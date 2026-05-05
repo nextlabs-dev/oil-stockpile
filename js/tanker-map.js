@@ -17,7 +17,10 @@ const TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const TILE_ATTRIBUTION =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
-const CIRCLE_COLOR = '#c0392b';
+// 円の色は「日本港向け / 海外向け / 混在」で 3 色に色分け
+const COLOR_JAPAN_ALL = '#c0392b';   // 全部日本港向け = 濃い赤
+const COLOR_MIXED = '#e67e22';       // 混在 = オレンジ
+const COLOR_OTHER = '#7f8c8d';       // 海外向け or 不明 = 灰
 
 /** 隻数 → 半径(meters)。1 隻でも見える + 多いほど大きく。 */
 function radiusForCount(count) {
@@ -27,6 +30,14 @@ function radiusForCount(count) {
 /** 隻数 → 塗り透明度。多いほど濃く、最大 0.85。 */
 function opacityForCount(count) {
   return Math.min(0.35 + 0.1 * count, 0.85);
+}
+
+/** 日本港向け率に応じて色を決める。 */
+function colorForCell(japanBound, total) {
+  if (total <= 0) return COLOR_OTHER;
+  if (japanBound >= total) return COLOR_JAPAN_ALL;
+  if (japanBound <= 0) return COLOR_OTHER;
+  return COLOR_MIXED;
 }
 
 export function initTankerMap(densityGrid) {
@@ -76,16 +87,22 @@ export function initTankerMap(densityGrid) {
     return;
   }
 
-  for (const { lat, lon, count } of cells) {
+  for (const cell of cells) {
+    const { lat, lon, count } = cell;
     if (typeof lat !== 'number' || typeof lon !== 'number') continue;
+    const japanBound = typeof cell.japanBound === 'number' ? cell.japanBound : 0;
+    const color = colorForCell(japanBound, count);
     L.circle([lat, lon], {
       radius: radiusForCount(count),
-      color: CIRCLE_COLOR,
+      color,
       weight: 1,
-      fillColor: CIRCLE_COLOR,
+      fillColor: color,
       fillOpacity: opacityForCount(count),
     })
-      .bindTooltip(`${count} 隻`, { direction: 'top' })
+      .bindTooltip(
+        `${count} 隻（うち日本港向け ${japanBound} 隻）`,
+        { direction: 'top' },
+      )
       .addTo(map);
   }
 }

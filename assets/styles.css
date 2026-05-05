@@ -720,6 +720,29 @@ a:hover { text-decoration: none; }
   font-size: 10px;
 }
 
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+}
+.map-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.map-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.map-legend-dot--japan { background: #c0392b; }
+.map-legend-dot--mixed { background: #e67e22; }
+.map-legend-dot--other { background: #7f8c8d; }
+
 .map-empty {
   margin-top: var(--space-3);
   font-size: var(--text-sm);

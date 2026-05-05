@@ -210,6 +210,30 @@ class TestDensityGrid(unittest.TestCase):
         self.assertEqual(cells[0]["count"], 2)
         self.assertEqual(cells[0]["lat"], 35.0)
         self.assertEqual(cells[0]["lon"], 140.0)
+        # 両方とも日本港向け
+        self.assertEqual(cells[0]["japanBound"], 2)
+
+    def test_japan_bound_split_within_cell(self):
+        # 同じセルに日本港向けと海外港向けが混在
+        ships = {
+            1: {
+                "static": {"type": 80, "destination": "JPYOK"},
+                "last_pos": {"lat": 35.0, "lon": 140.0},
+            },
+            2: {
+                "static": {"type": 80, "destination": "BUSAN"},
+                "last_pos": {"lat": 35.0, "lon": 140.0},
+            },
+            3: {
+                "static": {"type": 80, "destination": ""},
+                "last_pos": {"lat": 35.0, "lon": 140.0},
+            },
+        }
+        result = aggregate(ships)
+        cells = result["densityGrid"]["cells"]
+        self.assertEqual(len(cells), 1)
+        self.assertEqual(cells[0]["count"], 3)
+        self.assertEqual(cells[0]["japanBound"], 1)
 
     def test_separate_cells_kept_separate(self):
         ships = {

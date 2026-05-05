@@ -22,7 +22,10 @@ data/tankers.json を更新する。
       "source": "aisstream.io",
       "densityGrid": {
         "cellSizeDeg": 0.5,
-        "cells": [{"lat": 35.0, "lon": 140.0, "count": 2}, ...]
+        "cells": [
+          {"lat": 35.0, "lon": 140.0, "count": 2, "japanBound": 1},
+          ...
+        ]
       }
     }
 
@@ -167,7 +170,8 @@ def aggregate(ships_seen, *, cell_size_deg=DENSITY_CELL_SIZE_DEG):
         for port, count in counter.most_common(10)
     ]
 
-    cell_counter: Counter = Counter()
+    cell_total: Counter = Counter()
+    cell_japan: Counter = Counter()
     for t in tankers:
         if not isinstance(t["lat"], (int, float)) or not isinstance(
             t["lon"], (int, float)
@@ -177,10 +181,17 @@ def aggregate(ships_seen, *, cell_size_deg=DENSITY_CELL_SIZE_DEG):
             _quantize(t["lat"], cell_size_deg),
             _quantize(t["lon"], cell_size_deg),
         )
-        cell_counter[key] += 1
+        cell_total[key] += 1
+        if match_japan_port(t["destination"]) is not None:
+            cell_japan[key] += 1
     cells = [
-        {"lat": lat, "lon": lon, "count": count}
-        for (lat, lon), count in sorted(cell_counter.items())
+        {
+            "lat": lat,
+            "lon": lon,
+            "count": count,
+            "japanBound": cell_japan.get((lat, lon), 0),
+        }
+        for (lat, lon), count in sorted(cell_total.items())
     ]
 
     return {
