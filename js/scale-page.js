@@ -15,8 +15,10 @@ import { computeCurrentDays } from './data.js';
 const SNAPSHOTS_URL = '../data/snapshots.json';
 
 const CONSTANTS = {
-  /** 1 日あたり国内消費量（概算）。経産省「資源・エネルギー統計」の代表値帯。 */
-  DAILY_CONSUMPTION_KL: 300_000,
+  /** エネ庁備蓄算出ベース（純消費量、原油換算）約 28 万 kL/日 ≈ 176 万 bbl/日。
+   *  備蓄日数 × 本値 = 経産省 PDF の備蓄量と直接突き合わせ可能。
+   *  国際統計 (BP/EIA) ベースの 50 万 kL/日 (LPG・ナフサ込み) とは別系列なので注意。 */
+  DAILY_CONSUMPTION_KL: 280_000,
   /** 1 バレル = 158.987 L (USA Petroleum barrel)。 */
   LITERS_PER_BARREL: 158.987,
   /** VLCC 1 隻の典型的積載量。30 万 DWT 級・原油密度 0.86 で約 32 万 kL。 */
