@@ -1,22 +1,41 @@
-# Python
+# Python caches / virtualenvs
 __pycache__/
 *.py[cod]
 *.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 .venv/
 venv/
 
-# Editor
+# Node dependencies / package-manager caches
+node_modules/
+.npm/
+.pnpm-store/
+
+# Husky generated helper hooks
+.husky/_/
+
+# Editor / OS files
 .vscode/
 .idea/
 .claude/
 *.swp
+*.swo
 .DS_Store
 Thumbs.db
 
-# Working files
-data/.oil_daily.pdf
+# Runtime logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# Local-only secrets (none currently, but reserve)
+# Local working files
+data/.oil_daily.pdf
+
+# Local-only secrets
 .env
 .env.local
+.env.*.local

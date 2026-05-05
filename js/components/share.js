@@ -6,7 +6,7 @@
  * シェアテキストは「いま{N}日分」を含む。N は computeCurrentDays() の整数部。
  */
 
-import { SITE_CONFIG } from './data.js';
+import { SITE_CONFIG } from '../core/data.js';
 import { computeCurrentDays } from './counter.js';
 
 const TOAST_MS = 2400;

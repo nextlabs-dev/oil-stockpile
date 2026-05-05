@@ -1,0 +1,57 @@
+/* Section lead text (used by hero sections to introduce the headline number) */
+.lead {
+  font-size: var(--text-md);
+  font-weight: 400;
+  color: var(--fg-sub);
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-3);
+}
+
+/* Tabs (used as page nav, right side of header) */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  align-items: baseline;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: var(--space-2) 0;
+  font-size: var(--text-md);
+  color: var(--fg-sub);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.tab:hover {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.tab--active {
+  color: var(--fg);
+  border-bottom-color: var(--fg);
+  font-weight: 600;
+}
+
+.stale-warning {
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  display: inline-block;
+  border: 1px solid var(--tank-fill-warn);
+  color: var(--tank-fill-warn);
+  font-size: 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+}
+
+.stale-warning[hidden] {
+  display: none;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$title</title>
+<meta name="description" content="$description">
+<link rel="canonical" href="$canonical">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="$canonical">
+<meta property="og:title" content="$og_title">
+<meta property="og:description" content="$og_description">
+<meta property="og:image" content="$og_image">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="$og_image_alt">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="$twitter_title">
+<meta name="twitter:description" content="$twitter_description">
+<meta name="twitter:image" content="$og_image">
+
+<link rel="icon" href="$favicon" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="$font_href">
+$extra_head<link rel="stylesheet" href="$stylesheet">
+</head>
+<body>
+
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="$home_href" aria-label="あと何日？日本の石油備蓄 ホーム">
+      <h1 class="site-title">あと何日？日本の石油備蓄</h1>
+    </a>
+    <nav class="tabs" aria-label="セクション">
+$nav
+    </nav>
+  </div>
+</header>
+
+$content
+
+<footer class="site-footer">
+  <p class="footer-source">
+    $footer_source
+  </p>
+  <p class="footer-disclaimer">
+    $footer_disclaimer
+  </p>
+  <p class="footer-meta">
+    <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">株式会社ネクストラボ<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+    <span class="footer-sep">·</span>
+    実装の99%をAIが書きました
+  </p>
+</footer>
+
+$script_tags</body>
+</html>

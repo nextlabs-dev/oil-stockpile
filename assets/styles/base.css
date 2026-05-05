@@ -1,0 +1,161 @@
+/* =============================================================
+   日本の石油備蓄 — Minimal styles
+   ============================================================= */
+
+:root {
+  /* 色 */
+  --bg: #fafafa;
+  --bg-card: #ffffff;
+  --fg: #111111;
+  --fg-sub: #595959;
+  --fg-muted: #6b6b6b; /* WCAG AA 4.5:1 on #fafafa */
+  --fg-strong-hover: #2a2a2a;
+  --rule: #e5e5e5;
+  --rule-strong: #cccccc;
+
+  --tank-fill-ok: #1a1a1a;
+  --tank-fill-mid: #777777;
+  --tank-fill-warn: #c0392b;
+
+  --chart-line-1: #444444;
+  --chart-line-2: #888888;
+  --chart-line-3: #bbbbbb;
+
+  --link: #0a58ca;
+
+  --focus: #0066ff;
+
+  /* スペーシング */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 1rem; /* 16px */
+  --space-4: 1.5rem; /* 24px */
+  --space-5: 2rem; /* 32px */
+  --space-6: 3rem; /* 48px */
+  --section-pad-y: 3.5rem; /* 56px - 標準セクション */
+  --section-pad-y-hero: 5rem; /* 80px - ヒーロー */
+
+  /* ボーダー半径 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* タイポ重複サイズ */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-md: 14px;
+
+  /* レイアウト */
+  --max-w: 720px; /* 本文コンテンツ幅 (readability 重視) */
+  --max-w-page: 1080px; /* ヘッダー・フッター幅 (サイトの「顔」) */
+  --pad-x: var(--space-4);
+
+  /* フォント: Inter (Latin/数字) + Noto Sans JP (日本語) を Web フォントで配信
+     どちらかが読み込めない端末向けに system-ui / Hiragino Sans のフォールバックを残す
+     数値箇所では tabular-nums を個別指定 (font-variant-numeric) する */
+  --font-sans: "Inter", "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", sans-serif;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+}
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+dt,
+figure {
+  margin: 0;
+}
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+a:hover {
+  text-decoration: none;
+}
+
+/* A11y helper */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link: hidden until focused */
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--fg);
+  color: var(--bg);
+  text-decoration: none;
+  font-size: var(--text-md);
+  border-radius: var(--radius-sm);
+  z-index: 100;
+  transform: translateY(-150%);
+  transition: transform 0.15s;
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* =============================================================
+   Reduced motion
+   ============================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

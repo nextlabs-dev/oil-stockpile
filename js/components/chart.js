@@ -11,6 +11,8 @@
  * initChart(history) で初期化。
  */
 
+import { formatJaDate, formatMd } from '../core/format.js';
+
 const W = 720;
 const H = 280;
 const PAD_L = 44;
@@ -18,16 +20,6 @@ const PAD_R = 16;
 const PAD_T = 16;
 const PAD_B = 56;
 const MAX_X_LABELS = 9;
-
-function formatMd(iso) {
-  const [, m, d] = iso.split('-').map(Number);
-  return `${m}/${d}`;
-}
-
-function formatJaDate(iso) {
-  const [y, m, d] = iso.split('-').map(Number);
-  return `${y}年${m}月${d}日`;
-}
 
 function pickXLabelIndices(n, max) {
   if (n <= 0) return [];
@@ -40,9 +32,17 @@ function pickXLabelIndices(n, max) {
 }
 
 function escapeAttr(s) {
-  return String(s).replace(/[<>&"']/g, (c) => ({
-    '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;',
-  })[c]);
+  return String(s).replace(
+    /[<>&"']/g,
+    (c) =>
+      ({
+        '<': '&lt;',
+        '>': '&gt;',
+        '&': '&amp;',
+        '"': '&quot;',
+        "'": '&#39;',
+      })[c],
+  );
 }
 
 function buildHiddenTable(data) {
@@ -50,7 +50,7 @@ function buildHiddenTable(data) {
     .map(
       (r) =>
         `<tr><th scope="row">${escapeAttr(formatJaDate(r.asOf))}</th>` +
-        `<td>${r.total}</td><td>${r.national}</td><td>${r.private}</td><td>${r.joint}</td></tr>`
+        `<td>${r.total}</td><td>${r.national}</td><td>${r.private}</td><td>${r.joint}</td></tr>`,
     )
     .join('');
   return (
@@ -141,8 +141,7 @@ export function initChart(history) {
     points.forEach((p) => {
       const r = p.row;
       const label = `${formatJaDate(r.asOf)} 合計${r.total}日（国家${r.national}・民間${r.private}・産油国共同${r.joint}）`;
-      circles +=
-        `<circle class="chart-point" cx="${p.x.toFixed(1)}" cy="${p.yTotal.toFixed(1)}" r="3" data-i="${p.i}" role="button" tabindex="0" aria-label="${escapeAttr(label)}"><title>${escapeAttr(label)}</title></circle>`;
+      circles += `<circle class="chart-point" cx="${p.x.toFixed(1)}" cy="${p.yTotal.toFixed(1)}" r="3" data-i="${p.i}" role="button" tabindex="0" aria-label="${escapeAttr(label)}"><title>${escapeAttr(label)}</title></circle>`;
     });
 
     // Segment lines (only rendered when shown)

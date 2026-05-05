@@ -6,6 +6,8 @@
  * initBreakdown(history) で初期化。history の末尾要素を最新として扱う。
  */
 
+import { setText } from '../core/dom.js';
+
 /**
  * @param {Array<{national:number,private:number,joint:number}>} history
  */
@@ -13,12 +15,7 @@ export function initBreakdown(history) {
   if (!Array.isArray(history) || history.length === 0) return;
   const latest = history[history.length - 1];
 
-  const set = (id, v) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = String(v);
-  };
-
-  set('breakdown-national', latest.national);
-  set('breakdown-private', latest.private);
-  set('breakdown-joint', latest.joint);
+  setText('breakdown-national', String(latest.national));
+  setText('breakdown-private', String(latest.private));
+  setText('breakdown-joint', String(latest.joint));
 }

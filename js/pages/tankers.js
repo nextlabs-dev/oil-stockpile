@@ -8,45 +8,30 @@
  * リアルタイムストリームではなく、バックエンドが定期取得した snapshot を読むだけ。
  */
 
-import { initTankerMap } from './tanker-map.js';
+import { initTankerMap } from '../components/tanker-map.js';
+import { loadJson } from '../core/data.js';
+import { setText, showElement } from '../core/dom.js';
+import { formatJaDateTime } from '../core/format.js';
 
 const TANKERS_URL = '../data/tankers.json';
 const STALE_HOURS = 6;
 
 async function loadTankers() {
-  const r = await fetch(TANKERS_URL, { cache: 'no-cache' });
-  if (!r.ok) throw new Error(`Failed to load tankers data: ${r.status}`);
-  const data = await r.json();
-  if (typeof data.totalTankersInRegion !== 'number') {
-    throw new Error('tankers.json is missing required fields');
-  }
-  return data;
-}
-
-function formatJaDateTime(iso) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  const y = d.getFullYear();
-  const m = d.getMonth() + 1;
-  const day = d.getDate();
-  const hh = String(d.getHours()).padStart(2, '0');
-  const mm = String(d.getMinutes()).padStart(2, '0');
-  return `${y}年${m}月${day}日 ${hh}:${mm}`;
+  return loadJson(TANKERS_URL, (data) => {
+    if (typeof data.totalTankersInRegion !== 'number') {
+      throw new Error('tankers.json is missing required fields');
+    }
+  });
 }
 
 function showLoadError() {
   const el = document.getElementById('total-tankers');
   if (el) el.textContent = '—';
-  const lead = document.querySelector('.tanker-lead');
-  if (lead) {
-    lead.textContent = 'データの読み込みに失敗しました。時間をおいて再読み込みしてください。';
-    lead.style.color = 'var(--tank-fill-warn)';
+  const sub = document.querySelector('.tanker-sub');
+  if (sub) {
+    sub.textContent = 'データの読み込みに失敗しました。時間をおいて再読み込みしてください。';
+    sub.style.color = 'var(--tank-fill-warn)';
   }
-}
-
-function setText(id, value) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = value;
 }
 
 function renderPorts(ports) {
@@ -83,8 +68,7 @@ function checkStaleness(fetchedAtIso) {
   if (Number.isNaN(fetched)) return;
   const ageHours = (Date.now() - fetched) / 3_600_000;
   if (ageHours > STALE_HOURS) {
-    const warn = document.getElementById('stale-warning');
-    if (warn) warn.hidden = false;
+    showElement('stale-warning');
   }
 }
 
@@ -104,10 +88,7 @@ async function main() {
   renderPorts(data.topDestinationPorts);
 
   setText('fetched-at', formatJaDateTime(data.fetchedAt));
-  setText(
-    'sampling-duration',
-    `約 ${Math.round((data.samplingDurationSec || 0) / 60)} 分`,
-  );
+  setText('sampling-duration', `約 ${Math.round((data.samplingDurationSec || 0) / 60)} 分`);
   setText('bounding-box', data.boundingBox || '—');
 
   initTankerMap(data.vessels);

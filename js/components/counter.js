@@ -11,10 +11,9 @@
  * を asOf 昇順で並べた配列。
  */
 
-import {
-  STALE_THRESHOLD_DAYS,
-  computeCurrentDays as computeFromSnapshot,
-} from './data.js';
+import { computeCurrentDays as computeFromSnapshot, STALE_THRESHOLD_DAYS } from '../core/data.js';
+import { setText, showElement } from '../core/dom.js';
+import { formatJaDate } from '../core/format.js';
 
 const MS_PER_DAY = 86_400_000;
 
@@ -27,18 +26,14 @@ function setLatest(history) {
   }
   latestSnapshot = history[history.length - 1];
   // JST明示。UTC計算ズレを防ぐため必ず +09:00 を付ける
-  asOfTimestamp = new Date(latestSnapshot.asOf + 'T00:00:00+09:00').getTime();
-}
-
-export function getLatestSnapshot() {
-  return latestSnapshot;
+  asOfTimestamp = new Date(`${latestSnapshot.asOf}T00:00:00+09:00`).getTime();
 }
 
 export function computeCurrentDays(now = Date.now()) {
   return computeFromSnapshot(latestSnapshot, now);
 }
 
-export function getElapsedDays(now = Date.now()) {
+function getElapsedDays(now = Date.now()) {
   if (!latestSnapshot) return NaN;
   return (now - asOfTimestamp) / MS_PER_DAY;
 }
@@ -59,11 +54,6 @@ function pad2(n) {
   return String(n).padStart(2, '0');
 }
 
-function formatJaDate(iso) {
-  const [y, m, d] = iso.split('-').map(Number);
-  return `${y}年${m}月${d}日`;
-}
-
 const subscribers = new Set();
 
 /**
@@ -73,7 +63,11 @@ const subscribers = new Set();
 export function subscribe(fn) {
   subscribers.add(fn);
   // 登録直後に1回呼んで初期値を渡す（latestSnapshot が無いと NaN になるが許容）
-  try { fn(computeCurrentDays()); } catch (e) { console.error(e); }
+  try {
+    fn(computeCurrentDays());
+  } catch (e) {
+    console.error(e);
+  }
   return () => subscribers.delete(fn);
 }
 
@@ -83,17 +77,17 @@ function tick() {
   const days = computeCurrentDays();
   const { d, h, m, s } = splitBreakdown(days);
 
-  const elDays = document.getElementById('counter-days');
-  const elHours = document.getElementById('counter-hours');
-  const elMinutes = document.getElementById('counter-minutes');
-  const elSeconds = document.getElementById('counter-seconds');
-  if (elDays) elDays.textContent = String(d);
-  if (elHours) elHours.textContent = pad2(h);
-  if (elMinutes) elMinutes.textContent = pad2(m);
-  if (elSeconds) elSeconds.textContent = pad2(s);
+  setText('counter-days', String(d));
+  setText('counter-hours', pad2(h));
+  setText('counter-minutes', pad2(m));
+  setText('counter-seconds', pad2(s));
 
   subscribers.forEach((fn) => {
-    try { fn(days); } catch (e) { console.error(e); }
+    try {
+      fn(days);
+    } catch (e) {
+      console.error(e);
+    }
   });
 }
 
@@ -104,16 +98,13 @@ export function initCounter(history) {
   setLatest(history);
 
   // フッターの「データ時点」「公表」を埋める
-  const elAsOf = document.getElementById('footer-as-of');
-  const elPublished = document.getElementById('footer-published');
-  if (elAsOf) elAsOf.textContent = formatJaDate(latestSnapshot.asOf);
-  if (elPublished) elPublished.textContent = formatJaDate(latestSnapshot.published);
+  setText('footer-as-of', formatJaDate(latestSnapshot.asOf));
+  setText('footer-published', formatJaDate(latestSnapshot.published));
 
   // 古さ警告（asOf から閾値日数以上経過しているとき）
   const elapsedDays = getElapsedDays();
   if (elapsedDays > STALE_THRESHOLD_DAYS) {
-    const warn = document.getElementById('stale-warning');
-    if (warn) warn.hidden = false;
+    showElement('stale-warning');
   }
 
   tick();

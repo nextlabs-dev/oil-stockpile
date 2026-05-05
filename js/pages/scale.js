@@ -10,9 +10,9 @@
  * 値の精度より「桁感の正しさ」を優先し、すべて約・概算で表示する。
  */
 
-import { computeCurrentDays } from './data.js';
-
-const SNAPSHOTS_URL = '../data/snapshots.json';
+import { computeCurrentDays, loadHistory } from '../core/data.js';
+import { setText } from '../core/dom.js';
+import { formatFixed1, formatInt, formatJaDate } from '../core/format.js';
 
 const CONSTANTS = {
   /** エネ庁備蓄算出ベース（純消費量、原油換算）約 28 万 kL/日 ≈ 176 万 bbl/日。
@@ -26,40 +26,6 @@ const CONSTANTS = {
   /** IEA 加盟国に課された備蓄義務（純輸入量の 90 日分）。 */
   IEA_OBLIGATION_DAYS: 90,
 };
-
-async function loadLatestSnapshot() {
-  const r = await fetch(SNAPSHOTS_URL, { cache: 'no-cache' });
-  if (!r.ok) throw new Error(`Failed to load snapshots: ${r.status}`);
-  const data = await r.json();
-  if (!Array.isArray(data) || data.length === 0) {
-    throw new Error('snapshots.json is empty or invalid');
-  }
-  const sorted = data.slice().sort((a, b) => a.asOf.localeCompare(b.asOf));
-  return sorted[sorted.length - 1];
-}
-
-function formatJaDate(iso) {
-  if (!iso) return '—';
-  const [y, m, d] = iso.split('-').map(Number);
-  return `${y}年${m}月${d}日`;
-}
-
-/** 整数3桁区切り。null/NaN は '—'。 */
-function fmtInt(n) {
-  if (n == null || !Number.isFinite(n)) return '—';
-  return Math.round(n).toLocaleString('ja-JP');
-}
-
-/** 小数1桁。null/NaN は '—'。 */
-function fmt1(n) {
-  if (n == null || !Number.isFinite(n)) return '—';
-  return n.toFixed(1);
-}
-
-function setText(id, value) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = value;
-}
 
 function showLoadError() {
   const num = document.getElementById('scale-days');
@@ -76,9 +42,9 @@ function renderUnitConversion(days) {
   const totalLiters = totalKl * 1_000;
   const totalBarrels = totalLiters / CONSTANTS.LITERS_PER_BARREL;
 
-  setText('unit-kl', fmtInt(totalKl));
-  setText('unit-barrels', fmtInt(totalBarrels));
-  setText('unit-liters', fmtInt(totalLiters));
+  setText('unit-kl', formatInt(totalKl));
+  setText('unit-barrels', formatInt(totalBarrels));
+  setText('unit-liters', formatInt(totalLiters));
 }
 
 function renderScaleComparison(days) {
@@ -88,10 +54,10 @@ function renderScaleComparison(days) {
   const yearFrac = days / 365;
   const ieaPct = (days / CONSTANTS.IEA_OBLIGATION_DAYS) * 100;
 
-  setText('compare-vlcc', fmtInt(vlccCount));
-  setText('compare-year-pct', fmt1(yearPct));
-  setText('compare-year-frac', `約 ${fmt1(yearFrac)}`);
-  setText('compare-iea-pct', fmtInt(ieaPct));
+  setText('compare-vlcc', formatInt(vlccCount));
+  setText('compare-year-pct', formatFixed1(yearPct));
+  setText('compare-year-frac', `約 ${formatFixed1(yearFrac)}`);
+  setText('compare-iea-pct', formatInt(ieaPct));
 }
 
 function initSubTabs() {
@@ -136,7 +102,8 @@ async function main() {
 
   let snapshot;
   try {
-    snapshot = await loadLatestSnapshot();
+    const history = await loadHistory('../data/snapshots.json');
+    snapshot = history[history.length - 1];
   } catch (e) {
     console.error('snapshots load failed:', e);
     showLoadError();

@@ -9,31 +9,34 @@
 
 ```
 oil-stockpile/
-├── index.html              -- カウンタータブ
+├── index.html              -- カウンタータブ（生成物）
 ├── tankers/
-│   └── index.html          -- タンカータブ
+│   └── index.html          -- タンカータブ（生成物）
 ├── scale/
-│   └── index.html          -- 石油のものさしタブ
+│   └── index.html          -- 石油のものさしタブ（生成物）
 ├── about/
-│   └── index.html          -- about タブ（サイトの目的・出典・運営）
+│   └── index.html          -- about タブ（生成物）
+├── src/
+│   ├── pages/              -- ページ固有の <main> 本文
+│   └── templates/          -- 共通 head/header/footer テンプレート
 ├── assets/
-│   ├── styles.css
+│   ├── styles.css          -- CSS エントリーポイント
+│   ├── styles/
+│   │   ├── base.css
+│   │   ├── layout.css
+│   │   ├── components.css
+│   │   └── pages/
 │   ├── favicon.svg
 │   └── og-image.png        -- OGP画像（毎日 generate_ogp.py が再生成）
 ├── js/
-│   ├── data.js             -- 設定値とデータ読み込みヘルパ（手動メンテ）
-│   ├── counter.js          -- F-01 リアルタイムカウンター
-│   ├── tank-gauge.js       -- F-02 タンクゲージ
-│   ├── chart.js            -- F-03 推移グラフ
-│   ├── breakdown.js        -- 3区分内訳
-│   ├── share.js            -- F-05 シェア
-│   ├── main.js             -- カウンタータブのエントリーポイント
-│   ├── tankers-page.js     -- タンカータブのエントリーポイント
-│   └── scale-page.js       -- 石油のものさしタブのエントリーポイント
+│   ├── core/               -- 設定値・データ取得・DOM/format ヘルパ
+│   ├── components/         -- カウンター、グラフ、地図などの部品
+│   └── pages/              -- 各ページのエントリーポイント
 ├── data/
 │   ├── snapshots.json      -- 備蓄日数（毎日自動更新）
 │   └── tankers.json        -- タンカー集計（毎時自動更新）
 ├── scripts/
+│   ├── build_site.py       -- src から公開 HTML を生成
 │   ├── fetch_pdf.py        -- 備蓄PDF取得・パース・JSON更新
 │   ├── fetch_tankers.py    -- AIS WebSocket サンプラ
 │   ├── generate_ogp.py     -- OGP 画像生成（snapshots → assets/og-image.png）
@@ -184,11 +187,33 @@ python scripts/fetch_tankers.py --duration 60 --dry-run  # 短時間、書き込
 
 ## 設定値の手動メンテ
 
-`js/data.js` には以下が残っています（自動化対象外）:
+`js/core/data.js` には以下が残っています（自動化対象外）:
 
 - `PEAK_REFERENCE.days` — タンクゲージ最大値の基準。新しい高値が観測されたら更新
 - `SITE_CONFIG.url` — 本番URL。デプロイ時に書き換え
 - `STALE_THRESHOLD_DAYS` — 古さ警告のしきい値（既定 14日）
+
+## HTML の編集
+
+公開 HTML は `src/pages/` と `src/templates/` から生成します。ヘッダー、OGP、フッターなどの共通部は `src/templates/base.html` と `scripts/build_site.py` 側で管理します。
+
+```bash
+python scripts/build_site.py
+```
+
+ページ本文を編集する場合は `src/pages/*.html` を変更してから上記を実行してください。`index.html` / `tankers/index.html` / `scale/index.html` / `about/index.html` は GitHub Pages 用の生成物です。
+
+## コード整形と pre-commit
+
+JS / CSS / JSON / Markdown の整形と lint には Biome を使います。HTML 生成物と `src/**/*.html`、自動更新データの `data/**/*.json` は Biome 対象外です。
+
+```bash
+npm install
+npm run check   # Biome のチェック
+npm run format  # Biome の自動整形
+```
+
+`npm install` 後は Husky が Git の pre-commit hook を設定し、コミット時に `lint-staged` 経由で staged files だけ `biome check --write` を実行します。pre-commit hook 本体は `.husky/pre-commit` です。
 
 ## ローカル動作確認
 
@@ -239,15 +264,15 @@ python -m http.server 8080
 1. **Settings → Pages → Custom domain** で独自ドメインを設定 + DNS で CNAME を `tkysi-mi.github.io` に向ける
 2. プロジェクト内の絶対 URL を一括置換:
    - `index.html` / `tankers/index.html` / `scale/index.html` / `about/index.html` の `canonical` / `og:url` / `og:image` / `twitter:image`
-   - `js/data.js` の `SITE_CONFIG.url`
+   - `js/core/data.js` の `SITE_CONFIG.url`
    - `robots.txt` の `Sitemap`
    - `sitemap.xml` の各 `<loc>`
    - `README.md` 冒頭の「公開 URL」
 
 ## 設計メモ
 
-- Vanilla HTML / JS (ES Modules) / CSS のみ。ビルドステップなし
-- 外部CDNは Google Fonts (Inter) のみ
+- Vanilla HTML / JS (ES Modules) / CSS。HTML は軽量な Python スクリプトで共通テンプレートから生成
+- 外部CDNは Google Fonts (Inter) とタンカーマップ用 Leaflet
 - データ取得は GitHub Actions + Python pdfplumber（コスト$0）
 - 「リアルタイム」表記は速報PDFが日次更新されているため整合
 - タンクゲージ基準値・Y軸スケール・色閾値はすべて根拠を出典で示す方針

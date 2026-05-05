@@ -5,12 +5,12 @@
  * fetch失敗時はカウンター部にエラーを表示し、可能な範囲で停止する。
  */
 
-import { loadHistory } from './data.js';
-import { initCounter } from './counter.js';
-import { initTankGauge } from './tank-gauge.js';
-import { initChart } from './chart.js';
-import { initBreakdown } from './breakdown.js';
-import { initShare } from './share.js';
+import { initBreakdown } from '../components/breakdown.js';
+import { initChart } from '../components/chart.js';
+import { initCounter } from '../components/counter.js';
+import { initShare } from '../components/share.js';
+import { initTankGauge } from '../components/tank-gauge.js';
+import { loadHistory } from '../core/data.js';
 
 function showLoadError(err) {
   console.error('Failed to load history:', err);
@@ -32,11 +32,31 @@ async function main() {
     return;
   }
 
-  try { initBreakdown(history); } catch (e) { console.error('breakdown:', e); }
-  try { initChart(history); } catch (e) { console.error('chart:', e); }
-  try { initTankGauge(); } catch (e) { console.error('tank-gauge:', e); }
-  try { initShare(); } catch (e) { console.error('share:', e); }
-  try { initCounter(history); } catch (e) { console.error('counter:', e); }
+  try {
+    initBreakdown(history);
+  } catch (e) {
+    console.error('breakdown:', e);
+  }
+  try {
+    initChart(history);
+  } catch (e) {
+    console.error('chart:', e);
+  }
+  try {
+    initTankGauge();
+  } catch (e) {
+    console.error('tank-gauge:', e);
+  }
+  try {
+    initShare();
+  } catch (e) {
+    console.error('share:', e);
+  }
+  try {
+    initCounter(history);
+  } catch (e) {
+    console.error('counter:', e);
+  }
 }
 
 if (document.readyState === 'loading') {

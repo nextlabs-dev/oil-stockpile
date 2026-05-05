@@ -10,7 +10,7 @@
  *   ratio < 0.4         : 控えめな赤（--tank-fill-warn）
  */
 
-import { PEAK_REFERENCE } from './data.js';
+import { PEAK_REFERENCE } from '../core/data.js';
 import { subscribe } from './counter.js';
 
 const SVG_W = 200;
@@ -57,8 +57,9 @@ export function initTankGauge() {
 
       <!-- right-side ticks (25 / 50 / 75%) -->
       ${[0.25, 0.5, 0.75]
-        .map((f) =>
-          `<line x1="${TANK_X + TANK_W}" y1="${markY(f)}" x2="${TANK_X + TANK_W + 6}" y2="${markY(f)}" stroke="#bbb" stroke-width="1" />`,
+        .map(
+          (f) =>
+            `<line x1="${TANK_X + TANK_W}" y1="${markY(f)}" x2="${TANK_X + TANK_W + 6}" y2="${markY(f)}" stroke="#bbb" stroke-width="1" />`,
         )
         .join('')}
 

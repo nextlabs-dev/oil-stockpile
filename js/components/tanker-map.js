@@ -7,7 +7,7 @@
  * Leaflet は CDN から global L として読み込み済み (tankers/index.html)。
  */
 
-const MAP_CENTER = [35.0, 137.0];   // 日本中央付近
+const MAP_CENTER = [35.0, 137.0]; // 日本中央付近
 const MAP_ZOOM = 5;
 const MAP_MIN_ZOOM = 4;
 const MAP_MAX_ZOOM = 10;
@@ -33,12 +33,13 @@ function escapeHtml(s) {
 }
 
 function buildPopupHtml(v) {
-  const name = v.name && v.name.trim() ? escapeHtml(v.name) : '<em>(船名未取得)</em>';
-  const dest = v.destination && v.destination.trim() ? escapeHtml(v.destination) : '<em>(destination 未入力)</em>';
+  const name = v.name?.trim() ? escapeHtml(v.name) : '<em>(船名未取得)</em>';
+  const dest = v.destination?.trim() ? escapeHtml(v.destination) : '<em>(destination 未入力)</em>';
   const mmsi = typeof v.mmsi === 'number' ? v.mmsi : escapeHtml(v.mmsi);
-  const coord = (typeof v.lat === 'number' && typeof v.lon === 'number')
-    ? `${v.lat.toFixed(3)}°N, ${v.lon.toFixed(3)}°E`
-    : '位置不明';
+  const coord =
+    typeof v.lat === 'number' && typeof v.lon === 'number'
+      ? `${v.lat.toFixed(3)}°N, ${v.lon.toFixed(3)}°E`
+      : '位置不明';
   const flag = v.isJapanBound ? '🇯🇵 日本港向け' : 'それ以外';
   return `
     <div class="tanker-popup">
@@ -89,9 +90,7 @@ export function initTankerMap(vessels) {
   setTimeout(() => map.invalidateSize(), 0);
 
   // 位置不明の vessel は表示できないため除外
-  const withPosition = list.filter(
-    (v) => typeof v.lat === 'number' && typeof v.lon === 'number',
-  );
+  const withPosition = list.filter((v) => typeof v.lat === 'number' && typeof v.lon === 'number');
 
   if (withPosition.length === 0) {
     if (empty) empty.hidden = false;

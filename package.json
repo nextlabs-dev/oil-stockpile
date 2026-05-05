@@ -1,0 +1,20 @@
+{
+  "name": "oil-stockpile",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "biome check .",
+    "format": "biome check --write .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*.{js,css,md}": "biome check --write --no-errors-on-unmatched",
+    "*.json": "biome check --write --no-errors-on-unmatched"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.14",
+    "husky": "9.1.7",
+    "lint-staged": "16.4.0"
+  }
+}

@@ -39,7 +39,7 @@ DEFAULT_OUTPUT = REPO_ROOT / "assets" / "og-image.png"
 WIDTH = 1200
 HEIGHT = 630
 
-# 充填率の比較基準。js/data.js の PEAK_REFERENCE.days と一致させる
+# 充填率の比較基準。js/core/data.js の PEAK_REFERENCE.days と一致させる
 PEAK_DAYS = 247
 
 # 色（assets/styles.css の :root 変数と一致）

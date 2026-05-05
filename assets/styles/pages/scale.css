@@ -1,0 +1,212 @@
+/* =============================================================
+   Scale page (scale/index.html)
+   ============================================================= */
+.scale-hero {
+  text-align: center;
+}
+
+.scale-num-row {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--space-4);
+}
+
+.scale-num {
+  font-family: var(--font-sans);
+  font-size: clamp(64px, 16vw, 144px);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+.scale-unit {
+  font-size: clamp(14px, 2.6vw, 20px);
+  font-weight: 300;
+  color: var(--fg-sub);
+}
+
+.scale-sub {
+  font-size: var(--text-md);
+  color: var(--fg-sub);
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* In-page sub-tabs (ARIA tablist) */
+.subtabs-section {
+  /* base section padding inherited from .site-main > section */
+}
+
+.subtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-4);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: var(--space-4);
+}
+
+.subtab {
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: var(--space-2) 0;
+  margin-bottom: -1px;
+  font-size: var(--text-md);
+  color: var(--fg-sub);
+  font-weight: 400;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.subtab:hover {
+  color: var(--fg);
+}
+
+.subtab--active {
+  color: var(--fg);
+  font-weight: 600;
+  border-bottom-color: var(--fg);
+}
+
+.subtab-panel {
+  /* hidden 属性で表示制御 */
+}
+
+.panel-lead {
+  font-size: var(--text-md);
+  color: var(--fg-sub);
+  margin-bottom: var(--space-4);
+}
+
+.panel-note {
+  margin-top: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+  line-height: 1.7;
+}
+
+/* 単位換算リスト */
+.unit-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.unit-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 12px var(--space-3);
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.unit-row dt {
+  font-size: var(--text-sm);
+  color: var(--fg-sub);
+  letter-spacing: 0.02em;
+}
+
+.unit-row dd {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--fg);
+  text-align: right;
+}
+
+.unit-suffix {
+  font-size: 12px;
+  color: var(--fg-sub);
+  margin-left: var(--space-1);
+  font-weight: 400;
+}
+
+/* スケール比較カード */
+.compare-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.compare-card:last-of-type {
+  margin-bottom: 0;
+}
+
+.compare-label {
+  font-size: var(--text-sm);
+  color: var(--fg-sub);
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-2);
+}
+
+.compare-value {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 40px;
+  font-weight: 200;
+  line-height: 1.1;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+
+.compare-unit {
+  font-size: 16px;
+  color: var(--fg-sub);
+  margin-left: var(--space-1);
+  font-weight: 400;
+}
+
+.compare-meta {
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+  line-height: 1.7;
+}
+
+/* 豆知識リスト */
+.trivia-list {
+  display: grid;
+  gap: var(--space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.trivia-list li {
+  position: relative;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  line-height: 1.8;
+  color: var(--fg-sub);
+}
+
+.trivia-list li strong {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+@media (max-width: 520px) {
+  .compare-value {
+    font-size: 32px;
+  }
+  .unit-row dd {
+    font-size: 18px;
+  }
+}

@@ -14,16 +14,22 @@
  *   joint     — 産油国共同備蓄日数
  */
 
-const SNAPSHOTS_URL = './data/snapshots.json';
+const DEFAULT_SNAPSHOTS_URL = './data/snapshots.json';
+
+export async function loadJson(url, validate = null) {
+  const r = await fetch(url, { cache: 'no-cache' });
+  if (!r.ok) throw new Error(`Failed to load ${url}: ${r.status}`);
+  const data = await r.json();
+  if (validate) validate(data);
+  return data;
+}
 
 /**
  * snapshots.json を取得する。
  * fetch失敗時は例外を投げる（呼び出し側で握り潰さないこと）。
  */
-export async function loadHistory() {
-  const r = await fetch(SNAPSHOTS_URL, { cache: 'no-cache' });
-  if (!r.ok) throw new Error(`Failed to load snapshots: ${r.status}`);
-  const data = await r.json();
+export async function loadHistory(url = DEFAULT_SNAPSHOTS_URL) {
+  const data = await loadJson(url);
   if (!Array.isArray(data) || data.length === 0) {
     throw new Error('snapshots.json is empty or invalid');
   }
@@ -65,7 +71,7 @@ export function computeCurrentDays(snapshot, now = Date.now()) {
   if (!snapshot || typeof snapshot.total !== 'number' || !snapshot.asOf) {
     return NaN;
   }
-  const asOfMs = new Date(snapshot.asOf + 'T00:00:00+09:00').getTime();
+  const asOfMs = new Date(`${snapshot.asOf}T00:00:00+09:00`).getTime();
   const elapsedDays = (now - asOfMs) / 86_400_000;
   return Math.max(0, snapshot.total - elapsedDays);
 }
