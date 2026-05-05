@@ -39,7 +39,10 @@ export async function loadHistory(url = DEFAULT_SNAPSHOTS_URL) {
 
 /**
  * タンクゲージの基準（最大値）。
- * source を併記すること。
+ *
+ * SSOT: src/constants.json (peak_reference)
+ * 値の更新時は src/constants.json と本ファイルの両方を更新すること。
+ * scripts/build_site.py が build 時に整合性を verify する（不一致なら build 失敗）。
  */
 export const PEAK_REFERENCE = {
   days: 247,

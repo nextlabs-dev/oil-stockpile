@@ -24,23 +24,21 @@ data/snapshots.json の最新値から OGP 画像 (assets/og-image.png, 1200x630
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-SNAPSHOTS_PATH = REPO_ROOT / "data" / "snapshots.json"
-DEFAULT_OUTPUT = REPO_ROOT / "assets" / "og-image.png"
+from lib.constants import PEAK_DAYS  # SSOT: src/constants.json
+from lib.io import read_json
+from lib.paths import ASSETS_DIR, REPO_ROOT, SNAPSHOTS_PATH
+
+DEFAULT_OUTPUT = ASSETS_DIR / "og-image.png"
 
 # OGP 推奨サイズ (Twitter/Facebook 共通)
 WIDTH = 1200
 HEIGHT = 630
-
-# 充填率の比較基準。js/core/data.js の PEAK_REFERENCE.days と一致させる
-PEAK_DAYS = 247
 
 # 色（assets/styles.css の :root 変数と一致）
 BG = (250, 250, 250)              # --bg
@@ -94,8 +92,7 @@ class Snapshot:
 
 
 def load_snapshots(path: Path) -> list[dict]:
-    with path.open("r", encoding="utf-8") as f:
-        data = json.load(f)
+    data = read_json(path)
     if not isinstance(data, list) or not data:
         raise ValueError(f"{path} is empty or invalid")
     return data

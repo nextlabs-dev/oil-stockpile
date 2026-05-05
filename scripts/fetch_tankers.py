@@ -52,10 +52,9 @@ import re
 import sys
 from collections import Counter
 from datetime import datetime, timezone
-from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-OUTPUT_PATH = REPO_ROOT / "data" / "tankers.json"
+from lib.io import write_json
+from lib.paths import TANKERS_PATH
 
 WS_URL = "wss://stream.aisstream.io/v0/stream"
 
@@ -251,11 +250,7 @@ def write_output(summary, duration_sec, bbox):
         "boundingBox": bbox_str,
         "source": "aisstream.io",
     }
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(
-        json.dumps(out, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    write_json(TANKERS_PATH, out)
     return out
 
 
@@ -290,7 +285,7 @@ async def main_async(args):
         return 0
 
     write_output(summary, args.duration, DEFAULT_BBOX)
-    print(f"[tankers] wrote {OUTPUT_PATH}")
+    print(f"[tankers] wrote {TANKERS_PATH}")
     return 0
 
 

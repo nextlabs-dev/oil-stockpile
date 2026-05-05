@@ -18,24 +18,23 @@ oil_daily.pdf をダウンロード・パースし、data/snapshots.json を更�
 from __future__ import annotations
 
 import argparse
-import json
 import re
 import sys
 import time
-from datetime import date
 from pathlib import Path
 
 import pdfplumber
 from curl_cffi import requests as crequests
+
+from lib.io import read_json, write_json
+from lib.paths import DATA_DIR, SNAPSHOTS_PATH
 
 PDF_URL = (
     "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/"
     "pl001/pdf-oil-res/oil_daily.pdf"
 )
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-SNAPSHOTS_PATH = REPO_ROOT / "data" / "snapshots.json"
-TMP_PDF_PATH = REPO_ROOT / "data" / ".oil_daily.pdf"
+TMP_PDF_PATH = DATA_DIR / ".oil_daily.pdf"
 
 # 全角→半角
 ZEN_TO_HAN = str.maketrans("０１２３４５６７８９", "0123456789")
@@ -173,13 +172,11 @@ def validate(snapshot: dict, prev_total: int | None = None) -> None:
 def load_existing() -> list[dict]:
     if not SNAPSHOTS_PATH.exists():
         return []
-    return json.loads(SNAPSHOTS_PATH.read_text(encoding="utf-8"))
+    return read_json(SNAPSHOTS_PATH)
 
 
 def save(snapshots: list[dict]) -> None:
-    SNAPSHOTS_PATH.parent.mkdir(parents=True, exist_ok=True)
-    text = json.dumps(snapshots, ensure_ascii=False, indent=2)
-    SNAPSHOTS_PATH.write_text(text + "\n", encoding="utf-8")
+    write_json(SNAPSHOTS_PATH, snapshots)
 
 
 def merge(existing: list[dict], new: list[dict]) -> tuple[list[dict], int, int]:
