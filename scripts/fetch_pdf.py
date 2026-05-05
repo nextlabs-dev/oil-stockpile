@@ -25,8 +25,8 @@ import time
 from datetime import date
 from pathlib import Path
 
-import httpx
 import pdfplumber
+from curl_cffi import requests as crequests
 
 PDF_URL = (
     "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/"
@@ -40,13 +40,10 @@ TMP_PDF_PATH = REPO_ROOT / "data" / ".oil_daily.pdf"
 # 全角→半角
 ZEN_TO_HAN = str.maketrans("０１２３４５６７８９", "0123456789")
 
-# 経産省サイトの WAF が urllib のデフォルト挙動 (HTTP/1.1 + 簡素なヘッダ) を弾くため、
-# Chrome 風の UA + 標準的な Accept ヘッダで httpx HTTP/2 経由で取得する。
-USER_AGENT = (
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-    "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/130.0.0.0 Safari/537.36"
-)
+# 経産省サイトの WAF は単なるヘッダではなく TLS フィンガープリント (JA3) /
+# HTTP/2 SETTINGS まで見て bot を判別する。curl-cffi の impersonate モードで
+# 実ブラウザの fingerprint を完全模倣する。
+IMPERSONATE_BROWSER = "chrome"
 
 # パース対象の本文を見つけるためのヘッダ正規表現。
 # 例: 令和8年5月1日（4月28日時点） / 令和８年４月 30日（４月 27日時点）
@@ -69,31 +66,24 @@ def download_pdf(
     backoff: float = 5.0,
 ) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
-    headers = {
-        "User-Agent": USER_AGENT,
-        "Accept": "application/pdf,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "ja,en-US;q=0.9,en;q=0.8",
-    }
     last_err: Exception | None = None
     for attempt in range(1, retries + 1):
         try:
-            with httpx.Client(
-                http2=True,
-                headers=headers,
+            resp = crequests.get(
+                PDF_URL,
+                impersonate=IMPERSONATE_BROWSER,
                 timeout=timeout,
-                follow_redirects=True,
-            ) as client:
-                resp = client.get(PDF_URL)
-                resp.raise_for_status()
-                ct = resp.headers.get("Content-Type", "")
-                if "pdf" not in ct.lower():
-                    raise RuntimeError(f"unexpected content-type: {ct!r}")
-                data = resp.content
+            )
+            resp.raise_for_status()
+            ct = resp.headers.get("Content-Type", "")
+            if "pdf" not in ct.lower():
+                raise RuntimeError(f"unexpected content-type: {ct!r}")
+            data = resp.content
             if not data.startswith(b"%PDF"):
                 raise RuntimeError("downloaded file is not a PDF")
             dest.write_bytes(data)
             return
-        except (httpx.HTTPError, RuntimeError) as e:
+        except Exception as e:
             last_err = e
             print(
                 f"[fetch] download attempt {attempt}/{retries} failed: "
