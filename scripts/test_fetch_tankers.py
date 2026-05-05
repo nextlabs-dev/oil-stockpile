@@ -183,104 +183,89 @@ class TestAggregate(unittest.TestCase):
         self.assertEqual(result["japanBoundTankers"], 1)
 
 
-class TestDensityGrid(unittest.TestCase):
-    def test_no_position_returns_empty_grid(self):
+class TestVessels(unittest.TestCase):
+    def test_vessel_basic_fields(self):
         ships = {
-            1: {"static": {"type": 80, "destination": "JPYOK"}},  # ShipStaticData only
-        }
-        result = aggregate(ships)
-        self.assertEqual(result["densityGrid"]["cellSizeDeg"], 0.5)
-        self.assertEqual(result["densityGrid"]["cells"], [])
-
-    def test_two_tankers_same_cell_aggregate(self):
-        # 35.10/140.10 と 35.20/140.20 はどちらも 0.5° メッシュで丸めると同じセル (35.0, 140.0)
-        ships = {
-            1: {
-                "static": {"type": 80, "destination": "JPYOK"},
-                "last_pos": {"lat": 35.10, "lon": 140.10},
-            },
-            2: {
-                "static": {"type": 80, "destination": "CHIBA"},
-                "last_pos": {"lat": 35.20, "lon": 140.20},
+            123456789: {
+                "static": {
+                    "type": 80,
+                    "name": "EVER GIVEN",
+                    "destination": "JPYOK",
+                },
+                "last_pos": {"lat": 35.0123, "lon": 140.5678},
             },
         }
         result = aggregate(ships)
-        cells = result["densityGrid"]["cells"]
-        self.assertEqual(len(cells), 1)
-        self.assertEqual(cells[0]["count"], 2)
-        self.assertEqual(cells[0]["lat"], 35.0)
-        self.assertEqual(cells[0]["lon"], 140.0)
-        # 両方とも日本港向け
-        self.assertEqual(cells[0]["japanBound"], 2)
+        self.assertEqual(len(result["vessels"]), 1)
+        v = result["vessels"][0]
+        self.assertEqual(v["mmsi"], 123456789)
+        self.assertEqual(v["name"], "EVER GIVEN")
+        self.assertEqual(v["destination"], "JPYOK")
+        self.assertTrue(v["isJapanBound"])
+        self.assertEqual(v["lat"], 35.0123)
+        self.assertEqual(v["lon"], 140.5678)
 
-    def test_japan_bound_split_within_cell(self):
-        # 同じセルに日本港向けと海外港向けが混在
+    def test_non_japan_destination_marked_false(self):
         ships = {
             1: {
-                "static": {"type": 80, "destination": "JPYOK"},
-                "last_pos": {"lat": 35.0, "lon": 140.0},
-            },
-            2: {
-                "static": {"type": 80, "destination": "BUSAN"},
-                "last_pos": {"lat": 35.0, "lon": 140.0},
-            },
-            3: {
-                "static": {"type": 80, "destination": ""},
-                "last_pos": {"lat": 35.0, "lon": 140.0},
+                "static": {"type": 80, "name": "FOO", "destination": "BUSAN"},
+                "last_pos": {"lat": 34.0, "lon": 132.0},
             },
         }
         result = aggregate(ships)
-        cells = result["densityGrid"]["cells"]
-        self.assertEqual(len(cells), 1)
-        self.assertEqual(cells[0]["count"], 3)
-        self.assertEqual(cells[0]["japanBound"], 1)
+        v = result["vessels"][0]
+        self.assertFalse(v["isJapanBound"])
 
-    def test_separate_cells_kept_separate(self):
+    def test_no_position_keeps_vessel_with_null_coords(self):
+        # 静的データのみで位置がないケース。vessel は出すが lat/lon は None
+        ships = {
+            1: {"static": {"type": 80, "name": "NO POS", "destination": "JPYOK"}},
+        }
+        result = aggregate(ships)
+        self.assertEqual(len(result["vessels"]), 1)
+        v = result["vessels"][0]
+        self.assertIsNone(v["lat"])
+        self.assertIsNone(v["lon"])
+
+    def test_non_tankers_excluded(self):
         ships = {
             1: {
-                "static": {"type": 80, "destination": "JPYOK"},
+                "static": {"type": 70, "name": "CARGO", "destination": "JPYOK"},
                 "last_pos": {"lat": 35.0, "lon": 140.0},
             },
             2: {
-                "static": {"type": 80, "destination": "CHIBA"},
-                "last_pos": {"lat": 36.0, "lon": 141.0},  # 別のセル
-            },
-        }
-        result = aggregate(ships)
-        cells = result["densityGrid"]["cells"]
-        self.assertEqual(len(cells), 2)
-        self.assertEqual(sum(c["count"] for c in cells), 2)
-
-    def test_non_tankers_excluded_from_grid(self):
-        ships = {
-            1: {
-                "static": {"type": 70, "destination": "JPYOK"},  # Cargo, excluded
-                "last_pos": {"lat": 35.0, "lon": 140.0},
-            },
-            2: {
-                "static": {"type": 80, "destination": "JPYOK"},  # Tanker
+                "static": {"type": 80, "name": "TANKER", "destination": "JPYOK"},
                 "last_pos": {"lat": 35.0, "lon": 140.0},
             },
         }
         result = aggregate(ships)
-        cells = result["densityGrid"]["cells"]
-        self.assertEqual(len(cells), 1)
-        self.assertEqual(cells[0]["count"], 1)
+        self.assertEqual(len(result["vessels"]), 1)
+        self.assertEqual(result["vessels"][0]["name"], "TANKER")
 
-    def test_invalid_position_skipped(self):
+    def test_lat_lon_rounded_to_4_decimals(self):
         ships = {
             1: {
-                "static": {"type": 80, "destination": "JPYOK"},
+                "static": {"type": 80, "name": "PRECISE", "destination": "JPYOK"},
+                "last_pos": {"lat": 35.123456789, "lon": 140.987654321},
+            },
+        }
+        result = aggregate(ships)
+        v = result["vessels"][0]
+        self.assertEqual(v["lat"], 35.1235)
+        self.assertEqual(v["lon"], 140.9877)
+
+    def test_invalid_position_yields_null_coords(self):
+        ships = {
+            1: {
+                "static": {"type": 80, "name": "BAD", "destination": "JPYOK"},
                 "last_pos": {"lat": "not-a-number", "lon": 140.0},
             },
-            2: {
-                "static": {"type": 80, "destination": "JPYOK"},
-                "last_pos": None,
-            },
         }
-        # _quantize が None を返すケースは集計対象外
         result = aggregate(ships)
-        self.assertEqual(result["densityGrid"]["cells"], [])
+        v = result["vessels"][0]
+        self.assertIsNone(v["lat"])
+        # lon も None を期待（lat が無効ならペアで無効扱い）
+        self.assertEqual(v["lon"], 140.0)  # 個別では valid なので残す
 
 
 if __name__ == "__main__":

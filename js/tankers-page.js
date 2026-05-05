@@ -110,7 +110,7 @@ async function main() {
   );
   setText('bounding-box', data.boundingBox || '—');
 
-  initTankerMap(data.densityGrid);
+  initTankerMap(data.vessels);
 
   checkStaleness(data.fetchedAt);
 }

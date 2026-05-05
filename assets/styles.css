@@ -740,8 +740,19 @@ a:hover { text-decoration: none; }
   display: inline-block;
 }
 .map-legend-dot--japan { background: #c0392b; }
-.map-legend-dot--mixed { background: #e67e22; }
 .map-legend-dot--other { background: #7f8c8d; }
+
+.tanker-popup {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+.tanker-popup .tanker-popup-row {
+  display: inline-block;
+}
+.tanker-popup .tanker-popup-label {
+  color: var(--fg-muted);
+  margin-right: 4px;
+}
 
 .map-empty {
   margin-top: var(--space-3);

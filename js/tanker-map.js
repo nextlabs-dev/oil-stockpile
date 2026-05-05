@@ -1,9 +1,8 @@
 /**
- * /tankers/ の密度マップ描画。
+ * /tankers/ の船舶分布マップ。
  *
- * data.densityGrid.cells を Leaflet 円でプロットする。
- * cells は 0.5° メッシュ集計済 (個別船舶は識別不可) で、
- * 1 セル = lat/lon 中心 + 隻数。
+ * data.vessels (個別タンカーのリスト) を Leaflet circleMarker でプロット。
+ * クリックで船名・destination・MMSI・位置をポップアップ表示。
  *
  * Leaflet は CDN から global L として読み込み済み (tankers/index.html)。
  */
@@ -11,36 +10,48 @@
 const MAP_CENTER = [35.0, 137.0];   // 日本中央付近
 const MAP_ZOOM = 5;
 const MAP_MIN_ZOOM = 4;
-const MAP_MAX_ZOOM = 8;
+const MAP_MAX_ZOOM = 10;
 
 const TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const TILE_ATTRIBUTION =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
-// 円の色は「日本港向け / 海外向け / 混在」で 3 色に色分け
-const COLOR_JAPAN_ALL = '#c0392b';   // 全部日本港向け = 濃い赤
-const COLOR_MIXED = '#e67e22';       // 混在 = オレンジ
-const COLOR_OTHER = '#7f8c8d';       // 海外向け or 不明 = 灰
+// マーカー色: 日本港向け (赤) / それ以外・不明 (灰)
+const COLOR_JAPAN_BOUND = '#c0392b';
+const COLOR_OTHER = '#7f8c8d';
 
-/** 隻数 → 半径(meters)。1 隻でも見える + 多いほど大きく。 */
-function radiusForCount(count) {
-  return 12000 + 5000 * Math.sqrt(Math.max(count, 1));
+const MARKER_RADIUS_PX = 7;
+
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
 }
 
-/** 隻数 → 塗り透明度。多いほど濃く、最大 0.85。 */
-function opacityForCount(count) {
-  return Math.min(0.35 + 0.1 * count, 0.85);
+function buildPopupHtml(v) {
+  const name = v.name && v.name.trim() ? escapeHtml(v.name) : '<em>(船名未取得)</em>';
+  const dest = v.destination && v.destination.trim() ? escapeHtml(v.destination) : '<em>(destination 未入力)</em>';
+  const mmsi = typeof v.mmsi === 'number' ? v.mmsi : escapeHtml(v.mmsi);
+  const coord = (typeof v.lat === 'number' && typeof v.lon === 'number')
+    ? `${v.lat.toFixed(3)}°N, ${v.lon.toFixed(3)}°E`
+    : '位置不明';
+  const flag = v.isJapanBound ? '🇯🇵 日本港向け' : 'それ以外';
+  return `
+    <div class="tanker-popup">
+      <strong>${name}</strong><br>
+      <span class="tanker-popup-row"><span class="tanker-popup-label">Destination:</span> ${dest}</span><br>
+      <span class="tanker-popup-row"><span class="tanker-popup-label">MMSI:</span> ${mmsi}</span><br>
+      <span class="tanker-popup-row"><span class="tanker-popup-label">位置:</span> ${coord}</span><br>
+      <span class="tanker-popup-row">${flag}</span>
+    </div>
+  `.trim();
 }
 
-/** 日本港向け率に応じて色を決める。 */
-function colorForCell(japanBound, total) {
-  if (total <= 0) return COLOR_OTHER;
-  if (japanBound >= total) return COLOR_JAPAN_ALL;
-  if (japanBound <= 0) return COLOR_OTHER;
-  return COLOR_MIXED;
-}
-
-export function initTankerMap(densityGrid) {
+export function initTankerMap(vessels) {
   const container = document.getElementById('tanker-map');
   const empty = document.getElementById('map-empty');
   if (!container) return;
@@ -55,9 +66,7 @@ export function initTankerMap(densityGrid) {
     return;
   }
 
-  const cells = (densityGrid && Array.isArray(densityGrid.cells))
-    ? densityGrid.cells
-    : [];
+  const list = Array.isArray(vessels) ? vessels : [];
 
   const map = L.map(container, {
     center: MAP_CENTER,
@@ -65,7 +74,7 @@ export function initTankerMap(densityGrid) {
     minZoom: MAP_MIN_ZOOM,
     maxZoom: MAP_MAX_ZOOM,
     zoomControl: true,
-    scrollWheelZoom: false,         // ページスクロールを邪魔しない
+    scrollWheelZoom: false,
   });
 
   const tiles = L.tileLayer(TILE_URL, {
@@ -73,36 +82,32 @@ export function initTankerMap(densityGrid) {
     maxZoom: MAP_MAX_ZOOM,
   });
   tiles.on('tileerror', (e) => {
-    // タイル取得失敗時のデバッグ補助
     console.warn('[tanker-map] tile error:', e?.tile?.src || e);
   });
   tiles.addTo(map);
 
-  // CSS が反映された後で実サイズを再認識させる (タイミングによっては
-  // Leaflet が 0px と認識して描画を止めることがあるため)
   setTimeout(() => map.invalidateSize(), 0);
 
-  if (cells.length === 0) {
+  // 位置不明の vessel は表示できないため除外
+  const withPosition = list.filter(
+    (v) => typeof v.lat === 'number' && typeof v.lon === 'number',
+  );
+
+  if (withPosition.length === 0) {
     if (empty) empty.hidden = false;
     return;
   }
 
-  for (const cell of cells) {
-    const { lat, lon, count } = cell;
-    if (typeof lat !== 'number' || typeof lon !== 'number') continue;
-    const japanBound = typeof cell.japanBound === 'number' ? cell.japanBound : 0;
-    const color = colorForCell(japanBound, count);
-    L.circle([lat, lon], {
-      radius: radiusForCount(count),
+  for (const v of withPosition) {
+    const color = v.isJapanBound ? COLOR_JAPAN_BOUND : COLOR_OTHER;
+    L.circleMarker([v.lat, v.lon], {
+      radius: MARKER_RADIUS_PX,
       color,
-      weight: 1,
+      weight: 1.5,
       fillColor: color,
-      fillOpacity: opacityForCount(count),
+      fillOpacity: 0.7,
     })
-      .bindTooltip(
-        `${count} 隻（うち日本港向け ${japanBound} 隻）`,
-        { direction: 'top' },
-      )
+      .bindPopup(buildPopupHtml(v))
       .addTo(map);
   }
 }

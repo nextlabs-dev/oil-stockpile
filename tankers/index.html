@@ -66,18 +66,16 @@
     </p>
   </section>
 
-  <!-- Density map -->
+  <!-- Vessels map -->
   <section class="map-section" aria-labelledby="map-heading">
-    <h2 id="map-heading" class="section-title">海域内の分布</h2>
+    <h2 id="map-heading" class="section-title">海域内のタンカー</h2>
     <p class="map-note">
-      0.5° (約 55km) のメッシュごとに観測したタンカー隻数を円の大きさで表示します。
-      個別船舶の特定はできない粒度です。
+      観測した個別タンカーの位置をプロットします。マーカーをクリックすると船名・destination・MMSI・座標を表示します。
     </p>
-    <div id="tanker-map" class="tanker-map" role="img" aria-label="日本周辺海域のタンカー分布図"></div>
+    <div id="tanker-map" class="tanker-map" role="img" aria-label="日本周辺海域のタンカー位置図"></div>
     <p class="map-legend" aria-hidden="true">
-      <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--japan"></span>すべて日本港向け</span>
-      <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--mixed"></span>日本港向けと海外向けが混在</span>
-      <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--other"></span>海外向け / 不明</span>
+      <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--japan"></span>日本港向け</span>
+      <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--other"></span>海外向け / destination 未入力</span>
     </p>
     <p id="map-empty" class="map-empty" hidden>
       今回のサンプルでは位置情報付きのタンカーが観測されませんでした。
@@ -145,7 +143,7 @@
     <a href="https://aisstream.io/" target="_blank" rel="noopener noreferrer"><span lang="en">aisstream.io</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（<span lang="en">BETA</span>）の AIS リアルタイムストリーム
   </p>
   <p class="footer-disclaimer">
-    本サイトは AIS データに基づく非公式の集計です。表示は集計値（隻数・港名）のみで、個別船舶の情報は表示していません。実流入量は財務省貿易統計をご参照ください。
+    本サイトは AIS データに基づく非公式の集計です。AIS は IMO 規定により公開放送される情報で、地図には個別船舶の名称・destination・位置を表示しています。実流入量は財務省貿易統計をご参照ください。
   </p>
   <p class="footer-meta">
     <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">株式会社ネクストラボ<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
