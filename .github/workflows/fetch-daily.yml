@@ -29,11 +29,17 @@ jobs:
           cache: 'pip'
           cache-dependency-path: scripts/requirements.txt
 
+      - name: Install CJK fonts (for OGP image)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+
       - name: Install dependencies
         run: pip install -r scripts/requirements.txt
 
       - name: Fetch and parse PDF
         run: python scripts/fetch_pdf.py
+
+      - name: Generate OGP image
+        run: python scripts/generate_ogp.py
 
       - name: Commit if changed
         env:
@@ -42,11 +48,18 @@ jobs:
           GIT_COMMITTER_NAME: github-actions[bot]
           GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
         run: |
+          changed_paths=()
           if [[ -n "$(git status --porcelain data/snapshots.json)" ]]; then
-            git add data/snapshots.json
+            changed_paths+=("data/snapshots.json")
+          fi
+          if [[ -n "$(git status --porcelain assets/og-image.png)" ]]; then
+            changed_paths+=("assets/og-image.png")
+          fi
+          if [[ ${#changed_paths[@]} -gt 0 ]]; then
+            git add "${changed_paths[@]}"
             git commit -m "data: auto-update $(date -u +%Y-%m-%d)"
             git push
-            echo "::notice::snapshots.json updated and pushed"
+            echo "::notice::pushed: ${changed_paths[*]}"
           else
-            echo "::notice::No changes; PDF was identical to existing data"
+            echo "::notice::No changes; PDF and OGP were identical to existing"
           fi

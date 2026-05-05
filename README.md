@@ -3,7 +3,7 @@
 経済産業省「石油備蓄の現況」速報PDFを元に、日本の石油備蓄日数を Minimal に可視化する非公式サイト。
 
 - 元データ: https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/
-- 公開URL: （デプロイ後に記入）
+- 公開URL: https://tkysi-mi.github.io/oil-stockpile/
 
 ## 構成
 
@@ -19,7 +19,7 @@ oil-stockpile/
 ├── assets/
 │   ├── styles.css
 │   ├── favicon.svg
-│   └── og-image.png        -- 後日作成（1200x630）
+│   └── og-image.png        -- OGP画像（毎日 generate_ogp.py が再生成）
 ├── js/
 │   ├── data.js             -- 設定値とデータ読み込みヘルパ（手動メンテ）
 │   ├── counter.js          -- F-01 リアルタイムカウンター
@@ -36,8 +36,10 @@ oil-stockpile/
 ├── scripts/
 │   ├── fetch_pdf.py        -- 備蓄PDF取得・パース・JSON更新
 │   ├── fetch_tankers.py    -- AIS WebSocket サンプラ
+│   ├── generate_ogp.py     -- OGP 画像生成（snapshots → assets/og-image.png）
 │   ├── test_fetch_pdf.py
 │   ├── test_fetch_tankers.py
+│   ├── test_generate_ogp.py
 │   └── requirements.txt
 ├── .github/workflows/
 │   ├── fetch-daily.yml     -- 備蓄日数の毎朝取得 (07:00 JST)
@@ -104,6 +106,35 @@ python -m unittest discover -s scripts -p 'test_*.py'
 ```
 
 `scripts/` 以下を変更した PR / push では `.github/workflows/test.yml` が自動実行され、テストが落ちた場合はマージ前に検知できます。
+
+## OGP 画像の自動生成
+
+SNS シェア時に表示される OGP 画像（`assets/og-image.png`、1200×630）は、毎日の備蓄データ取得後に `scripts/generate_ogp.py` が再生成します。
+
+### 仕組み
+
+1. `fetch-daily.yml` 内で `python scripts/fetch_pdf.py` の後に `python scripts/generate_ogp.py` を実行
+2. `data/snapshots.json` の最新値を読み、Pillow で 1200×630 の PNG を描画
+3. 内容: 「あと何日？日本の石油備蓄」 / 「N 日分」 / 充填率タンクゲージ / 出典・データ時点
+4. 差分があれば `assets/og-image.png` も `data/snapshots.json` と一緒に commit → push
+
+「動的生成」ではなく、データ更新粒度（日次）に合わせた事前生成方式です。SNS プラットフォームの OG キャッシュ仕様（数時間〜30日）と組み合わせると、実用上は最新値とほぼ一致します。
+
+### ローカル実行
+
+```bash
+pip install -r scripts/requirements.txt
+python scripts/generate_ogp.py            # 本番（assets/og-image.png を上書き）
+python scripts/generate_ogp.py --dry-run  # 描画ロジックのスモーク確認、書き出さず終了
+```
+
+ローカルでは Windows なら游ゴシック / メイリオ、macOS なら Arial Unicode、Linux なら Noto Sans CJK を自動探索します。GitHub Actions では `fonts-noto-cjk` を apt で入れています。
+
+### 失敗したら
+
+- 失敗時は `assets/og-image.png` を更新せず Actions ログにエラー
+- 旧 OGP 画像が残るので「壊れた画像をシェア」状態にはならない
+- `scripts/test_generate_ogp.py` でロジック単位のテストをカバー（`test.yml` で自動実行）
 
 ## タンカータブ（`/tankers/`）
 
@@ -185,13 +216,33 @@ python -m http.server 8080
 
 ## デプロイ（GitHub Pages）
 
-1. リポジトリを作成し push
-2. Settings → Pages → Source: `main` ブランチ `/ (root)`
-3. Settings → Actions → General → Workflow permissions: **Read and write permissions** をON（Bot が `data/snapshots.json` を push できるように）
-4. （任意）カスタムドメインを CNAME で設定
-5. `js/data.js` の `SITE_CONFIG.url` を実 URL に書き換える
-6. `index.html` 内の `oil-stockpile.example` を実 URL に置換（canonical / og:url / og:image）
-7. `robots.txt` と `sitemap.xml` の Sitemap / loc も同様に置換
+公開 URL は GitHub Pages デフォルトの `https://tkysi-mi.github.io/oil-stockpile/` を採用しています。コード内の絶対 URL（canonical / og:url / og:image / sitemap / robots / `SITE_CONFIG.url`）はこの URL でハードコード済みです。
+
+### 初回セットアップ
+
+1. リポジトリ `tkysi-mi/oil-stockpile` の **Settings → Pages**
+   - Source: **Deploy from a branch**
+   - Branch: **main** / **/ (root)**
+   - Save
+2. **Settings → Actions → General → Workflow permissions** を **Read and write permissions** に変更（Bot が `data/snapshots.json` と `assets/og-image.png` を自動 push できるように）
+3. main ブランチに push → 初回ビルドが走り、〜1 分で `https://tkysi-mi.github.io/oil-stockpile/` で公開
+
+### デプロイ後の確認
+
+- ブラウザで上記 URL を開いてカウンターが動くこと
+- `https://tkysi-mi.github.io/oil-stockpile/assets/og-image.png` を直接開いて 1200×630 の OGP 画像が見えること
+- `https://www.opengraph.xyz/url/https%3A%2F%2Ftkysi-mi.github.io%2Foil-stockpile%2F` などのアンファラーで OGP メタが取れていること
+- 実際に X からツイートを送信し、リンクプレビュー画像が表示されること（Twitter のクローラがメタを読み込むまで数十秒かかる場合あり）
+
+### カスタムドメインに切り替える場合
+
+1. **Settings → Pages → Custom domain** で独自ドメインを設定 + DNS で CNAME を `tkysi-mi.github.io` に向ける
+2. プロジェクト内の絶対 URL を一括置換:
+   - `index.html` / `tankers/index.html` / `scale/index.html` / `about/index.html` の `canonical` / `og:url` / `og:image` / `twitter:image`
+   - `js/data.js` の `SITE_CONFIG.url`
+   - `robots.txt` の `Sitemap`
+   - `sitemap.xml` の各 `<loc>`
+   - `README.md` 冒頭の「公開 URL」
 
 ## 設計メモ
 

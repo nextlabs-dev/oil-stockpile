@@ -29,6 +29,8 @@
 | SC-017 | 石油のものさし | 備蓄量が VLCC 隻数・年間消費比・IEA 90 日比に換算表示される | Medium |
 | SC-018 | 石油のものさし | サブタブで 3 視点（単位換算・スケール比較・豆知識）を切替できる | Medium |
 | SC-019 | about | サイトの目的・出典・計算方法・運営者情報を 1 ページで確認できる | Medium |
+| SC-020 | 問い合わせ CTA | about タブ末尾の CTA から運営会社の問い合わせ動線に遷移できる | Low |
+| SC-021 | OGP 自動生成 | 備蓄データ更新時に OGP 画像が再生成される | Medium |
 
 ---
 
@@ -341,6 +343,45 @@ Feature: サイトの目的・出典・運営者の集約表示
     And 計算方法と限界セクションが表示される
     And 運営セクションに会社名「株式会社ネクストラボ」と所在地・代表者・設立年・事業内容が表示される
     And 免責事項セクションが表示される
+
+  @SC-020 @cta @happy-path @low
+  Scenario: 問い合わせ CTA から運営会社の問い合わせ動線に遷移できる
+    Given 訪問者が about タブをスクロールしている
+    When 訪問者がページ末尾の CTA「ネクストラボに問い合わせる」を押下する
+    Then 新規タブで `https://nextlabs.jp/#contact` が開く
+    And CTA は親要素の幅いっぱい（横幅フル）に表示されている
+```
+
+---
+
+### Feature: OGP 画像の自動再生成
+
+```gherkin
+@ogp @automation
+Feature: OGP 画像が備蓄データに追従して再生成される
+
+  As a SNS 経由でサイトを発見する訪問者
+  I want シェア時に表示される OGP 画像が最新の備蓄日数を反映していてほしい
+  So that 古い数字を出典付きで拡散してしまう事故を避けられる
+
+  Background:
+    Given GitHub Actions の `fetch-daily.yml` が毎朝 07:00 JST に走行する
+    And `scripts/generate_ogp.py` が `data/snapshots.json` の最新値を読む
+
+  @SC-021 @smoke @automation @medium
+  Scenario: 備蓄データ更新時に OGP 画像が再生成される
+    Given `data/snapshots.json` の最新 asOf が "2026-04-28" / total 211 である
+    When `python scripts/generate_ogp.py` が実行される
+    Then `assets/og-image.png` が 1200×630 の PNG として書き出される
+    And 画像内に「211 日分」「データ時点 2026年4月28日」が描画されている
+    And 画像内のタンクゲージが充填率（基準 247 日比 約85%）を反映している
+
+  @SC-021 @error-handling @medium
+  Scenario: 入力データ異常時は OGP を更新しない
+    Given `data/snapshots.json` が空または不正である
+    When `python scripts/generate_ogp.py` が実行される
+    Then スクリプトは exit code 1 で終了する
+    And 既存の `assets/og-image.png` は変更されない
 ```
 
 ---
@@ -356,8 +397,9 @@ Feature: サイトの目的・出典・運営者の集約表示
 | `@happy-path` | 正常系シナリオ |
 | `@error-handling` | データ古さ警告など、異常時の振る舞い |
 | `@high` / `@medium` / `@low` | 優先度（一覧テーブルと同期） |
-| `@counter` / `@gauge` / `@trend` / `@tankers` / `@share` / `@footer` / `@stale-warning` / `@scale` / `@about` | 機能カテゴリ。タブやコンポーネント単位の選択実行に利用 |
+| `@counter` / `@gauge` / `@trend` / `@tankers` / `@share` / `@footer` / `@stale-warning` / `@scale` / `@about` / `@cta` / `@ogp` | 機能カテゴリ。タブやコンポーネント単位の選択実行に利用 |
 | `@education` | 備蓄量への肌感覚を補強する教育系コンテンツ |
+| `@automation` | GitHub Actions 等のバックグラウンド自動化（人手操作なしで走るもの） |
 | `@core` | サイトの存在意義に直結する機能（カウンター・ゲージ・シェア） |
 | `@trust` | データ信頼性に関わる機能（出典表示・古さ警告） |
 

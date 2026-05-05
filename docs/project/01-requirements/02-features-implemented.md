@@ -21,3 +21,5 @@
 | FN-017 | SEO・配布 | 検索 | robots.txt / sitemap.xml | クローラ向け基本設定 |
 | FN-018 | コンテンツ拡張 | 教育 | 「石油のものさし」タブ | バレル/kL の単位換算、VLCC 隻数・年間消費比などのスケール比較、関連豆知識の 3 サブタブで備蓄量への肌感覚を補強 |
 | FN-019 | コンテンツ拡張 | 紹介 | about タブ | サイトの目的・データ出典・計算方法と限界・運営会社情報・免責事項を 1 ページに集約 |
+| FN-020 | シェア | CTA | 問い合わせ CTA ボタン | about タブ末尾に横幅フルの CTA を設置し、`nextlabs.jp/#contact` への遷移動線を提供 |
+| FN-021 | OGP・シェア | 画像生成 | OGP 動的生成 | snapshots.json の最新値を元に Pillow で 1200×630 PNG を毎日再生成し、`assets/og-image.png` に出力（GitHub Actions で `fetch-daily.yml` 後段に組み込み） |
