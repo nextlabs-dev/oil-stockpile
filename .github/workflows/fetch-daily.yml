@@ -58,6 +58,8 @@ jobs:
           if [[ ${#changed_paths[@]} -gt 0 ]]; then
             git add "${changed_paths[@]}"
             git commit -m "data: auto-update $(date -u +%Y-%m-%d)"
+            # 取得中に main に他の commit が積まれている場合があるため rebase してから push
+            git pull --rebase --autostash origin main
             git push
             echo "::notice::pushed: ${changed_paths[*]}"
           else

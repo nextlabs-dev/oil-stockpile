@@ -701,6 +701,16 @@ a:hover { text-decoration: none; }
   margin: 0 var(--space-1);
 }
 
+.tanker-scale {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
 /* Density map */
 .map-note {
   font-size: var(--text-sm);
