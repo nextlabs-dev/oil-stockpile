@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あと何日？｜日本の石油備蓄</title>
+<meta name="description" content="日本の石油備蓄、いまこれだけ。経済産業省「石油備蓄の現況」速報値を分かりやすく可視化する非公式カウンター。">
+<link rel="canonical" href="https://oil-stockpile.example/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oil-stockpile.example/">
+<meta property="og:title" content="あと何日？｜日本の石油備蓄">
+<meta property="og:description" content="経済産業省の速報値から、日本の石油備蓄日数を静かに可視化します。">
+<meta property="og:image" content="https://oil-stockpile.example/assets/og-image.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="あと何日？｜日本の石油備蓄">
+<meta name="twitter:description" content="経済産業省の速報値から、日本の石油備蓄日数を静かに可視化します。">
+<meta name="twitter:image" content="https://oil-stockpile.example/assets/og-image.png">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&family=Noto+Sans+JP:wght@200;300;400;500;700&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="./" aria-label="あと何日？日本の石油備蓄 ホーム">
+      <h1 class="site-title">あと何日？日本の石油備蓄</h1>
+    </a>
+    <nav class="tabs" aria-label="セクション">
+      <a class="tab tab--active" href="./" aria-current="page">カウンター</a>
+      <a class="tab" href="./tankers/">タンカー</a>
+      <a class="tab" href="./scale/">石油のものさし</a>
+      <a class="tab" href="./about/">about</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="site-main">
+
+  <!-- F-01: Real-time counter -->
+  <section class="counter-section is-hero" aria-labelledby="counter-heading">
+    <h2 id="counter-heading" class="lead">いま、日本の石油備蓄は</h2>
+    <div class="counter" role="timer" aria-label="日本の石油備蓄 推計日数">
+      <div class="counter-days-row">
+        <span id="counter-days" class="counter-num">—</span>
+        <span class="counter-unit">日</span>
+      </div>
+      <div class="counter-time-row" aria-hidden="true">
+        <span id="counter-hours" class="counter-time-num">--</span><span class="counter-sep">:</span><span id="counter-minutes" class="counter-time-num">--</span><span class="counter-sep">:</span><span id="counter-seconds" class="counter-time-num">--</span>
+      </div>
+    </div>
+    <p class="counter-note">
+      端末時刻に基づく秒按分の推計値。元データは経済産業省「石油備蓄の現況」速報PDFです。
+    </p>
+    <p id="stale-warning" class="stale-warning" hidden>
+      ⚠ 最新データから2週間以上経過しています。値が古い可能性があります。
+    </p>
+  </section>
+
+  <!-- F-02: Tank gauge -->
+  <section class="tank-section" aria-labelledby="tank-heading">
+    <h2 id="tank-heading" class="section-title">備蓄残量</h2>
+    <div class="tank-layout">
+      <div class="tank-svg-wrap" id="tank-svg-wrap">
+        <!-- SVG injected by js/tank-gauge.js -->
+      </div>
+      <dl class="tank-meta">
+        <div class="tank-meta-row">
+          <dt>充填率</dt>
+          <dd><span id="tank-percent">—</span><span class="tank-meta-unit">%</span></dd>
+        </div>
+        <div class="tank-meta-row">
+          <dt>基準（最大値）</dt>
+          <dd><span id="tank-peak-days">247</span><span class="tank-meta-unit">日</span></dd>
+        </div>
+        <div class="tank-meta-row tank-meta-source">
+          <dt>基準の出典</dt>
+          <dd id="tank-peak-source">経産省 速報PDF（直近実績）</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- F-03: History chart -->
+  <section class="chart-section" aria-labelledby="chart-heading">
+    <h2 id="chart-heading" class="section-title">備蓄日数の推移</h2>
+    <div class="chart-controls">
+      <label class="chart-toggle">
+        <input type="checkbox" id="chart-toggle-segments">
+        <span>3区分の内訳も表示する</span>
+      </label>
+    </div>
+    <figure class="chart-figure" aria-labelledby="chart-heading">
+      <div class="chart-wrap" id="chart-wrap">
+        <!-- table + SVG injected by js/chart.js -->
+      </div>
+    </figure>
+    <p class="chart-hint" id="chart-hint">
+      点にカーソルを当てる、または Tab キーで選択すると公表日と内訳が表示されます。
+    </p>
+  </section>
+
+  <!-- 3-segment breakdown (常時表示) -->
+  <section class="breakdown-section" aria-labelledby="breakdown-heading">
+    <h2 id="breakdown-heading" class="section-title">3区分内訳</h2>
+    <dl class="breakdown-list">
+      <div class="breakdown-row">
+        <dt>国家備蓄</dt>
+        <dd><span id="breakdown-national">—</span><span class="breakdown-unit">日</span></dd>
+      </div>
+      <div class="breakdown-row">
+        <dt>民間備蓄</dt>
+        <dd><span id="breakdown-private">—</span><span class="breakdown-unit">日</span></dd>
+      </div>
+      <div class="breakdown-row">
+        <dt>産油国共同備蓄</dt>
+        <dd><span id="breakdown-joint">—</span><span class="breakdown-unit">日</span></dd>
+      </div>
+    </dl>
+    <p class="breakdown-note">
+      ※ 内訳の合計と総備蓄日数が一致しないことがあります（出典PDFの丸めによるものです）。
+    </p>
+  </section>
+
+  <!-- F-05: Share -->
+  <section class="share-section" aria-labelledby="share-heading">
+    <h2 id="share-heading" class="visually-hidden">シェア</h2>
+    <div class="share-buttons">
+      <button id="share-x" class="share-btn share-btn--primary" type="button">
+        <span class="share-btn-icon" aria-hidden="true">𝕏</span>
+        <span>でシェア</span>
+      </button>
+      <button id="share-copy" class="share-btn" type="button">
+        リンクをコピー
+      </button>
+    </div>
+    <div id="share-toast" class="share-toast" role="status" aria-live="polite"></div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p class="footer-source">
+    <strong>データ出典:</strong>
+    経済産業省「<a href="https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/" target="_blank" rel="noopener noreferrer">石油備蓄の現況<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>」速報PDF
+    ／ データ時点 <span id="footer-as-of">—</span>
+    ／ 公表 <span id="footer-published">—</span>
+  </p>
+  <p class="footer-disclaimer">
+    本サイトは経産省公表の速報（推計値）を可視化する非公式の情報サイトです。確報値とは差が生じる場合があります。トップの「現在値」は端末時刻に基づく秒按分の推計表示で、実数を秒単位で観測するものではありません。
+  </p>
+  <p class="footer-meta">
+    <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">株式会社ネクストラボ<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+    <span class="footer-sep">·</span>
+    実装の99%をAIが書きました
+  </p>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

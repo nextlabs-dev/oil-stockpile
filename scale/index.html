@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>石油のものさし｜日本の石油備蓄</title>
+<meta name="description" content="日本の石油備蓄を「N 日」だけでなく、kL・バレル・VLCC隻数・年間消費比に換算して提示する非公式の可視化サイト。">
+<link rel="canonical" href="https://oil-stockpile.example/scale/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oil-stockpile.example/scale/">
+<meta property="og:title" content="石油のものさし｜日本の石油備蓄">
+<meta property="og:description" content="備蓄日数を kL・バレル・VLCC隻数・年間消費比に換算して、肌感覚を補強します。">
+<meta property="og:image" content="https://oil-stockpile.example/assets/og-image.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="石油のものさし｜日本の石油備蓄">
+<meta name="twitter:description" content="備蓄日数を kL・バレル・VLCC隻数・年間消費比に換算して、肌感覚を補強します。">
+<meta name="twitter:image" content="https://oil-stockpile.example/assets/og-image.png">
+
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&family=Noto+Sans+JP:wght@200;300;400;500;700&display=swap">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="../" aria-label="あと何日？日本の石油備蓄 ホーム">
+      <h1 class="site-title">あと何日？日本の石油備蓄</h1>
+    </a>
+    <nav class="tabs" aria-label="セクション">
+      <a class="tab" href="../">カウンター</a>
+      <a class="tab" href="../tankers/">タンカー</a>
+      <a class="tab tab--active" href="./" aria-current="page">石油のものさし</a>
+      <a class="tab" href="../about/">about</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="site-main">
+
+  <!-- Hero: 現在備蓄日数（カウンタータブとの接続） -->
+  <section class="scale-hero is-hero" aria-labelledby="scale-heading">
+    <h2 id="scale-heading" class="visually-hidden">石油のものさし</h2>
+    <p class="lead">いま、日本の石油備蓄</p>
+    <div class="scale-num-row">
+      <span id="scale-days" class="scale-num">—</span>
+      <span class="scale-unit">日分を、別の単位で見る</span>
+    </div>
+    <p class="scale-sub">
+      経産省の最新公表値（<span id="scale-as-of">—</span>時点）をもとに、容積換算・スケール比較・関連豆知識の3つの視点で並べます。
+    </p>
+  </section>
+
+  <!-- Sub-tabs -->
+  <section class="subtabs-section" aria-label="石油のものさし セクション切替">
+    <div class="subtabs" role="tablist" aria-label="石油のものさし">
+      <button class="subtab subtab--active" role="tab" id="subtab-units" aria-selected="true" aria-controls="panel-units" type="button">単位換算</button>
+      <button class="subtab" role="tab" id="subtab-scale" aria-selected="false" aria-controls="panel-scale" tabindex="-1" type="button">スケール比較</button>
+      <button class="subtab" role="tab" id="subtab-trivia" aria-selected="false" aria-controls="panel-trivia" tabindex="-1" type="button">豆知識</button>
+    </div>
+
+    <!-- Panel 1: 単位換算 -->
+    <div class="subtab-panel" role="tabpanel" id="panel-units" aria-labelledby="subtab-units">
+      <h2 class="section-title">容積に換算する</h2>
+      <p class="panel-lead">
+        備蓄日数を「1日あたり消費量」で掛け戻し、kL・バレル・リットルに換算します。
+      </p>
+      <dl class="unit-list">
+        <div class="unit-row">
+          <dt>キロリットル</dt>
+          <dd><span id="unit-kl">—</span><span class="unit-suffix">kL</span></dd>
+        </div>
+        <div class="unit-row">
+          <dt>バレル</dt>
+          <dd><span id="unit-barrels">—</span><span class="unit-suffix">バレル</span></dd>
+        </div>
+        <div class="unit-row">
+          <dt>リットル</dt>
+          <dd><span id="unit-liters">—</span><span class="unit-suffix">L</span></dd>
+        </div>
+      </dl>
+      <p class="panel-note">
+        ※ 1 日あたり消費量を 約 30 万 kL（約 190 万バレル）として概算しています。
+        備蓄日数の母数は経産省の公表方式に準じた近似値で、実需要量とは数%程度の差が生じます。
+        <br>
+        ※ 換算係数: 1 バレル = 158.987 リットル / 1 kL = 約 6.29 バレル。
+      </p>
+    </div>
+
+    <!-- Panel 2: スケール比較 -->
+    <div class="subtab-panel" role="tabpanel" id="panel-scale" aria-labelledby="subtab-scale" hidden>
+      <h2 class="section-title">スケールで比べる</h2>
+      <p class="panel-lead">
+        身近に置き換えにくい「N 日分」を、目で見える単位に置き換えます。
+      </p>
+
+      <div class="compare-card">
+        <p class="compare-label">VLCC（大型原油タンカー）に積み替えると</p>
+        <p class="compare-value">
+          <span id="compare-vlcc">—</span><span class="compare-unit">隻分</span>
+        </p>
+        <p class="compare-meta">VLCC 1 隻の積載量を 約 200 万バレル（約 32 万 kL）と仮定。</p>
+      </div>
+
+      <div class="compare-card">
+        <p class="compare-label">日本の年間消費量と比べると</p>
+        <p class="compare-value">
+          <span id="compare-year-pct">—</span><span class="compare-unit">%</span>
+        </p>
+        <p class="compare-meta">365 日分を 100% とした比率。<span id="compare-year-frac">—</span> 年分に相当します。</p>
+      </div>
+
+      <div class="compare-card">
+        <p class="compare-label">IEA 90 日備蓄義務を基準にすると</p>
+        <p class="compare-value">
+          <span id="compare-iea-pct">—</span><span class="compare-unit">%</span>
+        </p>
+        <p class="compare-meta">IEA 加盟国の備蓄義務（純輸入量の 90 日分）を 100% とした比率。</p>
+      </div>
+    </div>
+
+    <!-- Panel 3: 豆知識 -->
+    <div class="subtab-panel" role="tabpanel" id="panel-trivia" aria-labelledby="subtab-trivia" hidden>
+      <h2 class="section-title">石油備蓄の豆知識</h2>
+      <ul class="trivia-list">
+        <li>
+          <strong>1 バレル = 158.987 リットル。</strong>
+          語源は 19 世紀のペンシルベニアでウイスキー樽（barrel）を流用したことに由来する、世界共通の取引単位です。
+        </li>
+        <li>
+          <strong>日本の備蓄義務は 90 日分。</strong>
+          IEA（国際エネルギー機関）加盟国に課された義務で、現在の備蓄日数はこれを大きく上回る水準で運用されています。
+        </li>
+        <li>
+          <strong>国家備蓄基地は全国 10 基地。</strong>
+          むつ小川原・苫小牧東部・福井・志布志など、地理的に分散配置することで地震・有事のリスクを低減しています。
+        </li>
+        <li>
+          <strong>備蓄は 3 区分で構成される。</strong>
+          国（JOGMEC が管理）・民間（石油元売り・販売業者の義務量）・産油国共同備蓄（UAE・サウジアラビアとの共同事業）。
+        </li>
+        <li>
+          <strong>VLCC は全長 約 330 m。</strong>
+          東京タワー（333 m）に匹敵する長さで、満載時には 約 200 万バレル（約 32 万 kL）を運びます。
+        </li>
+        <li>
+          <strong>日本は石油の 約 97% を輸入に依存。</strong>
+          中東依存度は約 95%（直近実績）で、シーレーン安全保障と備蓄量が常にセットで議論される理由です。
+        </li>
+      </ul>
+      <p class="panel-note">
+        ※ 数値は経産省・JOGMEC・財務省貿易統計の公開情報をもとにした概算で、年度・基準により多少の変動があります。
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p class="footer-source">
+    <strong>データ出典:</strong>
+    経済産業省「<a href="https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/" target="_blank" rel="noopener noreferrer">石油備蓄の現況<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>」速報PDF
+    ／ 換算根拠: 経産省「資源・エネルギー統計」、IEA「<span lang="en">Oil Stocks of IEA Countries</span>」、JOGMEC 公開情報
+  </p>
+  <p class="footer-disclaimer">
+    本ページの換算値は概算です。1 日あたり消費量・VLCC 積載量・年間消費量は公開統計の代表的な値を採用しており、実値とは数%程度の誤差が生じます。引用時は元データの出典に当たってください。
+  </p>
+  <p class="footer-meta">
+    <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">株式会社ネクストラボ<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+    <span class="footer-sep">·</span>
+    実装の99%をAIが書きました
+  </p>
+</footer>
+
+<script type="module" src="../js/scale-page.js"></script>
+</body>
+</html>

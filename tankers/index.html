@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日本周辺のタンカー｜日本の石油備蓄</title>
+<meta name="description" content="いま、日本周辺の海域に何隻のタンカーが航行中か。AIS データから集計した隻数のみを表示する非公式の可視化サイト。">
+<link rel="canonical" href="https://oil-stockpile.example/tankers/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oil-stockpile.example/tankers/">
+<meta property="og:title" content="日本周辺のタンカー｜日本の石油備蓄">
+<meta property="og:description" content="AIS データから日本周辺のタンカー隻数を集計。aisstream.io 提供。">
+<meta property="og:image" content="https://oil-stockpile.example/assets/og-image.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="日本周辺のタンカー">
+<meta name="twitter:description" content="AIS データから日本周辺のタンカー隻数を集計。">
+<meta name="twitter:image" content="https://oil-stockpile.example/assets/og-image.png">
+
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&family=Noto+Sans+JP:wght@200;300;400;500;700&display=swap">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="../" aria-label="あと何日？日本の石油備蓄 ホーム">
+      <h1 class="site-title">あと何日？日本の石油備蓄</h1>
+    </a>
+    <nav class="tabs" aria-label="セクション">
+      <a class="tab" href="../">カウンター</a>
+      <a class="tab tab--active" href="./" aria-current="page">タンカー</a>
+      <a class="tab" href="../scale/">石油のものさし</a>
+      <a class="tab" href="../about/">about</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="site-main">
+
+  <!-- Hero: tanker count -->
+  <section class="tanker-hero is-hero" aria-labelledby="tanker-heading">
+    <h2 id="tanker-heading" class="visually-hidden">日本周辺のタンカー</h2>
+    <p class="lead">いま、日本周辺の海域に</p>
+    <div class="tanker-num-row">
+      <span id="total-tankers" class="tanker-num">—</span>
+      <span class="tanker-unit">隻のタンカーが航行中</span>
+    </div>
+    <p class="tanker-sub">
+      うち
+      <strong id="japan-bound" class="tanker-japan-bound">—</strong>
+      隻が日本の港を目的地としています
+    </p>
+  </section>
+
+  <!-- Top destinations -->
+  <section class="ports-section" aria-labelledby="ports-heading">
+    <h2 id="ports-heading" class="section-title">主な目的地</h2>
+    <ol class="ports-list" id="ports-list"></ol>
+    <p class="ports-empty" id="ports-empty" hidden>
+      今回のサンプルでは日本港を目的地とするタンカーは確認できませんでした。
+    </p>
+  </section>
+
+  <!-- Metadata -->
+  <section class="meta-section" aria-labelledby="meta-heading">
+    <h2 id="meta-heading" class="section-title">取得情報</h2>
+    <dl class="meta-list">
+      <div class="meta-row">
+        <dt>最終取得</dt>
+        <dd id="fetched-at">—</dd>
+      </div>
+      <div class="meta-row">
+        <dt>サンプル時間</dt>
+        <dd id="sampling-duration">—</dd>
+      </div>
+      <div class="meta-row">
+        <dt>対象海域</dt>
+        <dd id="bounding-box">—</dd>
+      </div>
+      <div class="meta-row">
+        <dt>データソース</dt>
+        <dd>
+          <a href="https://aisstream.io/" target="_blank" rel="noopener noreferrer"><span lang="en">aisstream.io</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+          <small>（<span lang="en">BETA</span>）</small>
+        </dd>
+      </div>
+    </dl>
+    <p id="stale-warning" class="stale-warning" hidden>
+      ⚠ 最終取得から6時間以上経過しています。自動取得が止まっている可能性があります。
+    </p>
+  </section>
+
+  <!-- Caveats -->
+  <section class="caveats-section" aria-labelledby="caveats-heading">
+    <h2 id="caveats-heading" class="section-title">この数字の限界</h2>
+    <ul class="caveat-list">
+      <li><strong>destination は船員の手入力</strong>です。「日本港を次の目的地として申告した船」を数えており、実際の入港数とは異なる場合があります。</li>
+      <li>対象は <strong>AIS の船種コード 80-89（Tanker）</strong>のみ。LNG専用船・小型船は計上されない場合があります。</li>
+      <li>サンプル時間中に静的データ（destination を含む情報）を送信しなかった船は計上されません。AIS の静的データは約6分ごとに送信されます。</li>
+      <li><strong>積載量・バレル数の推計は表示していません</strong>（DWT→バレル換算は誤差が大きく、誤解を招くため）。</li>
+    </ul>
+    <p class="caveat-foot">
+      実際の月次原油輸入量は
+      <a href="https://www.customs.go.jp/toukei/info/tsdl.htm" target="_blank" rel="noopener noreferrer">財務省貿易統計<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（HS 2709.00 原油）をご参照ください。
+    </p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p class="footer-source">
+    <strong>データソース:</strong>
+    <a href="https://aisstream.io/" target="_blank" rel="noopener noreferrer"><span lang="en">aisstream.io</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（<span lang="en">BETA</span>）の AIS リアルタイムストリーム
+  </p>
+  <p class="footer-disclaimer">
+    本サイトは AIS データに基づく非公式の集計です。表示は集計値（隻数・港名）のみで、個別船舶の情報は表示していません。実流入量は財務省貿易統計をご参照ください。
+  </p>
+  <p class="footer-meta">
+    <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">株式会社ネクストラボ<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+    <span class="footer-sep">·</span>
+    実装の99%をAIが書きました
+  </p>
+</footer>
+
+<script type="module" src="../js/tankers-page.js"></script>
+</body>
+</html>

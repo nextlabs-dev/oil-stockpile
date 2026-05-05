@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>このサイトについて｜日本の石油備蓄</title>
+<meta name="description" content="「あと何日？日本の石油備蓄」サイトの目的・データ出典・計算方法・運営会社の情報を 1 ページに集約しています。">
+<link rel="canonical" href="https://oil-stockpile.example/about/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oil-stockpile.example/about/">
+<meta property="og:title" content="このサイトについて｜日本の石油備蓄">
+<meta property="og:description" content="サイトの目的・データ出典・計算方法・運営会社情報。">
+<meta property="og:image" content="https://oil-stockpile.example/assets/og-image.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="このサイトについて｜日本の石油備蓄">
+<meta name="twitter:description" content="サイトの目的・データ出典・計算方法・運営会社情報。">
+<meta name="twitter:image" content="https://oil-stockpile.example/assets/og-image.png">
+
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&family=Noto+Sans+JP:wght@200;300;400;500;700&display=swap">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="../" aria-label="あと何日？日本の石油備蓄 ホーム">
+      <h1 class="site-title">あと何日？日本の石油備蓄</h1>
+    </a>
+    <nav class="tabs" aria-label="セクション">
+      <a class="tab" href="../">カウンター</a>
+      <a class="tab" href="../tankers/">タンカー</a>
+      <a class="tab" href="../scale/">石油のものさし</a>
+      <a class="tab tab--active" href="./" aria-current="page">about</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="site-main">
+
+  <!-- Hero -->
+  <section class="about-hero is-hero" aria-labelledby="about-heading">
+    <h2 id="about-heading" class="about-hero-title">このサイトについて</h2>
+    <p class="about-lead">
+      日本の石油備蓄を、出典付き・最小限の数字で静かに可視化する非公式サイトです。
+    </p>
+  </section>
+
+  <!-- 目的・課題 -->
+  <section class="about-section" aria-labelledby="purpose-heading">
+    <h2 id="purpose-heading" class="section-title">目的</h2>
+    <div class="about-prose">
+      <p>
+        日本は石油の 約 97% を輸入に依存し、IEA 基準で 90 日分の備蓄義務を負うエネルギー安全保障の脆弱国です。経済産業省は「石油備蓄の現況」速報を日次 PDF で公表していますが、その存在自体が一般に認知されておらず、「215 日分」のような数値単体では多寡の比較基準を持てないため、ニュース感度の高い層であっても「いま日本の備蓄が安全圏にあるのか」を肌感覚として把握しづらい状態にあります。
+      </p>
+      <p>
+        本サイトは経産省の速報 PDF を自動取得・パースし、<strong>「日本の石油備蓄、いま N 日分」</strong>という単一指標を訪問から数秒以内に把握できるように設計されています。総量を秒単位で減算するカウンター、過去最高値に対するタンクゲージ、12 ヶ月推移、日本周辺タンカー集計、kL・バレル換算といった複数の視点で「多いか少ないか」の比較基準を提供することを目的にしています。
+      </p>
+    </div>
+  </section>
+
+  <!-- データ出典 -->
+  <section class="about-section" aria-labelledby="sources-heading">
+    <h2 id="sources-heading" class="section-title">データ出典</h2>
+    <dl class="about-dl">
+      <div class="about-dl-row">
+        <dt>備蓄日数（カウンター・タンクゲージ・グラフ）</dt>
+        <dd>
+          経済産業省「<a href="https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/" target="_blank" rel="noopener noreferrer">石油備蓄の現況<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>」速報 PDF を毎朝 07:00 JST に自動取得・パースして反映しています。
+        </dd>
+      </div>
+      <div class="about-dl-row">
+        <dt>タンカー隻数</dt>
+        <dd>
+          <a href="https://aisstream.io/" target="_blank" rel="noopener noreferrer"><span lang="en">aisstream.io</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（<span lang="en">BETA</span>）の AIS リアルタイムストリームを毎時サンプリングして集計しています。AIS 船種コード 80–89（Tanker）のみを対象とし、個別船舶情報は表示していません。
+        </dd>
+      </div>
+      <div class="about-dl-row">
+        <dt>単位換算・スケール比較</dt>
+        <dd>
+          経産省「資源・エネルギー統計」の代表値、IEA「<span lang="en">Oil Stocks of IEA Countries</span>」、JOGMEC 公開情報をもとにした概算値を採用しています。実値とは数% 程度の誤差が生じます。
+        </dd>
+      </div>
+      <div class="about-dl-row">
+        <dt>輸入量を確認したい場合</dt>
+        <dd>
+          実際の月次原油輸入量は <a href="https://www.customs.go.jp/toukei/info/tsdl.htm" target="_blank" rel="noopener noreferrer">財務省貿易統計<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（HS 2709.00 原油）をご参照ください。
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 計算方法・表示しているもの／していないもの -->
+  <section class="about-section" aria-labelledby="method-heading">
+    <h2 id="method-heading" class="section-title">計算方法と限界</h2>
+    <div class="about-prose">
+      <p>
+        トップページのカウンターは、最新公表値の <code>asOf</code> 時点を起点に「1 日経過 = 1 日分減る」というモデルで秒按分の推計表示をしています。実数を秒単位で観測するものではなく、ページ遷移時にスナップショット値へリセットされます。
+      </p>
+      <p>
+        タンクゲージの基準値（最大値）は過去公表値の高水準を採用しており、新しい高値が観測された場合に手動で更新します。3 区分（国家・民間・産油国共同）の合計は丸めの影響で総備蓄日数と一致しないことがあります。
+      </p>
+      <p>
+        タンカータブの隻数は <strong>サンプル時間中に AIS 静的データを送信したタンカー数</strong> です。<code>destination</code> は船員の手入力情報のため、実際の入港数とは異なります。積載量・バレル数の推計は誤解を招くため表示していません。
+      </p>
+      <p>
+        備蓄: <code>asOf</code> から 14 日以上、タンカー: 最終取得から 6 時間以上経過すると、自動取得が停止している可能性を示す警告バナーを表示します。取得失敗時は古いデータを保持し、壊れた値を出さない設計にしています。
+      </p>
+    </div>
+  </section>
+
+  <!-- 運営会社 -->
+  <section class="about-section" aria-labelledby="company-heading">
+    <h2 id="company-heading" class="section-title">運営</h2>
+    <dl class="about-dl">
+      <div class="about-dl-row">
+        <dt>会社名</dt>
+        <dd>株式会社ネクストラボ（<span lang="en">NextLab Inc.</span>）</dd>
+      </div>
+      <div class="about-dl-row">
+        <dt>代表者</dt>
+        <dd>亀井 智英（<span lang="en">Founder / CEO</span>）</dd>
+      </div>
+      <div class="about-dl-row">
+        <dt>所在地</dt>
+        <dd>〒150-0002 東京都渋谷区渋谷 2-19-15 宮益坂ビルディング</dd>
+      </div>
+      <div class="about-dl-row">
+        <dt>設立</dt>
+        <dd>2021 年 8 月</dd>
+      </div>
+      <div class="about-dl-row">
+        <dt>事業内容</dt>
+        <dd>
+          BtoB ソリューション開発（<span lang="en">Bakuage, Readable</span>）<br>
+          AI 実装コンサルティング<br>
+          新規事業開発支援
+        </dd>
+      </div>
+      <div class="about-dl-row">
+        <dt>インボイス登録番号</dt>
+        <dd>T7011001142377</dd>
+      </div>
+      <div class="about-dl-row">
+        <dt>ウェブサイト</dt>
+        <dd>
+          <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">nextlabs.jp<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 免責 -->
+  <section class="about-section" aria-labelledby="disclaimer-heading">
+    <h2 id="disclaimer-heading" class="section-title">免責事項</h2>
+    <div class="about-prose">
+      <p>
+        本サイトは経済産業省公表の速報（推計値）および AIS データに基づく <strong>非公式の情報サイト</strong> です。確報値・実測値とは差が生じる場合があります。表示情報はベストエフォートで運用しており、内容の正確性・完全性・最新性について保証するものではありません。本サイトの情報を利用したことによるいかなる損害についても、運営者は責任を負いかねます。
+      </p>
+      <p>
+        個人情報・ログイン情報の収集・保存は一切行いません。
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p class="footer-source">
+    <strong>主要データ出典:</strong>
+    経済産業省「<a href="https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/" target="_blank" rel="noopener noreferrer">石油備蓄の現況<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>」速報 PDF
+    ／
+    <a href="https://aisstream.io/" target="_blank" rel="noopener noreferrer"><span lang="en">aisstream.io</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（<span lang="en">BETA</span>）
+  </p>
+  <p class="footer-disclaimer">
+    本サイトは経産省公表の速報（推計値）と AIS データを可視化する非公式の情報サイトです。確報値・実測値とは差が生じる場合があります。
+  </p>
+  <p class="footer-meta">
+    <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">株式会社ネクストラボ<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+    <span class="footer-sep">·</span>
+    実装の99%をAIが書きました
+  </p>
+</footer>
+
+</body>
+</html>
