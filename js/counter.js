@@ -11,7 +11,10 @@
  * を asOf 昇順で並べた配列。
  */
 
-import { STALE_THRESHOLD_DAYS } from './data.js';
+import {
+  STALE_THRESHOLD_DAYS,
+  computeCurrentDays as computeFromSnapshot,
+} from './data.js';
 
 const MS_PER_DAY = 86_400_000;
 
@@ -32,10 +35,7 @@ export function getLatestSnapshot() {
 }
 
 export function computeCurrentDays(now = Date.now()) {
-  if (!latestSnapshot) return NaN;
-  const elapsedMs = now - asOfTimestamp;
-  const elapsedDays = elapsedMs / MS_PER_DAY;
-  return Math.max(0, latestSnapshot.total - elapsedDays);
+  return computeFromSnapshot(latestSnapshot, now);
 }
 
 export function getElapsedDays(now = Date.now()) {

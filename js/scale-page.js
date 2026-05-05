@@ -10,6 +10,8 @@
  * 値の精度より「桁感の正しさ」を優先し、すべて約・概算で表示する。
  */
 
+import { computeCurrentDays } from './data.js';
+
 const SNAPSHOTS_URL = '../data/snapshots.json';
 
 const CONSTANTS = {
@@ -139,7 +141,8 @@ async function main() {
     return;
   }
 
-  const days = snapshot.total;
+  // カウンターページと同じ「いまこの瞬間の推計値」を起点に表示
+  const days = computeCurrentDays(snapshot);
   setText('scale-days', String(Math.floor(days)));
   setText('scale-as-of', formatJaDate(snapshot.asOf));
 

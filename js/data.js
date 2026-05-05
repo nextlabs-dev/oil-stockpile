@@ -53,3 +53,19 @@ export const SITE_CONFIG = {
  * 古さ警告のしきい値（asOf からの経過日数）。
  */
 export const STALE_THRESHOLD_DAYS = 14;
+
+/**
+ * snapshot の asOf 時点からの経過分を引いた「いまこの瞬間の推計備蓄日数」を返す。
+ * モデル: 「1 日経過 = 1 日分減る」（年間消費量推計を別途持たなくても整合）。
+ *
+ * カウンターページ (秒按分) と石油のものさしページ (整数日) が
+ * 同じ値起点で動くよう、両モジュールから本関数を呼ぶ。
+ */
+export function computeCurrentDays(snapshot, now = Date.now()) {
+  if (!snapshot || typeof snapshot.total !== 'number' || !snapshot.asOf) {
+    return NaN;
+  }
+  const asOfMs = new Date(snapshot.asOf + 'T00:00:00+09:00').getTime();
+  const elapsedDays = (now - asOfMs) / 86_400_000;
+  return Math.max(0, snapshot.total - elapsedDays);
+}
