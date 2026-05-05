@@ -1,0 +1,56 @@
+name: Fetch tanker AIS data
+
+# aisstream.io から日本周辺のタンカー情報を定期取得して
+# data/tankers.json を更新する。
+#
+# 必要な GitHub Secret:
+#   AISSTREAM_API_KEY  — https://aisstream.io/ で取得（無料）
+
+on:
+  schedule:
+    # 1時間ごと（毎時0分 UTC）。サンプル時間が約8分のため、十分に余裕。
+    - cron: '0 * * * *'
+  workflow_dispatch: {}
+
+concurrency:
+  group: fetch-tankers
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Sample AIS stream
+        env:
+          AISSTREAM_API_KEY: ${{ secrets.AISSTREAM_API_KEY }}
+        run: python scripts/fetch_tankers.py --duration 480
+
+      - name: Commit if changed
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        run: |
+          if [[ -n "$(git status --porcelain data/tankers.json)" ]]; then
+            git add data/tankers.json
+            git commit -m "data: tankers snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+            echo "::notice::tankers.json updated and pushed"
+          else
+            echo "::notice::No changes; tanker counts identical to existing data"
+          fi

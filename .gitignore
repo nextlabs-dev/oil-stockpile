@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Editor
+.vscode/
+.idea/
+.claude/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Working files
+data/.oil_daily.pdf
+*.log
+
+# Local-only secrets (none currently, but reserve)
+.env
+.env.local
