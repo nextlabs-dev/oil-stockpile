@@ -425,8 +425,10 @@ a:hover { text-decoration: none; }
   border-radius: var(--radius-sm);
   padding: var(--space-3) var(--space-2) var(--space-2);
   overflow-x: auto;
-  /* visually-hidden な data-table を absolute 配置するときの基準。
-     これがないと table が body 基準で配置され scrollHeight が伸びる */
+  /* 内部の visually-hidden な data-table（accessibility 用）の自然な高さで
+     縦スクロールが出るのを抑制。clip で見えないテーブルなのでスクロール不要 */
+  overflow-y: hidden;
+  /* table が body 基準で絶対配置されないよう positioning context を作る */
   position: relative;
 }
 
