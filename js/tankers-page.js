@@ -8,6 +8,8 @@
  * リアルタイムストリームではなく、バックエンドが定期取得した snapshot を読むだけ。
  */
 
+import { initTankerMap } from './tanker-map.js';
+
 const TANKERS_URL = '../data/tankers.json';
 const STALE_HOURS = 6;
 
@@ -107,6 +109,8 @@ async function main() {
     `約 ${Math.round((data.samplingDurationSec || 0) / 60)} 分`,
   );
   setText('bounding-box', data.boundingBox || '—');
+
+  initTankerMap(data.densityGrid);
 
   checkStaleness(data.fetchedAt);
 }

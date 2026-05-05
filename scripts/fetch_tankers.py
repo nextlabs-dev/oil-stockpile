@@ -19,13 +19,18 @@ data/tankers.json を更新する。
       "japanBoundTankers": 32,
       "topDestinationPorts": [{"port": "YOKOHAMA", "count": 8}, ...],
       "boundingBox": "24-46N / 122-146E",
-      "source": "aisstream.io"
+      "source": "aisstream.io",
+      "densityGrid": {
+        "cellSizeDeg": 0.5,
+        "cells": [{"lat": 35.0, "lon": 140.0, "count": 2}, ...]
+      }
     }
 
 注意事項:
     - aisstream.io は BETA で SLA 非保証。ToS の詳細は要確認
     - destination は船員手入力で精度に限界がある（正確な「日本入港」ではない）
-    - 集計値のみを出力するのは規約・プライバシー上の保守的な判断
+    - 個別船舶の MMSI / 船名 は出さない (規約・プライバシー上の保守的な判断)
+    - 位置は 0.5°メッシュ (~55km) に丸めて隻数のみ出力。個別船舶を識別できない粒度
 """
 
 from __future__ import annotations
@@ -48,6 +53,7 @@ WS_URL = "wss://stream.aisstream.io/v0/stream"
 # 日本周辺海域 (大雑把)。緯度範囲: 沖縄〜北海道、経度範囲: 東シナ海〜西太平洋
 DEFAULT_BBOX = [[24.0, 122.0], [46.0, 146.0]]
 DEFAULT_DURATION_SEC = 480  # 8分: AIS Type 5 が約6分間隔のため大半をカバー
+DENSITY_CELL_SIZE_DEG = 0.5  # ~55km メッシュ。個別船舶を識別できない粒度
 
 # 日本の主要原油受入港のキーワード集合
 # 値は表示用の正規化された港名（複数別名→同じ canonical に集約）
@@ -118,10 +124,20 @@ def match_japan_port(dest):
     return None
 
 
-def aggregate(ships_seen):
+def _quantize(value, step):
+    """value を step 単位の代表値 (グリッドの中心) に丸める。"""
+    if value is None:
+        return None
+    return round(round(value / step) * step, 4)
+
+
+def aggregate(ships_seen, *, cell_size_deg=DENSITY_CELL_SIZE_DEG):
     """
-    ships_seen: { mmsi: { 'static': {type, destination}, 'last_pos': bool } }
+    ships_seen: { mmsi: { 'static': {type, destination}, 'last_pos': {lat, lon} | None } }
     戻り値: 集計済みの dict（船舶識別情報は含まない）
+
+    位置は cell_size_deg のメッシュに丸めて隻数のみ集計するため、
+    出力から個別船舶を特定することはできない。
     """
     tankers = []
     for _mmsi, info in ships_seen.items():
@@ -130,8 +146,13 @@ def aggregate(ships_seen):
             continue
         if not is_tanker_type(static.get("type")):
             continue
+        last_pos = info.get("last_pos")
+        if not isinstance(last_pos, dict):
+            last_pos = None
         tankers.append({
             "destination": static.get("destination", ""),
+            "lat": last_pos.get("lat") if last_pos else None,
+            "lon": last_pos.get("lon") if last_pos else None,
         })
 
     japan_bound_ports = []
@@ -146,10 +167,30 @@ def aggregate(ships_seen):
         for port, count in counter.most_common(10)
     ]
 
+    cell_counter: Counter = Counter()
+    for t in tankers:
+        if not isinstance(t["lat"], (int, float)) or not isinstance(
+            t["lon"], (int, float)
+        ):
+            continue
+        key = (
+            _quantize(t["lat"], cell_size_deg),
+            _quantize(t["lon"], cell_size_deg),
+        )
+        cell_counter[key] += 1
+    cells = [
+        {"lat": lat, "lon": lon, "count": count}
+        for (lat, lon), count in sorted(cell_counter.items())
+    ]
+
     return {
         "totalTankersInRegion": len(tankers),
         "japanBoundTankers": len(japan_bound_ports),
         "topDestinationPorts": top,
+        "densityGrid": {
+            "cellSizeDeg": cell_size_deg,
+            "cells": cells,
+        },
     }
 
 
@@ -195,7 +236,14 @@ async def sample(api_key, duration_sec, bbox):
                     "destination": (payload.get("Destination") or "").strip(),
                 }
             elif mt == "PositionReport":
-                ships_seen.setdefault(mmsi, {})["last_pos"] = True
+                payload = msg.get("Message", {}).get("PositionReport", {})
+                lat = payload.get("Latitude")
+                lon = payload.get("Longitude")
+                if isinstance(lat, (int, float)) and isinstance(lon, (int, float)):
+                    ships_seen.setdefault(mmsi, {})["last_pos"] = {
+                        "lat": float(lat),
+                        "lon": float(lon),
+                    }
 
     return ships_seen
 

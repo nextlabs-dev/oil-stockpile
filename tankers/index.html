@@ -26,6 +26,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&family=Noto+Sans+JP:wght@200;300;400;500;700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin="anonymous">
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
@@ -60,6 +63,19 @@
       うち
       <strong id="japan-bound" class="tanker-japan-bound">—</strong>
       隻が日本の港を目的地としています
+    </p>
+  </section>
+
+  <!-- Density map -->
+  <section class="map-section" aria-labelledby="map-heading">
+    <h2 id="map-heading" class="section-title">海域内の分布</h2>
+    <p class="map-note">
+      0.5° (約 55km) のメッシュごとに観測したタンカー隻数を円の大きさで表示します。
+      個別船舶の特定はできない粒度です。
+    </p>
+    <div id="tanker-map" class="tanker-map" role="img" aria-label="日本周辺海域のタンカー分布図"></div>
+    <p id="map-empty" class="map-empty" hidden>
+      今回のサンプルでは位置情報付きのタンカーが観測されませんでした。
     </p>
   </section>
 
@@ -133,6 +149,9 @@
   </p>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin="anonymous"></script>
 <script type="module" src="../js/tankers-page.js"></script>
 </body>
 </html>

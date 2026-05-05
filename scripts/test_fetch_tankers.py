@@ -183,5 +183,81 @@ class TestAggregate(unittest.TestCase):
         self.assertEqual(result["japanBoundTankers"], 1)
 
 
+class TestDensityGrid(unittest.TestCase):
+    def test_no_position_returns_empty_grid(self):
+        ships = {
+            1: {"static": {"type": 80, "destination": "JPYOK"}},  # ShipStaticData only
+        }
+        result = aggregate(ships)
+        self.assertEqual(result["densityGrid"]["cellSizeDeg"], 0.5)
+        self.assertEqual(result["densityGrid"]["cells"], [])
+
+    def test_two_tankers_same_cell_aggregate(self):
+        # 35.10/140.10 と 35.20/140.20 はどちらも 0.5° メッシュで丸めると同じセル (35.0, 140.0)
+        ships = {
+            1: {
+                "static": {"type": 80, "destination": "JPYOK"},
+                "last_pos": {"lat": 35.10, "lon": 140.10},
+            },
+            2: {
+                "static": {"type": 80, "destination": "CHIBA"},
+                "last_pos": {"lat": 35.20, "lon": 140.20},
+            },
+        }
+        result = aggregate(ships)
+        cells = result["densityGrid"]["cells"]
+        self.assertEqual(len(cells), 1)
+        self.assertEqual(cells[0]["count"], 2)
+        self.assertEqual(cells[0]["lat"], 35.0)
+        self.assertEqual(cells[0]["lon"], 140.0)
+
+    def test_separate_cells_kept_separate(self):
+        ships = {
+            1: {
+                "static": {"type": 80, "destination": "JPYOK"},
+                "last_pos": {"lat": 35.0, "lon": 140.0},
+            },
+            2: {
+                "static": {"type": 80, "destination": "CHIBA"},
+                "last_pos": {"lat": 36.0, "lon": 141.0},  # 別のセル
+            },
+        }
+        result = aggregate(ships)
+        cells = result["densityGrid"]["cells"]
+        self.assertEqual(len(cells), 2)
+        self.assertEqual(sum(c["count"] for c in cells), 2)
+
+    def test_non_tankers_excluded_from_grid(self):
+        ships = {
+            1: {
+                "static": {"type": 70, "destination": "JPYOK"},  # Cargo, excluded
+                "last_pos": {"lat": 35.0, "lon": 140.0},
+            },
+            2: {
+                "static": {"type": 80, "destination": "JPYOK"},  # Tanker
+                "last_pos": {"lat": 35.0, "lon": 140.0},
+            },
+        }
+        result = aggregate(ships)
+        cells = result["densityGrid"]["cells"]
+        self.assertEqual(len(cells), 1)
+        self.assertEqual(cells[0]["count"], 1)
+
+    def test_invalid_position_skipped(self):
+        ships = {
+            1: {
+                "static": {"type": 80, "destination": "JPYOK"},
+                "last_pos": {"lat": "not-a-number", "lon": 140.0},
+            },
+            2: {
+                "static": {"type": 80, "destination": "JPYOK"},
+                "last_pos": None,
+            },
+        }
+        # _quantize が None を返すケースは集計対象外
+        result = aggregate(ships)
+        self.assertEqual(result["densityGrid"]["cells"], [])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
