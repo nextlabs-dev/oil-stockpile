@@ -1,7 +1,7 @@
 {
-  "fetchedAt": "2026-05-05T19:25:06+00:00",
+  "fetchedAt": "2026-05-05T19:49:06+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 4,
+  "totalTankersInRegion": 2,
   "japanBoundTankers": 1,
   "topDestinationPorts": [
     {
@@ -9,6 +9,21 @@
       "count": 1
     }
   ],
+  "densityGrid": {
+    "cellSizeDeg": 0.5,
+    "cells": [
+      {
+        "lat": 33.5,
+        "lon": 136.5,
+        "count": 1
+      },
+      {
+        "lat": 34.0,
+        "lon": 135.0,
+        "count": 1
+      }
+    ]
+  },
   "boundingBox": "24-46N / 122-146E",
   "source": "aisstream.io"
 }
