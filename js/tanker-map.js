@@ -13,10 +13,9 @@ const MAP_ZOOM = 5;
 const MAP_MIN_ZOOM = 4;
 const MAP_MAX_ZOOM = 8;
 
-const TILE_URL = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+const TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const TILE_ATTRIBUTION =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors ' +
-  '&copy; <a href="https://carto.com/attributions">CARTO</a>';
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 const CIRCLE_COLOR = '#c0392b';
 
@@ -58,11 +57,19 @@ export function initTankerMap(densityGrid) {
     scrollWheelZoom: false,         // ページスクロールを邪魔しない
   });
 
-  L.tileLayer(TILE_URL, {
+  const tiles = L.tileLayer(TILE_URL, {
     attribution: TILE_ATTRIBUTION,
-    subdomains: 'abcd',
     maxZoom: MAP_MAX_ZOOM,
-  }).addTo(map);
+  });
+  tiles.on('tileerror', (e) => {
+    // タイル取得失敗時のデバッグ補助
+    console.warn('[tanker-map] tile error:', e?.tile?.src || e);
+  });
+  tiles.addTo(map);
+
+  // CSS が反映された後で実サイズを再認識させる (タイミングによっては
+  // Leaflet が 0px と認識して描画を止めることがあるため)
+  setTimeout(() => map.invalidateSize(), 0);
 
   if (cells.length === 0) {
     if (empty) empty.hidden = false;
