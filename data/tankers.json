@@ -1,41 +1,54 @@
 {
-  "fetchedAt": "2026-05-06T03:45:17+00:00",
+  "fetchedAt": "2026-05-06T06:42:25+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 4,
-  "japanBoundTankers": 0,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 5,
+  "japanBoundTankers": 1,
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 431005016,
-      "name": "HINATA",
-      "destination": ">JP MYJ COSMO",
+      "mmsi": 636021962,
+      "name": "NEW AMITY",
+      "destination": "PANPAC",
       "isJapanBound": false,
-      "lat": 33.4734,
-      "lon": 136.0117
+      "lat": 33.4633,
+      "lon": 136.6559
     },
     {
-      "mmsi": 431009162,
-      "name": "EIHO",
-      "destination": ">JP MIZ KAMASIMA OFF",
+      "mmsi": 431005507,
+      "name": "MATSUYAMA MARU NO.12",
+      "destination": ">JP SBK OFF",
       "isJapanBound": false,
-      "lat": 33.6134,
-      "lon": 136.0934
+      "lat": 33.7441,
+      "lon": 136.3908
     },
     {
-      "mmsi": 431001342,
-      "name": "EIKAMARU NO.2",
-      "destination": "JP KSA OFF",
+      "mmsi": 431010119,
+      "name": "HOUSHIN MARU",
+      "destination": ">JP UBJ OFF",
       "isJapanBound": false,
-      "lat": 33.9255,
-      "lon": 136.4847
+      "lat": 33.7216,
+      "lon": 136.2316
     },
     {
-      "mmsi": 431003089,
-      "name": "NORIYOSHIMARU",
-      "destination": ">JP WAK",
+      "mmsi": 432986000,
+      "name": "ENEOS OCEAN",
+      "destination": "JP KWS",
+      "isJapanBound": true,
+      "lat": 33.5564,
+      "lon": 136.7851
+    },
+    {
+      "mmsi": 441586000,
+      "name": "NEW GLOBAL",
+      "destination": "ULSAN KR",
       "isJapanBound": false,
-      "lat": 34.2041,
-      "lon": 135.143
+      "lat": 33.7808,
+      "lon": 136.466
     }
   ],
   "boundingBox": "24-46N / 122-146E",
