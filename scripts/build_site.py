@@ -99,9 +99,13 @@ def render_nav(page: dict[str, Any], nav_labels: dict[str, str], nav_order: list
     return "\n".join(links)
 
 
-def render_page(template: Template, site_config: dict[str, Any], page: dict[str, Any]) -> str:
+def render_page(
+    template: Template,
+    site_config: dict[str, Any],
+    page: dict[str, Any],
+    content: str,
+) -> str:
     site = site_config["site"]
-    content = (PAGES_DIR / page["source"]).read_text(encoding="utf-8").strip()
     canonical = site["url"] + page["canonical_path"]
     asset_root = "" if page["root_path"] == "./" else page["root_path"]
     favicon = asset_root + "assets/favicon.svg"
@@ -139,8 +143,10 @@ def main() -> int:
     template = Template(BASE_TEMPLATE.read_text(encoding="utf-8"))
     for page in site_config["pages"]:
         output = REPO_ROOT / page["output"]
+        content = (PAGES_DIR / page["source"]).read_text(encoding="utf-8").strip()
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(render_page(template, site_config, page), encoding="utf-8", newline="\n")
+        rendered = render_page(template, site_config, page, content)
+        output.write_text(rendered, encoding="utf-8", newline="\n")
         print(f"built {page['output']}")
     return 0
 

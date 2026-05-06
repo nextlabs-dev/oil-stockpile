@@ -3,17 +3,25 @@
 Run from project root:
     python -m unittest discover -s scripts -p 'test_*.py'
 
-verify_constants_in_sync の本体は _check_peak_days_in_sync(text, expected)
-に分離してあり、純粋なテキスト関数として正規表現と比較ロジックを検証する。
+I/O から切り離した純粋関数 (expand_tokens / text_value / render_nav /
+render_page / _check_peak_days_in_sync) をカバーする。
 """
 
 import os
 import sys
 import unittest
+from string import Template
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from build_site import _check_peak_days_in_sync  # noqa: E402
+from build_site import (  # noqa: E402
+    EXTERNAL_NOTE,
+    _check_peak_days_in_sync,
+    expand_tokens,
+    render_nav,
+    render_page,
+    text_value,
+)
 
 
 SAMPLE_DATA_JS = """\
@@ -56,6 +64,143 @@ class CheckPeakDaysInSyncTest(unittest.TestCase):
         };
         """
         self.assertIsNone(_check_peak_days_in_sync(text, 247))
+
+
+class ExpandTokensTest(unittest.TestCase):
+    def test_replaces_external_note_in_string(self):
+        result = expand_tokens("a {{ external_note }} b")
+        self.assertEqual(result, f"a {EXTERNAL_NOTE} b")
+
+    def test_returns_unchanged_when_token_absent(self):
+        self.assertEqual(expand_tokens("plain text"), "plain text")
+
+    def test_recurses_into_list(self):
+        result = expand_tokens(["a", "x {{ external_note }} y"])
+        self.assertEqual(result, ["a", f"x {EXTERNAL_NOTE} y"])
+
+    def test_recurses_into_dict(self):
+        result = expand_tokens({"k": "{{ external_note }}", "n": 1})
+        self.assertEqual(result, {"k": EXTERNAL_NOTE, "n": 1})
+
+    def test_passes_through_non_string_types(self):
+        self.assertEqual(expand_tokens(42), 42)
+        self.assertIsNone(expand_tokens(None))
+
+
+class TextValueTest(unittest.TestCase):
+    def test_none_returns_empty_string(self):
+        self.assertEqual(text_value(None), "")
+
+    def test_string_returns_as_is(self):
+        self.assertEqual(text_value("hello"), "hello")
+
+    def test_list_joined_with_newlines(self):
+        self.assertEqual(text_value(["a", "b", "c"]), "a\nb\nc")
+
+
+class RenderNavTest(unittest.TestCase):
+    NAV_LABELS = {"home": "ホーム", "about": "About"}
+    NAV_ORDER = ["home", "about"]
+
+    def _page(self, active: str) -> dict:
+        return {
+            "active_nav": active,
+            "nav": {"home": "./", "about": "./about/"},
+        }
+
+    def test_active_nav_has_aria_current_and_active_class(self):
+        out = render_nav(self._page("home"), self.NAV_LABELS, self.NAV_ORDER)
+        self.assertIn('class="tab tab--active"', out)
+        self.assertIn('aria-current="page"', out)
+        self.assertIn(">ホーム<", out)
+
+    def test_inactive_nav_has_no_aria_current(self):
+        out = render_nav(self._page("home"), self.NAV_LABELS, self.NAV_ORDER)
+        # About リンクは active ではない: tab だけ、aria-current なし
+        about_line = next(line for line in out.splitlines() if "About" in line)
+        self.assertIn('class="tab"', about_line)
+        self.assertNotIn("aria-current", about_line)
+
+    def test_links_emitted_in_nav_order(self):
+        out = render_nav(self._page("home"), self.NAV_LABELS, self.NAV_ORDER)
+        self.assertLess(out.index("ホーム"), out.index("About"))
+
+
+class RenderPageTest(unittest.TestCase):
+    """最小テンプレで render_page の組み立てを検証する。"""
+
+    TEMPLATE = Template(
+        "T=$title|D=$description|C=$canonical|"
+        "OG_IMG=$og_image|FAVI=$favicon|CSS=$stylesheet|"
+        "FONT=$font_href|EXTRA=[$extra_head]|HOME=$home_href|"
+        "NAV=[$nav]|BODY=$content|"
+        "FS=$footer_source|FD=$footer_disclaimer|SCRIPTS=[$script_tags]|"
+        "OG_TITLE=$og_title|OG_DESC=$og_description|"
+        "TW_TITLE=$twitter_title|TW_DESC=$twitter_description|"
+        "OG_ALT=$og_image_alt"
+    )
+
+    SITE_CONFIG = {
+        "site": {
+            "url": "https://example.com",
+            "og_image": "https://example.com/og.png",
+            "og_image_alt": "alt",
+            "font_href": "https://fonts.example.com/css",
+        },
+        "nav_order": ["home", "about"],
+        "nav_labels": {"home": "ホーム", "about": "About"},
+    }
+
+    def _page(self, **overrides) -> dict:
+        page = {
+            "title": "T",
+            "description": "D",
+            "canonical_path": "/scale/",
+            "og_title": "OT",
+            "og_description": "OD",
+            "twitter_title": "TT",
+            "twitter_description": "TD",
+            "active_nav": "home",
+            "root_path": "../",
+            "nav": {"home": "../", "about": "../about/"},
+        }
+        page.update(overrides)
+        return page
+
+    def test_canonical_concatenates_url_and_path(self):
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY")
+        self.assertIn("C=https://example.com/scale/", out)
+
+    def test_root_path_dot_slash_yields_empty_asset_root(self):
+        # root_path="./" のページ (home) では favicon/css が "assets/..." (前置なし)
+        page = self._page(root_path="./", canonical_path="/")
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, page, "BODY")
+        self.assertIn("FAVI=assets/favicon.svg|", out)
+        self.assertIn("CSS=assets/styles.css|", out)
+
+    def test_subpage_root_path_prepends_to_assets(self):
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY")
+        self.assertIn("FAVI=../assets/favicon.svg|", out)
+        self.assertIn("CSS=../assets/styles.css|", out)
+
+    def test_extra_head_empty_when_missing(self):
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY")
+        self.assertIn("EXTRA=[]|", out)
+
+    def test_extra_head_appends_newline_when_present(self):
+        page = self._page(extra_head=['<link rel="x" href="y">'])
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, page, "BODY")
+        self.assertIn('EXTRA=[<link rel="x" href="y">\n]|', out)
+
+    def test_content_passed_through_unchanged(self):
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "<p>X</p>")
+        self.assertIn("BODY=<p>X</p>|", out)
+
+    def test_nav_renders_inside_template(self):
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY")
+        self.assertIn('aria-current="page"', out)
+        self.assertIn("ホーム", out)
+        self.assertIn("About", out)
 
 
 if __name__ == "__main__":
