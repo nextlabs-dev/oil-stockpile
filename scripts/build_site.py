@@ -57,6 +57,26 @@ _PEAK_DAYS_RE = re.compile(
 )
 
 
+def _check_peak_days_in_sync(data_js_text: str, expected: int) -> None:
+    """Raise if data.js text does not mirror the expected PEAK_REFERENCE.days.
+
+    Pure function over text — kept separate so tests can exercise the regex
+    and comparison without filesystem fixtures.
+    """
+    match = _PEAK_DAYS_RE.search(data_js_text)
+    if not match:
+        raise RuntimeError(
+            "PEAK_REFERENCE.days not found in js/core/data.js"
+        )
+    js_days = int(match.group(1))
+    if js_days != expected:
+        raise RuntimeError(
+            f"PEAK_REFERENCE.days drift: "
+            f"src/constants.json={expected}, js/core/data.js={js_days}. "
+            f"Update both files to keep them in sync."
+        )
+
+
 def verify_constants_in_sync() -> None:
     """Fail the build when js/core/data.js drifts from src/constants.json.
 
@@ -64,19 +84,10 @@ def verify_constants_in_sync() -> None:
     keeps a hand-mirrored copy of PEAK_REFERENCE.days. This check catches
     drift before it ships.
     """
-    text = _DATA_JS_PATH.read_text(encoding="utf-8")
-    match = _PEAK_DAYS_RE.search(text)
-    if not match:
-        raise RuntimeError(
-            f"PEAK_REFERENCE.days not found in {_DATA_JS_PATH.relative_to(REPO_ROOT)}"
-        )
-    js_days = int(match.group(1))
-    if js_days != PEAK_DAYS:
-        raise RuntimeError(
-            f"PEAK_REFERENCE.days drift: "
-            f"src/constants.json={PEAK_DAYS}, js/core/data.js={js_days}. "
-            f"Update both files to keep them in sync."
-        )
+    _check_peak_days_in_sync(
+        _DATA_JS_PATH.read_text(encoding="utf-8"),
+        PEAK_DAYS,
+    )
 
 
 def render_nav(page: dict[str, Any], nav_labels: dict[str, str], nav_order: list[str]) -> str:
