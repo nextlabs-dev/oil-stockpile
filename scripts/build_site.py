@@ -16,7 +16,7 @@ import re
 from string import Template
 from typing import Any
 
-from lib.constants import PEAK_DAYS
+from lib.constants import PEAK_DAYS, PEAK_SOURCE
 from lib.io import read_json
 from lib.paths import REPO_ROOT, SITE_CONFIG_PATH, SRC_DIR
 
@@ -51,29 +51,51 @@ def load_site_config() -> dict[str, Any]:
 
 
 _DATA_JS_PATH = REPO_ROOT / "js" / "core" / "data.js"
-_PEAK_DAYS_RE = re.compile(
-    r"PEAK_REFERENCE\s*=\s*\{[^}]*?\bdays\s*:\s*(\d+)",
+_PEAK_REFERENCE_BLOCK_RE = re.compile(
+    r"PEAK_REFERENCE\s*=\s*\{(?P<body>[^}]*)\}",
     re.DOTALL,
 )
+_PEAK_DAYS_FIELD_RE = re.compile(r"\bdays\s*:\s*(\d+)")
+_PEAK_SOURCE_FIELD_RE = re.compile(r"\bsource\s*:\s*(['\"])(.*?)\1", re.DOTALL)
 
 
-def _check_peak_days_in_sync(data_js_text: str, expected: int) -> None:
-    """Raise if data.js text does not mirror the expected PEAK_REFERENCE.days.
+def _check_peak_reference_in_sync(
+    data_js_text: str,
+    expected_days: int,
+    expected_source: str,
+) -> None:
+    """Raise if data.js text does not mirror src/constants.json's peak_reference.
 
-    Pure function over text — kept separate so tests can exercise the regex
-    and comparison without filesystem fixtures.
+    Both `days` and `source` are validated. Pure function over text — kept
+    separate so tests can exercise the regex and comparison without filesystem
+    fixtures.
     """
-    match = _PEAK_DAYS_RE.search(data_js_text)
-    if not match:
-        raise RuntimeError(
-            "PEAK_REFERENCE.days not found in js/core/data.js"
-        )
-    js_days = int(match.group(1))
-    if js_days != expected:
+    block = _PEAK_REFERENCE_BLOCK_RE.search(data_js_text)
+    if not block:
+        raise RuntimeError("PEAK_REFERENCE block not found in js/core/data.js")
+    body = block.group("body")
+
+    days_match = _PEAK_DAYS_FIELD_RE.search(body)
+    if not days_match:
+        raise RuntimeError("PEAK_REFERENCE.days not found in js/core/data.js")
+    js_days = int(days_match.group(1))
+    if js_days != expected_days:
         raise RuntimeError(
             f"PEAK_REFERENCE.days drift: "
-            f"src/constants.json={expected}, js/core/data.js={js_days}. "
+            f"src/constants.json={expected_days}, js/core/data.js={js_days}. "
             f"Update both files to keep them in sync."
+        )
+
+    source_match = _PEAK_SOURCE_FIELD_RE.search(body)
+    if not source_match:
+        raise RuntimeError("PEAK_REFERENCE.source not found in js/core/data.js")
+    js_source = source_match.group(2)
+    if js_source != expected_source:
+        raise RuntimeError(
+            "PEAK_REFERENCE.source drift: "
+            f"src/constants.json={expected_source!r}, "
+            f"js/core/data.js={js_source!r}. "
+            "Update both files to keep them in sync."
         )
 
 
@@ -81,12 +103,13 @@ def verify_constants_in_sync() -> None:
     """Fail the build when js/core/data.js drifts from src/constants.json.
 
     The JS side cannot import the JSON SSOT directly (no build step), so it
-    keeps a hand-mirrored copy of PEAK_REFERENCE.days. This check catches
-    drift before it ships.
+    keeps a hand-mirrored copy of PEAK_REFERENCE. This check catches drift
+    of both `days` and `source` before it ships.
     """
-    _check_peak_days_in_sync(
+    _check_peak_reference_in_sync(
         _DATA_JS_PATH.read_text(encoding="utf-8"),
         PEAK_DAYS,
+        PEAK_SOURCE,
     )
 
 

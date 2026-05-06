@@ -8,8 +8,8 @@ name: Fetch tanker AIS data
 
 on:
   schedule:
-    # 1時間ごと（毎時0分 UTC）。サンプル時間が約8分のため、十分に余裕。
-    - cron: '0 * * * *'
+    # 1時間ごと。GitHub Actions は毎時0分が混みやすいため 17分にずらす。
+    - cron: '17 * * * *'
   workflow_dispatch: {}
 
 concurrency:
@@ -47,12 +47,33 @@ jobs:
           GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
         run: |
           if [[ -n "$(git status --porcelain data/tankers.json)" ]]; then
-            git add data/tankers.json
-            git commit -m "data: tankers snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
-            # サンプリング中に main に他の commit が積まれている場合があるため rebase してから push
-            git pull --rebase --autostash origin main
-            git push
-            echo "::notice::tankers.json updated and pushed"
+            sampled="$(mktemp)"
+            cp data/tankers.json "$sampled"
+
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git reset --hard origin/main
+              cp "$sampled" data/tankers.json
+
+              if [[ -z "$(git status --porcelain data/tankers.json)" ]]; then
+                echo "::notice::No changes after refreshing main; tanker counts identical to latest data"
+                exit 0
+              fi
+
+              git add data/tankers.json
+              git commit -m "data: tankers snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
+
+              if git push; then
+                echo "::notice::tankers.json updated and pushed"
+                exit 0
+              fi
+
+              echo "::warning::push failed on attempt ${attempt}; retrying on latest main"
+              sleep 2
+            done
+
+            echo "::error::failed to push tanker snapshot after retries"
+            exit 1
           else
             echo "::notice::No changes; tanker counts identical to existing data"
           fi

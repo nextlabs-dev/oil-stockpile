@@ -12,8 +12,9 @@ import { computeCurrentDays } from './counter.js';
 const TOAST_MS = 2400;
 
 function buildShareText() {
-  const days = Math.floor(computeCurrentDays());
-  return `日本の石油備蓄、いま${days}日分。`;
+  const days = computeCurrentDays();
+  if (!Number.isFinite(days)) return null;
+  return `日本の石油備蓄、いま${Math.floor(days)}日分。`;
 }
 
 let toastTimer = null;
@@ -35,6 +36,10 @@ export function initShare() {
   if (btnX) {
     btnX.addEventListener('click', () => {
       const text = buildShareText();
+      if (text == null) {
+        showToast('データを取得できていません');
+        return;
+      }
       const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(SITE_CONFIG.url)}`;
       window.open(url, '_blank', 'noopener,noreferrer');
     });
@@ -42,7 +47,12 @@ export function initShare() {
 
   if (btnCopy) {
     btnCopy.addEventListener('click', async () => {
-      const text = `${buildShareText()} ${SITE_CONFIG.url}`;
+      const shareText = buildShareText();
+      if (shareText == null) {
+        showToast('データを取得できていません');
+        return;
+      }
+      const text = `${shareText} ${SITE_CONFIG.url}`;
       try {
         if (navigator.clipboard && window.isSecureContext) {
           await navigator.clipboard.writeText(text);

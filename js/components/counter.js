@@ -59,14 +59,18 @@ const subscribers = new Set();
 /**
  * 1秒ごとに最新の現在備蓄日数（小数）を受け取るリスナーを登録する。
  * 戻り値は購読解除関数。
+ *
+ * latestSnapshot が未設定の段階で subscribe された場合は初回 callback を
+ * 呼ばない。次の tick() で正しい値が配信される（DOM に "NaN" が一瞬書き込まれるのを防ぐ）。
  */
 export function subscribe(fn) {
   subscribers.add(fn);
-  // 登録直後に1回呼んで初期値を渡す（latestSnapshot が無いと NaN になるが許容）
-  try {
-    fn(computeCurrentDays());
-  } catch (e) {
-    console.error(e);
+  if (latestSnapshot) {
+    try {
+      fn(computeCurrentDays());
+    } catch (e) {
+      console.error(e);
+    }
   }
   return () => subscribers.delete(fn);
 }

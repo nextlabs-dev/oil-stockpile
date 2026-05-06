@@ -17,6 +17,7 @@ oil-stockpile/
 ├── about/
 │   └── index.html          -- about タブ（生成物）
 ├── src/
+│   ├── site.json           -- サイト共通設定・ページ定義
 │   ├── pages/              -- ページ固有の <main> 本文
 │   └── templates/          -- 共通 head/header/footer テンプレート
 ├── assets/
@@ -151,7 +152,7 @@ python scripts/generate_ogp.py --dry-run  # 描画ロジックのスモーク確
 | うち日本港 destination の隻数 | 表示 | destination の文字列マッチで判定 |
 | 上位の destination 港 | 表示 | 集計値のみ |
 | 推計バレル数・リットル数 | **非表示** | DWT→バレル換算は誤差が大きく誤解を招くため |
-| 個別船舶の MMSI / 船名 / 位置 | **非表示** | 規約・プライバシー上の保守的判断 |
+| 個別船舶の MMSI / 船名 / 位置 | 表示 | AIS は IMO 規定により公開放送される情報。`aisstream.io` の利用規約上も問題ないと判断し、地図ポップアップで表示 |
 | 実際の月次原油輸入量 | リンクのみ | 財務省貿易統計（HS 2709.00）を参照 |
 
 ### AISSTREAM_API_KEY のセットアップ
@@ -163,7 +164,7 @@ python scripts/generate_ogp.py --dry-run  # 描画ロジックのスモーク確
 
 ### 自動化の仕組み
 
-1. 毎時 0分 UTC に `fetch-tankers.yml` が起動
+1. 毎時 17分 UTC に `fetch-tankers.yml` が起動
 2. `scripts/fetch_tankers.py` が aisstream.io WebSocket に接続、8分間サンプリング
 3. ShipStaticData / PositionReport を集めて MMSI でユニーク化
 4. 船種コード 80-89 (Tanker) のみ抽出、destination を日本港名/UN-LOCODE と部分一致
@@ -195,7 +196,7 @@ python scripts/fetch_tankers.py --duration 60 --dry-run  # 短時間、書き込
 
 ## HTML の編集
 
-公開 HTML は `src/pages/` と `src/templates/` から生成します。ヘッダー、OGP、フッターなどの共通部は `src/templates/base.html` と `scripts/build_site.py` 側で管理します。
+公開 HTML は `src/pages/`、`src/templates/`、`src/site.json` から生成します。ページ本文は `src/pages/*.html`、title / description / nav / footer などのページ定義は `src/site.json`、共通HTML枠は `src/templates/base.html` で管理します。
 
 ```bash
 python scripts/build_site.py

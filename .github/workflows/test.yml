@@ -2,15 +2,22 @@ name: Tests
 
 # scripts/fetch_pdf.py のロジックをテストする。
 # fetch-daily.yml の自動取得が壊れる前に、パーサ修正の影響を CI で検出する。
+# 加えて、src/ 編集時に build_site.py の生成物が drift していないかも検証する。
 
 on:
   push:
     paths:
       - 'scripts/**'
+      - 'src/**'
+      - 'assets/**'
+      - 'js/**'
       - '.github/workflows/test.yml'
   pull_request:
     paths:
       - 'scripts/**'
+      - 'src/**'
+      - 'assets/**'
+      - 'js/**'
       - '.github/workflows/test.yml'
   workflow_dispatch: {}
 
@@ -32,3 +39,11 @@ jobs:
 
       - name: Run unit tests
         run: python -m unittest discover -s scripts -p 'test_*.py' -v
+
+      - name: Verify generated HTML is in sync with src/
+        run: |
+          python scripts/build_site.py
+          if ! git diff --exit-code -- index.html tankers/index.html scale/index.html about/index.html; then
+            echo "::error::Generated HTML is out of date. Run 'python scripts/build_site.py' locally and commit the result."
+            exit 1
+          fi

@@ -4,7 +4,7 @@ Run from project root:
     python -m unittest discover -s scripts -p 'test_*.py'
 
 I/O から切り離した純粋関数 (expand_tokens / text_value / render_nav /
-render_page / _check_peak_days_in_sync) をカバーする。
+render_page / _check_peak_reference_in_sync) をカバーする。
 """
 
 import os
@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from build_site import (  # noqa: E402
     EXTERNAL_NOTE,
-    _check_peak_days_in_sync,
+    _check_peak_reference_in_sync,
     expand_tokens,
     render_nav,
     render_page,
@@ -24,46 +24,92 @@ from build_site import (  # noqa: E402
 )
 
 
-SAMPLE_DATA_JS = """\
-export const PEAK_REFERENCE = {
+SAMPLE_SOURCE = "経産省「石油備蓄の現況」過去公表値の高水準（2025年3月末ごろ）"
+SAMPLE_DATA_JS = f"""\
+export const PEAK_REFERENCE = {{
   days: 247,
-  source: '経産省「石油備蓄の現況」過去公表値の高水準（2025年3月末ごろ）',
-};
+  source: '{SAMPLE_SOURCE}',
+}};
 """
 
 
-class CheckPeakDaysInSyncTest(unittest.TestCase):
+class CheckPeakReferenceInSyncTest(unittest.TestCase):
     def test_matches_returns_none(self):
         # 一致すれば例外を投げない
-        self.assertIsNone(_check_peak_days_in_sync(SAMPLE_DATA_JS, 247))
+        self.assertIsNone(
+            _check_peak_reference_in_sync(SAMPLE_DATA_JS, 247, SAMPLE_SOURCE)
+        )
 
-    def test_mismatch_message_contains_both_values(self):
+    def test_days_mismatch_message_contains_both_values(self):
         with self.assertRaises(RuntimeError) as cm:
-            _check_peak_days_in_sync(SAMPLE_DATA_JS, 250)
+            _check_peak_reference_in_sync(SAMPLE_DATA_JS, 250, SAMPLE_SOURCE)
         msg = str(cm.exception)
         self.assertIn("247", msg)
         self.assertIn("250", msg)
+        self.assertIn("days", msg)
         self.assertIn("drift", msg)
 
-    def test_pattern_not_found_raises(self):
+    def test_source_mismatch_raises(self):
         with self.assertRaises(RuntimeError) as cm:
-            _check_peak_days_in_sync("// no peak reference here\n", 247)
+            _check_peak_reference_in_sync(SAMPLE_DATA_JS, 247, "別の出典")
+        msg = str(cm.exception)
+        self.assertIn("source", msg)
+        self.assertIn("drift", msg)
+
+    def test_block_not_found_raises(self):
+        with self.assertRaises(RuntimeError) as cm:
+            _check_peak_reference_in_sync(
+                "// no peak reference here\n", 247, SAMPLE_SOURCE
+            )
         self.assertIn("not found", str(cm.exception))
+
+    def test_days_field_missing_inside_block_raises(self):
+        text = "export const PEAK_REFERENCE = { source: 'x' };"
+        with self.assertRaises(RuntimeError) as cm:
+            _check_peak_reference_in_sync(text, 247, "x")
+        self.assertIn("days", str(cm.exception))
+
+    def test_source_field_missing_inside_block_raises(self):
+        text = "export const PEAK_REFERENCE = { days: 247 };"
+        with self.assertRaises(RuntimeError) as cm:
+            _check_peak_reference_in_sync(text, 247, SAMPLE_SOURCE)
+        self.assertIn("source", str(cm.exception))
 
     def test_tolerates_whitespace_variants(self):
         # JS フォーマッタの整形違いに耐えること
-        text = "export const PEAK_REFERENCE  =  {\n  days  :  247  ,\n};"
-        self.assertIsNone(_check_peak_days_in_sync(text, 247))
+        text = (
+            "export const PEAK_REFERENCE  =  {\n"
+            "  days  :  247  ,\n"
+            f"  source  :  '{SAMPLE_SOURCE}'  ,\n"
+            "};"
+        )
+        self.assertIsNone(
+            _check_peak_reference_in_sync(text, 247, SAMPLE_SOURCE)
+        )
 
-    def test_picks_first_days_inside_peak_reference_block(self):
+    def test_picks_fields_inside_peak_reference_block(self):
         # PEAK_REFERENCE 以外のブロックに紛れた days は拾わないこと
-        text = """
-        export const OTHER = { days: 999 };
-        export const PEAK_REFERENCE = {
+        text = f"""
+        export const OTHER = {{ days: 999, source: 'other' }};
+        export const PEAK_REFERENCE = {{
           days: 247,
-        };
+          source: '{SAMPLE_SOURCE}',
+        }};
         """
-        self.assertIsNone(_check_peak_days_in_sync(text, 247))
+        self.assertIsNone(
+            _check_peak_reference_in_sync(text, 247, SAMPLE_SOURCE)
+        )
+
+    def test_supports_double_quoted_source(self):
+        text = (
+            "export const PEAK_REFERENCE = {\n"
+            "  days: 247,\n"
+            f'  source: "{SAMPLE_SOURCE}",\n'
+            "};"
+        )
+        self.assertIsNone(
+            _check_peak_reference_in_sync(text, 247, SAMPLE_SOURCE)
+        )
 
 
 class ExpandTokensTest(unittest.TestCase):

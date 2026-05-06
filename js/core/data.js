@@ -76,5 +76,6 @@ export function computeCurrentDays(snapshot, now = Date.now()) {
   }
   const asOfMs = new Date(`${snapshot.asOf}T00:00:00+09:00`).getTime();
   const elapsedDays = (now - asOfMs) / 86_400_000;
-  return Math.max(0, snapshot.total - elapsedDays);
+  // 端末時計が asOf より過去寄りでも total を超えた値を返さないよう上限で cap
+  return Math.min(snapshot.total, Math.max(0, snapshot.total - elapsedDays));
 }

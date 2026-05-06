@@ -32,6 +32,14 @@ async function main() {
     return;
   }
 
+  // counter を先に初期化することで、続く tank-gauge の subscribe() が
+  // 即座に正しい値で同期される（latestSnapshot 未設定で NaN が DOM に
+  // 書き込まれる隙間を作らない）。
+  try {
+    initCounter(history);
+  } catch (e) {
+    console.error('counter:', e);
+  }
   try {
     initBreakdown(history);
   } catch (e) {
@@ -51,11 +59,6 @@ async function main() {
     initShare();
   } catch (e) {
     console.error('share:', e);
-  }
-  try {
-    initCounter(history);
-  } catch (e) {
-    console.error('counter:', e);
   }
 }
 

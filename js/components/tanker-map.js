@@ -7,6 +7,8 @@
  * Leaflet は CDN から global L として読み込み済み (tankers/index.html)。
  */
 
+import { escapeHtml } from '../core/escape.js';
+
 const MAP_CENTER = [35.0, 137.0]; // 日本中央付近
 const MAP_ZOOM = 5;
 const MAP_MIN_ZOOM = 4;
@@ -21,16 +23,6 @@ const COLOR_JAPAN_BOUND = '#c0392b';
 const COLOR_OTHER = '#7f8c8d';
 
 const MARKER_RADIUS_PX = 7;
-
-function escapeHtml(s) {
-  if (s == null) return '';
-  return String(s)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
-}
 
 function buildPopupHtml(v) {
   const name = v.name?.trim() ? escapeHtml(v.name) : '<em>(船名未取得)</em>';
