@@ -22,6 +22,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from fetch_tankers import (  # noqa: E402
     aggregate,
+    is_japan_bound_destination,
     is_tanker_type,
     match_japan_port,
     normalize_destination,
@@ -102,6 +103,14 @@ class TestMatchJapanPort(unittest.TestCase):
     def test_with_internal_space(self):
         self.assertEqual(match_japan_port("JP YOK"), "YOKOHAMA")
 
+    def test_jpmiz_short_form_normalizes_to_mizushima(self):
+        # 観測データ ">JP MIZ B MINAI OFF" 等の短縮形
+        self.assertEqual(match_japan_port(">JP MIZ B MINAI OFF"), "MIZUSHIMA")
+        self.assertEqual(match_japan_port(">JP MIZ TS OFF"), "MIZUSHIMA")
+
+    def test_jpmur_short_form_matches_muroran(self):
+        self.assertEqual(match_japan_port(">JP MUR"), "MURORAN")
+
     def test_busan_not_japan(self):
         self.assertIsNone(match_japan_port("BUSAN"))
 
@@ -120,11 +129,56 @@ class TestMatchJapanPort(unittest.TestCase):
         self.assertIsNone(match_japan_port(None))
 
 
+class TestIsJapanBoundDestination(unittest.TestCase):
+    """フォールバック判定: port 特定不可だが日本向けと推定するケース。"""
+
+    def test_known_port_is_japan_bound(self):
+        # 既存の港名マッチも True を返す
+        self.assertTrue(is_japan_bound_destination("JPYOK"))
+        self.assertTrue(is_japan_bound_destination(">JP YKK 3E"))
+        self.assertTrue(is_japan_bound_destination("YOKOHAMA"))
+
+    def test_unregistered_jp_locode_is_japan_bound(self):
+        # JPKZJ (金沢) は KEYWORDS 未登録だが LOCODE 形式で日本向け
+        self.assertTrue(is_japan_bound_destination(">JP KZJ"))
+        self.assertTrue(is_japan_bound_destination("JPKZJ"))
+
+    def test_jp_prefix_with_garbled_text_is_japan_bound(self):
+        # 船員手入力の崩れた表記でも >JP プレフィックスで日本向けと判定
+        self.assertTrue(is_japan_bound_destination(">JP MIZ B MINAI OFF"))
+        self.assertTrue(is_japan_bound_destination(">JP KAMA OFF"))
+        self.assertTrue(is_japan_bound_destination(">JP/SKD/OFF"))
+
+    def test_jp_locode_without_prefix_is_japan_bound(self):
+        # ">" がない LOCODE 形式も拾う
+        self.assertTrue(is_japan_bound_destination("JP NAS OFF"))
+
+    def test_non_japan_destination_is_not_japan_bound(self):
+        self.assertFalse(is_japan_bound_destination("BUSAN"))
+        self.assertFalse(is_japan_bound_destination("SHANGHAI"))
+        self.assertFalse(is_japan_bound_destination(">CN SHA"))
+        self.assertFalse(is_japan_bound_destination("VLADIVOSTOK"))
+
+    def test_empty_returns_false(self):
+        self.assertFalse(is_japan_bound_destination(""))
+        self.assertFalse(is_japan_bound_destination(None))
+
+    def test_garbage_returns_false(self):
+        self.assertFalse(is_japan_bound_destination("@@@@@@@@@@"))
+        self.assertFalse(is_japan_bound_destination("ZZZZZ"))
+
+    def test_jp_followed_by_digits_does_not_match(self):
+        # LOCODE は JP+大文字3文字。JP+数字や JP+短い文字列はフォールバック対象外
+        self.assertFalse(is_japan_bound_destination("JP12"))
+        self.assertFalse(is_japan_bound_destination("FOOJP"))
+
+
 class TestAggregate(unittest.TestCase):
     def test_empty_input(self):
         result = aggregate({})
         self.assertEqual(result["totalTankersInRegion"], 0)
         self.assertEqual(result["japanBoundTankers"], 0)
+        self.assertEqual(result["japanBoundUnknownPort"], 0)
         self.assertEqual(result["topDestinationPorts"], [])
 
     def test_filters_non_tanker_types(self):
@@ -182,6 +236,33 @@ class TestAggregate(unittest.TestCase):
         self.assertEqual(result["totalTankersInRegion"], 3)
         self.assertEqual(result["japanBoundTankers"], 1)
 
+    def test_japan_bound_unknown_port_counted_separately(self):
+        # フォールバック判定された船は japanBoundUnknownPort に計上され、
+        # topDestinationPorts には含まれない
+        ships = {
+            1: {"static": {"type": 80, "destination": "JPYOK"}},      # 特定港 (YOKOHAMA)
+            2: {"static": {"type": 80, "destination": ">JP KZJ"}},    # 港名特定不可（KZJ は未登録 LOCODE）
+            3: {"static": {"type": 80, "destination": ">JP NAS OFF"}},  # 港名特定不可（NAS も未登録）
+            4: {"static": {"type": 80, "destination": "BUSAN"}},      # 日本向けでない
+        }
+        result = aggregate(ships)
+        self.assertEqual(result["totalTankersInRegion"], 4)
+        self.assertEqual(result["japanBoundTankers"], 3)              # 特定 1 + 不明 2
+        self.assertEqual(result["japanBoundUnknownPort"], 2)
+        ports = result["topDestinationPorts"]
+        self.assertEqual(ports, [{"port": "YOKOHAMA", "count": 1}])   # 特定港のみ
+
+    def test_all_unknown_jp_yields_empty_top_ports(self):
+        # 全てフォールバック判定の場合、topDestinationPorts は空でも japanBoundTankers > 0
+        ships = {
+            1: {"static": {"type": 80, "destination": ">JP KZJ"}},
+            2: {"static": {"type": 80, "destination": ">JP NAS OFF"}},
+        }
+        result = aggregate(ships)
+        self.assertEqual(result["japanBoundTankers"], 2)
+        self.assertEqual(result["japanBoundUnknownPort"], 2)
+        self.assertEqual(result["topDestinationPorts"], [])
+
 
 class TestVessels(unittest.TestCase):
     def test_vessel_basic_fields(self):
@@ -215,6 +296,18 @@ class TestVessels(unittest.TestCase):
         result = aggregate(ships)
         v = result["vessels"][0]
         self.assertFalse(v["isJapanBound"])
+
+    def test_unknown_jp_destination_marked_japan_bound(self):
+        # port 名特定不可でもフォールバックで isJapanBound = True
+        ships = {
+            1: {
+                "static": {"type": 80, "name": "KOUHOU MARU", "destination": ">JP KZJ"},
+                "last_pos": {"lat": 34.36, "lon": 134.0},
+            },
+        }
+        result = aggregate(ships)
+        v = result["vessels"][0]
+        self.assertTrue(v["isJapanBound"])
 
     def test_no_position_keeps_vessel_with_null_coords(self):
         # 静的データのみで位置がないケース。vessel は出すが lat/lon は None

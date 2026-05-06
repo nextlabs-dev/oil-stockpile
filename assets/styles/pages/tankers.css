@@ -164,6 +164,19 @@
   text-align: center;
 }
 
+.ports-unknown {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+  text-align: right;
+}
+
+.ports-unknown strong {
+  color: var(--fg-sub);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Meta section */
 .meta-list {
   display: grid;

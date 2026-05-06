@@ -16,8 +16,9 @@ data/tankers.json を更新する。
       "fetchedAt": "ISO 8601 UTC",
       "samplingDurationSec": 480,
       "totalTankersInRegion": 87,
-      "japanBoundTankers": 32,
-      "topDestinationPorts": [{"port": "YOKOHAMA", "count": 8}, ...],
+      "japanBoundTankers": 32,                  # 特定港 + port 不明の日本向け の合計
+      "japanBoundUnknownPort": 5,               # 日本向けだが港名特定不可
+      "topDestinationPorts": [{"port": "YOKOHAMA", "count": 8}, ...],  # 特定港のみ
       "boundingBox": "24-46N / 122-146E",
       "source": "aisstream.io",
       "vessels": [
@@ -80,6 +81,10 @@ JAPAN_PORT_KEYWORDS = {
     "JPMTY": "MATSUYAMA",
     "JPSBS": "SHIBUSHI",
     "JPNGS": "NEGISHI",
+    # 観測された短縮形（船員手入力で頻出するパターン）。JP プレフィックス必須の
+    # 部分一致なので、独立した英単語との誤マッチは起こらない
+    "JPMIZ": "MIZUSHIMA",  # ">JP MIZ B MINAI OFF" や ">JP MIZ TS OFF" 形式
+    "JPMUR": "MURORAN",    # 室蘭製油所・原油受入港
     # 英語の港・地名（destination に頻出）
     "YOKOHAMA": "YOKOHAMA",
     "NEGISHI": "YOKOHAMA",  # 根岸製油所（横浜）
@@ -131,6 +136,32 @@ def match_japan_port(dest):
     return None
 
 
+# 「JP」+ 3 文字 LOCODE パターン。port 名特定不可だが日本向けと推定するためのフォールバック。
+_JP_LOCODE_RE = re.compile(r"JP[A-Z]{3}")
+
+
+def is_japan_bound_destination(dest):
+    """destination が日本向けを示すか（特定港マッチに加えて、port 不明の日本向けも True）。
+
+    判定優先順:
+      1. JAPAN_PORT_KEYWORDS にマッチ（特定可能な日本港）
+      2. ">JP" プレフィックスを含む（船員手入力フリーテキストでも日本向けの慣行）
+      3. "JP[A-Z]{3}" 形式の UN/LOCODE を含む（リスト未登録の日本港）
+    """
+    if not dest:
+        return False
+    if match_japan_port(dest) is not None:
+        return True
+    norm = normalize_destination(dest)
+    if not norm:
+        return False
+    if ">JP" in norm:
+        return True
+    if _JP_LOCODE_RE.search(norm):
+        return True
+    return False
+
+
 def _round_coord(value):
     """緯度経度を 4 桁 (~11m 精度) に丸める。"""
     if not isinstance(value, (int, float)):
@@ -149,7 +180,6 @@ def aggregate(ships_seen):
         if not is_tanker_type(static.get("type")):
             continue
         destination = (static.get("destination") or "").strip()
-        japan_port = match_japan_port(destination)
         last_pos = info.get("last_pos")
         if not isinstance(last_pos, dict):
             last_pos = None
@@ -157,17 +187,22 @@ def aggregate(ships_seen):
             "mmsi": int(mmsi) if isinstance(mmsi, (int, str)) and str(mmsi).isdigit() else mmsi,
             "name": (static.get("name") or "").strip(),
             "destination": destination,
-            "isJapanBound": japan_port is not None,
+            "isJapanBound": is_japan_bound_destination(destination),
             "lat": _round_coord(last_pos.get("lat")) if last_pos else None,
             "lon": _round_coord(last_pos.get("lon")) if last_pos else None,
         }
         vessels.append(vessel)
 
     japan_bound_ports = []
+    japan_bound_unknown_port = 0
     for v in vessels:
+        if not v["isJapanBound"]:
+            continue
         port = match_japan_port(v["destination"])
         if port is not None:
             japan_bound_ports.append(port)
+        else:
+            japan_bound_unknown_port += 1
 
     counter = Counter(japan_bound_ports)
     top = [
@@ -178,6 +213,7 @@ def aggregate(ships_seen):
     return {
         "totalTankersInRegion": len(vessels),
         "japanBoundTankers": sum(1 for v in vessels if v["isJapanBound"]),
+        "japanBoundUnknownPort": japan_bound_unknown_port,
         "topDestinationPorts": top,
         "vessels": vessels,
     }

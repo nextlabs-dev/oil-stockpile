@@ -34,32 +34,44 @@ function showLoadError() {
   }
 }
 
-function renderPorts(ports) {
+function renderPorts(ports, unknownCount) {
   const list = document.getElementById('ports-list');
   const empty = document.getElementById('ports-empty');
+  const unknown = document.getElementById('ports-unknown');
+  const unknownCountEl = document.getElementById('ports-unknown-count');
   if (!list) return;
 
   list.innerHTML = '';
-  if (!Array.isArray(ports) || ports.length === 0) {
+  const hasPorts = Array.isArray(ports) && ports.length > 0;
+  const hasUnknown = typeof unknownCount === 'number' && unknownCount > 0;
+
+  if (!hasPorts && !hasUnknown) {
     if (empty) empty.hidden = false;
     return;
   }
 
-  for (const { port, count } of ports) {
-    const li = document.createElement('li');
-    li.className = 'port-row';
-    const nameEl = document.createElement('span');
-    nameEl.className = 'port-name';
-    nameEl.textContent = port;
-    const countEl = document.createElement('span');
-    countEl.className = 'port-count';
-    countEl.textContent = String(count);
-    const small = document.createElement('small');
-    small.textContent = '隻';
-    countEl.appendChild(small);
-    li.appendChild(nameEl);
-    li.appendChild(countEl);
-    list.appendChild(li);
+  if (hasPorts) {
+    for (const { port, count } of ports) {
+      const li = document.createElement('li');
+      li.className = 'port-row';
+      const nameEl = document.createElement('span');
+      nameEl.className = 'port-name';
+      nameEl.textContent = port;
+      const countEl = document.createElement('span');
+      countEl.className = 'port-count';
+      countEl.textContent = String(count);
+      const small = document.createElement('small');
+      small.textContent = '隻';
+      countEl.appendChild(small);
+      li.appendChild(nameEl);
+      li.appendChild(countEl);
+      list.appendChild(li);
+    }
+  }
+
+  if (hasUnknown && unknown) {
+    if (unknownCountEl) unknownCountEl.textContent = String(unknownCount);
+    unknown.hidden = false;
   }
 }
 
@@ -85,7 +97,7 @@ async function main() {
   setText('total-tankers', String(data.totalTankersInRegion));
   setText('japan-bound', String(data.japanBoundTankers));
 
-  renderPorts(data.topDestinationPorts);
+  renderPorts(data.topDestinationPorts, data.japanBoundUnknownPort);
 
   setText('fetched-at', formatJaDateTime(data.fetchedAt));
   setText('sampling-duration', `約 ${Math.round((data.samplingDurationSec || 0) / 60)} 分`);
