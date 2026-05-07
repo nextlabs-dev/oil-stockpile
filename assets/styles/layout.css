@@ -97,6 +97,36 @@
   margin-bottom: var(--space-3);
 }
 
+.footer-company {
+  display: grid;
+  gap: 4px;
+  margin: 0 0 var(--space-3) 0;
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+  line-height: 1.7;
+}
+
+.footer-company-row {
+  display: grid;
+  grid-template-columns: 4.5em 1fr;
+  gap: var(--space-2);
+  align-items: baseline;
+}
+
+.footer-company-row dt {
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+
+.footer-company-row dd {
+  margin: 0;
+  color: var(--fg-sub);
+}
+
+.footer-company-row dd a {
+  color: inherit;
+}
+
 .footer-meta {
   font-size: var(--text-xs);
   color: var(--fg-muted);
@@ -104,4 +134,11 @@
 
 .footer-sep {
   margin: 0 var(--space-2);
+}
+
+@media (max-width: 520px) {
+  .footer-company-row {
+    grid-template-columns: 4em 1fr;
+    gap: var(--space-1);
+  }
 }

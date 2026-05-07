@@ -1,9 +1,11 @@
 /**
  * F-05 シェア
- *  - X (Twitter) intent URL を新規タブで開く
+ *  - X (Twitter) intent URL を新規タブで開く（テキスト＋URL）
+ *  - LINE / Facebook 公式シェア URL を新規タブで開く（URL のみ。
+ *    Facebook は quote 廃止済み、LINE の lineit/share も text 非対応のため）
  *  - Clipboard API でリンクとテキストをコピー
  *
- * シェアテキストは「いま{N}日分」を含む。N は computeCurrentDays() の整数部。
+ * X とコピーのシェアテキストは「いま{N}日分」を含む。N は computeCurrentDays() の整数部。
  */
 
 import { SITE_CONFIG } from '../core/data.js';
@@ -31,6 +33,8 @@ function showToast(msg) {
 
 export function initShare() {
   const btnX = document.getElementById('share-x');
+  const btnLine = document.getElementById('share-line');
+  const btnFacebook = document.getElementById('share-facebook');
   const btnCopy = document.getElementById('share-copy');
 
   if (btnX) {
@@ -41,6 +45,20 @@ export function initShare() {
         return;
       }
       const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(SITE_CONFIG.url)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  if (btnLine) {
+    btnLine.addEventListener('click', () => {
+      const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(SITE_CONFIG.url)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  if (btnFacebook) {
+    btnFacebook.addEventListener('click', () => {
+      const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_CONFIG.url)}`;
       window.open(url, '_blank', 'noopener,noreferrer');
     });
   }

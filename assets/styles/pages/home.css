@@ -122,7 +122,7 @@
   font-weight: 400;
 }
 
-.tank-meta-source dd {
+.tank-meta-row.tank-meta-source dd {
   font-size: 12px;
   font-weight: 400;
   color: var(--fg-sub);
@@ -359,6 +359,30 @@
 .share-btn--primary:hover {
   background: var(--fg-strong-hover);
   border-color: var(--fg-strong-hover);
+}
+
+.share-btn--line {
+  background: #06c755;
+  color: #fff;
+  border-color: #06c755;
+}
+
+.share-btn--line:hover {
+  background: #05b048;
+  color: #fff;
+  border-color: #05b048;
+}
+
+.share-btn--facebook {
+  background: #1877f2;
+  color: #fff;
+  border-color: #1877f2;
+}
+
+.share-btn--facebook:hover {
+  background: #166fe5;
+  color: #fff;
+  border-color: #166fe5;
 }
 
 .share-btn-icon {
