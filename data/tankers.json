@@ -1,131 +1,98 @@
 {
-  "fetchedAt": "2026-05-07T07:00:06+00:00",
+  "fetchedAt": "2026-05-07T09:53:03+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 21,
-  "japanBoundTankers": 21,
-  "japanBoundUnknownPort": 17,
-  "topDestinationPorts": [
-    {
-      "port": "MIZUSHIMA",
-      "count": 2
-    },
-    {
-      "port": "YOKKAICHI",
-      "count": 2
-    }
-  ],
+  "totalTankersInRegion": 16,
+  "japanBoundTankers": 15,
+  "japanBoundUnknownPort": 15,
+  "topDestinationPorts": [],
   "vessels": [
-    {
-      "mmsi": 432707000,
-      "name": "SAKURAGAWA",
-      "destination": "JP SAK",
-      "isJapanBound": true,
-      "lat": 34.5662,
-      "lon": 135.3071
-    },
     {
       "mmsi": 431009016,
       "name": "KAKUSUI MARU",
       "destination": ">JP UKB E4",
       "isJapanBound": true,
-      "lat": 34.609,
-      "lon": 135.3503
+      "lat": 34.7151,
+      "lon": 135.294
     },
     {
-      "mmsi": 431017776,
-      "name": "JINJYAMARU NO10",
-      "destination": ">JP SBK",
+      "mmsi": 431002151,
+      "name": "NO.3TOKUYOMARU",
+      "destination": ">JP SBK OFF",
       "isJapanBound": true,
-      "lat": 34.5889,
-      "lon": 135.432
-    },
-    {
-      "mmsi": 431016017,
-      "name": "YACHIYO MARU NO.3",
-      "destination": "JP OSA",
-      "isJapanBound": true,
-      "lat": 34.612,
-      "lon": 135.3113
-    },
-    {
-      "mmsi": 431025629,
-      "name": "KASUGA MARU",
-      "destination": ">JP SBK ENEOS 11",
-      "isJapanBound": true,
-      "lat": 34.5889,
-      "lon": 135.4626
+      "lat": 33.896,
+      "lon": 136.4453
     },
     {
       "mmsi": 431016957,
       "name": "GENKAI MARU NO.1",
       "destination": "JP AMX OFF",
       "isJapanBound": true,
-      "lat": 34.622,
-      "lon": 135.3233
-    },
-    {
-      "mmsi": 352005410,
-      "name": "CS OCEAN",
-      "destination": "JP OSA / W35",
-      "isJapanBound": true,
-      "lat": 34.6586,
-      "lon": 135.4197
-    },
-    {
-      "mmsi": 431101145,
-      "name": "SANSHUN MARU",
-      "destination": ">JP MIZ B S",
-      "isJapanBound": true,
-      "lat": 34.702,
-      "lon": 135.2548
-    },
-    {
-      "mmsi": 431501663,
-      "name": "EISEKI",
-      "destination": "JP KNM",
-      "isJapanBound": true,
-      "lat": 34.6016,
-      "lon": 135.2362
-    },
-    {
-      "mmsi": 431001045,
-      "name": "TAIRAMARU",
-      "destination": ">JP YKK/3  OFF",
-      "isJapanBound": true,
-      "lat": 34.5912,
-      "lon": 135.4206
+      "lat": 34.671,
+      "lon": 135.3847
     },
     {
       "mmsi": 431008568,
       "name": "JINJYAMARU NO.8",
       "destination": ">JP SBK 3 OFF",
       "isJapanBound": true,
-      "lat": 34.5722,
-      "lon": 135.4283
+      "lat": 34.5838,
+      "lon": 135.4213
     },
     {
-      "mmsi": 431016149,
-      "name": "SHINSEI",
-      "destination": "JP MIZ OFF",
+      "mmsi": 431019369,
+      "name": "KOUSEN MARU",
+      "destination": ">JP MAR OFF",
       "isJapanBound": true,
-      "lat": 34.6368,
-      "lon": 135.3235
+      "lat": 33.8897,
+      "lon": 136.4279
     },
     {
-      "mmsi": 431014474,
-      "name": "MEISHO MARU",
-      "destination": "JP ANE OFF",
+      "mmsi": 431029456,
+      "name": "SEIFUKUMARU NO.8",
+      "destination": "JP UKB OFF",
       "isJapanBound": true,
-      "lat": 34.5567,
-      "lon": 135.3629
+      "lat": 34.6809,
+      "lon": 135.3077
     },
     {
-      "mmsi": 431008812,
-      "name": "OOZU MARU",
-      "destination": ">JP YKK OFF",
+      "mmsi": 431005138,
+      "name": "MIKASA",
+      "destination": ">JP SBK",
       "isJapanBound": true,
-      "lat": 34.5074,
-      "lon": 135.2208
+      "lat": 34.5137,
+      "lon": 135.403
+    },
+    {
+      "mmsi": 538005869,
+      "name": "ARDMORE DEFENDER",
+      "destination": "KRPTK",
+      "isJapanBound": false,
+      "lat": 35.4878,
+      "lon": 139.8466
+    },
+    {
+      "mmsi": 431016141,
+      "name": "SHINSETO MARU",
+      "destination": "JP OSA OFF",
+      "isJapanBound": true,
+      "lat": 34.6301,
+      "lon": 135.3338
+    },
+    {
+      "mmsi": 352005410,
+      "name": "CS OCEAN",
+      "destination": "JP OSA / W35",
+      "isJapanBound": true,
+      "lat": 34.6587,
+      "lon": 135.42
+    },
+    {
+      "mmsi": 431005507,
+      "name": "MATSUYAMA MARU NO.12",
+      "destination": ">JP SBK OFF",
+      "isJapanBound": true,
+      "lat": 34.5349,
+      "lon": 135.3044
     },
     {
       "mmsi": 431006905,
@@ -136,52 +103,36 @@
       "lon": 135.4502
     },
     {
-      "mmsi": 431661000,
-      "name": "PHENIX LEGEND",
-      "destination": ">JP UKB K HYOGO-E",
+      "mmsi": 431017004,
+      "name": "SHINKO",
+      "destination": ">JP WAK",
       "isJapanBound": true,
-      "lat": 34.6671,
-      "lon": 135.1868
+      "lat": 34.2082,
+      "lon": 135.126
     },
     {
-      "mmsi": 432941000,
-      "name": "RYOUMEI MARU",
-      "destination": ">JP KISHIWADA",
+      "mmsi": 431001715,
+      "name": "CHOUKAI MARU",
+      "destination": ">JP AFG E OFF",
       "isJapanBound": true,
-      "lat": 34.5065,
-      "lon": 135.3593
+      "lat": 39.7771,
+      "lon": 140.028
     },
     {
-      "mmsi": 431003276,
-      "name": "KIRISHIMA MARU NO.2",
-      "destination": ">JP SBK OHAMA-6",
+      "mmsi": 431300411,
+      "name": "TAIKEIMARU NO.5",
+      "destination": ">JP OSA 2A",
       "isJapanBound": true,
       "lat": null,
       "lon": null
-    },
-    {
-      "mmsi": 431100682,
-      "name": "SHINSUI MARU NO.8",
-      "destination": ">JP SBK XX / SEC7",
-      "isJapanBound": true,
-      "lat": 33.5342,
-      "lon": 136.0737
-    },
-    {
-      "mmsi": 431005329,
-      "name": "KAIYO MARU",
-      "destination": "JP UKB  NAGATA",
-      "isJapanBound": true,
-      "lat": 34.6509,
-      "lon": 135.1592
     },
     {
       "mmsi": 431004372,
       "name": "KINYU MARU NO12",
       "destination": ">JP SBK ENEOS B-1",
       "isJapanBound": true,
-      "lat": 34.5502,
-      "lon": 135.4276
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
