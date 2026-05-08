@@ -1,95 +1,71 @@
 {
-  "fetchedAt": "2026-05-08T19:52:40+00:00",
+  "fetchedAt": "2026-05-08T21:23:18+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 14,
-  "japanBoundTankers": 14,
-  "japanBoundUnknownPort": 13,
+  "totalTankersInRegion": 12,
+  "japanBoundTankers": 12,
+  "japanBoundUnknownPort": 11,
   "topDestinationPorts": [
     {
-      "port": "YOKKAICHI",
+      "port": "KAWASAKI",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431000393,
-      "name": "NADESHIKO MARU",
-      "destination": ">JP HIJ",
+      "mmsi": 352181000,
+      "name": "CRANE AVANCE",
+      "destination": ">JP NGO / AS",
       "isJapanBound": true,
-      "lat": 34.3571,
-      "lon": 132.4476
+      "lat": 33.4597,
+      "lon": 136.1015
     },
     {
-      "mmsi": 431015453,
-      "name": "MARUOKA MARU",
-      "destination": "JP KRE ETAJIMA OFF",
+      "mmsi": 431001216,
+      "name": "MEISHOMARU",
+      "destination": ">JP KWS OFF",
       "isJapanBound": true,
-      "lat": 34.1933,
-      "lon": 132.486
-    },
-    {
-      "mmsi": 431016755,
-      "name": "ASUZAN MARU",
-      "destination": "> JP YKK  CE-1",
-      "isJapanBound": true,
-      "lat": 33.923,
-      "lon": 136.5325
-    },
-    {
-      "mmsi": 431025781,
-      "name": "DAIITI METAMARU",
-      "destination": ">JP TXD OFF",
-      "isJapanBound": true,
-      "lat": 33.8289,
-      "lon": 131.9484
+      "lat": 33.7568,
+      "lon": 136.3349
     },
     {
       "mmsi": 431028115,
       "name": "NIKKOHMARU NO.25",
       "destination": ">JP OTK OFF",
       "isJapanBound": true,
-      "lat": 34.2218,
-      "lon": 132.2522
+      "lat": 34.2217,
+      "lon": 132.2521
     },
     {
-      "mmsi": 431501853,
-      "name": "23KOUSINMARU",
-      "destination": "JP IWK /E OFF",
+      "mmsi": 431000175,
+      "name": "KINSUI MARU",
+      "destination": "JP SKD A-7",
       "isJapanBound": true,
-      "lat": 34.1729,
-      "lon": 132.2926
+      "lat": 33.5702,
+      "lon": 136.0342
     },
     {
       "mmsi": 431004325,
       "name": "ATAGO",
-      "destination": ">JP OTK OFF",
+      "destination": ">JP UKB OFF",
       "isJapanBound": true,
       "lat": 34.222,
       "lon": 132.2425
     },
     {
-      "mmsi": 431013295,
-      "name": "RYOYU MARU",
-      "destination": ">JP OSA OFF",
+      "mmsi": 431000393,
+      "name": "NADESHIKO MARU",
+      "destination": ">JP HIJ",
       "isJapanBound": true,
-      "lat": 33.4994,
-      "lon": 135.959
+      "lat": 34.357,
+      "lon": 132.4476
     },
     {
-      "mmsi": 431400324,
-      "name": "NIKKO MARU NO.6",
-      "destination": ">JP OTK OFF",
+      "mmsi": 431006294,
+      "name": "RYOEIMARU",
+      "destination": ">JP IWK",
       "isJapanBound": true,
-      "lat": 34.2189,
-      "lon": 132.2567
-    },
-    {
-      "mmsi": 431003736,
-      "name": "KIRISHIMA MARU NO.17",
-      "destination": ">JP OTK OFF",
-      "isJapanBound": true,
-      "lat": 34.2347,
-      "lon": 132.2386
+      "lat": 34.1998,
+      "lon": 132.2763
     },
     {
       "mmsi": 431301018,
@@ -97,31 +73,39 @@
       "destination": ">JP IWK/ENEOS3-12",
       "isJapanBound": true,
       "lat": 34.1853,
-      "lon": 132.283
+      "lon": 132.2832
     },
     {
-      "mmsi": 431854000,
-      "name": "YUSHOMARU",
-      "destination": "JP OTK OFF",
+      "mmsi": 431001715,
+      "name": "CHOUKAI MARU",
+      "destination": ">JP AFG E",
       "isJapanBound": true,
-      "lat": 34.2172,
-      "lon": 132.2536
+      "lat": 39.7564,
+      "lon": 140.0568
     },
     {
-      "mmsi": 431001061,
-      "name": "KAIRYU",
-      "destination": ">JP OTK G2",
+      "mmsi": 431005242,
+      "name": "KAKUSHO MARU",
+      "destination": ">JP WAK OFF",
       "isJapanBound": true,
-      "lat": 34.2238,
-      "lon": 132.2413
+      "lat": 34.2078,
+      "lon": 135.1166
     },
     {
-      "mmsi": 431001417,
-      "name": "TAMARIKI MARU",
-      "destination": ">JP IWK OFF",
+      "mmsi": 431017044,
+      "name": "HAKUSEI MARU NO.10",
+      "destination": "JP HIJ DOCK",
       "isJapanBound": true,
-      "lat": 34.17,
-      "lon": 132.3063
+      "lat": 34.3404,
+      "lon": 132.4854
+    },
+    {
+      "mmsi": 431501664,
+      "name": "KYOKUZAN",
+      "destination": "JP KIK 32",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
