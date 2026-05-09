@@ -1,79 +1,31 @@
 {
-  "fetchedAt": "2026-05-09T00:17:12+00:00",
+  "fetchedAt": "2026-05-09T04:02:40+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 9,
-  "japanBoundUnknownPort": 8,
+  "totalTankersInRegion": 8,
+  "japanBoundTankers": 7,
+  "japanBoundUnknownPort": 6,
   "topDestinationPorts": [
     {
-      "port": "CHIBA",
+      "port": "KAWASAKI",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431015453,
-      "name": "MARUOKA MARU",
-      "destination": "JP HHR TAKASAGO",
+      "mmsi": 431009162,
+      "name": "EIHO",
+      "destination": ">JP KWS OFF",
       "isJapanBound": true,
-      "lat": 34.1969,
-      "lon": 132.4818
+      "lat": 33.733,
+      "lon": 136.2774
     },
     {
-      "mmsi": 431006294,
-      "name": "RYOEIMARU",
-      "destination": ">JP IWK",
+      "mmsi": 431100372,
+      "name": "SOUBI MARU",
+      "destination": ">JP MSA OFF/E",
       "isJapanBound": true,
-      "lat": 34.2005,
-      "lon": 132.2756
-    },
-    {
-      "mmsi": 441691000,
-      "name": "LUNA HANA",
-      "destination": "JP CHB OFF",
-      "isJapanBound": true,
-      "lat": 33.7568,
-      "lon": 136.306
-    },
-    {
-      "mmsi": 431001562,
-      "name": "HOKO MARU NO.5",
-      "destination": "JP WAK",
-      "isJapanBound": true,
-      "lat": 34.21,
-      "lon": 135.1438
-    },
-    {
-      "mmsi": 431000851,
-      "name": "MATSUSHIMAMARU NO.18",
-      "destination": ">JP HKS",
-      "isJapanBound": true,
-      "lat": 34.0063,
-      "lon": 132.6138
-    },
-    {
-      "mmsi": 431003736,
-      "name": "KIRISHIMA MARU NO.17",
-      "destination": ">JP OTK OFF",
-      "isJapanBound": true,
-      "lat": 34.2357,
-      "lon": 132.2372
-    },
-    {
-      "mmsi": 431501853,
-      "name": "23KOUSINMARU",
-      "destination": "JP IWK /E OFF",
-      "isJapanBound": true,
-      "lat": 34.1975,
-      "lon": 132.242
-    },
-    {
-      "mmsi": 431402014,
-      "name": "KOYO MARU NO.12",
-      "destination": ">JP OSA H OFF",
-      "isJapanBound": true,
-      "lat": 33.9481,
-      "lon": 136.5029
+      "lat": 33.4859,
+      "lon": 136.0091
     },
     {
       "mmsi": 431020932,
@@ -84,12 +36,44 @@
       "lon": 139.7664
     },
     {
-      "mmsi": 431001061,
-      "name": "KAIRYU",
+      "mmsi": 431028115,
+      "name": "NIKKOHMARU NO.25",
       "destination": ">JP OTK OFF",
       "isJapanBound": true,
-      "lat": 34.2198,
-      "lon": 132.2684
+      "lat": 34.2184,
+      "lon": 132.2451
+    },
+    {
+      "mmsi": 431029673,
+      "name": "SHINKO MARU NO.2",
+      "destination": ">JP KRE",
+      "isJapanBound": true,
+      "lat": 34.2058,
+      "lon": 132.5428
+    },
+    {
+      "mmsi": 431300665,
+      "name": "NIKKO MARU NO.18",
+      "destination": ">JP OTK OFF",
+      "isJapanBound": true,
+      "lat": 34.2193,
+      "lon": 132.2445
+    },
+    {
+      "mmsi": 431854000,
+      "name": "YUSHOMARU",
+      "destination": "JP OTK OFF",
+      "isJapanBound": true,
+      "lat": 34.2167,
+      "lon": 132.2463
+    },
+    {
+      "mmsi": 431400324,
+      "name": "NIKKO MARU NO.6",
+      "destination": ">JP OTK DAICEL/2",
+      "isJapanBound": true,
+      "lat": 34.2174,
+      "lon": 132.2458
     }
   ],
   "boundingBox": "24-46N / 122-146E",
