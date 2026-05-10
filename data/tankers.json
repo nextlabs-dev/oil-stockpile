@@ -1,14 +1,10 @@
 {
-  "fetchedAt": "2026-05-10T15:21:10+00:00",
+  "fetchedAt": "2026-05-10T16:16:49+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 17,
-  "japanBoundTankers": 7,
-  "japanBoundUnknownPort": 5,
+  "totalTankersInRegion": 10,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [
-    {
-      "port": "YOKKAICHI",
-      "count": 1
-    },
     {
       "port": "MIZUSHIMA",
       "count": 1
@@ -16,137 +12,81 @@
   ],
   "vessels": [
     {
-      "mmsi": 431014484,
-      "name": "PROPANE MARU NO.8",
-      "destination": ">JP SBK OFF",
-      "isJapanBound": true,
-      "lat": 33.6974,
-      "lon": 136.1994
-    },
-    {
-      "mmsi": 431000529,
-      "name": "SYUUKA MARU NO.2",
-      "destination": "JP IHA OFF",
-      "isJapanBound": true,
-      "lat": 33.5979,
-      "lon": 136.1
-    },
-    {
       "mmsi": 538007494,
       "name": "FRONT EARL",
       "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": 35.326,
-      "lon": 129.6711
+      "lat": 35.3381,
+      "lon": 129.6823
     },
     {
-      "mmsi": 352001491,
-      "name": "KS ADONIS",
-      "destination": "MY SDK",
+      "mmsi": 441203000,
+      "name": "RISING SAMBU",
+      "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 37.4001,
-      "lon": 126.5544
+      "lat": 35.4569,
+      "lon": 129.4458
     },
     {
-      "mmsi": 431024158,
-      "name": "MIYA MARU NO.18",
-      "destination": "JP WAK OFF",
+      "mmsi": 431007738,
+      "name": "NO.11 SHIGEFUKUMARU",
+      "destination": "JP MIZ OFF",
       "isJapanBound": true,
-      "lat": 34.1516,
-      "lon": 135.1479
+      "lat": 33.7874,
+      "lon": 136.3556
     },
     {
-      "mmsi": 241291000,
-      "name": "MARAN GAS EFESSOS",
-      "destination": "FOR ORDERS",
+      "mmsi": 636020426,
+      "name": "STOLT MERCURY",
+      "destination": "KRUSN",
       "isJapanBound": false,
-      "lat": 35.8981,
-      "lon": 131.8402
+      "lat": 35.3236,
+      "lon": 129.6777
     },
     {
-      "mmsi": 431001715,
-      "name": "CHOUKAI MARU",
-      "destination": ">JP AFG E",
+      "mmsi": 563205800,
+      "name": "STOLT YURI",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 35.325,
+      "lon": 130.3128
+    },
+    {
+      "mmsi": 432825000,
+      "name": "YUHO MARU NO.5",
+      "destination": ">JP OIP OFF/E",
       "isJapanBound": true,
-      "lat": 39.7564,
-      "lon": 140.0568
+      "lat": 35.0086,
+      "lon": 129.7851
     },
     {
-      "mmsi": 414728000,
-      "name": "AN XING ZUO",
-      "destination": "ZHOUSHAN,CN",
+      "mmsi": 441509000,
+      "name": "NEW CHALLENGE",
+      "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 35.7681,
-      "lon": 130.7555
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 431004181,
-      "name": "SANKYO MARU NO.2",
-      "destination": "JP YKK DM",
+      "mmsi": 636024083,
+      "name": "PUTERI SARAWAK",
+      "destination": "KRINC",
+      "isJapanBound": false,
+      "lat": 36.0238,
+      "lon": 131.2541
+    },
+    {
+      "mmsi": 431402001,
+      "name": "HOSEI MARU NO.3",
+      "destination": ">JP WAK OFF",
       "isJapanBound": true,
-      "lat": 33.7859,
-      "lon": 136.3602
+      "lat": 34.1563,
+      "lon": 135.1597
     },
     {
-      "mmsi": 352001217,
-      "name": "CS BREEZE",
-      "destination": "JP NGO/AS",
-      "isJapanBound": true,
-      "lat": 34.8234,
-      "lon": 129.9971
-    },
-    {
-      "mmsi": 311001681,
-      "name": "LAKE MODRO",
-      "destination": "SEA TRIAL(HWO.2552)",
-      "isJapanBound": false,
-      "lat": 34.6205,
-      "lon": 129.1019
-    },
-    {
-      "mmsi": 613321501,
-      "name": "JACKLYN",
-      "destination": "LONG KOU",
-      "isJapanBound": false,
-      "lat": 35.2347,
-      "lon": 129.5942
-    },
-    {
-      "mmsi": 538011793,
-      "name": "GEM LAYLA",
-      "destination": "K-S1822 SEA TRIAL",
-      "isJapanBound": false,
-      "lat": 34.7197,
-      "lon": 129.0898
-    },
-    {
-      "mmsi": 636024889,
-      "name": "UMM HEESH",
-      "destination": "SHI-2646 SEA TRIAL",
-      "isJapanBound": false,
-      "lat": 34.6309,
-      "lon": 129.0585
-    },
-    {
-      "mmsi": 356248000,
-      "name": "SUN VENUS",
-      "destination": "JP MIZ FP",
-      "isJapanBound": true,
-      "lat": 34.7847,
-      "lon": 130.0179
-    },
-    {
-      "mmsi": 228432600,
-      "name": "GORDONWATERS KNUTSEN",
-      "destination": "USG FOR ORDERS",
-      "isJapanBound": false,
-      "lat": 34.3831,
-      "lon": 129.8014
-    },
-    {
-      "mmsi": 440194890,
-      "name": "KS HONOR",
-      "destination": "KR INC",
+      "mmsi": 441555000,
+      "name": "KTS WHITE",
+      "destination": "KR USN UTK #2",
       "isJapanBound": false,
       "lat": null,
       "lon": null
