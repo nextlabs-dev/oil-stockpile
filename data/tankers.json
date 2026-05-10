@@ -1,68 +1,103 @@
 {
-  "fetchedAt": "2026-05-10T16:16:49+00:00",
+  "fetchedAt": "2026-05-10T17:20:09+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 3,
+  "totalTankersInRegion": 13,
+  "japanBoundTankers": 2,
   "japanBoundUnknownPort": 2,
-  "topDestinationPorts": [
-    {
-      "port": "MIZUSHIMA",
-      "count": 1
-    }
-  ],
+  "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 538007494,
-      "name": "FRONT EARL",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.3381,
-      "lon": 129.6823
-    },
-    {
-      "mmsi": 441203000,
-      "name": "RISING SAMBU",
+      "mmsi": 538008803,
+      "name": "SUN EDELWEISS",
       "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 35.4569,
-      "lon": 129.4458
+      "lat": 35.2231,
+      "lon": 129.6531
     },
     {
-      "mmsi": 431007738,
-      "name": "NO.11 SHIGEFUKUMARU",
-      "destination": "JP MIZ OFF",
-      "isJapanBound": true,
-      "lat": 33.7874,
-      "lon": 136.3556
+      "mmsi": 249752000,
+      "name": "CLEAN BROWNSVILLE-TR",
+      "destination": "SEA TRIAL/HHI-3435",
+      "isJapanBound": false,
+      "lat": 35.5107,
+      "lon": 129.4378
     },
     {
       "mmsi": 636020426,
       "name": "STOLT MERCURY",
       "destination": "KRUSN",
       "isJapanBound": false,
-      "lat": 35.3236,
-      "lon": 129.6777
+      "lat": 35.3706,
+      "lon": 129.5534
+    },
+    {
+      "mmsi": 413307360,
+      "name": "BEI HAI YUAN WANG",
+      "destination": "QINHUANGDAO",
+      "isJapanBound": false,
+      "lat": 34.547,
+      "lon": 122.8923
+    },
+    {
+      "mmsi": 249569000,
+      "name": "CLEAN RIO GRANDE-S/T",
+      "destination": "SEA TRIAL/HHI-3434",
+      "isJapanBound": false,
+      "lat": 35.5123,
+      "lon": 129.4344
+    },
+    {
+      "mmsi": 412358080,
+      "name": "SHENG HANG CAI FU",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.3387,
+      "lon": 129.57
+    },
+    {
+      "mmsi": 431402001,
+      "name": "HOSEI MARU NO.3",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1559,
+      "lon": 135.1598
+    },
+    {
+      "mmsi": 538007494,
+      "name": "FRONT EARL",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.3501,
+      "lon": 129.6965
     },
     {
       "mmsi": 563205800,
       "name": "STOLT YURI",
       "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 35.325,
-      "lon": 130.3128
+      "lat": 35.5154,
+      "lon": 130.3568
     },
     {
-      "mmsi": 432825000,
-      "name": "YUHO MARU NO.5",
-      "destination": ">JP OIP OFF/E",
+      "mmsi": 431390000,
+      "name": "SHINSEI MARU",
+      "destination": "JP>AFG",
+      "isJapanBound": false,
+      "lat": 39.8585,
+      "lon": 139.8598
+    },
+    {
+      "mmsi": 431001715,
+      "name": "CHOUKAI MARU",
+      "destination": ">JP AFG E",
       "isJapanBound": true,
-      "lat": 35.0086,
-      "lon": 129.7851
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 441509000,
-      "name": "NEW CHALLENGE",
-      "destination": "KR USN",
+      "mmsi": 355147000,
+      "name": "G. SWAN",
+      "destination": "KRUSN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
@@ -71,22 +106,6 @@
       "mmsi": 636024083,
       "name": "PUTERI SARAWAK",
       "destination": "KRINC",
-      "isJapanBound": false,
-      "lat": 36.0238,
-      "lon": 131.2541
-    },
-    {
-      "mmsi": 431402001,
-      "name": "HOSEI MARU NO.3",
-      "destination": ">JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.1563,
-      "lon": 135.1597
-    },
-    {
-      "mmsi": 441555000,
-      "name": "KTS WHITE",
-      "destination": "KR USN UTK #2",
       "isJapanBound": false,
       "lat": null,
       "lon": null
