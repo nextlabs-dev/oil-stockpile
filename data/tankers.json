@@ -1,42 +1,50 @@
 {
-  "fetchedAt": "2026-05-10T17:20:09+00:00",
+  "fetchedAt": "2026-05-10T18:12:46+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 18,
+  "japanBoundTankers": 1,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [],
   "vessels": [
+    {
+      "mmsi": 440135400,
+      "name": "TRITON",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.4581,
+      "lon": 129.3716
+    },
     {
       "mmsi": 538008803,
       "name": "SUN EDELWEISS",
       "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 35.2231,
-      "lon": 129.6531
-    },
-    {
-      "mmsi": 249752000,
-      "name": "CLEAN BROWNSVILLE-TR",
-      "destination": "SEA TRIAL/HHI-3435",
-      "isJapanBound": false,
-      "lat": 35.5107,
-      "lon": 129.4378
+      "lat": 35.241,
+      "lon": 129.6619
     },
     {
       "mmsi": 636020426,
       "name": "STOLT MERCURY",
       "destination": "KRUSN",
       "isJapanBound": false,
-      "lat": 35.3706,
-      "lon": 129.5534
+      "lat": 35.4154,
+      "lon": 129.4632
     },
     {
-      "mmsi": 413307360,
-      "name": "BEI HAI YUAN WANG",
-      "destination": "QINHUANGDAO",
+      "mmsi": 357843000,
+      "name": "GOLDEN MIND",
+      "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 34.547,
-      "lon": 122.8923
+      "lat": 35.0429,
+      "lon": 129.3659
+    },
+    {
+      "mmsi": 245389000,
+      "name": "CORAL ACROPORA",
+      "destination": "KR TSN",
+      "isJapanBound": false,
+      "lat": 35.1416,
+      "lon": 129.376
     },
     {
       "mmsi": 249569000,
@@ -47,36 +55,20 @@
       "lon": 129.4344
     },
     {
-      "mmsi": 412358080,
-      "name": "SHENG HANG CAI FU",
-      "destination": "ULSAN",
+      "mmsi": 314001157,
+      "name": "SEARUN",
+      "destination": "RU KOZ",
       "isJapanBound": false,
-      "lat": 35.3387,
-      "lon": 129.57
+      "lat": 36.3719,
+      "lon": 130.037
     },
     {
-      "mmsi": 431402001,
-      "name": "HOSEI MARU NO.3",
-      "destination": ">JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.1559,
-      "lon": 135.1598
-    },
-    {
-      "mmsi": 538007494,
-      "name": "FRONT EARL",
-      "destination": "ULSAN",
+      "mmsi": 477664300,
+      "name": "GLORISEA",
+      "destination": "KR PUS",
       "isJapanBound": false,
-      "lat": 35.3501,
-      "lon": 129.6965
-    },
-    {
-      "mmsi": 563205800,
-      "name": "STOLT YURI",
-      "destination": "KR USN",
-      "isJapanBound": false,
-      "lat": 35.5154,
-      "lon": 130.3568
+      "lat": 35.0017,
+      "lon": 129.3603
     },
     {
       "mmsi": 431390000,
@@ -87,28 +79,76 @@
       "lon": 139.8598
     },
     {
-      "mmsi": 431001715,
-      "name": "CHOUKAI MARU",
-      "destination": ">JP AFG E",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "mmsi": 374161000,
+      "name": "GOLDEN PROCYON",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 35.4473,
+      "lon": 129.4363
     },
     {
       "mmsi": 355147000,
       "name": "G. SWAN",
       "destination": "KRUSN",
       "isJapanBound": false,
+      "lat": 35.4062,
+      "lon": 129.4477
+    },
+    {
+      "mmsi": 440410930,
+      "name": "CHARIS",
+      "destination": "KWANG YANG",
+      "isJapanBound": false,
+      "lat": 35.1775,
+      "lon": 129.2555
+    },
+    {
+      "mmsi": 431402001,
+      "name": "HOSEI MARU NO.3",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.156,
+      "lon": 135.1598
+    },
+    {
+      "mmsi": 563028800,
+      "name": "CONCERTO",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 35.4452,
+      "lon": 129.463
+    },
+    {
+      "mmsi": 440173000,
+      "name": "WOODONG",
+      "destination": "KR INC",
+      "isJapanBound": false,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 636024083,
-      "name": "PUTERI SARAWAK",
-      "destination": "KRINC",
+      "mmsi": 441509000,
+      "name": "NEW CHALLENGE",
+      "destination": "KR USN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 440116410,
+      "name": "DL DIAMOND",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 35.4439,
+      "lon": 129.3704
+    },
+    {
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 37.4965,
+      "lon": 126.6234
     }
   ],
   "boundingBox": "24-46N / 122-146E",
