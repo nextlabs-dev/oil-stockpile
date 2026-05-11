@@ -1,87 +1,95 @@
 {
-  "fetchedAt": "2026-05-11T20:10:57+00:00",
+  "fetchedAt": "2026-05-11T21:48:54+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 8,
-  "japanBoundTankers": 6,
-  "japanBoundUnknownPort": 3,
+  "totalTankersInRegion": 10,
+  "japanBoundTankers": 7,
+  "japanBoundUnknownPort": 6,
   "topDestinationPorts": [
     {
       "port": "MIZUSHIMA",
-      "count": 1
-    },
-    {
-      "port": "YOKOHAMA",
-      "count": 1
-    },
-    {
-      "port": "KAWASAKI",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431001086,
-      "name": "DELPHINUS",
-      "destination": ">JP MIZ OFF",
-      "isJapanBound": true,
-      "lat": 34.2148,
-      "lon": 135.1435
-    },
-    {
       "mmsi": 431024158,
       "name": "MIYA MARU NO.18",
       "destination": "JP WAK",
       "isJapanBound": true,
-      "lat": 34.212,
-      "lon": 135.141
-    },
-    {
-      "mmsi": 431014961,
-      "name": "CHOYO MARU",
-      "destination": "JP NGO OFF",
-      "isJapanBound": true,
-      "lat": 33.5472,
-      "lon": 136.008
-    },
-    {
-      "mmsi": 431402001,
-      "name": "HOSEI MARU NO.3",
-      "destination": ">JP YOK OFF",
-      "isJapanBound": true,
-      "lat": 33.9108,
-      "lon": 136.541
-    },
-    {
-      "mmsi": 431602142,
-      "name": "KAKUTO MARU",
-      "destination": "JP KWS ENEOS 200-1",
-      "isJapanBound": true,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 431005666,
+      "name": "TOUYOUMARU 33",
+      "destination": "JP TXD / E",
+      "isJapanBound": true,
+      "lat": 35.4821,
+      "lon": 132.5649
     },
     {
       "mmsi": 431004086,
       "name": "FUJITAKA MARU",
       "destination": "YSG/WM",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.4498,
+      "lon": 133.256
     },
     {
-      "mmsi": 440011120,
-      "name": "MINSUNG11",
+      "mmsi": 440014870,
+      "name": "MS CLEAN",
       "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": 37.4502,
+      "lon": 126.5909
+    },
+    {
+      "mmsi": 431026064,
+      "name": "ETSUZANMARU NO.15",
+      "destination": "JP NGO 2B OFF",
+      "isJapanBound": true,
+      "lat": 33.7017,
+      "lon": 136.2268
+    },
+    {
+      "mmsi": 431401974,
+      "name": "HOSEI MARU NO.7",
+      "destination": ">JP OSA OFF",
+      "isJapanBound": true,
+      "lat": 33.7555,
+      "lon": 136.3065
+    },
+    {
+      "mmsi": 431001086,
+      "name": "DELPHINUS",
+      "destination": ">JP MIZ OFF",
+      "isJapanBound": true,
+      "lat": 34.2149,
+      "lon": 135.1435
+    },
+    {
+      "mmsi": 431020877,
+      "name": "HIKARU",
+      "destination": ">JP AFG ES",
+      "isJapanBound": true,
+      "lat": 39.7758,
+      "lon": 139.9557
+    },
+    {
+      "mmsi": 431001151,
+      "name": "MATSUYAMA MARU NO.11",
+      "destination": ">JP SBK OFF",
+      "isJapanBound": true,
+      "lat": 33.9368,
+      "lon": 136.5136
+    },
+    {
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
+      "destination": "",
       "isJapanBound": false,
       "lat": null,
       "lon": null
-    },
-    {
-      "mmsi": 431000592,
-      "name": "NITTAN MARU NO.10",
-      "destination": "JP AFG OFF",
-      "isJapanBound": true,
-      "lat": 39.7834,
-      "lon": 139.9686
     }
   ],
   "boundingBox": "24-46N / 122-146E",
