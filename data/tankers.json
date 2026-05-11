@@ -1,95 +1,63 @@
 {
-  "fetchedAt": "2026-05-11T21:48:54+00:00",
+  "fetchedAt": "2026-05-11T23:18:22+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 7,
-  "japanBoundUnknownPort": 6,
+  "totalTankersInRegion": 6,
+  "japanBoundTankers": 6,
+  "japanBoundUnknownPort": 5,
   "topDestinationPorts": [
     {
-      "port": "MIZUSHIMA",
+      "port": "YOKKAICHI",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431024158,
-      "name": "MIYA MARU NO.18",
-      "destination": "JP WAK",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431005666,
-      "name": "TOUYOUMARU 33",
-      "destination": "JP TXD / E",
-      "isJapanBound": true,
-      "lat": 35.4821,
-      "lon": 132.5649
-    },
-    {
-      "mmsi": 431004086,
-      "name": "FUJITAKA MARU",
-      "destination": "YSG/WM",
-      "isJapanBound": false,
-      "lat": 35.4498,
-      "lon": 133.256
-    },
-    {
-      "mmsi": 440014870,
-      "name": "MS CLEAN",
-      "destination": "INCHEON",
-      "isJapanBound": false,
-      "lat": 37.4502,
-      "lon": 126.5909
-    },
-    {
-      "mmsi": 431026064,
-      "name": "ETSUZANMARU NO.15",
-      "destination": "JP NGO 2B OFF",
-      "isJapanBound": true,
-      "lat": 33.7017,
-      "lon": 136.2268
-    },
-    {
       "mmsi": 431401974,
       "name": "HOSEI MARU NO.7",
       "destination": ">JP OSA OFF",
       "isJapanBound": true,
-      "lat": 33.7555,
-      "lon": 136.3065
+      "lat": 33.5662,
+      "lon": 136.0432
     },
     {
-      "mmsi": 431001086,
-      "name": "DELPHINUS",
-      "destination": ">JP MIZ OFF",
+      "mmsi": 431401964,
+      "name": "ENSHU MARU",
+      "destination": ">JP YKK 3E OFF",
       "isJapanBound": true,
-      "lat": 34.2149,
-      "lon": 135.1435
+      "lat": 33.5166,
+      "lon": 135.9853
     },
     {
-      "mmsi": 431020877,
-      "name": "HIKARU",
-      "destination": ">JP AFG ES",
+      "mmsi": 441691000,
+      "name": "LUNA HANA",
+      "destination": "JP HIM",
       "isJapanBound": true,
-      "lat": 39.7758,
-      "lon": 139.9557
+      "lat": 33.888,
+      "lon": 136.4582
     },
     {
-      "mmsi": 431001151,
-      "name": "MATSUYAMA MARU NO.11",
-      "destination": ">JP SBK OFF",
+      "mmsi": 431002261,
+      "name": "MIYA MARU NO.1",
+      "destination": "JP SMN TOT 4",
       "isJapanBound": true,
-      "lat": 33.9368,
-      "lon": 136.5136
+      "lat": 35.5478,
+      "lon": 133.2708
     },
     {
-      "mmsi": 440021230,
-      "name": "GWANG SEONG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "mmsi": 431014961,
+      "name": "CHOYO MARU",
+      "destination": "JP NGO 4B P1 OFF",
+      "isJapanBound": true,
+      "lat": 33.9226,
+      "lon": 136.3703
+    },
+    {
+      "mmsi": 431004666,
+      "name": "OOZU MARU NO.10",
+      "destination": ">JP SMN",
+      "isJapanBound": true,
+      "lat": 35.5456,
+      "lon": 133.263
     }
   ],
   "boundingBox": "24-46N / 122-146E",
