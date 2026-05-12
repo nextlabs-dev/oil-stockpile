@@ -1,13 +1,17 @@
 {
-  "fetchedAt": "2026-05-12T17:30:30+00:00",
+  "fetchedAt": "2026-05-12T20:14:33+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 9,
-  "japanBoundTankers": 6,
-  "japanBoundUnknownPort": 4,
+  "totalTankersInRegion": 13,
+  "japanBoundTankers": 11,
+  "japanBoundUnknownPort": 5,
   "topDestinationPorts": [
     {
+      "port": "YOKKAICHI",
+      "count": 3
+    },
+    {
       "port": "KAWASAKI",
-      "count": 1
+      "count": 2
     },
     {
       "port": "YOKOHAMA",
@@ -16,74 +20,106 @@
   ],
   "vessels": [
     {
-      "mmsi": 431007738,
-      "name": "NO.11 SHIGEFUKUMARU",
-      "destination": "JP KWS DU OFF",
+      "mmsi": 431014666,
+      "name": "ATSUTA MARU",
+      "destination": ">JP YKK OFF",
       "isJapanBound": true,
-      "lat": 33.5512,
-      "lon": 136.0554
+      "lat": 33.7153,
+      "lon": 136.2503
     },
     {
-      "mmsi": 431024158,
-      "name": "MIYA MARU NO.18",
-      "destination": "JP WAK",
+      "mmsi": 431000639,
+      "name": "KAIREI",
+      "destination": ">JP FKJ OFF /WM",
       "isJapanBound": true,
-      "lat": 34.212,
-      "lon": 135.141
+      "lat": 33.6598,
+      "lon": 136.1671
+    },
+    {
+      "mmsi": 431008453,
+      "name": "MATSU MARU NO,21",
+      "destination": ">JP KNZ SEKIYU 4",
+      "isJapanBound": true,
+      "lat": 36.6378,
+      "lon": 136.5783
+    },
+    {
+      "mmsi": 319768000,
+      "name": "NAVE ARIADNE",
+      "destination": "JP OIP",
+      "isJapanBound": true,
+      "lat": 33.2912,
+      "lon": 136.2026
     },
     {
       "mmsi": 431010331,
       "name": "NIKKO MARU NO22",
       "destination": "JP KAN",
       "isJapanBound": true,
-      "lat": 34.1699,
-      "lon": 135.1459
+      "lat": 34.1695,
+      "lon": 135.1458
     },
     {
-      "mmsi": 441071000,
-      "name": "BANGKOK CHEMI",
-      "destination": "KR INC",
-      "isJapanBound": false,
-      "lat": 37.4406,
-      "lon": 126.5704
-    },
-    {
-      "mmsi": 431005249,
-      "name": "SHINYO MARU",
-      "destination": ">JP SKD",
+      "mmsi": 431000175,
+      "name": "KINSUI MARU",
+      "destination": "JP YKK OFF",
       "isJapanBound": true,
-      "lat": 33.6248,
-      "lon": 136.1392
+      "lat": 33.8111,
+      "lon": 136.3825
     },
     {
-      "mmsi": 440509320,
-      "name": "GLOBAL 1",
+      "mmsi": 431402007,
+      "name": "KYOWAMARU",
+      "destination": ">JP YKK 3W",
+      "isJapanBound": true,
+      "lat": 33.78,
+      "lon": 136.5283
+    },
+    {
+      "mmsi": 441586000,
+      "name": "NEW GLOBAL",
+      "destination": "CN DUSHAN",
+      "isJapanBound": false,
+      "lat": 34.0109,
+      "lon": 136.703
+    },
+    {
+      "mmsi": 431007082,
+      "name": "HISHI MARU",
+      "destination": ">JP KWS OFF",
+      "isJapanBound": true,
+      "lat": 33.7999,
+      "lon": 136.3405
+    },
+    {
+      "mmsi": 431002261,
+      "name": "MIYA MARU NO.1",
+      "destination": "JP FKJ OFF",
+      "isJapanBound": true,
+      "lat": 36.2164,
+      "lon": 136.1038
+    },
+    {
+      "mmsi": 431007738,
+      "name": "NO.11 SHIGEFUKUMARU",
+      "destination": "JP KWS DU OFF",
+      "isJapanBound": true,
+      "lat": 33.8737,
+      "lon": 136.4732
+    },
+    {
+      "mmsi": 440011120,
+      "name": "MINSUNG11",
       "destination": "INCHEON",
       "isJapanBound": false,
-      "lat": 37.4482,
-      "lon": 126.6088
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 431015256,
-      "name": "REISHINMARU",
-      "destination": ">JP MKW TAHARA",
+      "mmsi": 372335000,
+      "name": "SUN ORION",
+      "destination": "JP YOK",
       "isJapanBound": true,
-      "lat": 33.5746,
-      "lon": 136.051
-    },
-    {
-      "mmsi": 432809000,
-      "name": "AKATSUKI MARU",
-      "destination": "JP YOK/NNX",
-      "isJapanBound": true,
-      "lat": 35.3512,
-      "lon": 139.7294
-    },
-    {
-      "mmsi": 440021230,
-      "name": "GWANG SEONG",
-      "destination": "",
-      "isJapanBound": false,
       "lat": null,
       "lon": null
     }
