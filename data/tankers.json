@@ -1,64 +1,88 @@
 {
-  "fetchedAt": "2026-05-12T15:17:31+00:00",
+  "fetchedAt": "2026-05-12T17:30:30+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 6,
-  "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 9,
+  "japanBoundTankers": 6,
+  "japanBoundUnknownPort": 4,
   "topDestinationPorts": [
     {
-      "port": "YOKKAICHI",
+      "port": "KAWASAKI",
       "count": 1
     },
     {
-      "port": "KAWASAKI",
+      "port": "YOKOHAMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431001045,
-      "name": "TAIRAMARU",
-      "destination": ">JP SBK/3  OFF",
+      "mmsi": 431007738,
+      "name": "NO.11 SHIGEFUKUMARU",
+      "destination": "JP KWS DU OFF",
       "isJapanBound": true,
-      "lat": 33.7901,
-      "lon": 136.3534
+      "lat": 33.5512,
+      "lon": 136.0554
+    },
+    {
+      "mmsi": 431024158,
+      "name": "MIYA MARU NO.18",
+      "destination": "JP WAK",
+      "isJapanBound": true,
+      "lat": 34.212,
+      "lon": 135.141
+    },
+    {
+      "mmsi": 431010331,
+      "name": "NIKKO MARU NO22",
+      "destination": "JP KAN",
+      "isJapanBound": true,
+      "lat": 34.1699,
+      "lon": 135.1459
+    },
+    {
+      "mmsi": 441071000,
+      "name": "BANGKOK CHEMI",
+      "destination": "KR INC",
+      "isJapanBound": false,
+      "lat": 37.4406,
+      "lon": 126.5704
+    },
+    {
+      "mmsi": 431005249,
+      "name": "SHINYO MARU",
+      "destination": ">JP SKD",
+      "isJapanBound": true,
+      "lat": 33.6248,
+      "lon": 136.1392
     },
     {
       "mmsi": 440509320,
       "name": "GLOBAL 1",
       "destination": "INCHEON",
       "isJapanBound": false,
-      "lat": 37.4483,
+      "lat": 37.4482,
       "lon": 126.6088
     },
     {
-      "mmsi": 431023494,
-      "name": "KIRISHIMA MARU NO.25",
-      "destination": ">JP ANE OFF",
+      "mmsi": 431015256,
+      "name": "REISHINMARU",
+      "destination": ">JP MKW TAHARA",
       "isJapanBound": true,
-      "lat": 33.7771,
-      "lon": 136.3439
+      "lat": 33.5746,
+      "lon": 136.051
     },
     {
-      "mmsi": 431009761,
-      "name": "KAKUWAMARU",
-      "destination": ">JP YKK 3E",
+      "mmsi": 432809000,
+      "name": "AKATSUKI MARU",
+      "destination": "JP YOK/NNX",
       "isJapanBound": true,
-      "lat": 33.8183,
-      "lon": 136.3961
+      "lat": 35.3512,
+      "lon": 139.7294
     },
     {
-      "mmsi": 431015126,
-      "name": "KOTOKU MARU",
-      "destination": "JP KWS KK1 OFF",
-      "isJapanBound": true,
-      "lat": 35.4765,
-      "lon": 139.7691
-    },
-    {
-      "mmsi": 210392000,
-      "name": "PRINCESS VANYA",
-      "destination": "KR INC",
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
+      "destination": "",
       "isJapanBound": false,
       "lat": null,
       "lon": null
