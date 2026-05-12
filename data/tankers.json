@@ -1,10 +1,14 @@
 {
-  "fetchedAt": "2026-05-12T12:24:03+00:00",
+  "fetchedAt": "2026-05-12T15:17:31+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 5,
+  "totalTankersInRegion": 6,
   "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 3,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [
+    {
+      "port": "YOKKAICHI",
+      "count": 1
+    },
     {
       "port": "KAWASAKI",
       "count": 1
@@ -12,42 +16,50 @@
   ],
   "vessels": [
     {
-      "mmsi": 431019648,
-      "name": "KIYO MARU NO1",
-      "destination": "JP NAO/WM",
+      "mmsi": 431001045,
+      "name": "TAIRAMARU",
+      "destination": ">JP SBK/3  OFF",
       "isJapanBound": true,
-      "lat": 35.8129,
-      "lon": 134.6072
+      "lat": 33.7901,
+      "lon": 136.3534
     },
     {
-      "mmsi": 440074350,
-      "name": "GA YEON HO",
-      "destination": "",
+      "mmsi": 440509320,
+      "name": "GLOBAL 1",
+      "destination": "INCHEON",
       "isJapanBound": false,
-      "lat": 37.4869,
-      "lon": 126.6167
+      "lat": 37.4483,
+      "lon": 126.6088
     },
     {
-      "mmsi": 431003635,
-      "name": "SHUHO",
-      "destination": ">JP TXD SENSHIMA 1",
+      "mmsi": 431023494,
+      "name": "KIRISHIMA MARU NO.25",
+      "destination": ">JP ANE OFF",
       "isJapanBound": true,
-      "lat": 33.6131,
-      "lon": 136.1057
+      "lat": 33.7771,
+      "lon": 136.3439
     },
     {
-      "mmsi": 431011753,
-      "name": "HOUSEIMARU NO21",
-      "destination": ">JP KWS OFF",
+      "mmsi": 431009761,
+      "name": "KAKUWAMARU",
+      "destination": ">JP YKK 3E",
       "isJapanBound": true,
-      "lat": 35.4959,
-      "lon": 139.8261
+      "lat": 33.8183,
+      "lon": 136.3961
     },
     {
-      "mmsi": 431019549,
-      "name": "SHINKO MARU NO31",
-      "destination": "JP WAK NITETSU J",
+      "mmsi": 431015126,
+      "name": "KOTOKU MARU",
+      "destination": "JP KWS KK1 OFF",
       "isJapanBound": true,
+      "lat": 35.4765,
+      "lon": 139.7691
+    },
+    {
+      "mmsi": 210392000,
+      "name": "PRINCESS VANYA",
+      "destination": "KR INC",
+      "isJapanBound": false,
       "lat": null,
       "lon": null
     }
