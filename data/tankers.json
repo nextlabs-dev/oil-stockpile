@@ -1,71 +1,151 @@
 {
-  "fetchedAt": "2026-05-13T19:14:14+00:00",
+  "fetchedAt": "2026-05-13T21:02:44+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 7,
-  "japanBoundTankers": 6,
-  "japanBoundUnknownPort": 4,
+  "totalTankersInRegion": 16,
+  "japanBoundTankers": 10,
+  "japanBoundUnknownPort": 6,
   "topDestinationPorts": [
     {
-      "port": "YOKKAICHI",
+      "port": "KAWASAKI",
       "count": 2
+    },
+    {
+      "port": "YOKOHAMA",
+      "count": 1
+    },
+    {
+      "port": "YOKKAICHI",
+      "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431000781,
-      "name": "SENTAIMARU",
-      "destination": ">JP YKK DM",
-      "isJapanBound": true,
-      "lat": 33.6647,
-      "lon": 136.1843
-    },
-    {
-      "mmsi": 431301663,
-      "name": "SYUNYOMARU",
-      "destination": ">JP SBK KOMATSU 2-A",
-      "isJapanBound": true,
-      "lat": 34.1588,
-      "lon": 134.9617
-    },
-    {
-      "mmsi": 431009496,
-      "name": "TOKUYO MARU NO.17",
-      "destination": ">JP YKK U-2 / 3W",
-      "isJapanBound": true,
-      "lat": 33.7924,
-      "lon": 136.3527
-    },
-    {
-      "mmsi": 431009761,
-      "name": "KAKUWAMARU",
-      "destination": ">JP SBK 3 COSMO 91",
-      "isJapanBound": true,
-      "lat": 33.6787,
-      "lon": 136.1891
+      "mmsi": 538011749,
+      "name": "DHT JAGUAR",
+      "destination": "FOR.ORDER",
+      "isJapanBound": false,
+      "lat": 34.2399,
+      "lon": 137.236
     },
     {
       "mmsi": 352001120,
       "name": "GOLDEN GRACE HANA",
       "destination": "KR YOS",
       "isJapanBound": false,
-      "lat": 33.5757,
-      "lon": 136.4449
+      "lat": 33.4341,
+      "lon": 136.0785
+    },
+    {
+      "mmsi": 440026590,
+      "name": "9MINSUNG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 37.4966,
+      "lon": 126.6235
     },
     {
       "mmsi": 431006217,
       "name": "KOKUSHU MARU",
       "destination": ">JP RY0/WM OFF",
       "isJapanBound": true,
-      "lat": 38.0951,
-      "lon": 138.4581
+      "lat": 38.0952,
+      "lon": 138.4569
     },
     {
-      "mmsi": 431005242,
-      "name": "KAKUSHO MARU",
-      "destination": ">JP WAK OFF",
+      "mmsi": 431026945,
+      "name": "SHINYU MARU NO.2",
+      "destination": ">JP OIP XX",
       "isJapanBound": true,
-      "lat": 34.1537,
-      "lon": 135.1375
+      "lat": 34.1306,
+      "lon": 136.8459
+    },
+    {
+      "mmsi": 538012027,
+      "name": "MAGNATE",
+      "destination": "JP KWS OFF",
+      "isJapanBound": true,
+      "lat": 35.4478,
+      "lon": 139.762
+    },
+    {
+      "mmsi": 431004325,
+      "name": "ATAGO",
+      "destination": ">JP YOK YK-1",
+      "isJapanBound": true,
+      "lat": 33.969,
+      "lon": 136.5294
+    },
+    {
+      "mmsi": 431218000,
+      "name": "ENEOS DREAM",
+      "destination": "SHIRASHIMA",
+      "isJapanBound": false,
+      "lat": 32.922,
+      "lon": 137.0517
+    },
+    {
+      "mmsi": 431009496,
+      "name": "TOKUYO MARU NO.17",
+      "destination": ">JP YKK U-2 / 3W",
+      "isJapanBound": true,
+      "lat": 34.0394,
+      "lon": 136.6882
+    },
+    {
+      "mmsi": 431402031,
+      "name": "RYOJITSUMARU",
+      "destination": "JP OSA H",
+      "isJapanBound": true,
+      "lat": 34.1975,
+      "lon": 135.0385
+    },
+    {
+      "mmsi": 431000136,
+      "name": "KYOKUTOUMARU",
+      "destination": "JP KNX OFF",
+      "isJapanBound": true,
+      "lat": 33.9485,
+      "lon": 136.5401
+    },
+    {
+      "mmsi": 431001111,
+      "name": "ROKKOU",
+      "destination": ">JP KWS OFF",
+      "isJapanBound": true,
+      "lat": 33.5681,
+      "lon": 136.0258
+    },
+    {
+      "mmsi": 432477000,
+      "name": "SHUNHO MARU",
+      "destination": ">JP ANE OFF",
+      "isJapanBound": true,
+      "lat": 33.6274,
+      "lon": 136.1576
+    },
+    {
+      "mmsi": 431023554,
+      "name": "MEIYU MARU",
+      "destination": ">JP SBK OFF",
+      "isJapanBound": true,
+      "lat": 34.1157,
+      "lon": 136.8294
+    },
+    {
+      "mmsi": 440022810,
+      "name": "SANGA HO",
+      "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": 37.4964,
+      "lon": 126.6235
+    },
+    {
+      "mmsi": 352006318,
+      "name": "ORIENTAL SUNSTONE",
+      "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
