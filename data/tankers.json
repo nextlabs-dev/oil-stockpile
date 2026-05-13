@@ -1,63 +1,59 @@
 {
-  "fetchedAt": "2026-05-13T13:35:53+00:00",
+  "fetchedAt": "2026-05-13T16:41:02+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 6,
-  "japanBoundTankers": 6,
-  "japanBoundUnknownPort": 5,
+  "totalTankersInRegion": 5,
+  "japanBoundTankers": 5,
+  "japanBoundUnknownPort": 3,
   "topDestinationPorts": [
     {
       "port": "KAWASAKI",
+      "count": 1
+    },
+    {
+      "port": "YOKOHAMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 636019649,
-      "name": "HOU-EI",
-      "destination": "JP SAK",
-      "isJapanBound": true,
-      "lat": 33.7488,
-      "lon": 136.4342
-    },
-    {
-      "mmsi": 431009445,
-      "name": "KYOWA MARU NO.1",
-      "destination": "JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.1513,
-      "lon": 135.2049
-    },
-    {
-      "mmsi": 431402031,
-      "name": "RYOJITSUMARU",
-      "destination": "JP OSA H",
-      "isJapanBound": true,
-      "lat": 33.6569,
-      "lon": 136.1661
-    },
-    {
-      "mmsi": 431011904,
-      "name": "EIYOSHI",
+      "mmsi": 431020284,
+      "name": "KOTOKU MARU NO16",
       "destination": "JP KWS OFF",
       "isJapanBound": true,
-      "lat": 33.6295,
-      "lon": 136.0879
+      "lat": 33.6448,
+      "lon": 136.2032
     },
     {
-      "mmsi": 431014199,
-      "name": "MATSUBISHI MARU",
-      "destination": "JP OTK OFF",
+      "mmsi": 441083000,
+      "name": "KEOYOUNG STAR 5",
+      "destination": "JP NGO",
       "isJapanBound": true,
-      "lat": 33.702,
-      "lon": 136.2065
+      "lat": 33.7083,
+      "lon": 136.2541
     },
     {
-      "mmsi": 431005242,
-      "name": "KAKUSHO MARU",
-      "destination": ">JP WAK OFF",
+      "mmsi": 431005248,
+      "name": "SOUSHIN MARU",
+      "destination": ">JP KNZ OFF /WM",
       "isJapanBound": true,
-      "lat": 34.1537,
-      "lon": 135.1377
+      "lat": 33.6946,
+      "lon": 136.3037
+    },
+    {
+      "mmsi": 432809000,
+      "name": "AKATSUKI MARU",
+      "destination": "JP YOK/NNX",
+      "isJapanBound": true,
+      "lat": 35.3511,
+      "lon": 139.7295
+    },
+    {
+      "mmsi": 431001112,
+      "name": "NO.10 HASSHOMARU",
+      "destination": "JP KIJ/W2A",
+      "isJapanBound": true,
+      "lat": 38.0074,
+      "lon": 139.2065
     }
   ],
   "boundingBox": "24-46N / 122-146E",
