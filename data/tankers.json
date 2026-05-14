@@ -1,42 +1,55 @@
 {
-  "fetchedAt": "2026-05-14T04:20:41+00:00",
+  "fetchedAt": "2026-05-14T07:28:32+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 4,
+  "totalTankersInRegion": 5,
   "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 2,
-  "topDestinationPorts": [],
+  "japanBoundUnknownPort": 1,
+  "topDestinationPorts": [
+    {
+      "port": "YOKKAICHI",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 352006318,
-      "name": "ORIENTAL SUNSTONE",
+      "mmsi": 431401796,
+      "name": "RYOKA MARU NO.103",
+      "destination": ">JP YKK OFF",
+      "isJapanBound": true,
+      "lat": 33.82,
+      "lon": 136.392
+    },
+    {
+      "mmsi": 431800699,
+      "name": "SHOKENMARU",
+      "destination": "JP TSUNEISI OFF",
+      "isJapanBound": true,
+      "lat": 34.3504,
+      "lon": 136.9943
+    },
+    {
+      "mmsi": 440042130,
+      "name": "WOO SUNG HO",
       "destination": "INCHEON",
       "isJapanBound": false,
-      "lat": 37.5073,
-      "lon": 126.6007
+      "lat": 37.4782,
+      "lon": 126.5944
     },
     {
-      "mmsi": 241467000,
-      "name": "MARAN GAS VERGINA",
-      "destination": "FOR ORDERS",
+      "mmsi": 352019000,
+      "name": "HARMONY CHEMIST",
+      "destination": "KRYOS",
       "isJapanBound": false,
-      "lat": 37.7271,
-      "lon": 137.9634
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 431006217,
-      "name": "KOKUSHU MARU",
-      "destination": "JP KIJ OFF",
-      "isJapanBound": true,
-      "lat": 38.0051,
-      "lon": 139.2
-    },
-    {
-      "mmsi": 431004095,
-      "name": "REBUN MARU NO.3",
-      "destination": ">JP KNZ OFF",
-      "isJapanBound": true,
-      "lat": 37.9168,
-      "lon": 138.7207
+      "mmsi": 440014500,
+      "name": "WOO CHAN",
+      "destination": "KR INC            @<",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
