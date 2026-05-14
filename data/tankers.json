@@ -1,101 +1,64 @@
 {
-  "fetchedAt": "2026-05-14T10:40:12+00:00",
+  "fetchedAt": "2026-05-14T13:12:21+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 11,
-  "japanBoundTankers": 7,
-  "japanBoundUnknownPort": 5,
-  "topDestinationPorts": [
-    {
-      "port": "YOKKAICHI",
-      "count": 2
-    }
-  ],
+  "totalTankersInRegion": 7,
+  "japanBoundTankers": 4,
+  "japanBoundUnknownPort": 4,
+  "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 432945000,
-      "name": "TOKUHO MARU",
-      "destination": ">JP NGO S1 5B",
+      "mmsi": 431002821,
+      "name": "KINYO MARU NO.15",
+      "destination": ">JP NGO N",
       "isJapanBound": true,
-      "lat": 33.8697,
-      "lon": 136.4524
+      "lat": 33.6198,
+      "lon": 136.1279
     },
     {
-      "mmsi": 431000823,
-      "name": "SENRIN MARU",
-      "destination": ">JP SBK 7 OFF",
+      "mmsi": 431005242,
+      "name": "KAKUSHO MARU",
+      "destination": ">JP WAK OFF",
       "isJapanBound": true,
-      "lat": 33.5924,
-      "lon": 136.047
+      "lat": 34.1626,
+      "lon": 135.1413
     },
     {
-      "mmsi": 431401964,
-      "name": "ENSHU MARU",
-      "destination": "?JP TXD OFF",
+      "mmsi": 431015689,
+      "name": "YUHO MARU NO.33",
+      "destination": ">JP IHA XX/OFF",
       "isJapanBound": true,
-      "lat": 33.78,
-      "lon": 136.3039
+      "lat": 33.5256,
+      "lon": 135.9895
     },
     {
-      "mmsi": 440042130,
-      "name": "WOO SUNG HO",
-      "destination": "INCHEON",
+      "mmsi": 440074350,
+      "name": "GA YEON HO",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 37.4782,
-      "lon": 126.5944
+      "lat": 37.4869,
+      "lon": 126.6166
     },
     {
-      "mmsi": 431024669,
-      "name": "SUNNY DREAM",
-      "destination": ">JP KNX OFF",
-      "isJapanBound": true,
-      "lat": 33.6373,
-      "lon": 136.3569
-    },
-    {
-      "mmsi": 431800699,
-      "name": "SHOKENMARU",
-      "destination": "JP TSUNEISI OFF",
-      "isJapanBound": true,
-      "lat": 33.9081,
-      "lon": 136.4844
-    },
-    {
-      "mmsi": 440014500,
-      "name": "WOO CHAN",
-      "destination": "KRTSN",
+      "mmsi": 352019000,
+      "name": "HARMONY CHEMIST",
+      "destination": "KRYOS",
       "isJapanBound": false,
-      "lat": 37.4504,
+      "lat": 37.4482,
       "lon": 126.5907
     },
     {
-      "mmsi": 431301768,
-      "name": "ORION",
-      "destination": ">JP YKK OFF",
-      "isJapanBound": true,
-      "lat": 33.5218,
-      "lon": 135.9857
-    },
-    {
-      "mmsi": 441943000,
-      "name": "SJ HOPE",
-      "destination": "KR_ICN",
+      "mmsi": 440215710,
+      "name": "SEUNG JIN",
+      "destination": "INCHEON KR",
       "isJapanBound": false,
-      "lat": 37.3904,
-      "lon": 126.5587
+      "lat": 37.5092,
+      "lon": 126.6017
     },
     {
-      "mmsi": 431020091,
-      "name": "SHINKAWA MARU",
-      "destination": "JP YKK OFF",
+      "mmsi": 431003155,
+      "name": "HOUEI NO.1",
+      "destination": ">JP WAK OFF",
       "isJapanBound": true,
-      "lat": 33.7713,
-      "lon": 136.2957
-    },
-    {
-      "mmsi": 215282000,
-      "name": "APNOIA",
-      "destination": "KRINC",
-      "isJapanBound": false,
       "lat": null,
       "lon": null
     }
