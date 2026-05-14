@@ -1,42 +1,63 @@
 {
-  "fetchedAt": "2026-05-14T15:38:56+00:00",
+  "fetchedAt": "2026-05-14T18:15:17+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 4,
-  "japanBoundTankers": 2,
+  "totalTankersInRegion": 6,
+  "japanBoundTankers": 3,
   "japanBoundUnknownPort": 2,
-  "topDestinationPorts": [],
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 440215710,
-      "name": "SEUNG JIN",
-      "destination": "INCHEON KR",
-      "isJapanBound": false,
-      "lat": 37.5092,
-      "lon": 126.6018
-    },
-    {
-      "mmsi": 431501797,
-      "name": "AI MARU",
-      "destination": ">JP KOJ OFF",
+      "mmsi": 431006217,
+      "name": "KOKUSHU MARU",
+      "destination": "JP KIJ OFF",
       "isJapanBound": true,
-      "lat": 33.5244,
-      "lon": 136.0693
+      "lat": 38.0053,
+      "lon": 139.1999
     },
     {
-      "mmsi": 440021230,
-      "name": "GWANG SEONG",
+      "mmsi": 431015317,
+      "name": "SHOYO",
+      "destination": ">JP TXD OFF",
+      "isJapanBound": true,
+      "lat": 33.5426,
+      "lon": 136.0107
+    },
+    {
+      "mmsi": 440043440,
+      "name": "K GAS",
+      "destination": "ICN,KR",
+      "isJapanBound": false,
+      "lat": 37.441,
+      "lon": 126.5823
+    },
+    {
+      "mmsi": 440074350,
+      "name": "GA YEON HO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 37.4967,
-      "lon": 126.6238
+      "lat": 37.4869,
+      "lon": 126.6167
     },
     {
-      "mmsi": 431018367,
-      "name": "KOYO MARU NO.21",
-      "destination": ">JP KIK OFF",
+      "mmsi": 431402014,
+      "name": "KOYO MARU NO.12",
+      "destination": ">JP KWS OFF",
       "isJapanBound": true,
-      "lat": 33.686,
-      "lon": 136.2398
+      "lat": 33.8278,
+      "lon": 136.3961
+    },
+    {
+      "mmsi": 215282000,
+      "name": "APNOIA",
+      "destination": "KRINC",
+      "isJapanBound": false,
+      "lat": 37.5018,
+      "lon": 126.6026
     }
   ],
   "boundingBox": "24-46N / 122-146E",
