@@ -1,119 +1,47 @@
 {
-  "fetchedAt": "2026-05-14T21:30:38+00:00",
+  "fetchedAt": "2026-05-14T23:19:15+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 8,
-  "japanBoundUnknownPort": 7,
+  "totalTankersInRegion": 4,
+  "japanBoundTankers": 4,
+  "japanBoundUnknownPort": 3,
   "topDestinationPorts": [
     {
-      "port": "YOKKAICHI",
+      "port": "CHIBA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 441943000,
-      "name": "SJ HOPE",
-      "destination": "KR_ICN",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431000932,
-      "name": "HOURIN NO.3",
-      "destination": "JP ANE MITSUI/A-4",
+      "mmsi": 431010742,
+      "name": "NANIWA",
+      "destination": ">JP AFG ES",
       "isJapanBound": true,
-      "lat": 33.7437,
-      "lon": 136.2855
+      "lat": 39.7405,
+      "lon": 140.0674
     },
     {
-      "mmsi": 431014963,
-      "name": "WASYU",
-      "destination": "JP OSA OFF",
+      "mmsi": 431023346,
+      "name": "MATSUYAMA MARU NO.15",
+      "destination": ">JP AFG ENEOS",
       "isJapanBound": true,
-      "lat": 33.8038,
-      "lon": 136.328
+      "lat": 39.7592,
+      "lon": 140.0513
     },
     {
-      "mmsi": 431005342,
-      "name": "KISARAGI MARU",
-      "destination": ">JP YKK OFF",
+      "mmsi": 538003450,
+      "name": "SEAWAYS YOSEMITE",
+      "destination": "JPCHB",
       "isJapanBound": true,
-      "lat": 33.7931,
-      "lon": 136.3393
-    },
-    {
-      "mmsi": 440183000,
-      "name": "MISIKAN",
-      "destination": "KR USN",
-      "isJapanBound": false,
-      "lat": 33.4117,
-      "lon": 135.9967
-    },
-    {
-      "mmsi": 431002386,
-      "name": "NAIKAI MARU NO.2",
-      "destination": ">JP SBK 3 COSUMO-62",
-      "isJapanBound": true,
-      "lat": 34.2125,
-      "lon": 134.9886
-    },
-    {
-      "mmsi": 241350000,
-      "name": "MARAN GAS MYSTRAS",
-      "destination": "FOR ORDERS",
-      "isJapanBound": false,
-      "lat": 33.5862,
-      "lon": 136.8816
-    },
-    {
-      "mmsi": 431020792,
-      "name": "SHOKYU MARU",
-      "destination": "JP NGO",
-      "isJapanBound": true,
-      "lat": 33.9276,
-      "lon": 136.5341
+      "lat": 35.4198,
+      "lon": 139.7921
     },
     {
       "mmsi": 431006217,
       "name": "KOKUSHU MARU",
       "destination": "JP KIJ MGC",
       "isJapanBound": true,
-      "lat": 38.0054,
-      "lon": 139.1994
-    },
-    {
-      "mmsi": 431018625,
-      "name": "HAKUEIMARU",
-      "destination": "JP> WAK",
-      "isJapanBound": false,
-      "lat": 34.245,
-      "lon": 135.1002
-    },
-    {
-      "mmsi": 431001112,
-      "name": "NO.10 HASSHOMARU",
-      "destination": "JP KIJ",
-      "isJapanBound": true,
-      "lat": 37.9501,
-      "lon": 139.0734
-    },
-    {
-      "mmsi": 431005242,
-      "name": "KAKUSHO MARU",
-      "destination": ">JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.1635,
-      "lon": 135.1411
-    },
-    {
-      "mmsi": 352019000,
-      "name": "HARMONY CHEMIST",
-      "destination": "KRYOS",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 37.9907,
+      "lon": 139.2197
     }
   ],
   "boundingBox": "24-46N / 122-146E",
