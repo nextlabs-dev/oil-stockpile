@@ -1,108 +1,116 @@
 {
-  "fetchedAt": "2026-05-14T20:09:27+00:00",
+  "fetchedAt": "2026-05-14T21:30:38+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 12,
-  "japanBoundTankers": 6,
-  "japanBoundUnknownPort": 5,
+  "totalTankersInRegion": 13,
+  "japanBoundTankers": 8,
+  "japanBoundUnknownPort": 7,
   "topDestinationPorts": [
     {
-      "port": "KASHIMA",
+      "port": "YOKKAICHI",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431005426,
-      "name": "KOUHOU MARU",
-      "destination": ">JP UDONO",
-      "isJapanBound": true,
-      "lat": 33.673,
-      "lon": 135.982
-    },
-    {
-      "mmsi": 440736000,
-      "name": "KEOYOUNG SUN5",
-      "destination": "KR-USN/AS",
+      "mmsi": 441943000,
+      "name": "SJ HOPE",
+      "destination": "KR_ICN",
       "isJapanBound": false,
-      "lat": 33.5846,
-      "lon": 136.1189
-    },
-    {
-      "mmsi": 440042130,
-      "name": "WOO SUNG HO",
-      "destination": "INCHEON",
-      "isJapanBound": false,
-      "lat": 37.3966,
-      "lon": 126.5639
-    },
-    {
-      "mmsi": 431006217,
-      "name": "KOKUSHU MARU",
-      "destination": "JP KIJ OFF",
-      "isJapanBound": true,
-      "lat": 38.0053,
-      "lon": 139.1996
-    },
-    {
-      "mmsi": 440215710,
-      "name": "SEUNG JIN",
-      "destination": "INCHEON KR",
-      "isJapanBound": false,
-      "lat": 37.5054,
-      "lon": 126.6007
-    },
-    {
-      "mmsi": 431011753,
-      "name": "HOUSEIMARU NO21",
-      "destination": ">JP WAK NISHIHAMA 6",
-      "isJapanBound": true,
-      "lat": 33.5821,
-      "lon": 136.0615
-    },
-    {
-      "mmsi": 431003933,
-      "name": "RYOKA MARU NO5",
-      "destination": ">JP KSM OFF",
-      "isJapanBound": true,
-      "lat": 33.6197,
-      "lon": 136.126
+      "lat": null,
+      "lon": null
     },
     {
       "mmsi": 431000932,
       "name": "HOURIN NO.3",
       "destination": "JP ANE MITSUI/A-4",
       "isJapanBound": true,
-      "lat": 33.5745,
-      "lon": 136.0636
+      "lat": 33.7437,
+      "lon": 136.2855
+    },
+    {
+      "mmsi": 431014963,
+      "name": "WASYU",
+      "destination": "JP OSA OFF",
+      "isJapanBound": true,
+      "lat": 33.8038,
+      "lon": 136.328
+    },
+    {
+      "mmsi": 431005342,
+      "name": "KISARAGI MARU",
+      "destination": ">JP YKK OFF",
+      "isJapanBound": true,
+      "lat": 33.7931,
+      "lon": 136.3393
+    },
+    {
+      "mmsi": 440183000,
+      "name": "MISIKAN",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 33.4117,
+      "lon": 135.9967
+    },
+    {
+      "mmsi": 431002386,
+      "name": "NAIKAI MARU NO.2",
+      "destination": ">JP SBK 3 COSUMO-62",
+      "isJapanBound": true,
+      "lat": 34.2125,
+      "lon": 134.9886
+    },
+    {
+      "mmsi": 241350000,
+      "name": "MARAN GAS MYSTRAS",
+      "destination": "FOR ORDERS",
+      "isJapanBound": false,
+      "lat": 33.5862,
+      "lon": 136.8816
+    },
+    {
+      "mmsi": 431020792,
+      "name": "SHOKYU MARU",
+      "destination": "JP NGO",
+      "isJapanBound": true,
+      "lat": 33.9276,
+      "lon": 136.5341
+    },
+    {
+      "mmsi": 431006217,
+      "name": "KOKUSHU MARU",
+      "destination": "JP KIJ MGC",
+      "isJapanBound": true,
+      "lat": 38.0054,
+      "lon": 139.1994
+    },
+    {
+      "mmsi": 431018625,
+      "name": "HAKUEIMARU",
+      "destination": "JP> WAK",
+      "isJapanBound": false,
+      "lat": 34.245,
+      "lon": 135.1002
+    },
+    {
+      "mmsi": 431001112,
+      "name": "NO.10 HASSHOMARU",
+      "destination": "JP KIJ",
+      "isJapanBound": true,
+      "lat": 37.9501,
+      "lon": 139.0734
     },
     {
       "mmsi": 431005242,
       "name": "KAKUSHO MARU",
       "destination": ">JP WAK OFF",
       "isJapanBound": true,
-      "lat": 34.1634,
+      "lat": 34.1635,
       "lon": 135.1411
     },
     {
-      "mmsi": 215282000,
-      "name": "APNOIA",
-      "destination": "KRINC",
-      "isJapanBound": false,
-      "lat": 37.5019,
-      "lon": 126.6026
-    },
-    {
-      "mmsi": 440413420,
-      "name": "BAEK KEAUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 37.4966,
-      "lon": 126.6248
-    },
-    {
-      "mmsi": 441601000,
-      "name": "SEONGHO ACE",
-      "destination": "KR INC",
+      "mmsi": 352019000,
+      "name": "HARMONY CHEMIST",
+      "destination": "KRYOS",
       "isJapanBound": false,
       "lat": null,
       "lon": null
