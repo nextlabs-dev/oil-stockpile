@@ -1,66 +1,42 @@
 {
-  "fetchedAt": "2026-05-14T13:12:21+00:00",
+  "fetchedAt": "2026-05-14T15:38:56+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 7,
-  "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 4,
+  "totalTankersInRegion": 4,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [],
   "vessels": [
-    {
-      "mmsi": 431002821,
-      "name": "KINYO MARU NO.15",
-      "destination": ">JP NGO N",
-      "isJapanBound": true,
-      "lat": 33.6198,
-      "lon": 136.1279
-    },
-    {
-      "mmsi": 431005242,
-      "name": "KAKUSHO MARU",
-      "destination": ">JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.1626,
-      "lon": 135.1413
-    },
-    {
-      "mmsi": 431015689,
-      "name": "YUHO MARU NO.33",
-      "destination": ">JP IHA XX/OFF",
-      "isJapanBound": true,
-      "lat": 33.5256,
-      "lon": 135.9895
-    },
-    {
-      "mmsi": 440074350,
-      "name": "GA YEON HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 37.4869,
-      "lon": 126.6166
-    },
-    {
-      "mmsi": 352019000,
-      "name": "HARMONY CHEMIST",
-      "destination": "KRYOS",
-      "isJapanBound": false,
-      "lat": 37.4482,
-      "lon": 126.5907
-    },
     {
       "mmsi": 440215710,
       "name": "SEUNG JIN",
       "destination": "INCHEON KR",
       "isJapanBound": false,
       "lat": 37.5092,
-      "lon": 126.6017
+      "lon": 126.6018
     },
     {
-      "mmsi": 431003155,
-      "name": "HOUEI NO.1",
-      "destination": ">JP WAK OFF",
+      "mmsi": 431501797,
+      "name": "AI MARU",
+      "destination": ">JP KOJ OFF",
       "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 33.5244,
+      "lon": 136.0693
+    },
+    {
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 37.4967,
+      "lon": 126.6238
+    },
+    {
+      "mmsi": 431018367,
+      "name": "KOYO MARU NO.21",
+      "destination": ">JP KIK OFF",
+      "isJapanBound": true,
+      "lat": 33.686,
+      "lon": 136.2398
     }
   ],
   "boundingBox": "24-46N / 122-146E",
