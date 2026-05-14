@@ -1,63 +1,111 @@
 {
-  "fetchedAt": "2026-05-14T18:15:17+00:00",
+  "fetchedAt": "2026-05-14T20:09:27+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 6,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 12,
+  "japanBoundTankers": 6,
+  "japanBoundUnknownPort": 5,
   "topDestinationPorts": [
     {
-      "port": "KAWASAKI",
+      "port": "KASHIMA",
       "count": 1
     }
   ],
   "vessels": [
+    {
+      "mmsi": 431005426,
+      "name": "KOUHOU MARU",
+      "destination": ">JP UDONO",
+      "isJapanBound": true,
+      "lat": 33.673,
+      "lon": 135.982
+    },
+    {
+      "mmsi": 440736000,
+      "name": "KEOYOUNG SUN5",
+      "destination": "KR-USN/AS",
+      "isJapanBound": false,
+      "lat": 33.5846,
+      "lon": 136.1189
+    },
+    {
+      "mmsi": 440042130,
+      "name": "WOO SUNG HO",
+      "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": 37.3966,
+      "lon": 126.5639
+    },
     {
       "mmsi": 431006217,
       "name": "KOKUSHU MARU",
       "destination": "JP KIJ OFF",
       "isJapanBound": true,
       "lat": 38.0053,
-      "lon": 139.1999
+      "lon": 139.1996
     },
     {
-      "mmsi": 431015317,
-      "name": "SHOYO",
-      "destination": ">JP TXD OFF",
-      "isJapanBound": true,
-      "lat": 33.5426,
-      "lon": 136.0107
-    },
-    {
-      "mmsi": 440043440,
-      "name": "K GAS",
-      "destination": "ICN,KR",
+      "mmsi": 440215710,
+      "name": "SEUNG JIN",
+      "destination": "INCHEON KR",
       "isJapanBound": false,
-      "lat": 37.441,
-      "lon": 126.5823
+      "lat": 37.5054,
+      "lon": 126.6007
     },
     {
-      "mmsi": 440074350,
-      "name": "GA YEON HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 37.4869,
-      "lon": 126.6167
-    },
-    {
-      "mmsi": 431402014,
-      "name": "KOYO MARU NO.12",
-      "destination": ">JP KWS OFF",
+      "mmsi": 431011753,
+      "name": "HOUSEIMARU NO21",
+      "destination": ">JP WAK NISHIHAMA 6",
       "isJapanBound": true,
-      "lat": 33.8278,
-      "lon": 136.3961
+      "lat": 33.5821,
+      "lon": 136.0615
+    },
+    {
+      "mmsi": 431003933,
+      "name": "RYOKA MARU NO5",
+      "destination": ">JP KSM OFF",
+      "isJapanBound": true,
+      "lat": 33.6197,
+      "lon": 136.126
+    },
+    {
+      "mmsi": 431000932,
+      "name": "HOURIN NO.3",
+      "destination": "JP ANE MITSUI/A-4",
+      "isJapanBound": true,
+      "lat": 33.5745,
+      "lon": 136.0636
+    },
+    {
+      "mmsi": 431005242,
+      "name": "KAKUSHO MARU",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1634,
+      "lon": 135.1411
     },
     {
       "mmsi": 215282000,
       "name": "APNOIA",
       "destination": "KRINC",
       "isJapanBound": false,
-      "lat": 37.5018,
+      "lat": 37.5019,
       "lon": 126.6026
+    },
+    {
+      "mmsi": 440413420,
+      "name": "BAEK KEAUNG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 37.4966,
+      "lon": 126.6248
+    },
+    {
+      "mmsi": 441601000,
+      "name": "SEONGHO ACE",
+      "destination": "KR INC",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
