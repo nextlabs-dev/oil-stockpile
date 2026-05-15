@@ -1,47 +1,79 @@
 {
-  "fetchedAt": "2026-05-15T07:41:41+00:00",
+  "fetchedAt": "2026-05-15T10:45:00+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 8,
+  "totalTankersInRegion": 11,
   "japanBoundTankers": 5,
   "japanBoundUnknownPort": 4,
   "topDestinationPorts": [
     {
-      "port": "TOMAKOMAI",
+      "port": "YOKKAICHI",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431003024,
-      "name": "SHINKOUMARU NO.28",
-      "destination": "> JP KNM OFF",
-      "isJapanBound": true,
-      "lat": 33.691,
-      "lon": 136.1472
+      "mmsi": 431018625,
+      "name": "HAKUEIMARU",
+      "destination": "JP> WAK",
+      "isJapanBound": false,
+      "lat": 34.2451,
+      "lon": 135.1015
     },
     {
-      "mmsi": 431003277,
-      "name": "KEISEN MARU",
-      "destination": ">JP HANEDA OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "mmsi": 440022810,
+      "name": "SANGA HO",
+      "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": 37.4965,
+      "lon": 126.6248
     },
     {
-      "mmsi": 373901000,
-      "name": "BLACK DRAGON",
-      "destination": "JP,TMK",
+      "mmsi": 431010674,
+      "name": "KOSYU MARU NO,11",
+      "destination": ">JP SBK 3S COSMO-64",
       "isJapanBound": true,
-      "lat": 40.1358,
-      "lon": 138.1839
+      "lat": 33.7252,
+      "lon": 136.1892
+    },
+    {
+      "mmsi": 431401796,
+      "name": "RYOKA MARU NO.103",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 33.7513,
+      "lon": 136.284
+    },
+    {
+      "mmsi": 432702000,
+      "name": "RYOUSEIMARU",
+      "destination": ">JP YKK OFF",
+      "isJapanBound": true,
+      "lat": 33.6965,
+      "lon": 136.2169
     },
     {
       "mmsi": 431011482,
       "name": "NAIKAI MARU NO,25",
       "destination": ">JP KIJ EW OFF",
       "isJapanBound": true,
-      "lat": 38.0144,
-      "lon": 139.1946
+      "lat": 38.0147,
+      "lon": 139.1944
+    },
+    {
+      "mmsi": 441601000,
+      "name": "SEONGHO ACE",
+      "destination": "KR INC",
+      "isJapanBound": false,
+      "lat": 37.389,
+      "lon": 126.5581
+    },
+    {
+      "mmsi": 440167480,
+      "name": "DL AMBER",
+      "destination": "INC",
+      "isJapanBound": false,
+      "lat": 37.3237,
+      "lon": 126.4232
     },
     {
       "mmsi": 440021230,
@@ -52,25 +84,17 @@
       "lon": 126.6238
     },
     {
-      "mmsi": 441652000,
-      "name": "HANYU EMPIRE",
-      "destination": "ULSAN,KR",
-      "isJapanBound": false,
-      "lat": 33.6787,
-      "lon": 136.2185
-    },
-    {
-      "mmsi": 431006217,
-      "name": "KOKUSHU MARU",
-      "destination": "JP SBK/E OFF",
+      "mmsi": 431005242,
+      "name": "KAKUSHO MARU",
+      "destination": ">JP WAK OFF",
       "isJapanBound": true,
-      "lat": 37.8758,
-      "lon": 138.6938
+      "lat": 34.1641,
+      "lon": 135.1426
     },
     {
-      "mmsi": 431018625,
-      "name": "HAKUEIMARU",
-      "destination": "JP> WAK",
+      "mmsi": 440011120,
+      "name": "MINSUNG11",
+      "destination": "INCHEON",
       "isJapanBound": false,
       "lat": null,
       "lon": null
