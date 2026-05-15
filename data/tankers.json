@@ -1,47 +1,99 @@
 {
-  "fetchedAt": "2026-05-14T23:19:15+00:00",
+  "fetchedAt": "2026-05-15T00:16:49+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 4,
-  "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 3,
+  "totalTankersInRegion": 10,
+  "japanBoundTankers": 9,
+  "japanBoundUnknownPort": 7,
   "topDestinationPorts": [
     {
-      "port": "CHIBA",
+      "port": "KAWASAKI",
+      "count": 1
+    },
+    {
+      "port": "YOKOHAMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431010742,
-      "name": "NANIWA",
-      "destination": ">JP AFG ES",
+      "mmsi": 431001112,
+      "name": "NO.10 HASSHOMARU",
+      "destination": "JP KIJ",
       "isJapanBound": true,
-      "lat": 39.7405,
-      "lon": 140.0674
+      "lat": 37.9217,
+      "lon": 138.8332
+    },
+    {
+      "mmsi": 636021627,
+      "name": "TENSHO",
+      "destination": "JP KWS",
+      "isJapanBound": true,
+      "lat": 35.4844,
+      "lon": 139.7864
+    },
+    {
+      "mmsi": 431011136,
+      "name": "YAMABISHIMARU NO.18",
+      "destination": ">JP FNB",
+      "isJapanBound": true,
+      "lat": 33.7268,
+      "lon": 136.2647
+    },
+    {
+      "mmsi": 431007045,
+      "name": "TAISEIMARU NO.3",
+      "destination": ">JP YOK  /NNX",
+      "isJapanBound": true,
+      "lat": 35.4488,
+      "lon": 139.8017
     },
     {
       "mmsi": 431023346,
       "name": "MATSUYAMA MARU NO.15",
       "destination": ">JP AFG ENEOS",
       "isJapanBound": true,
-      "lat": 39.7592,
-      "lon": 140.0513
+      "lat": 39.7604,
+      "lon": 140.0518
     },
     {
-      "mmsi": 538003450,
-      "name": "SEAWAYS YOSEMITE",
-      "destination": "JPCHB",
-      "isJapanBound": true,
-      "lat": 35.4198,
-      "lon": 139.7921
+      "mmsi": 441601000,
+      "name": "SEONGHO ACE",
+      "destination": "KR INC",
+      "isJapanBound": false,
+      "lat": 37.313,
+      "lon": 126.4052
     },
     {
-      "mmsi": 431006217,
-      "name": "KOKUSHU MARU",
-      "destination": "JP KIJ MGC",
+      "mmsi": 431021934,
+      "name": "ICHIE MARU",
+      "destination": ">JP KSW SU",
       "isJapanBound": true,
-      "lat": 37.9907,
-      "lon": 139.2197
+      "lat": 33.5195,
+      "lon": 136.0029
+    },
+    {
+      "mmsi": 431005242,
+      "name": "KAKUSHO MARU",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1637,
+      "lon": 135.1421
+    },
+    {
+      "mmsi": 431001715,
+      "name": "CHOUKAI MARU",
+      "destination": ">JP AFG",
+      "isJapanBound": true,
+      "lat": 39.7737,
+      "lon": 140.0487
+    },
+    {
+      "mmsi": 431005655,
+      "name": "NANIWA MARU NO.1",
+      "destination": ">JP TYO OFF",
+      "isJapanBound": true,
+      "lat": 35.524,
+      "lon": 139.7969
     }
   ],
   "boundingBox": "24-46N / 122-146E",
