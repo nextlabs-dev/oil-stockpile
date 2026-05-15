@@ -1,79 +1,47 @@
 {
-  "fetchedAt": "2026-05-15T04:23:58+00:00",
+  "fetchedAt": "2026-05-15T07:41:41+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 15,
-  "japanBoundTankers": 9,
-  "japanBoundUnknownPort": 8,
+  "totalTankersInRegion": 8,
+  "japanBoundTankers": 5,
+  "japanBoundUnknownPort": 4,
   "topDestinationPorts": [
     {
-      "port": "CHIBA",
+      "port": "TOMAKOMAI",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 441601000,
-      "name": "SEONGHO ACE",
-      "destination": "KR INC",
-      "isJapanBound": false,
-      "lat": 37.3905,
-      "lon": 126.5601
-    },
-    {
-      "mmsi": 431003374,
-      "name": "NO5 MATSUMARU",
-      "destination": "JP SBK OFF",
+      "mmsi": 431003024,
+      "name": "SHINKOUMARU NO.28",
+      "destination": "> JP KNM OFF",
       "isJapanBound": true,
-      "lat": 33.89,
-      "lon": 136.4448
+      "lat": 33.691,
+      "lon": 136.1472
     },
     {
-      "mmsi": 352001217,
-      "name": "CS BREEZE",
-      "destination": "JP NGO",
+      "mmsi": 431003277,
+      "name": "KEISEN MARU",
+      "destination": ">JP HANEDA OFF",
       "isJapanBound": true,
-      "lat": 33.9224,
-      "lon": 136.827
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440892000,
-      "name": "GOLDEN SUNNY HANA",
-      "destination": "JP UKB",
+      "mmsi": 373901000,
+      "name": "BLACK DRAGON",
+      "destination": "JP,TMK",
       "isJapanBound": true,
-      "lat": 33.8572,
-      "lon": 136.3872
+      "lat": 40.1358,
+      "lon": 138.1839
     },
     {
-      "mmsi": 310853000,
-      "name": "WOODSIDE BARRUMBARA",
-      "destination": "FOR ORDERS",
-      "isJapanBound": false,
-      "lat": 35.4972,
-      "lon": 139.8838
-    },
-    {
-      "mmsi": 431501862,
-      "name": "KYOKUSHINMARU NO.2",
-      "destination": ">JP OSA 2A .",
+      "mmsi": 431011482,
+      "name": "NAIKAI MARU NO,25",
+      "destination": ">JP KIJ EW OFF",
       "isJapanBound": true,
-      "lat": 33.5891,
-      "lon": 136.0477
-    },
-    {
-      "mmsi": 441943000,
-      "name": "SJ HOPE",
-      "destination": "KR_ICN",
-      "isJapanBound": false,
-      "lat": 37.4502,
-      "lon": 126.5908
-    },
-    {
-      "mmsi": 431015256,
-      "name": "REISHINMARU",
-      "destination": ">JP KSA JFE",
-      "isJapanBound": true,
-      "lat": 33.6172,
-      "lon": 136.096
+      "lat": 38.0144,
+      "lon": 139.1946
     },
     {
       "mmsi": 440021230,
@@ -84,52 +52,28 @@
       "lon": 126.6238
     },
     {
-      "mmsi": 431012013,
-      "name": "KAKURYU MARU",
-      "destination": "JP ANE OFF",
-      "isJapanBound": true,
-      "lat": 33.7702,
-      "lon": 136.4202
-    },
-    {
-      "mmsi": 431021934,
-      "name": "ICHIE MARU",
-      "destination": ">JP KSW SU",
-      "isJapanBound": true,
-      "lat": 33.9999,
-      "lon": 136.6151
-    },
-    {
-      "mmsi": 431009313,
-      "name": "AWAJISHIMA",
-      "destination": "JP TXD OFF",
-      "isJapanBound": true,
-      "lat": 33.9291,
-      "lon": 136.5545
-    },
-    {
-      "mmsi": 352006318,
-      "name": "ORIENTAL SUNSTONE",
-      "destination": "INCHEON",
+      "mmsi": 441652000,
+      "name": "HANYU EMPIRE",
+      "destination": "ULSAN,KR",
       "isJapanBound": false,
-      "lat": 37.5065,
-      "lon": 126.6023
+      "lat": 33.6787,
+      "lon": 136.2185
     },
     {
-      "mmsi": 440022810,
-      "name": "SANGA HO",
-      "destination": "INCHEON           CC",
-      "isJapanBound": false,
-      "lat": 37.4966,
-      "lon": 126.6235
-    },
-    {
-      "mmsi": 636019649,
-      "name": "HOU-EI",
-      "destination": "JP CHB",
+      "mmsi": 431006217,
+      "name": "KOKUSHU MARU",
+      "destination": "JP SBK/E OFF",
       "isJapanBound": true,
-      "lat": 34.5185,
-      "lon": 135.2346
+      "lat": 37.8758,
+      "lon": 138.6938
+    },
+    {
+      "mmsi": 431018625,
+      "name": "HAKUEIMARU",
+      "destination": "JP> WAK",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
