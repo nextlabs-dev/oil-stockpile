@@ -1,47 +1,139 @@
 {
-  "fetchedAt": "2026-05-15T13:12:10+00:00",
+  "fetchedAt": "2026-05-15T15:36:45+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 4,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 15,
+  "japanBoundTankers": 6,
+  "japanBoundUnknownPort": 4,
   "topDestinationPorts": [
     {
       "port": "YOKKAICHI",
+      "count": 1
+    },
+    {
+      "port": "CHIBA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431026644,
-      "name": "RYOUKEN MARU NO.3",
-      "destination": ">JP YKK DM M3",
-      "isJapanBound": true,
-      "lat": 33.6404,
-      "lon": 136.0582
+      "mmsi": 636024872,
+      "name": "GRAND COSMOS",
+      "destination": "RU PGN",
+      "isJapanBound": false,
+      "lat": 37.4076,
+      "lon": 132.4814
     },
     {
-      "mmsi": 431501664,
-      "name": "KYOKUZAN",
-      "destination": "JP NGO /E",
-      "isJapanBound": true,
-      "lat": 37.5149,
-      "lon": 137.5149
+      "mmsi": 431004086,
+      "name": "FUJITAKA MARU",
+      "destination": "WAK",
+      "isJapanBound": false,
+      "lat": 34.1512,
+      "lon": 135.1604
     },
     {
-      "mmsi": 431014522,
-      "name": "HOKENMARU NO.3",
-      "destination": ">JP SKD OFF",
-      "isJapanBound": true,
-      "lat": 33.6127,
-      "lon": 136.0853
+      "mmsi": 636018925,
+      "name": "VEGA SUN",
+      "destination": "PABLB",
+      "isJapanBound": false,
+      "lat": 37.54,
+      "lon": 132.6557
     },
     {
-      "mmsi": 441601000,
-      "name": "SEONGHO ACE",
-      "destination": "KR INC",
+      "mmsi": 431011482,
+      "name": "NAIKAI MARU NO,25",
+      "destination": ">JP KIJ EW OFF",
+      "isJapanBound": true,
+      "lat": 38.0148,
+      "lon": 139.1945
+    },
+    {
+      "mmsi": 636019714,
+      "name": "GLORIOUS SUNSHINE",
+      "destination": "CAVAN",
+      "isJapanBound": false,
+      "lat": 39.7107,
+      "lon": 136.5079
+    },
+    {
+      "mmsi": 431005058,
+      "name": "ASAHI MARU NO25",
+      "destination": ">JP RYO OFF/WM",
+      "isJapanBound": true,
+      "lat": 38.0939,
+      "lon": 138.4571
+    },
+    {
+      "mmsi": 352002628,
+      "name": "KIKU",
+      "destination": "SING",
+      "isJapanBound": false,
+      "lat": 37.8576,
+      "lon": 133.318
+    },
+    {
+      "mmsi": 636021712,
+      "name": "SOUTHERN BELUGA",
+      "destination": "JP AXT",
+      "isJapanBound": true,
+      "lat": 36.7577,
+      "lon": 132.3276
+    },
+    {
+      "mmsi": 431016755,
+      "name": "ASUZAN MARU",
+      "destination": "> JP YKK  CW-13",
+      "isJapanBound": true,
+      "lat": 33.5424,
+      "lon": 136.0341
+    },
+    {
+      "mmsi": 636019649,
+      "name": "HOU-EI",
+      "destination": "JP CHB",
+      "isJapanBound": true,
+      "lat": 33.6919,
+      "lon": 136.4097
+    },
+    {
+      "mmsi": 355147000,
+      "name": "G. SWAN",
+      "destination": "PABLB",
+      "isJapanBound": false,
+      "lat": 39.1501,
+      "lon": 136.4024
+    },
+    {
+      "mmsi": 431001715,
+      "name": "CHOUKAI MARU",
+      "destination": ">JP IWH OFF",
+      "isJapanBound": true,
+      "lat": 38.1917,
+      "lon": 139.4012
+    },
+    {
+      "mmsi": 255900127,
+      "name": "CHEM SCEPTRUM",
+      "destination": "KRUSN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 613322700,
+      "name": "EVITA",
+      "destination": "CNDJK",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 37.4967,
+      "lon": 126.6238
     }
   ],
   "boundingBox": "24-46N / 122-146E",
