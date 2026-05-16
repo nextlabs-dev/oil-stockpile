@@ -1,107 +1,111 @@
 {
-  "fetchedAt": "2026-05-16T19:39:55+00:00",
+  "fetchedAt": "2026-05-16T21:11:53+00:00",
   "samplingDurationSec": 480,
   "totalTankersInRegion": 11,
-  "japanBoundTankers": 10,
-  "japanBoundUnknownPort": 5,
+  "japanBoundTankers": 8,
+  "japanBoundUnknownPort": 4,
   "topDestinationPorts": [
     {
       "port": "YOKKAICHI",
-      "count": 3
+      "count": 2
+    },
+    {
+      "port": "YOKOHAMA",
+      "count": 1
     },
     {
       "port": "KAWASAKI",
-      "count": 2
+      "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431009327,
-      "name": "LP MARU NO.17",
-      "destination": ">JP YKK OFF",
+      "mmsi": 431018785,
+      "name": "TOBASE3",
+      "destination": ">JP MAR",
       "isJapanBound": true,
-      "lat": 33.5542,
-      "lon": 136.0487
+      "lat": 33.7331,
+      "lon": 136.0163
     },
     {
-      "mmsi": 431005675,
-      "name": "YUUKI",
-      "destination": ">JP KWS HO 24",
+      "mmsi": 431024081,
+      "name": "IZUMIMARU NO.6",
+      "destination": ">JP KNZ",
       "isJapanBound": true,
-      "lat": 35.5056,
-      "lon": 139.7608
+      "lat": 36.6209,
+      "lon": 136.6082
     },
     {
-      "mmsi": 431002261,
-      "name": "MIYA MARU NO.1",
-      "destination": "JP KIJ EW OFF",
+      "mmsi": 431402001,
+      "name": "HOSEI MARU NO.3",
+      "destination": ">JP WAK OFF",
       "isJapanBound": true,
-      "lat": 36.9079,
-      "lon": 136.3243
+      "lat": 33.6791,
+      "lon": 136.2034
     },
     {
       "mmsi": 431014666,
       "name": "ATSUTA MARU",
       "destination": ">JP YKK CE 1",
       "isJapanBound": true,
-      "lat": 33.5641,
-      "lon": 136.0724
+      "lat": 33.793,
+      "lon": 136.3364
     },
     {
-      "mmsi": 432970000,
-      "name": "ZUIHO MARU",
-      "destination": ">JP YKK 3E/OFF",
+      "mmsi": 431501838,
+      "name": "GREEN MARU NO.8",
+      "destination": "JP YOK NNX OFF",
       "isJapanBound": true,
-      "lat": 33.6522,
-      "lon": 136.1715
+      "lat": 33.7776,
+      "lon": 136.3419
     },
     {
-      "mmsi": 431015689,
-      "name": "YUHO MARU NO.33",
-      "destination": ">JP NGO N3",
-      "isJapanBound": true,
-      "lat": 33.638,
-      "lon": 136.1604
+      "mmsi": 440184000,
+      "name": "FORTUNE KAREN",
+      "destination": "KR TSN",
+      "isJapanBound": false,
+      "lat": 37.4991,
+      "lon": 126.6303
     },
     {
-      "mmsi": 431008976,
-      "name": "NIPPO MARU",
-      "destination": ">JP NGO N3 32",
-      "isJapanBound": true,
-      "lat": 33.8618,
-      "lon": 136.4489
-    },
-    {
-      "mmsi": 440058060,
-      "name": "KEOJE YUBIA",
+      "mmsi": 440011120,
+      "name": "MINSUNG11",
       "destination": "INCHEON",
       "isJapanBound": false,
-      "lat": 37.4782,
-      "lon": 126.5943
+      "lat": 37.4985,
+      "lon": 126.5978
     },
     {
-      "mmsi": 431000529,
-      "name": "SYUUKA MARU NO.2",
-      "destination": "JP SMZ OFF",
-      "isJapanBound": true,
-      "lat": 33.8493,
-      "lon": 136.4726
+      "mmsi": 440215710,
+      "name": "SEUNG JIN",
+      "destination": "INCHEON KR",
+      "isJapanBound": false,
+      "lat": 37.3937,
+      "lon": 126.5419
     },
     {
-      "mmsi": 431019648,
-      "name": "KIYO MARU NO1",
-      "destination": "JP KWS/NNX",
+      "mmsi": 311072200,
+      "name": "PACIFIC ARCADIA",
+      "destination": "JP YKK",
       "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 33.7515,
+      "lon": 137.085
     },
     {
-      "mmsi": 431003155,
-      "name": "HOUEI NO.1",
-      "destination": ">JP WAK OFF",
+      "mmsi": 431014199,
+      "name": "MATSUBISHI MARU",
+      "destination": "JP KWS OFF",
       "isJapanBound": true,
-      "lat": 34.162,
-      "lon": 135.1416
+      "lat": 33.6212,
+      "lon": 136.1263
+    },
+    {
+      "mmsi": 431004588,
+      "name": "SHUOUMARU",
+      "destination": "JP HIM OFF",
+      "isJapanBound": true,
+      "lat": 33.7463,
+      "lon": 136.4209
     }
   ],
   "boundingBox": "24-46N / 122-146E",
