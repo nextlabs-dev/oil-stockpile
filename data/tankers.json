@@ -1,109 +1,85 @@
 {
-  "fetchedAt": "2026-05-16T00:13:07+00:00",
+  "fetchedAt": "2026-05-16T04:07:52+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 12,
+  "totalTankersInRegion": 9,
   "japanBoundTankers": 8,
-  "japanBoundUnknownPort": 5,
+  "japanBoundUnknownPort": 6,
   "topDestinationPorts": [
     {
-      "port": "YOKKAICHI",
-      "count": 3
+      "port": "KAWASAKI",
+      "count": 2
     }
   ],
   "vessels": [
     {
-      "mmsi": 431010785,
-      "name": "RYUSEI MARU",
-      "destination": ">JP HIM",
-      "isJapanBound": true,
-      "lat": 33.7456,
-      "lon": 136.1863
-    },
-    {
-      "mmsi": 431026064,
-      "name": "ETSUZANMARU NO.15",
-      "destination": "JP TXD TOHSO 3",
-      "isJapanBound": true,
-      "lat": 33.6993,
-      "lon": 136.1711
-    },
-    {
-      "mmsi": 431010694,
-      "name": "KOSHO MARU",
-      "destination": ">JP YKK 3W",
-      "isJapanBound": true,
-      "lat": 33.7141,
-      "lon": 136.2566
-    },
-    {
-      "mmsi": 441203000,
-      "name": "RISING SAMBU",
-      "destination": "KR INC",
-      "isJapanBound": false,
-      "lat": 37.4175,
-      "lon": 126.5707
-    },
-    {
-      "mmsi": 431005055,
-      "name": "SACHI MARU",
-      "destination": ">JP KNM JC OFF",
-      "isJapanBound": true,
-      "lat": 37.7266,
-      "lon": 138.1343
-    },
-    {
-      "mmsi": 431300665,
-      "name": "NIKKO MARU NO.18",
-      "destination": ">JP OTK OFF",
-      "isJapanBound": true,
-      "lat": 33.7313,
-      "lon": 136.1751
-    },
-    {
-      "mmsi": 440304320,
-      "name": "DOO LA NO.7",
-      "destination": "KR ICN",
-      "isJapanBound": false,
-      "lat": 37.4992,
-      "lon": 126.6302
-    },
-    {
-      "mmsi": 311072200,
-      "name": "PACIFIC ARCADIA",
-      "destination": "JP YKK",
-      "isJapanBound": true,
-      "lat": 33.6654,
-      "lon": 137.1117
-    },
-    {
-      "mmsi": 431005056,
-      "name": "KINYOU",
+      "mmsi": 431000635,
+      "name": "SHOMEI",
       "destination": ">JP NGO OFF",
       "isJapanBound": true,
-      "lat": 33.5021,
-      "lon": 136.0205
+      "lat": 33.7135,
+      "lon": 136.2339
     },
     {
-      "mmsi": 440622000,
-      "name": "NEW SILVER",
-      "destination": "JP_YKK",
+      "mmsi": 431011904,
+      "name": "EIYOSHI",
+      "destination": "JP HKT WS SEC/OFF",
       "isJapanBound": true,
-      "lat": 33.4958,
-      "lon": 136.029
+      "lat": 33.7878,
+      "lon": 136.2154
     },
     {
-      "mmsi": 440232000,
-      "name": "DOOLA STAR",
-      "destination": "DSN/KR",
-      "isJapanBound": false,
-      "lat": 37.382,
-      "lon": 126.5533
+      "mmsi": 431004957,
+      "name": "TSUKASA",
+      "destination": ">JP KWS OFF",
+      "isJapanBound": true,
+      "lat": 35.4864,
+      "lon": 139.8224
     },
     {
-      "mmsi": 440019380,
-      "name": "DURUHO",
-      "destination": "",
+      "mmsi": 431011482,
+      "name": "NAIKAI MARU NO,25",
+      "destination": ">JP KIJ EW W2-A",
+      "isJapanBound": true,
+      "lat": 37.9926,
+      "lon": 139.2173
+    },
+    {
+      "mmsi": 431402051,
+      "name": "FUKUSHO MARU",
+      "destination": ">JP MSA OFF",
+      "isJapanBound": true,
+      "lat": 33.8303,
+      "lon": 136.4163
+    },
+    {
+      "mmsi": 431003911,
+      "name": "WAYO MARU",
+      "destination": ">JP NGO OFF",
+      "isJapanBound": true,
+      "lat": 33.4929,
+      "lon": 135.9804
+    },
+    {
+      "mmsi": 636016660,
+      "name": "NAVIGATOR CETO",
+      "destination": "CAPRR",
       "isJapanBound": false,
+      "lat": 38.3505,
+      "lon": 133.6697
+    },
+    {
+      "mmsi": 431015615,
+      "name": "SEISEN MARU",
+      "destination": ">JP SGM OFF",
+      "isJapanBound": true,
+      "lat": 37.9849,
+      "lon": 139.2276
+    },
+    {
+      "mmsi": 431001401,
+      "name": "SHOEI MARU",
+      "destination": "JP KWS NNX",
+      "isJapanBound": true,
       "lat": null,
       "lon": null
     }
