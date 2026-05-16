@@ -1,119 +1,111 @@
 {
-  "fetchedAt": "2026-05-15T23:18:52+00:00",
+  "fetchedAt": "2026-05-16T00:13:07+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 9,
-  "japanBoundUnknownPort": 8,
+  "totalTankersInRegion": 12,
+  "japanBoundTankers": 8,
+  "japanBoundUnknownPort": 5,
   "topDestinationPorts": [
     {
       "port": "YOKKAICHI",
-      "count": 1
+      "count": 3
     }
   ],
   "vessels": [
     {
-      "mmsi": 431005055,
-      "name": "SACHI MARU",
-      "destination": ">JP KNM JC OFF",
+      "mmsi": 431010785,
+      "name": "RYUSEI MARU",
+      "destination": ">JP HIM",
       "isJapanBound": true,
-      "lat": 37.7826,
-      "lon": 138.3701
-    },
-    {
-      "mmsi": 431004086,
-      "name": "FUJITAKA MARU",
-      "destination": "WAK",
-      "isJapanBound": false,
-      "lat": 34.1509,
-      "lon": 135.1601
-    },
-    {
-      "mmsi": 432536000,
-      "name": "KASHIMA MARU NO.10",
-      "destination": ">JP ANE OFF",
-      "isJapanBound": true,
-      "lat": 33.8047,
-      "lon": 136.476
+      "lat": 33.7456,
+      "lon": 136.1863
     },
     {
       "mmsi": 431026064,
       "name": "ETSUZANMARU NO.15",
       "destination": "JP TXD TOHSO 3",
       "isJapanBound": true,
-      "lat": 33.8071,
-      "lon": 136.3305
+      "lat": 33.6993,
+      "lon": 136.1711
     },
     {
-      "mmsi": 440232000,
-      "name": "DOOLA STAR",
-      "destination": "DSN/KR",
+      "mmsi": 431010694,
+      "name": "KOSHO MARU",
+      "destination": ">JP YKK 3W",
+      "isJapanBound": true,
+      "lat": 33.7141,
+      "lon": 136.2566
+    },
+    {
+      "mmsi": 441203000,
+      "name": "RISING SAMBU",
+      "destination": "KR INC",
       "isJapanBound": false,
-      "lat": 37.3819,
-      "lon": 126.5532
+      "lat": 37.4175,
+      "lon": 126.5707
     },
     {
-      "mmsi": 431017196,
-      "name": "SYOUN MARU",
-      "destination": ">JP NGO N3 27",
+      "mmsi": 431005055,
+      "name": "SACHI MARU",
+      "destination": ">JP KNM JC OFF",
       "isJapanBound": true,
-      "lat": 33.7994,
-      "lon": 136.1431
-    },
-    {
-      "mmsi": 431015785,
-      "name": "TOHO MARU",
-      "destination": ">JP YKK 3E OFF",
-      "isJapanBound": true,
-      "lat": 33.9255,
-      "lon": 136.3834
+      "lat": 37.7266,
+      "lon": 138.1343
     },
     {
       "mmsi": 431300665,
       "name": "NIKKO MARU NO.18",
       "destination": ">JP OTK OFF",
       "isJapanBound": true,
-      "lat": 33.8437,
-      "lon": 136.3381
+      "lat": 33.7313,
+      "lon": 136.1751
     },
     {
-      "mmsi": 431010785,
-      "name": "RYUSEI MARU",
-      "destination": ">JP HIM",
+      "mmsi": 440304320,
+      "name": "DOO LA NO.7",
+      "destination": "KR ICN",
+      "isJapanBound": false,
+      "lat": 37.4992,
+      "lon": 126.6302
+    },
+    {
+      "mmsi": 311072200,
+      "name": "PACIFIC ARCADIA",
+      "destination": "JP YKK",
       "isJapanBound": true,
-      "lat": 33.8662,
-      "lon": 136.3526
+      "lat": 33.6654,
+      "lon": 137.1117
     },
     {
-      "mmsi": 440026590,
-      "name": "9MINSUNG",
+      "mmsi": 431005056,
+      "name": "KINYOU",
+      "destination": ">JP NGO OFF",
+      "isJapanBound": true,
+      "lat": 33.5021,
+      "lon": 136.0205
+    },
+    {
+      "mmsi": 440622000,
+      "name": "NEW SILVER",
+      "destination": "JP_YKK",
+      "isJapanBound": true,
+      "lat": 33.4958,
+      "lon": 136.029
+    },
+    {
+      "mmsi": 440232000,
+      "name": "DOOLA STAR",
+      "destination": "DSN/KR",
+      "isJapanBound": false,
+      "lat": 37.382,
+      "lon": 126.5533
+    },
+    {
+      "mmsi": 440019380,
+      "name": "DURUHO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 37.4997,
-      "lon": 126.5974
-    },
-    {
-      "mmsi": 431011482,
-      "name": "NAIKAI MARU NO,25",
-      "destination": ">JP KIJ EW W2-A",
-      "isJapanBound": true,
-      "lat": 37.9967,
-      "lon": 139.22
-    },
-    {
-      "mmsi": 440400200,
-      "name": "HAE CHANG SUN",
-      "destination": "PYUNGTAEK",
-      "isJapanBound": false,
-      "lat": 37.4301,
-      "lon": 126.5668
-    },
-    {
-      "mmsi": 431005242,
-      "name": "KAKUSHO MARU",
-      "destination": ">JP SBK OFF",
-      "isJapanBound": true,
-      "lat": 34.1633,
-      "lon": 135.1413
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
