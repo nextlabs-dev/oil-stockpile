@@ -1,156 +1,71 @@
 {
-  "fetchedAt": "2026-05-16T12:12:46+00:00",
+  "fetchedAt": "2026-05-16T14:06:32+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 18,
-  "japanBoundTankers": 7,
-  "japanBoundUnknownPort": 6,
-  "topDestinationPorts": [
-    {
-      "port": "TOMAKOMAI",
-      "count": 1
-    }
-  ],
+  "totalTankersInRegion": 8,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 3,
+  "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 431011509,
-      "name": "SAKURAMARU",
-      "destination": "JP HIM",
+      "mmsi": 431011482,
+      "name": "NAIKAI MARU NO,25",
+      "destination": ">JP HKS E OFF",
       "isJapanBound": true,
-      "lat": 33.5673,
-      "lon": 136.0179
+      "lat": 37.3375,
+      "lon": 136.6062
     },
     {
       "mmsi": 431006342,
       "name": "KOHSEIYOH",
       "destination": ">JP WAK OFF",
       "isJapanBound": true,
-      "lat": 34.1543,
-      "lon": 135.1588
+      "lat": 34.1542,
+      "lon": 135.1585
     },
     {
-      "mmsi": 613322700,
-      "name": "EVITA",
-      "destination": "CNDJK",
+      "mmsi": 636023629,
+      "name": "RIVIERA",
+      "destination": "AU GEX",
       "isJapanBound": false,
-      "lat": 37.3079,
-      "lon": 131.1115
+      "lat": 35.2543,
+      "lon": 129.5237
     },
     {
-      "mmsi": 235115082,
-      "name": "BW VOLANS",
+      "mmsi": 431003155,
+      "name": "HOUEI NO.1",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1619,
+      "lon": 135.1415
+    },
+    {
+      "mmsi": 632001118,
+      "name": "DRACO",
+      "destination": "BUSAN S.KOREA",
+      "isJapanBound": false,
+      "lat": 35.6804,
+      "lon": 130.247
+    },
+    {
+      "mmsi": 441601000,
+      "name": "SEONGHO ACE",
       "destination": "KR INC",
       "isJapanBound": false,
-      "lat": 40.1501,
-      "lon": 137.5684
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 431005858,
-      "name": "KEIYO MARU NO.8",
-      "destination": ">JP MKW OFF",
-      "isJapanBound": true,
-      "lat": 33.5861,
-      "lon": 136.0931
-    },
-    {
-      "mmsi": 431002261,
-      "name": "MIYA MARU NO.1",
-      "destination": "JP KIJ EW OFF",
-      "isJapanBound": true,
-      "lat": 35.8253,
-      "lon": 134.6371
-    },
-    {
-      "mmsi": 563120600,
-      "name": "GINGA LIGER",
-      "destination": "JP NIH",
-      "isJapanBound": true,
-      "lat": 38.6609,
-      "lon": 138.9253
-    },
-    {
-      "mmsi": 636018925,
-      "name": "VEGA SUN",
-      "destination": "PABLB",
-      "isJapanBound": false,
-      "lat": 40.5642,
-      "lon": 138.5097
-    },
-    {
-      "mmsi": 431012645,
-      "name": "HAYATO",
-      "destination": ">JP NAO OFF WM",
-      "isJapanBound": true,
-      "lat": 37.5734,
-      "lon": 137.3241
-    },
-    {
-      "mmsi": 477191800,
-      "name": "NEW CHAMPION",
-      "destination": "CAOFEIDIAN PORT",
-      "isJapanBound": false,
-      "lat": 40.6598,
-      "lon": 138.6993
-    },
-    {
-      "mmsi": 413357420,
-      "name": "CHANGHANG CHENGGONG",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 34.3258,
-      "lon": 130.1308
-    },
-    {
-      "mmsi": 352275000,
-      "name": "CRANE REGULUS",
-      "destination": "CN YZH",
-      "isJapanBound": false,
-      "lat": 34.2358,
-      "lon": 137.1362
-    },
-    {
-      "mmsi": 636018345,
-      "name": "KOHSENRI",
-      "destination": "JP TMK",
-      "isJapanBound": true,
-      "lat": 38.0618,
-      "lon": 134.8519
-    },
-    {
-      "mmsi": 440133000,
-      "name": "SEONGHO GALAXY",
-      "destination": "KR YOS",
-      "isJapanBound": false,
-      "lat": 39.6132,
-      "lon": 137.2444
-    },
-    {
-      "mmsi": 310744000,
-      "name": "GASLOG GLASGOW",
-      "destination": "CAKTM",
-      "isJapanBound": false,
-      "lat": 37.7795,
-      "lon": 133.3237
-    },
-    {
-      "mmsi": 440183000,
-      "name": "MISIKAN",
+      "mmsi": 441588000,
+      "name": "WOOLIM DRAGON 7",
       "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 34.6528,
-      "lon": 130.1748
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440058060,
-      "name": "KEOJE YUBIA",
-      "destination": "INCHEON",
-      "isJapanBound": false,
-      "lat": 37.4782,
-      "lon": 126.5943
-    },
-    {
-      "mmsi": 440316160,
-      "name": "INTRANS EDY",
-      "destination": "KR INC",
+      "mmsi": 257472830,
+      "name": "CLIPPER GRACE",
+      "destination": "HHI3463 S/T",
       "isJapanBound": false,
       "lat": null,
       "lon": null
