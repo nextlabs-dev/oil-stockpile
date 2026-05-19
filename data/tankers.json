@@ -1,98 +1,239 @@
 {
-  "fetchedAt": "2026-05-19T12:27:59+00:00",
+  "fetchedAt": "2026-05-19T16:39:11+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 11,
-  "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 4,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 28,
+  "japanBoundTankers": 23,
+  "japanBoundUnknownPort": 22,
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 431800677,
-      "name": "SHOHO MARU",
-      "destination": "JP TAP",
+      "mmsi": 431009313,
+      "name": "AWAJISHIMA",
+      "destination": "JP WAK NAKA WHARF 2B",
       "isJapanBound": true,
-      "lat": 33.5857,
-      "lon": 136.0693
+      "lat": 34.2145,
+      "lon": 135.1415
     },
     {
-      "mmsi": 241636000,
-      "name": "MARAN GAS CHIOS",
-      "destination": "FOR ORDERS",
-      "isJapanBound": false,
-      "lat": 35.2862,
-      "lon": 130.6741
+      "mmsi": 431015824,
+      "name": "SUZUKA MARU NO.10",
+      "destination": ">JP UBJ",
+      "isJapanBound": true,
+      "lat": 33.9271,
+      "lon": 131.2123
     },
     {
-      "mmsi": 440014500,
-      "name": "WOO CHAN",
-      "destination": "KR TSN",
+      "mmsi": 431501797,
+      "name": "AI MARU",
+      "destination": ">JP KOJ OFF",
+      "isJapanBound": true,
+      "lat": 33.5787,
+      "lon": 136.1381
+    },
+    {
+      "mmsi": 431018707,
+      "name": "MEIKOU MARU",
+      "destination": "JP OSA OFF",
+      "isJapanBound": true,
+      "lat": 33.534,
+      "lon": 135.9806
+    },
+    {
+      "mmsi": 431023554,
+      "name": "MEIYU MARU",
+      "destination": ">JP SBK",
+      "isJapanBound": true,
+      "lat": 33.717,
+      "lon": 136.2429
+    },
+    {
+      "mmsi": 440043440,
+      "name": "K GAS",
+      "destination": "ICN,KR",
       "isJapanBound": false,
-      "lat": 34.6692,
-      "lon": 128.7877
+      "lat": 37.4497,
+      "lon": 126.5908
+    },
+    {
+      "mmsi": 431001417,
+      "name": "TAMARIKI MARU",
+      "destination": ">JP KNM /S",
+      "isJapanBound": true,
+      "lat": 33.9418,
+      "lon": 130.9282
+    },
+    {
+      "mmsi": 431004673,
+      "name": "MEIYOU MARU",
+      "destination": ">JP SMJ OFF",
+      "isJapanBound": true,
+      "lat": 33.6824,
+      "lon": 136.1317
+    },
+    {
+      "mmsi": 371010000,
+      "name": "HESTIANA",
+      "destination": "JP KNM M",
+      "isJapanBound": true,
+      "lat": 33.9371,
+      "lon": 130.9454
+    },
+    {
+      "mmsi": 431003435,
+      "name": "JYOHOUMARU",
+      "destination": ">JP IWK OFF",
+      "isJapanBound": true,
+      "lat": 33.8965,
+      "lon": 136.6056
     },
     {
       "mmsi": 440400200,
       "name": "HAE CHANG SUN",
       "destination": "INCHEON",
       "isJapanBound": false,
-      "lat": 37.4662,
-      "lon": 126.5866
+      "lat": 37.5091,
+      "lon": 126.6019
     },
     {
-      "mmsi": 431019369,
-      "name": "KOUSEN MARU",
-      "destination": ">JP MAR",
+      "mmsi": 431001357,
+      "name": "TOUNAN MARU",
+      "destination": "JP KNM HESAKI OFF",
       "isJapanBound": true,
-      "lat": 33.6219,
-      "lon": 136.1012
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 431001715,
-      "name": "CHOUKAI MARU",
-      "destination": ">JP AFG OFF",
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 37.4966,
+      "lon": 126.6238
+    },
+    {
+      "mmsi": 431000926,
+      "name": "WATATSUMI",
+      "destination": ">JP UBJ OFF",
       "isJapanBound": true,
-      "lat": 39.8744,
-      "lon": 139.8546
+      "lat": 33.8993,
+      "lon": 131.1862
     },
     {
-      "mmsi": 431017811,
-      "name": "SENSHO MARU",
-      "destination": "JP MAR OFF",
+      "mmsi": 431006342,
+      "name": "KOHSEIYOH",
+      "destination": ">JP KZU OFF",
       "isJapanBound": true,
-      "lat": 33.855,
-      "lon": 136.3673
+      "lat": 33.6959,
+      "lon": 136.1923
     },
     {
-      "mmsi": 636015943,
-      "name": "NAVIGATOR GRACE",
-      "destination": "KRUSN",
+      "mmsi": 441588000,
+      "name": "WOOLIM DRAGON 7",
+      "destination": "INC KR           #&",
       "isJapanBound": false,
-      "lat": 34.6893,
-      "lon": 128.9311
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 563239700,
-      "name": "NORTH OCEAN",
-      "destination": "HO2525 SEA TRIAL",
-      "isJapanBound": false,
-      "lat": 34.3112,
-      "lon": 129.0205
+      "mmsi": 431301658,
+      "name": "SHOSEIMARU",
+      "destination": "JP KNM OFF",
+      "isJapanBound": true,
+      "lat": 34.0527,
+      "lon": 130.8596
     },
     {
-      "mmsi": 613411300,
-      "name": "LINDOR",
-      "destination": "LONGKOU",
-      "isJapanBound": false,
-      "lat": 35.0054,
-      "lon": 129.6878
+      "mmsi": 431400405,
+      "name": "KYOKAI MARU NO.21",
+      "destination": "JP KNM MUTSUREN OFF",
+      "isJapanBound": true,
+      "lat": 33.9586,
+      "lon": 130.8909
     },
     {
-      "mmsi": 563325400,
-      "name": "SERI DAYANG",
-      "destination": "HO-2571 SEATRIAL/KWY",
+      "mmsi": 431012645,
+      "name": "HAYATO",
+      "destination": ">JP HKS OFF E",
+      "isJapanBound": true,
+      "lat": 34.094,
+      "lon": 130.8397
+    },
+    {
+      "mmsi": 431005242,
+      "name": "KAKUSHO MARU",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.2091,
+      "lon": 135.1164
+    },
+    {
+      "mmsi": 431012332,
+      "name": "SHINKO MARU NO.38",
+      "destination": ">JP KNM JC OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431025494,
+      "name": "KIRISHIMA MARU NO.12",
+      "destination": "JP KWS HO#25",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431005484,
+      "name": "KORYU MARU",
+      "destination": "JP HKT OFF/WA",
+      "isJapanBound": true,
+      "lat": 33.617,
+      "lon": 130.3577
+    },
+    {
+      "mmsi": 441791000,
+      "name": "KOREA VENUS",
+      "destination": "KRINC",
       "isJapanBound": false,
-      "lat": 34.5379,
-      "lon": 127.9442
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431002547,
+      "name": "KOSHINMARU NO.13",
+      "destination": ">JP IMI OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431026644,
+      "name": "RYOUKEN MARU NO.3",
+      "destination": ">JP KNM OFF",
+      "isJapanBound": true,
+      "lat": 33.9552,
+      "lon": 131.0777
+    },
+    {
+      "mmsi": 431020792,
+      "name": "SHOKYU MARU",
+      "destination": "JP KNM WM OFF",
+      "isJapanBound": true,
+      "lat": 33.9777,
+      "lon": 130.8916
+    },
+    {
+      "mmsi": 431011559,
+      "name": "KINYO MARU NO,11",
+      "destination": ">JP SMJ OFF/E",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
