@@ -1,20 +1,32 @@
 {
-  "fetchedAt": "2026-05-20T05:23:29+00:00",
+  "fetchedAt": "2026-05-20T08:43:41+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 11,
-  "japanBoundTankers": 8,
-  "japanBoundUnknownPort": 6,
+  "totalTankersInRegion": 7,
+  "japanBoundTankers": 6,
+  "japanBoundUnknownPort": 5,
   "topDestinationPorts": [
     {
       "port": "KAWASAKI",
       "count": 1
-    },
-    {
-      "port": "CHIBA",
-      "count": 1
     }
   ],
   "vessels": [
+    {
+      "mmsi": 431011559,
+      "name": "KINYO MARU NO,11",
+      "destination": ">JP SKD Z-1 OFF",
+      "isJapanBound": true,
+      "lat": 33.9243,
+      "lon": 132.6639
+    },
+    {
+      "mmsi": 431000932,
+      "name": "HOURIN NO.3",
+      "destination": "JP OSA H AST UME/OFF",
+      "isJapanBound": true,
+      "lat": 33.9497,
+      "lon": 136.3307
+    },
     {
       "mmsi": 431100969,
       "name": "NITTAN MARU NO.21",
@@ -24,84 +36,36 @@
       "lon": 139.7651
     },
     {
-      "mmsi": 431002865,
-      "name": "KOYO MARU NO.3",
-      "destination": ">JP HKS  OFF",
-      "isJapanBound": true,
-      "lat": 34.3612,
-      "lon": 132.5194
-    },
-    {
-      "mmsi": 431300665,
-      "name": "NIKKO MARU NO.18",
-      "destination": ">JP OTK OFF",
-      "isJapanBound": true,
-      "lat": 34.2257,
-      "lon": 132.2399
-    },
-    {
-      "mmsi": 431000774,
-      "name": "KYOKUKOUMARU",
-      "destination": "JP MYJ OFF",
-      "isJapanBound": true,
-      "lat": 33.8574,
-      "lon": 132.6717
-    },
-    {
-      "mmsi": 372966000,
-      "name": "FALCON CHEMIST",
-      "destination": "JP CHB",
-      "isJapanBound": true,
-      "lat": 33.7232,
-      "lon": 136.2561
-    },
-    {
-      "mmsi": 431013232,
-      "name": "SYOZAN",
-      "destination": "JP> MYJ OFF",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431390000,
-      "name": "SHINSEI MARU",
-      "destination": "JP> IWA",
-      "isJapanBound": false,
-      "lat": 34.1642,
-      "lon": 132.3089
-    },
-    {
-      "mmsi": 431003736,
-      "name": "KIRISHIMA MARU NO.17",
-      "destination": ">JP OTK OFF",
-      "isJapanBound": true,
-      "lat": 34.235,
-      "lon": 132.2348
-    },
-    {
-      "mmsi": 228461800,
-      "name": "JOZEF PILSUDSKI",
-      "destination": "NG BON",
-      "isJapanBound": false,
-      "lat": 34.37,
-      "lon": 137.0749
-    },
-    {
       "mmsi": 431021327,
       "name": "HIYOSHI MARU NO.8",
       "destination": ">JP OIP OFF",
       "isJapanBound": true,
-      "lat": 34.362,
-      "lon": 132.5216
+      "lat": 34.0792,
+      "lon": 132.3159
     },
     {
-      "mmsi": 431001715,
-      "name": "CHOUKAI MARU",
-      "destination": ">JP AFG OFF",
+      "mmsi": 431401964,
+      "name": "ENSHU MARU",
+      "destination": "?JP TXD OFF",
       "isJapanBound": true,
-      "lat": 39.8745,
-      "lon": 139.8546
+      "lat": 33.8356,
+      "lon": 136.3889
+    },
+    {
+      "mmsi": 431002865,
+      "name": "KOYO MARU NO.3",
+      "destination": ">JP HKS  OFF",
+      "isJapanBound": true,
+      "lat": 34.0429,
+      "lon": 132.5054
+    },
+    {
+      "mmsi": 441588000,
+      "name": "WOOLIM DRAGON 7",
+      "destination": "INC KR",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
