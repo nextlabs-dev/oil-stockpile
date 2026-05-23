@@ -1,87 +1,127 @@
 {
-  "fetchedAt": "2026-05-23T15:26:23+00:00",
+  "fetchedAt": "2026-05-23T17:23:42+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 9,
-  "japanBoundTankers": 8,
-  "japanBoundUnknownPort": 7,
+  "totalTankersInRegion": 14,
+  "japanBoundTankers": 13,
+  "japanBoundUnknownPort": 12,
   "topDestinationPorts": [
     {
-      "port": "YOKKAICHI",
+      "port": "MIZUSHIMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431006905,
-      "name": "YUHO MARU NO.8",
-      "destination": "JP WAK KAINAN OFF",
+      "mmsi": 431008568,
+      "name": "JINJYAMARU NO.8",
+      "destination": ">JP TAP",
       "isJapanBound": true,
-      "lat": 34.1612,
-      "lon": 135.1479
+      "lat": 34.3558,
+      "lon": 134.07
     },
     {
-      "mmsi": 352006318,
-      "name": "ORIENTAL SUNSTONE",
-      "destination": "KR INC",
-      "isJapanBound": false,
-      "lat": 37.4374,
-      "lon": 126.5696
+      "mmsi": 431000951,
+      "name": "TOMOEMARU",
+      "destination": "JP NGO OFF",
+      "isJapanBound": true,
+      "lat": 34.429,
+      "lon": 134.0359
     },
     {
-      "mmsi": 431013291,
-      "name": "TOGENMARU",
-      "destination": ">JP AFG  OFF",
+      "mmsi": 431018785,
+      "name": "TOBASE3",
+      "destination": ">JP MAR",
       "isJapanBound": true,
-      "lat": 39.7781,
-      "lon": 140.0248
+      "lat": 34.2961,
+      "lon": 133.7884
     },
     {
       "mmsi": 431000654,
       "name": "KEITEN MARU",
       "destination": ">JP KAINAN OFF",
       "isJapanBound": true,
-      "lat": 34.1605,
-      "lon": 135.1327
+      "lat": 34.1603,
+      "lon": 135.1318
     },
     {
       "mmsi": 431300401,
       "name": "TOYOMASA MARU",
       "destination": ">JP KAINAN OFF",
       "isJapanBound": true,
-      "lat": 34.1651,
-      "lon": 135.1421
-    },
-    {
-      "mmsi": 431014494,
-      "name": "EIHO MARU",
-      "destination": ">JP YKK 3E",
-      "isJapanBound": true,
-      "lat": 34.2599,
-      "lon": 134.5458
-    },
-    {
-      "mmsi": 431000991,
-      "name": "HIYOSHI MARU NO.17",
-      "destination": ">JP ANE/NARUTO OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 34.1649,
+      "lon": 135.1413
     },
     {
       "mmsi": 431001659,
       "name": "KOSHO MARU",
       "destination": ">JP NARUTO  OFF",
       "isJapanBound": true,
-      "lat": 34.2651,
-      "lon": 134.5312
+      "lat": 34.2649,
+      "lon": 134.5314
     },
     {
-      "mmsi": 431012013,
-      "name": "KAKURYU MARU",
-      "destination": "JP SBK OFF",
+      "mmsi": 431501712,
+      "name": "HASSHO MARU NO.1",
+      "destination": ">JP WAK NAKA 2",
       "isJapanBound": true,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 431006905,
+      "name": "YUHO MARU NO.8",
+      "destination": "JP WAK KAINAN OFF",
+      "isJapanBound": true,
+      "lat": 34.1611,
+      "lon": 135.1472
+    },
+    {
+      "mmsi": 352006318,
+      "name": "ORIENTAL SUNSTONE",
+      "destination": "KR INC",
+      "isJapanBound": false,
+      "lat": 37.4371,
+      "lon": 126.5696
+    },
+    {
+      "mmsi": 431014828,
+      "name": "NISSEN MARU",
+      "destination": "JP KAMASHIMA OFF",
+      "isJapanBound": true,
+      "lat": 34.4217,
+      "lon": 133.851
+    },
+    {
+      "mmsi": 431025296,
+      "name": "KYOKUKAI MARU",
+      "destination": ">JP WAK OFF/E",
+      "isJapanBound": true,
+      "lat": 34.155,
+      "lon": 135.1394
+    },
+    {
+      "mmsi": 431011559,
+      "name": "KINYO MARU NO,11",
+      "destination": ">JP SKD Z-2 OFF",
+      "isJapanBound": true,
+      "lat": 34.3459,
+      "lon": 133.8729
+    },
+    {
+      "mmsi": 431009159,
+      "name": "ZUIHOU MARU",
+      "destination": ">JP MIZ OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431008726,
+      "name": "HOSYOMARU",
+      "destination": ">JP TNO",
+      "isJapanBound": true,
+      "lat": 34.476,
+      "lon": 134.1824
     }
   ],
   "boundingBox": "24-46N / 122-146E",
