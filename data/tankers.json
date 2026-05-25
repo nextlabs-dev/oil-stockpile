@@ -1,98 +1,122 @@
 {
-  "fetchedAt": "2026-05-25T16:10:52+00:00",
+  "fetchedAt": "2026-05-25T18:02:50+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 11,
-  "japanBoundTankers": 10,
-  "japanBoundUnknownPort": 10,
+  "totalTankersInRegion": 14,
+  "japanBoundTankers": 9,
+  "japanBoundUnknownPort": 9,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 311000222,
-      "name": "EMERALD SPIRIT",
-      "destination": "JPSAK",
+      "mmsi": 431029352,
+      "name": "HAKURYO MARU",
+      "destination": ">JP HESAKI OFF",
       "isJapanBound": true,
-      "lat": 34.6029,
-      "lon": 130.3374
+      "lat": 33.899,
+      "lon": 131.0719
     },
     {
-      "mmsi": 440027000,
-      "name": "KEOYOUNG BLUE 1",
-      "destination": "JP TSG/AS",
-      "isJapanBound": true,
-      "lat": 34.466,
-      "lon": 130.3571
+      "mmsi": 441276000,
+      "name": "KEOYOUNG BLUE 5",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 34.1756,
+      "lon": 130.668
     },
     {
-      "mmsi": 431021905,
-      "name": "FUKIMARU NO.10",
-      "destination": "JP GOT OFF",
+      "mmsi": 431301658,
+      "name": "SHOSEIMARU",
+      "destination": "JP HESAKI OFF",
       "isJapanBound": true,
-      "lat": 34.1421,
-      "lon": 130.4967
+      "lat": 33.8727,
+      "lon": 131.1272
     },
     {
       "mmsi": 431101044,
       "name": "SHINJU MARU NO.1",
       "destination": "JP KNM Z-10",
       "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 33.9426,
+      "lon": 131.086
     },
     {
-      "mmsi": 431010478,
-      "name": "RYOKENMARU_NO8",
-      "destination": ">JP WAK OFF",
+      "mmsi": 431021905,
+      "name": "FUKIMARU NO.10",
+      "destination": "JP GOT OFF",
+      "isJapanBound": true,
+      "lat": 34.3924,
+      "lon": 130.8306
+    },
+    {
+      "mmsi": 431000080,
+      "name": "YAMATO MARU",
+      "destination": "JP OIP OFF /E",
+      "isJapanBound": true,
+      "lat": 33.9012,
+      "lon": 131.1113
+    },
+    {
+      "mmsi": 371937000,
+      "name": "CRANE MAIA",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 33.9525,
+      "lon": 131.0575
+    },
+    {
+      "mmsi": 431004611,
+      "name": "NO88 TO YO MARU",
+      "destination": "JP UBJ OFF",
       "isJapanBound": true,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 563079100,
-      "name": "JAL SIDDHI",
-      "destination": "JP-NOS",
-      "isJapanBound": true,
-      "lat": 34.0649,
-      "lon": 130.7721
+      "mmsi": 352002575,
+      "name": "DAMIANIA",
+      "destination": "BUSAN OPL",
+      "isJapanBound": false,
+      "lat": 35.0898,
+      "lon": 130.0972
     },
     {
-      "mmsi": 431013295,
-      "name": "RYOYU MARU",
-      "destination": ">JP UBJ OFF",
+      "mmsi": 431004235,
+      "name": "KAKUSEI MARU",
+      "destination": "JP AFG EN",
       "isJapanBound": true,
-      "lat": 33.9067,
-      "lon": 131.1815
+      "lat": 39.7848,
+      "lon": 139.9671
     },
     {
       "mmsi": 431501865,
       "name": "AZUMA MARU NO.11",
       "destination": "JP NGO OFF / E",
       "isJapanBound": true,
-      "lat": 34.5634,
-      "lon": 131.0817
+      "lat": 34.236,
+      "lon": 130.8222
     },
     {
-      "mmsi": 538012513,
-      "name": "FC VIOLET",
-      "destination": "KR TSN",
+      "mmsi": 374112000,
+      "name": "SUN QUEEN",
+      "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 35.0911,
-      "lon": 129.5006
+      "lat": 34.1825,
+      "lon": 130.6656
     },
     {
-      "mmsi": 431029352,
-      "name": "HAKURYO MARU",
-      "destination": ">JP HESAKI OFF",
-      "isJapanBound": true,
-      "lat": 33.8768,
-      "lon": 131.1467
+      "mmsi": 440011120,
+      "name": "MINSUNG11",
+      "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": 37.4966,
+      "lon": 126.6241
     },
     {
-      "mmsi": 431001288,
-      "name": "SHINYO MARU",
-      "destination": ">JP WAK OFF",
+      "mmsi": 431012675,
+      "name": "SEIWA",
+      "destination": "> JP WAK NAKA-3",
       "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 34.212,
+      "lon": 135.1434
     }
   ],
   "boundingBox": "24-46N / 122-146E",
