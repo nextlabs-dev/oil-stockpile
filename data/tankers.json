@@ -1,50 +1,66 @@
 {
-  "fetchedAt": "2026-05-25T20:05:37+00:00",
+  "fetchedAt": "2026-05-25T21:41:54+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 5,
+  "totalTankersInRegion": 7,
   "japanBoundTankers": 3,
   "japanBoundUnknownPort": 3,
   "topDestinationPorts": [],
   "vessels": [
     {
+      "mmsi": 440824000,
+      "name": "GALAXY SAMBU",
+      "destination": "KR YOS",
+      "isJapanBound": false,
+      "lat": 37.4539,
+      "lon": 126.5756
+    },
+    {
       "mmsi": 440525000,
       "name": "KEOJE CORDELIA",
       "destination": "INCHEON.KOREA",
       "isJapanBound": false,
-      "lat": 37.3896,
-      "lon": 126.5595
+      "lat": 37.5001,
+      "lon": 126.5974
     },
     {
-      "mmsi": 431021905,
-      "name": "FUKIMARU NO.10",
-      "destination": "JP GOT OFF",
-      "isJapanBound": true,
-      "lat": 34.6072,
-      "lon": 131.2545
-    },
-    {
-      "mmsi": 431001288,
-      "name": "SHINYO MARU",
-      "destination": ">JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.1498,
-      "lon": 135.1396
-    },
-    {
-      "mmsi": 440005120,
-      "name": "AREUM",
-      "destination": "DAESAN",
+      "mmsi": 440400200,
+      "name": "HAE CHANG SUN",
+      "destination": "INCHEON",
       "isJapanBound": false,
-      "lat": 37.4624,
-      "lon": 126.6128
+      "lat": 37.3933,
+      "lon": 126.5413
     },
     {
-      "mmsi": 431010478,
-      "name": "RYOKENMARU_NO8",
-      "destination": ">JP WAK OFF",
+      "mmsi": 431009445,
+      "name": "KYOWA MARU NO.1",
+      "destination": "JP WAK KAINAN OFF",
       "isJapanBound": true,
-      "lat": 34.2002,
-      "lon": 135.1256
+      "lat": 34.1513,
+      "lon": 135.2049
+    },
+    {
+      "mmsi": 431004235,
+      "name": "KAKUSEI MARU",
+      "destination": "JP AFG EN",
+      "isJapanBound": true,
+      "lat": 39.7609,
+      "lon": 140.0421
+    },
+    {
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431001562,
+      "name": "HOKO MARU NO.5",
+      "destination": "JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1537,
+      "lon": 135.1614
     }
   ],
   "boundingBox": "24-46N / 122-146E",
