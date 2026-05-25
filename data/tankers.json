@@ -1,35 +1,11 @@
 {
-  "fetchedAt": "2026-05-25T21:41:54+00:00",
+  "fetchedAt": "2026-05-25T23:29:06+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 7,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 3,
+  "totalTankersInRegion": 4,
+  "japanBoundTankers": 4,
+  "japanBoundUnknownPort": 4,
   "topDestinationPorts": [],
   "vessels": [
-    {
-      "mmsi": 440824000,
-      "name": "GALAXY SAMBU",
-      "destination": "KR YOS",
-      "isJapanBound": false,
-      "lat": 37.4539,
-      "lon": 126.5756
-    },
-    {
-      "mmsi": 440525000,
-      "name": "KEOJE CORDELIA",
-      "destination": "INCHEON.KOREA",
-      "isJapanBound": false,
-      "lat": 37.5001,
-      "lon": 126.5974
-    },
-    {
-      "mmsi": 440400200,
-      "name": "HAE CHANG SUN",
-      "destination": "INCHEON",
-      "isJapanBound": false,
-      "lat": 37.3933,
-      "lon": 126.5413
-    },
     {
       "mmsi": 431009445,
       "name": "KYOWA MARU NO.1",
@@ -39,28 +15,28 @@
       "lon": 135.2049
     },
     {
+      "mmsi": 431011482,
+      "name": "NAIKAI MARU NO,25",
+      "destination": ">JP FTX OFF",
+      "isJapanBound": true,
+      "lat": 34.6447,
+      "lon": 131.2365
+    },
+    {
+      "mmsi": 431353000,
+      "name": "ENEOS SPIRIT",
+      "destination": "JP SAK",
+      "isJapanBound": true,
+      "lat": 35.4405,
+      "lon": 139.7605
+    },
+    {
       "mmsi": 431004235,
       "name": "KAKUSEI MARU",
       "destination": "JP AFG EN",
       "isJapanBound": true,
-      "lat": 39.7609,
-      "lon": 140.0421
-    },
-    {
-      "mmsi": 440021230,
-      "name": "GWANG SEONG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431001562,
-      "name": "HOKO MARU NO.5",
-      "destination": "JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.1537,
-      "lon": 135.1614
+      "lat": 39.7605,
+      "lon": 140.0517
     }
   ],
   "boundingBox": "24-46N / 122-146E",
