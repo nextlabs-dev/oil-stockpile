@@ -1,43 +1,55 @@
 {
-  "fetchedAt": "2026-05-26T04:41:39+00:00",
+  "fetchedAt": "2026-05-26T08:50:47+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 3,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 1,
+  "totalTankersInRegion": 5,
+  "japanBoundTankers": 4,
+  "japanBoundUnknownPort": 3,
   "topDestinationPorts": [
     {
       "port": "KAWASAKI",
-      "count": 1
-    },
-    {
-      "port": "MIZUSHIMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431009445,
-      "name": "KYOWA MARU NO.1",
-      "destination": "JP WAK KAINAN OFF",
+      "mmsi": 636021827,
+      "name": "ADAMANTIOS",
+      "destination": "JPSAK",
       "isJapanBound": true,
-      "lat": 34.1513,
-      "lon": 135.2049
+      "lat": 34.2163,
+      "lon": 134.9986
+    },
+    {
+      "mmsi": 431011753,
+      "name": "HOUSEIMARU NO21",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1568,
+      "lon": 135.1548
+    },
+    {
+      "mmsi": 431218000,
+      "name": "ENEOS DREAM",
+      "destination": "JP HBK",
+      "isJapanBound": true,
+      "lat": 34.0631,
+      "lon": 130.8041
+    },
+    {
+      "mmsi": 353962000,
+      "name": "NAVE TITAN",
+      "destination": "KRTSN",
+      "isJapanBound": false,
+      "lat": 34.0353,
+      "lon": 130.5509
     },
     {
       "mmsi": 431100969,
       "name": "NITTAN MARU NO.21",
       "destination": "JP KWS DU",
       "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431004235,
-      "name": "KAKUSEI MARU",
-      "destination": "JP MIZ/E",
-      "isJapanBound": true,
-      "lat": 39.7706,
-      "lon": 139.9786
+      "lat": 35.5223,
+      "lon": 139.7651
     }
   ],
   "boundingBox": "24-46N / 122-146E",
