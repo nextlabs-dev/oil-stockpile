@@ -1,10 +1,19 @@
 {
-  "fetchedAt": "2026-05-25T23:29:06+00:00",
+  "fetchedAt": "2026-05-26T04:41:39+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 4,
-  "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 4,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 3,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 1,
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 1
+    },
+    {
+      "port": "MIZUSHIMA",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
       "mmsi": 431009445,
@@ -15,28 +24,20 @@
       "lon": 135.2049
     },
     {
-      "mmsi": 431011482,
-      "name": "NAIKAI MARU NO,25",
-      "destination": ">JP FTX OFF",
+      "mmsi": 431100969,
+      "name": "NITTAN MARU NO.21",
+      "destination": "JP KWS DU",
       "isJapanBound": true,
-      "lat": 34.6447,
-      "lon": 131.2365
-    },
-    {
-      "mmsi": 431353000,
-      "name": "ENEOS SPIRIT",
-      "destination": "JP SAK",
-      "isJapanBound": true,
-      "lat": 35.4405,
-      "lon": 139.7605
+      "lat": null,
+      "lon": null
     },
     {
       "mmsi": 431004235,
       "name": "KAKUSEI MARU",
-      "destination": "JP AFG EN",
+      "destination": "JP MIZ/E",
       "isJapanBound": true,
-      "lat": 39.7605,
-      "lon": 140.0517
+      "lat": 39.7706,
+      "lon": 139.9786
     }
   ],
   "boundingBox": "24-46N / 122-146E",
