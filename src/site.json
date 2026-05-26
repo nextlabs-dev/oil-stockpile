@@ -3,7 +3,7 @@
     "url": "https://tkysi-mi.github.io/oil-stockpile",
     "og_image": "https://tkysi-mi.github.io/oil-stockpile/assets/og-image.png",
     "og_image_alt": "日本の石油備蓄カウンターと充填率タンクゲージ",
-    "font_href": "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&family=Noto+Sans+JP:wght@200;300;400;500;700&display=swap"
+    "font_href": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
   },
   "nav_order": ["home", "tankers", "scale", "about"],
   "nav_labels": {
@@ -17,6 +17,20 @@
       "key": "home",
       "source": "home.html",
       "output": "index.html",
+      "body_class": "page-home",
+      "site_brand": [
+        "      <span class=\"site-logo\" aria-hidden=\"true\"></span>",
+        "      <span class=\"site-brand-text\">",
+        "        <span class=\"site-title\">JAPAN OIL STOCKPILE</span>",
+        "        <span class=\"site-tagline\">あと何日、日本は持つのか。</span>",
+        "      </span>"
+      ],
+      "header_meta": [
+        "    <div class=\"site-header-meta\">",
+        "      <span class=\"site-header-meta-label\">最終更新</span>",
+        "      <span class=\"site-header-meta-value\" id=\"header-last-updated\">—</span>",
+        "    </div>"
+      ],
       "title": "あと何日？｜日本の石油備蓄",
       "description": "日本の石油備蓄、いまこれだけ。経済産業省「石油備蓄の現況」速報値を分かりやすく可視化する非公式カウンター。",
       "canonical_path": "/",

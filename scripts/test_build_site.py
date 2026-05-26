@@ -178,7 +178,7 @@ class RenderPageTest(unittest.TestCase):
     TEMPLATE = Template(
         "T=$title|D=$description|C=$canonical|"
         "OG_IMG=$og_image|FAVI=$favicon|CSS=$stylesheet|"
-        "FONT=$font_href|EXTRA=[$extra_head]|HOME=$home_href|"
+        "FONT=$font_href|EXTRA=[$extra_head]|BODY_CLASS=[$body_class]|HOME=$home_href|"
         "NAV=[$nav]|BODY=$content|"
         "FS=$footer_source|FD=$footer_disclaimer|SCRIPTS=[$script_tags]|"
         "OG_TITLE=$og_title|OG_DESC=$og_description|"
@@ -247,6 +247,15 @@ class RenderPageTest(unittest.TestCase):
         self.assertIn('aria-current="page"', out)
         self.assertIn("ホーム", out)
         self.assertIn("About", out)
+
+    def test_body_class_empty_when_missing(self):
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY")
+        self.assertIn("BODY_CLASS=[]|", out)
+
+    def test_body_class_passes_through_when_set(self):
+        page = self._page(body_class="page-home")
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, page, "BODY")
+        self.assertIn("BODY_CLASS=[page-home]|", out)
 
 
 if __name__ == "__main__":

@@ -1,117 +1,119 @@
 /**
- * F-02 タンクゲージ
+ * 内訳ドーナツ（4 区分の pie / donut）
  *
- * 縦長 SVG。fill rect の高さを (current / PEAK_REFERENCE.days) で計算する。
- * counter.js の subscribe() を使って秒ごとに同期する。
+ * 国家備蓄・民間備蓄・産油国共同備蓄・その他 の 4 セグメントを比率で描く。
+ * 中央には latest.total 日分を表示。凡例は #donut-legend に流し込む。
  *
- * 色分岐:
- *   ratio >= 0.8        : 黒（--tank-fill-ok）
- *   0.4 <= ratio < 0.8  : グレー（--tank-fill-mid）
- *   ratio < 0.4         : 控えめな赤（--tank-fill-warn）
+ * 充填率（current / PEAK_REFERENCE.days）は KPI カード #tank-percent に
+ * 別途反映する。counter.js の subscribe() を購読する。
  */
 
 import { PEAK_REFERENCE } from '../core/data.js';
+import { escapeHtml } from '../core/escape.js';
 import { subscribe } from './counter.js';
 
-const SVG_W = 200;
-const SVG_H = 420;
-const TANK_X = 36;
-const TANK_Y = 40;
-const TANK_W = 130;
-const TANK_H = 340;
-const STROKE = 1.5;
+const SVG_SIZE = 200;
+const CENTER = SVG_SIZE / 2;
+const RADIUS = 72;
+const STROKE = 22;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
-const insetTopY = TANK_Y + STROKE;
-const insetBottomY = TANK_Y + TANK_H - STROKE;
-const insetX = TANK_X + STROKE;
-const insetW = TANK_W - STROKE * 2;
-const insetH = insetBottomY - insetTopY;
+const SEGMENTS = [
+  { key: 'national', label: '国家備蓄', color: 'var(--donut-national)' },
+  { key: 'private', label: '民間備蓄', color: 'var(--donut-private)' },
+  { key: 'joint', label: '産油国共同備蓄', color: 'var(--donut-joint)' },
+  { key: 'other', label: 'その他', color: 'var(--donut-other)' },
+];
 
-function colorForRatio(r) {
-  if (r >= 0.8) return 'var(--tank-fill-ok)';
-  if (r >= 0.4) return 'var(--tank-fill-mid)';
-  return 'var(--tank-fill-warn)';
+function computeSegments(snapshot) {
+  const national = Number(snapshot.national) || 0;
+  const privateVal = Number(snapshot.private) || 0;
+  const joint = Number(snapshot.joint) || 0;
+  const total = Number(snapshot.total) || 0;
+  const sum3 = national + privateVal + joint;
+  const other = Math.max(0, total - sum3);
+  return {
+    national,
+    private: privateVal,
+    joint,
+    other,
+    total,
+  };
 }
 
-function markY(frac) {
-  return insetBottomY - insetH * frac;
-}
+function renderDonutSvg(segs) {
+  const denom = segs.national + segs.private + segs.joint + segs.other;
+  let offset = 0;
+  const arcs = SEGMENTS.map((seg) => {
+    const value = segs[seg.key];
+    const portion = denom > 0 ? value / denom : 0;
+    const arcLen = portion * CIRCUMFERENCE;
+    const path = `<circle cx="${CENTER}" cy="${CENTER}" r="${RADIUS}"
+      fill="none"
+      stroke="${seg.color}"
+      stroke-width="${STROKE}"
+      stroke-linecap="butt"
+      stroke-dasharray="${arcLen.toFixed(2)} ${(CIRCUMFERENCE - arcLen).toFixed(2)}"
+      stroke-dashoffset="${(-offset).toFixed(2)}" />`;
+    offset += arcLen;
+    return path;
+  }).join('');
 
-export function initTankGauge() {
-  const wrap = document.getElementById('tank-svg-wrap');
-  if (!wrap) return;
-
-  const peakDays = PEAK_REFERENCE.days;
-  const halfDays = Math.round(peakDays / 2);
-
-  wrap.innerHTML = `
-    <svg viewBox="0 0 ${SVG_W} ${SVG_H}" xmlns="http://www.w3.org/2000/svg" role="img">
-      <title>タンクゲージ: 現在の備蓄残量</title>
-      <defs>
-        <clipPath id="tank-clip">
-          <rect x="${insetX}" y="${insetTopY}"
-                width="${insetW}" height="${insetH}"
-                rx="3" ry="3" />
-        </clipPath>
-      </defs>
-
-      <!-- right-side ticks (25 / 50 / 75%) -->
-      ${[0.25, 0.5, 0.75]
-        .map(
-          (f) =>
-            `<line x1="${TANK_X + TANK_W}" y1="${markY(f)}" x2="${TANK_X + TANK_W + 6}" y2="${markY(f)}" stroke="#bbb" stroke-width="1" />`,
-        )
-        .join('')}
-
-      <!-- top pipe stub -->
-      <rect x="${TANK_X + TANK_W / 2 - 14}" y="${TANK_Y - 14}"
-            width="28" height="14" fill="#1a1a1a" />
-
-      <!-- fill (height set dynamically) -->
-      <rect id="tank-fill" class="tank-fill-rect"
-            x="${insetX}" y="${insetBottomY}"
-            width="${insetW}" height="0"
-            clip-path="url(#tank-clip)"
-            fill="${colorForRatio(0.85)}" />
-
-      <!-- outer frame on top of fill -->
-      <rect x="${TANK_X}" y="${TANK_Y}"
-            width="${TANK_W}" height="${TANK_H}"
-            rx="4" ry="4"
-            fill="none" stroke="#1a1a1a" stroke-width="${STROKE}" />
-
-      <!-- right-side scale labels -->
-      <text x="${TANK_X + TANK_W + 12}" y="${insetTopY + 4}"
-            font-size="11" fill="#666" font-family="Inter, sans-serif">${peakDays}</text>
-      <text x="${TANK_X + TANK_W + 12}" y="${markY(0.5) + 4}"
-            font-size="11" fill="#999" font-family="Inter, sans-serif">${halfDays}</text>
-      <text x="${TANK_X + TANK_W + 12}" y="${insetBottomY + 4}"
-            font-size="11" fill="#999" font-family="Inter, sans-serif">0</text>
+  return `
+    <svg viewBox="0 0 ${SVG_SIZE} ${SVG_SIZE}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="備蓄日数の内訳ドーナツ">
+      <title>備蓄日数の内訳</title>
+      <g transform="rotate(-90 ${CENTER} ${CENTER})">
+        ${arcs}
+      </g>
+      <text
+        x="${CENTER}" y="${CENTER - 18}"
+        text-anchor="middle"
+        class="donut-center-label">合計</text>
+      <text id="donut-center-value"
+        x="${CENTER}" y="${CENTER + 8}"
+        text-anchor="middle"
+        class="donut-center-value">${segs.total}</text>
+      <text
+        x="${CENTER}" y="${CENTER + 26}"
+        text-anchor="middle"
+        class="donut-center-unit">日分</text>
     </svg>
   `;
+}
 
-  const fillEl = wrap.querySelector('#tank-fill');
-  const svgEl = wrap.querySelector('svg');
-  const percentEl = document.getElementById('tank-percent');
+function renderLegend(segs) {
+  return SEGMENTS.map(
+    (seg) => `
+      <div class="donut-legend-row">
+        <span class="donut-legend-dot" style="background: ${seg.color}" aria-hidden="true"></span>
+        <dt class="donut-legend-label">${escapeHtml(seg.label)}</dt>
+        <dd class="donut-legend-value">${segs[seg.key]}<span class="donut-legend-unit">日分</span></dd>
+      </div>
+    `,
+  ).join('');
+}
+
+export function initTankGauge(history) {
+  const wrap = document.getElementById('tank-svg-wrap');
+  const legend = document.getElementById('donut-legend');
+  if (!wrap) return;
+
+  const latest = Array.isArray(history) && history.length > 0 ? history[history.length - 1] : null;
+  if (!latest) return;
+
+  const segs = computeSegments(latest);
+  wrap.innerHTML = renderDonutSvg(segs);
+  if (legend) legend.innerHTML = renderLegend(segs);
+
   const peakEl = document.getElementById('tank-peak-days');
-  const peakSourceEl = document.getElementById('tank-peak-source');
-  if (peakEl) peakEl.textContent = String(peakDays);
-  if (peakSourceEl) peakSourceEl.textContent = PEAK_REFERENCE.source;
+  if (peakEl) peakEl.textContent = String(PEAK_REFERENCE.days);
 
+  // 充填率 KPI（#tank-percent）を秒按分で更新する
+  const peakDays = PEAK_REFERENCE.days;
+  const percentEl = document.getElementById('tank-percent');
   subscribe((days) => {
+    if (!percentEl) return;
     const ratio = Math.max(0, Math.min(1, days / peakDays));
-    const h = insetH * ratio;
-    const y = insetBottomY - h;
-    fillEl.setAttribute('height', h.toFixed(2));
-    fillEl.setAttribute('y', y.toFixed(2));
-    fillEl.setAttribute('fill', colorForRatio(ratio));
-
-    if (percentEl) percentEl.textContent = (ratio * 100).toFixed(1);
-    if (svgEl) {
-      svgEl.setAttribute(
-        'aria-label',
-        `現在の備蓄: 約${Math.floor(days)}日（基準${peakDays}日の${(ratio * 100).toFixed(0)}%）`,
-      );
-    }
+    percentEl.textContent = (ratio * 100).toFixed(1);
   });
 }
