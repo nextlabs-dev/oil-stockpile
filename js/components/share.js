@@ -6,6 +6,9 @@
  *  - Clipboard API でリンクとテキストをコピー
  *
  * X とコピーのシェアテキストは「いま{N}日分」を含む。N は computeCurrentDays() の整数部。
+ *
+ * バインドは `data-share="x|line|facebook|copy"` 属性で行い、ページ上の
+ * 複数インスタンス（例: ヒーロー内 + フッター内）に同時に作用する。
  */
 
 import { SITE_CONFIG } from '../core/data.js';
@@ -31,66 +34,64 @@ function showToast(msg) {
   }, TOAST_MS);
 }
 
+function openShareX() {
+  const text = buildShareText();
+  if (text == null) {
+    showToast('データを取得できていません');
+    return;
+  }
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(SITE_CONFIG.url)}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function openShareLine() {
+  const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(SITE_CONFIG.url)}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function openShareFacebook() {
+  const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_CONFIG.url)}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+async function copyShareLink() {
+  const shareText = buildShareText();
+  if (shareText == null) {
+    showToast('データを取得できていません');
+    return;
+  }
+  const text = `${shareText} ${SITE_CONFIG.url}`;
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      showToast('コピーしました');
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('コピーしました');
+    }
+  } catch (e) {
+    console.error('Copy failed:', e);
+    showToast('コピーに失敗しました');
+  }
+}
+
+const HANDLERS = {
+  x: openShareX,
+  line: openShareLine,
+  facebook: openShareFacebook,
+  copy: copyShareLink,
+};
+
 export function initShare() {
-  const btnX = document.getElementById('share-x');
-  const btnLine = document.getElementById('share-line');
-  const btnFacebook = document.getElementById('share-facebook');
-  const btnCopy = document.getElementById('share-copy');
-
-  if (btnX) {
-    btnX.addEventListener('click', () => {
-      const text = buildShareText();
-      if (text == null) {
-        showToast('データを取得できていません');
-        return;
-      }
-      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(SITE_CONFIG.url)}`;
-      window.open(url, '_blank', 'noopener,noreferrer');
-    });
-  }
-
-  if (btnLine) {
-    btnLine.addEventListener('click', () => {
-      const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(SITE_CONFIG.url)}`;
-      window.open(url, '_blank', 'noopener,noreferrer');
-    });
-  }
-
-  if (btnFacebook) {
-    btnFacebook.addEventListener('click', () => {
-      const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_CONFIG.url)}`;
-      window.open(url, '_blank', 'noopener,noreferrer');
-    });
-  }
-
-  if (btnCopy) {
-    btnCopy.addEventListener('click', async () => {
-      const shareText = buildShareText();
-      if (shareText == null) {
-        showToast('データを取得できていません');
-        return;
-      }
-      const text = `${shareText} ${SITE_CONFIG.url}`;
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-          showToast('コピーしました');
-        } else {
-          // 古いブラウザや非HTTPS時のフォールバック
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          ta.style.position = 'fixed';
-          ta.style.opacity = '0';
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand('copy');
-          document.body.removeChild(ta);
-          showToast('コピーしました');
-        }
-      } catch (e) {
-        console.error('Copy failed:', e);
-        showToast('コピーに失敗しました');
-      }
-    });
+  for (const el of document.querySelectorAll('[data-share]')) {
+    const handler = HANDLERS[el.dataset.share];
+    if (handler) el.addEventListener('click', handler);
   }
 }

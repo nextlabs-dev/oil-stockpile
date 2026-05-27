@@ -1,251 +1,707 @@
 /* =============================================================
-   Tankers page (tankers/index.html)
+   Tankers page (tankers/index.html) — Light bluish-purple dashboard
+   Scope: body.page-tankers
    ============================================================= */
-.tanker-hero {
-  text-align: center;
+
+.page-tankers {
+  --bg: #e9eef7;
+  --bg-gradient: linear-gradient(180deg, #e3e9f5 0%, #eef2fa 100%);
+  --bg-card: #ffffff;
+  --bg-soft: #f1f5fb;
+  --bg-banner: #dde6f5;
+
+  --fg: #14182c;
+  --fg-strong: #0f1430;
+  --fg-sub: #51587a;
+  --fg-muted: #828aa6;
+
+  --rule: #dde3ef;
+  --rule-soft: #e8ecf5;
+
+  --brand: #5983f1;
+  --brand-strong: #4870e8;
+  --brand-soft: #eef2ff;
+  --brand-ink: #1e2a78;
+
+  --accent-live: #16a34a;
+  --accent-live-bg: #ecfdf5;
+
+  --jp-bound: #3b5cf0;
+  --jp-bound-soft: #dbe4fb;
+  --ship-other: #a8b3d1;
+  --ship-other-soft: #e3e8f4;
+
+  --link: var(--brand);
+  --focus: var(--brand);
 }
 
-.tanker-num-row {
+.page-tankers {
+  background: var(--bg-gradient);
+  color: var(--fg);
+  min-height: 100vh;
+}
+
+.page-tankers a {
+  color: var(--link);
+}
+
+/* =============================================================
+   Main grid (4-col, matches home)
+   ============================================================= */
+.page-tankers .site-main.dashboard {
+  max-width: 1200px;
+  padding: var(--space-3) var(--space-5) var(--space-6);
+}
+
+.page-tankers .dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: min-content;
+  gap: var(--space-3);
+}
+
+.page-tankers .dash-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule-soft);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 4px 16px rgba(44, 64, 120, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.page-tankers .dash-card--hero {
+  grid-column: 1 / span 5;
+  padding: 24px;
+  gap: 22px;
+  background: linear-gradient(315deg, #eaf0fb 0%, #f4f7fd 35%, #ffffff 100%);
+}
+
+.page-tankers .ship-viz-card {
+  grid-column: 6 / span 7;
+}
+
+.page-tankers .dash-card--full {
+  grid-column: 1 / -1;
+}
+
+.page-tankers .ports-card {
+  grid-column: 1 / span 5;
+}
+
+.page-tankers .meta-card {
+  grid-column: 6 / span 7;
+}
+
+.page-tankers .dash-card-eyebrow {
+  font-size: 12px;
+  color: var(--fg-sub);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.page-tankers .dash-card-eyebrow--live {
   display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-live);
+  background: var(--accent-live-bg);
+  border-radius: 999px;
+}
+
+.page-tankers .live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-live);
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.page-tankers .dash-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg-strong);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* =============================================================
+   AIS LIVE hero card
+   ============================================================= */
+.page-tankers .ais-live-top {
+  display: flex;
+  align-items: flex-end;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.page-tankers .ais-num-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  font-variant-numeric: tabular-nums;
+  flex: 0 0 auto;
+}
+
+.page-tankers .ais-num {
+  font-family: "Inter", var(--font-sans);
+  font-size: clamp(60px, 7vw, 96px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  background: linear-gradient(180deg, #7c97f8 0%, #3b5cf0 55%, #2541c7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--brand);
+  white-space: nowrap;
+}
+
+.page-tankers .ais-num-unit-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 8px;
+}
+
+.page-tankers .ais-num-unit {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fg-strong);
+  line-height: 1;
+}
+
+.page-tankers .ais-num-sub-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  font-weight: 600;
+}
+
+.page-tankers .ais-live-note {
+  font-size: 12px;
+  color: var(--fg-sub);
+  line-height: 1.75;
+  margin: 0;
+}
+
+.page-tankers .ais-live-note strong {
+  font-family: "Inter", var(--font-sans);
+  font-weight: 700;
+  color: var(--fg-strong);
+  font-variant-numeric: tabular-nums;
+  margin: 0 1px;
+}
+
+.page-tankers .ais-breakdown-box {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 10px 14px;
+  min-width: 140px;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.page-tankers .ais-breakdown-row {
+  display: flex;
+  justify-content: space-between;
   align-items: baseline;
   gap: 12px;
-  font-variant-numeric: tabular-nums;
-  margin-bottom: var(--space-4);
 }
 
-.tanker-num {
-  font-family: var(--font-sans);
-  font-size: clamp(64px, 16vw, 144px);
-  font-weight: 200;
+.page-tankers .ais-breakdown-label {
+  font-size: 12px;
+  color: var(--fg-sub);
+  letter-spacing: 0.02em;
+}
+
+.page-tankers .ais-breakdown-row--jp .ais-breakdown-label {
+  color: var(--jp-bound);
+  font-weight: 600;
+}
+
+.page-tankers .ais-breakdown-value {
+  font-size: 12px;
+  color: var(--fg-strong);
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.page-tankers .ais-breakdown-value strong {
+  font-family: "Inter", var(--font-sans);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--fg-strong);
+  letter-spacing: -0.01em;
   line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--fg);
 }
 
-.tanker-unit {
-  font-size: clamp(14px, 2.6vw, 20px);
-  font-weight: 300;
+.page-tankers .ais-breakdown-row--jp .ais-breakdown-value strong {
+  color: var(--jp-bound);
+}
+
+.page-tankers .ais-breakdown-unit {
+  font-size: 11px;
   color: var(--fg-sub);
+  font-weight: 500;
 }
 
-.tanker-sub {
-  font-size: var(--text-md);
-  color: var(--fg-sub);
+.page-tankers .ais-share {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.tanker-japan-bound {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: 28px;
-  font-weight: 300;
-  color: var(--fg);
-  margin: 0 var(--space-1);
+.page-tankers .ais-share-label {
+  font-size: 11px;
+  color: var(--brand);
+  font-weight: 600;
 }
 
-.tanker-scale {
-  margin-top: var(--space-4);
-  font-size: var(--text-sm);
+.page-tankers .ais-share .share-buttons {
+  gap: 4px;
+}
+
+.page-tankers .ais-share .share-btn {
+  padding: 8px 10px;
+  font-size: 12px;
+  gap: 6px;
+}
+
+/* =============================================================
+   Ship icon visualization card
+   ============================================================= */
+.page-tankers .ship-viz-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.page-tankers .ship-viz-keylegend {
+  font-size: 11px;
   color: var(--fg-muted);
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.7;
+  margin: 0;
 }
 
-/* Density map */
-.map-note {
-  font-size: var(--text-sm);
-  color: var(--fg-muted);
-  margin-bottom: var(--space-3);
-}
-
-.tanker-map {
-  width: 100%;
-  height: 380px;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-md);
-  background: var(--bg-card);
-}
-
-.tanker-map .leaflet-control-attribution {
-  font-size: 10px;
-}
-
-.map-legend {
+.page-tankers .ship-viz-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-2);
-  font-size: var(--text-sm);
-  color: var(--fg-muted);
+  gap: 6px 18px;
+  font-size: 12px;
+  color: var(--fg-sub);
+  margin: 0;
+  padding-top: 6px;
+  border-top: 1px solid var(--rule-soft);
 }
-.map-legend-item {
+
+.page-tankers .ship-viz-legend-item {
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
-.map-legend-dot {
+
+.page-tankers .ship-viz-legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.page-tankers .ship-viz-legend-dot--jp {
+  background: var(--jp-bound);
+}
+
+.page-tankers .ship-viz-legend-dot--other {
+  background: var(--ship-other);
+}
+
+.page-tankers .ship-viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(28px, 1fr));
+  gap: 6px;
+  padding: 8px 0;
+  min-height: 110px;
+  align-content: start;
+}
+
+.page-tankers .ship-icon {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  display: block;
+  object-fit: contain;
+}
+
+.page-tankers .ship-viz-footer {
+  margin-top: auto;
+  padding: 14px 16px;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule-soft);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.page-tankers .ship-viz-footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.page-tankers .ship-viz-footer-label {
+  font-size: 12px;
+  color: var(--fg-sub);
+  font-weight: 500;
+}
+
+.page-tankers .ship-viz-footer-label strong {
+  font-family: "Inter", var(--font-sans);
+  font-weight: 700;
+  color: var(--fg-strong);
+  font-variant-numeric: tabular-nums;
+  margin: 0 2px;
+}
+
+.page-tankers .ship-viz-footer-volume {
+  font-family: "Inter", var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--fg-strong);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.page-tankers .ship-viz-footer-volume strong {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--fg-strong);
+  margin: 0 2px;
+  letter-spacing: -0.02em;
+}
+
+.page-tankers .ship-viz-footer-sub {
+  font-size: 11px;
+  color: var(--fg-muted);
+  line-height: 1.6;
+  margin: 4px 0 0;
+}
+
+.page-tankers .ship-viz-footer-sub strong {
+  font-family: "Inter", var(--font-sans);
+  color: var(--fg-sub);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin: 0 1px;
+}
+
+.page-tankers .ship-viz-footer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding-left: 18px;
+  border-left: 1px solid var(--rule-soft);
+}
+
+.page-tankers .ship-viz-footer-note-label {
+  font-size: 11px;
+  color: var(--fg-muted);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.page-tankers .ship-viz-footer-note {
+  font-size: 11px;
+  color: var(--fg-sub);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* =============================================================
+   Map card
+   ============================================================= */
+.page-tankers .map-note {
+  font-size: 12px;
+  color: var(--fg-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.page-tankers .tanker-map {
+  width: 100%;
+  height: 380px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--bg-soft);
+  overflow: hidden;
+}
+
+.page-tankers .tanker-map .leaflet-control-attribution {
+  font-size: 10px;
+}
+
+.page-tankers .map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin: 0;
+}
+.page-tankers .map-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.page-tankers .map-legend-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   display: inline-block;
 }
-.map-legend-dot--japan {
+.page-tankers .map-legend-dot--japan {
   background: #c0392b;
 }
-.map-legend-dot--other {
+.page-tankers .map-legend-dot--other {
   background: #7f8c8d;
 }
 
-.tanker-popup {
-  font-size: var(--text-sm);
+.page-tankers .tanker-popup {
+  font-size: 12px;
   line-height: 1.6;
 }
-.tanker-popup .tanker-popup-row {
+.page-tankers .tanker-popup .tanker-popup-row {
   display: inline-block;
 }
-.tanker-popup .tanker-popup-label {
+.page-tankers .tanker-popup .tanker-popup-label {
   color: var(--fg-muted);
   margin-right: 4px;
 }
 
-.map-empty {
-  margin-top: var(--space-3);
-  font-size: var(--text-sm);
+.page-tankers .map-empty {
+  font-size: 12px;
   color: var(--fg-muted);
+  margin: 0;
 }
 
-/* Top destinations list */
-.ports-list {
+/* =============================================================
+   Ports list
+   ============================================================= */
+.page-tankers .ports-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  gap: var(--space-2);
+  gap: 8px;
 }
 
-.port-row {
+.page-tankers .port-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 12px var(--space-3);
-  background: var(--bg-card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule-soft);
+  border-radius: 8px;
 }
 
-.port-name {
-  font-size: var(--text-md);
-  font-weight: 500;
+.page-tankers .port-name {
+  font-size: 13px;
+  font-weight: 600;
   letter-spacing: 0.02em;
-  color: var(--fg);
+  color: var(--fg-strong);
 }
 
-.port-count {
-  font-family: var(--font-sans);
+.page-tankers .port-count {
+  font-family: "Inter", var(--font-sans);
   font-variant-numeric: tabular-nums;
   font-size: 18px;
-  color: var(--fg);
+  font-weight: 700;
+  color: var(--jp-bound);
 }
 
-.port-count small {
-  font-size: 12px;
+.page-tankers .port-count small {
+  font-size: 11px;
   color: var(--fg-sub);
   margin-left: 2px;
-}
-
-.ports-empty {
-  font-size: var(--text-sm);
-  color: var(--fg-muted);
-  padding: var(--space-4) var(--space-3);
-  background: var(--bg-card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-sm);
-  text-align: center;
-}
-
-.ports-unknown {
-  margin-top: var(--space-2);
-  font-size: var(--text-sm);
-  color: var(--fg-muted);
-  text-align: right;
-}
-
-.ports-unknown strong {
-  color: var(--fg-sub);
   font-weight: 500;
-  font-variant-numeric: tabular-nums;
 }
 
-/* Meta section */
-.meta-list {
-  display: grid;
-  gap: 12px;
+.page-tankers .ports-empty {
+  font-size: 12px;
+  color: var(--fg-muted);
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule-soft);
+  border-radius: 8px;
+  text-align: center;
   margin: 0;
 }
 
-.meta-row {
+.page-tankers .ports-unknown {
+  font-size: 11px;
+  color: var(--fg-muted);
+  text-align: right;
+  margin: 0;
+}
+
+.page-tankers .ports-unknown strong {
+  color: var(--fg-sub);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* =============================================================
+   Meta section
+   ============================================================= */
+.page-tankers .meta-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.page-tankers .meta-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: var(--space-2) 0;
-  border-bottom: 1px dashed var(--rule);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule-soft);
   gap: var(--space-3);
   flex-wrap: wrap;
 }
 
-.meta-row:last-of-type {
+.page-tankers .meta-row:last-of-type {
   border-bottom: none;
 }
 
-.meta-row dt {
-  font-size: 12px;
+.page-tankers .meta-row dt {
+  font-size: 11px;
   color: var(--fg-muted);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   flex: 0 0 auto;
+  font-weight: 600;
 }
 
-.meta-row dd {
-  font-size: var(--text-md);
-  color: var(--fg);
+.page-tankers .meta-row dd {
+  font-size: 13px;
+  color: var(--fg-strong);
   text-align: right;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
 }
 
-/* Caveats */
-.caveat-list {
+.page-tankers .stale-warning {
+  margin-top: 8px;
+  padding: 8px 12px;
+  display: inline-block;
+  font-size: 11px;
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+}
+
+/* =============================================================
+   Caveats
+   ============================================================= */
+.page-tankers .caveat-list {
   list-style: none;
   padding: 0;
+  margin: 0;
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
-.caveat-list li {
+.page-tankers .caveat-list li {
   position: relative;
   padding-left: 20px;
-  font-size: var(--text-sm);
+  font-size: 13px;
   line-height: 1.7;
   color: var(--fg-sub);
 }
 
-.caveat-list li::before {
+.page-tankers .caveat-list li::before {
   content: "—";
   position: absolute;
   left: 0;
   color: var(--fg-muted);
 }
 
-.caveat-list li strong {
-  color: var(--fg);
-  font-weight: 500;
+.page-tankers .caveat-list li strong {
+  color: var(--fg-strong);
+  font-weight: 600;
 }
 
-.caveat-foot {
-  margin-top: var(--space-3);
-  padding: 12px var(--space-3);
-  background: var(--bg-card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-sm);
+.page-tankers .caveat-foot {
+  margin-top: 4px;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule-soft);
+  border-radius: 8px;
+  font-size: 12px;
   color: var(--fg-sub);
+}
+
+.page-tankers .skip-link {
+  background: var(--brand);
+  color: #ffffff;
+}
+
+/* =============================================================
+   Responsive
+   ============================================================= */
+@media (max-width: 980px) {
+  .page-tankers .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .page-tankers .dash-card--hero,
+  .page-tankers .ship-viz-card,
+  .page-tankers .ports-card,
+  .page-tankers .meta-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-tankers .ais-live-top {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .page-tankers .ais-breakdown-box {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .page-tankers .ais-num {
+    font-size: clamp(56px, 18vw, 80px);
+  }
+  .page-tankers .tanker-map {
+    height: 320px;
+  }
 }

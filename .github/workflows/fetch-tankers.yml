@@ -35,6 +35,9 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Sample AIS stream
+        # aisstream.io は BETA で SLA 非保証。上流障害で run 全体が赤くなるのを避ける。
+        # 失敗時は tankers.json を書かないため、次の Commit if changed は no-op で抜ける。
+        continue-on-error: true
         env:
           AISSTREAM_API_KEY: ${{ secrets.AISSTREAM_API_KEY }}
         run: python scripts/fetch_tankers.py --duration 480

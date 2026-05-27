@@ -3,7 +3,7 @@
     "url": "https://tkysi-mi.github.io/oil-stockpile",
     "og_image": "https://tkysi-mi.github.io/oil-stockpile/assets/og-image.png",
     "og_image_alt": "日本の石油備蓄カウンターと充填率タンクゲージ",
-    "font_href": "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&family=Noto+Sans+JP:wght@200;300;400;500;700&display=swap"
+    "font_href": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
   },
   "nav_order": ["home", "tankers", "scale", "about"],
   "nav_labels": {
@@ -17,6 +17,20 @@
       "key": "home",
       "source": "home.html",
       "output": "index.html",
+      "body_class": "page-home",
+      "site_brand": [
+        "      <span class=\"site-logo\" aria-hidden=\"true\"></span>",
+        "      <span class=\"site-brand-text\">",
+        "        <span class=\"site-title\">JAPAN OIL STOCKPILE</span>",
+        "        <span class=\"site-tagline\">あと何日、日本は持つのか。</span>",
+        "      </span>"
+      ],
+      "header_meta": [
+        "    <div class=\"site-header-meta\">",
+        "      <span class=\"site-header-meta-label\">最終更新</span>",
+        "      <span class=\"site-header-meta-value\" id=\"header-last-updated\">—</span>",
+        "    </div>"
+      ],
       "title": "あと何日？｜日本の石油備蓄",
       "description": "日本の石油備蓄、いまこれだけ。経済産業省「石油備蓄の現況」速報値を分かりやすく可視化する非公式カウンター。",
       "canonical_path": "/",
@@ -45,6 +59,20 @@
       "key": "tankers",
       "source": "tankers.html",
       "output": "tankers/index.html",
+      "body_class": "page-tankers",
+      "site_brand": [
+        "      <span class=\"site-logo\" aria-hidden=\"true\"></span>",
+        "      <span class=\"site-brand-text\">",
+        "        <span class=\"site-title\">JAPAN OIL STOCKPILE</span>",
+        "        <span class=\"site-tagline\">あと何日、日本は持つのか。</span>",
+        "      </span>"
+      ],
+      "header_meta": [
+        "    <div class=\"site-header-meta\">",
+        "      <span class=\"site-header-meta-label\">最終更新</span>",
+        "      <span class=\"site-header-meta-value\" id=\"header-last-updated\">—</span>",
+        "    </div>"
+      ],
       "title": "日本周辺のタンカー｜日本の石油備蓄",
       "description": "いま、日本周辺の海域に何隻のタンカーが航行中か。AIS データから集計した隻数のみを表示する非公式の可視化サイト。",
       "canonical_path": "/tankers/",
@@ -81,6 +109,20 @@
       "key": "scale",
       "source": "scale.html",
       "output": "scale/index.html",
+      "body_class": "page-scale",
+      "site_brand": [
+        "      <span class=\"site-logo\" aria-hidden=\"true\"></span>",
+        "      <span class=\"site-brand-text\">",
+        "        <span class=\"site-title\">JAPAN OIL STOCKPILE</span>",
+        "        <span class=\"site-tagline\">あと何日、日本は持つのか。</span>",
+        "      </span>"
+      ],
+      "header_meta": [
+        "    <div class=\"site-header-meta\">",
+        "      <span class=\"site-header-meta-label\">最終更新</span>",
+        "      <span class=\"site-header-meta-value\" id=\"header-last-updated\">—</span>",
+        "    </div>"
+      ],
       "title": "石油のものさし｜日本の石油備蓄",
       "description": "日本の石油備蓄を「N 日」だけでなく、kL・バレル・VLCC隻数・年間消費比に換算して提示する非公式の可視化サイト。",
       "canonical_path": "/scale/",
@@ -108,6 +150,20 @@
       "key": "about",
       "source": "about.html",
       "output": "about/index.html",
+      "body_class": "page-about",
+      "site_brand": [
+        "      <span class=\"site-logo\" aria-hidden=\"true\"></span>",
+        "      <span class=\"site-brand-text\">",
+        "        <span class=\"site-title\">JAPAN OIL STOCKPILE</span>",
+        "        <span class=\"site-tagline\">あと何日、日本は持つのか。</span>",
+        "      </span>"
+      ],
+      "header_meta": [
+        "    <div class=\"site-header-meta\">",
+        "      <span class=\"site-header-meta-label\">最終更新</span>",
+        "      <span class=\"site-header-meta-value\" id=\"header-last-updated\">—</span>",
+        "    </div>"
+      ],
       "title": "このサイトについて｜日本の石油備蓄",
       "description": "「あと何日？日本の石油備蓄」サイトの目的・データ出典・計算方法・運営会社の情報を 1 ページに集約しています。",
       "canonical_path": "/about/",
@@ -116,6 +172,7 @@
       "twitter_title": "このサイトについて｜日本の石油備蓄",
       "twitter_description": "サイトの目的・データ出典・計算方法・運営会社情報。",
       "active_nav": "about",
+      "script_tags": "<script type=\"module\" src=\"../js/pages/about.js\"></script>",
       "footer_source": [
         "<strong>主要データ出典:</strong>",
         "    経済産業省「<a href=\"https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/\" target=\"_blank\" rel=\"noopener noreferrer\">石油備蓄の現況{{ external_note }}</a>」速報 PDF",

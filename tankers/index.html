@@ -25,20 +25,24 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&family=Noto+Sans+JP:wght@200;300;400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin="anonymous">
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
-<body>
+<body class="page-tankers">
 
 <a class="skip-link" href="#main">本文へスキップ</a>
 
 <header class="site-header">
   <div class="site-header-inner">
     <a class="site-brand" href="../" aria-label="あと何日？日本の石油備蓄 ホーム">
-      <h1 class="site-title">あと何日？日本の石油備蓄</h1>
+      <span class="site-logo" aria-hidden="true"></span>
+      <span class="site-brand-text">
+        <span class="site-title">JAPAN OIL STOCKPILE</span>
+        <span class="site-tagline">あと何日、日本は持つのか。</span>
+      </span>
     </a>
     <nav class="tabs" aria-label="セクション">
       <a class="tab" href="../">カウンター</a>
@@ -46,133 +50,217 @@
       <a class="tab" href="../scale/">石油のものさし</a>
       <a class="tab" href="../about/">about</a>
     </nav>
+    <div class="site-header-meta">
+      <span class="site-header-meta-label">最終更新</span>
+      <span class="site-header-meta-value" id="header-last-updated">—</span>
+    </div>
   </div>
 </header>
 
-<main id="main" class="site-main">
+<main id="main" class="site-main dashboard">
+  <h2 id="tanker-heading" class="visually-hidden">日本周辺のタンカー</h2>
 
-  <!-- Hero: tanker count -->
-  <section class="tanker-hero is-hero" aria-labelledby="tanker-heading">
-    <h2 id="tanker-heading" class="visually-hidden">日本周辺のタンカー</h2>
-    <p class="lead">いま、日本周辺の海域に</p>
-    <div class="tanker-num-row">
-      <span id="total-tankers" class="tanker-num">—</span>
-      <span class="tanker-unit">隻のタンカーが航行中</span>
-    </div>
-    <p class="tanker-sub">
-      うち
-      <strong id="japan-bound" class="tanker-japan-bound">—</strong>
-      隻が日本の港を目的地としています
-    </p>
-    <p class="tanker-scale">
-      ※ 典型的な VLCC（大型原油タンカー）1 隻 ≈ 約 200 万バレル ≈ 約 32 万 kL ≈ 日本の原油消費 約 1 日分 に相当。
-    </p>
-  </section>
+  <div class="dashboard-grid">
 
-  <!-- Vessels map -->
-  <section class="map-section" aria-labelledby="map-heading">
-    <h2 id="map-heading" class="section-title">海域内のタンカー</h2>
-    <p class="map-note">
-      観測した個別タンカーの位置をプロットします。マーカーをクリックすると船名・destination・MMSI・座標を表示します。
-    </p>
-    <div id="tanker-map" class="tanker-map" aria-label="日本周辺海域のタンカー位置図"></div>
-    <p class="map-legend" aria-hidden="true">
-      <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--japan"></span>日本港向け</span>
-      <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--other"></span>日本港向け以外</span>
-    </p>
-    <p id="map-empty" class="map-empty" hidden>
-      今回のサンプルでは位置情報付きのタンカーが観測されませんでした。
-    </p>
-  </section>
+    <!-- Hero card: AIS LIVE big number + share -->
+    <section class="dash-card dash-card--hero ais-live-card" aria-labelledby="tanker-heading">
+      <span class="dash-card-eyebrow dash-card-eyebrow--live">
+        <span class="live-dot" aria-hidden="true"></span>AIS LIVE・1時間更新
+      </span>
 
-  <!-- Top destinations -->
-  <section class="ports-section" aria-labelledby="ports-heading">
-    <h2 id="ports-heading" class="section-title">主な目的地</h2>
-    <ol class="ports-list" id="ports-list"></ol>
-    <p class="ports-unknown" id="ports-unknown" hidden>
-      上記のほか <strong id="ports-unknown-count">—</strong> 隻は <span lang="en">destination</span> から港名を特定できませんでした。
-    </p>
-    <p class="ports-empty" id="ports-empty" hidden>
-      今回のサンプルでは日本港を目的地とするタンカーは確認できませんでした。
-    </p>
-  </section>
-
-  <!-- Metadata -->
-  <section class="meta-section" aria-labelledby="meta-heading">
-    <h2 id="meta-heading" class="section-title">取得情報</h2>
-    <dl class="meta-list">
-      <div class="meta-row">
-        <dt>最終取得</dt>
-        <dd id="fetched-at">—</dd>
+      <div class="ais-live-top">
+        <div class="ais-num-row" role="status" aria-label="日本周辺のタンカー観測隻数">
+          <span id="total-tankers" class="ais-num">—</span>
+          <span class="ais-num-unit-stack">
+            <span class="ais-num-unit">隻</span>
+            <span class="ais-num-sub-label">観測中</span>
+          </span>
+        </div>
+        <div class="ais-breakdown-box" aria-hidden="false">
+          <div class="ais-breakdown-row ais-breakdown-row--jp">
+            <span class="ais-breakdown-label">日本向け</span>
+            <span class="ais-breakdown-value"><strong id="japan-bound">—</strong><span class="ais-breakdown-unit">隻</span></span>
+          </div>
+          <div class="ais-breakdown-row">
+            <span class="ais-breakdown-label">その他</span>
+            <span class="ais-breakdown-value"><strong id="tankers-other">—</strong><span class="ais-breakdown-unit">隻</span></span>
+          </div>
+        </div>
       </div>
-      <div class="meta-row">
-        <dt>サンプル時間</dt>
-        <dd id="sampling-duration">—</dd>
-      </div>
-      <div class="meta-row">
-        <dt>対象海域</dt>
-        <dd id="bounding-box">—</dd>
-      </div>
-      <div class="meta-row">
-        <dt>データソース</dt>
-        <dd>
-          <a href="https://aisstream.io/" target="_blank" rel="noopener noreferrer"><span lang="en">aisstream.io</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
-          <small>（<span lang="en">BETA</span>）</small>
-        </dd>
-      </div>
-    </dl>
-    <p id="stale-warning" class="stale-warning" hidden>
-      ⚠ 最終取得から6時間以上経過しています。自動取得が止まっている可能性があります。
-    </p>
-  </section>
 
-  <!-- Caveats -->
-  <section class="caveats-section" aria-labelledby="caveats-heading">
-    <h2 id="caveats-heading" class="section-title">この数字の限界</h2>
-    <ul class="caveat-list">
-      <li><strong>destination は船員の手入力</strong>です。「日本港を次の目的地として申告した船」を数えており、実際の入港数とは異なる場合があります。</li>
-      <li>対象は <strong>AIS の船種コード 80-89（Tanker）</strong>のみ。LNG専用船・小型船は計上されない場合があります。</li>
-      <li>サンプル時間中に静的データ（destination を含む情報）を送信しなかった船は計上されません。AIS の静的データは約6分ごとに送信されます。</li>
-      <li><strong>積載量・バレル数の推計は表示していません</strong>（DWT→バレル換算は誤差が大きく、誤解を招くため）。</li>
-    </ul>
-    <p class="caveat-foot">
-      実際の月次原油輸入量は
-      <a href="https://www.customs.go.jp/toukei/info/tsdl.htm" target="_blank" rel="noopener noreferrer">財務省貿易統計<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（HS 2709.00 原油）をご参照ください。
-    </p>
-  </section>
+      <p class="ais-live-note">
+        AIS 航行データを元に、近海航行のタンカーが分かりやすく可視化できます。日本向けが <strong id="ais-note-jp">—</strong> 隻ぐらいだと、<span lang="en">VLCC</span> 換算で約 <strong id="ais-note-kl">—</strong> 万 <span lang="en">kL</span>、約 <strong id="ais-note-days">—</strong> 日分の原油消費量に相当します。
+      </p>
 
+      <div class="ais-share">
+        <span class="ais-share-label">AIS 状況を共有する</span>
+        <div class="share-buttons">
+          <button class="share-btn" type="button" data-share="x">
+            <span class="share-btn-icon" aria-hidden="true">𝕏</span>
+            <span>Xで共有する</span>
+          </button>
+          <button class="share-btn" type="button" data-share="line">
+            <svg class="share-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M19.365 9.863c.349 0 .631.285.631.631 0 .345-.282.63-.631.63H17.61v1.125h1.755c.349 0 .631.283.631.63 0 .344-.282.629-.631.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .63.283.63.63 0 .344-.282.629-.63.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+            </svg>
+            <span>LINEで共有する</span>
+          </button>
+          <button class="share-btn" type="button" data-share="copy">
+            <svg class="share-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"/>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"/>
+            </svg>
+            <span>リンクをコピー</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ship icon visualization -->
+    <section class="dash-card ship-viz-card" aria-labelledby="ship-viz-heading">
+      <div class="ship-viz-head">
+        <h3 id="ship-viz-heading" class="dash-card-title">船アイコン可視化</h3>
+        <p class="ship-viz-keylegend" aria-hidden="true">
+          1アイコン=1隻 / 濃色=日本向け / 淡色=その他・通過
+        </p>
+      </div>
+
+      <div id="ship-viz" class="ship-viz-grid" role="img" aria-label="観測されたタンカーのアイコン可視化"></div>
+
+      <p class="ship-viz-legend" aria-hidden="true">
+        <span class="ship-viz-legend-item">
+          <span class="ship-viz-legend-dot ship-viz-legend-dot--jp"></span>日本向け（<span lang="en">Destination</span> 明確）
+        </span>
+        <span class="ship-viz-legend-item">
+          <span class="ship-viz-legend-dot ship-viz-legend-dot--other"></span>その他・通過
+        </span>
+      </p>
+
+      <div class="ship-viz-footer">
+        <div class="ship-viz-footer-left">
+          <span class="ship-viz-footer-label">日本向け<strong id="japan-bound-2">—</strong>隻</span>
+          <div class="ship-viz-footer-volume">
+            約<strong id="jp-volume-kl">—</strong>万<span lang="en">kL</span>
+          </div>
+          <p class="ship-viz-footer-sub">
+            <span lang="en">VLCC</span> 換算で、日本の原油消費量約<strong id="jp-volume-days">—</strong>日分。
+          </p>
+        </div>
+        <div class="ship-viz-footer-right">
+          <span class="ship-viz-footer-note-label">補足</span>
+          <p class="ship-viz-footer-note">
+            <span lang="en">AIS</span> の <span lang="en">destination</span> は船員の手入力のため、
+            実際の入港数や正確な国別積み付け先とは差が出る場合があります。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map card -->
+    <section class="dash-card dash-card--full map-card" aria-labelledby="map-heading">
+      <h3 id="map-heading" class="dash-card-title">海域内のタンカー位置</h3>
+      <p class="map-note">
+        観測した個別タンカーの位置をプロット。マーカーをクリックすると船名・<span lang="en">destination</span>・<span lang="en">MMSI</span>・座標を表示します。
+      </p>
+      <div id="tanker-map" class="tanker-map" aria-label="日本周辺海域のタンカー位置図"></div>
+      <p class="map-legend" aria-hidden="true">
+        <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--japan"></span>日本港向け</span>
+        <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--other"></span>日本港向け以外</span>
+      </p>
+      <p id="map-empty" class="map-empty" hidden>
+        今回のサンプルでは位置情報付きのタンカーが観測されませんでした。
+      </p>
+    </section>
+
+    <!-- Top destinations -->
+    <section class="dash-card ports-card" aria-labelledby="ports-heading">
+      <h3 id="ports-heading" class="dash-card-title">主な目的地</h3>
+      <ol class="ports-list" id="ports-list"></ol>
+      <p class="ports-unknown" id="ports-unknown" hidden>
+        上記のほか <strong id="ports-unknown-count">—</strong> 隻は <span lang="en">destination</span> から港名を特定できませんでした。
+      </p>
+      <p class="ports-empty" id="ports-empty" hidden>
+        今回のサンプルでは日本港を目的地とするタンカーは確認できませんでした。
+      </p>
+    </section>
+
+    <!-- Metadata -->
+    <section class="dash-card meta-card" aria-labelledby="meta-heading">
+      <h3 id="meta-heading" class="dash-card-title">取得情報</h3>
+      <dl class="meta-list">
+        <div class="meta-row">
+          <dt>最終取得</dt>
+          <dd id="fetched-at">—</dd>
+        </div>
+        <div class="meta-row">
+          <dt>サンプル時間</dt>
+          <dd id="sampling-duration">—</dd>
+        </div>
+        <div class="meta-row">
+          <dt>対象海域</dt>
+          <dd id="bounding-box">—</dd>
+        </div>
+        <div class="meta-row">
+          <dt>データソース</dt>
+          <dd>
+            <a href="https://aisstream.io/" target="_blank" rel="noopener noreferrer"><span lang="en">aisstream.io</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+            <small>（<span lang="en">BETA</span>）</small>
+          </dd>
+        </div>
+      </dl>
+      <p id="stale-warning" class="stale-warning" hidden>
+        ⚠ 最終取得から6時間以上経過しています。自動取得が止まっている可能性があります。
+      </p>
+    </section>
+
+    <!-- Caveats -->
+    <section class="dash-card dash-card--full caveats-card" aria-labelledby="caveats-heading">
+      <h3 id="caveats-heading" class="dash-card-title">この数字の限界</h3>
+      <ul class="caveat-list">
+        <li><strong>destination は船員の手入力</strong>です。「日本港を次の目的地として申告した船」を数えており、実際の入港数とは異なる場合があります。</li>
+        <li>対象は <strong>AIS の船種コード 80-89（Tanker）</strong>のみ。LNG専用船・小型船は計上されない場合があります。</li>
+        <li>サンプル時間中に静的データ（destination を含む情報）を送信しなかった船は計上されません。AIS の静的データは約6分ごとに送信されます。</li>
+        <li><strong>積載量・バレル数の推計は表示していません</strong>（DWT→バレル換算は誤差が大きく、誤解を招くため）。</li>
+      </ul>
+      <p class="caveat-foot">
+        実際の月次原油輸入量は
+        <a href="https://www.customs.go.jp/toukei/info/tsdl.htm" target="_blank" rel="noopener noreferrer">財務省貿易統計<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（HS 2709.00 原油）をご参照ください。
+      </p>
+    </section>
+
+  </div>
 </main>
 
-<footer class="site-footer">
-  <p class="footer-source">
-    <strong>データソース:</strong>
-    <a href="https://aisstream.io/" target="_blank" rel="noopener noreferrer"><span lang="en">aisstream.io</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（<span lang="en">BETA</span>）の AIS リアルタイムストリーム
-  </p>
-  <p class="footer-disclaimer">
-    本サイトは AIS データに基づく非公式の集計です。AIS は IMO 規定により公開放送される情報で、地図には個別船舶の名称・destination・位置を表示しています。実流入量は財務省貿易統計をご参照ください。
-  </p>
-  <dl class="footer-company" aria-label="運営会社">
-    <div class="footer-company-row">
-      <dt>提供</dt>
-      <dd>株式会社ネクストラボ（<span lang="en">NextLab Inc.</span>）</dd>
+<section class="footer-share-section" aria-labelledby="footer-share-heading">
+  <h2 id="footer-share-heading" class="visually-hidden">運営とシェア</h2>
+  <div class="footer-share-row">
+    <p class="footer-share-org">
+      <span lang="ja">株式会社ネクストラボ</span>（<span lang="en">NextLab Inc.</span>）
+      ／
+      <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer"><span lang="en">nextlabs.jp</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+    </p>
+    <div class="share-buttons">
+      <button class="share-btn" type="button" data-share="x">
+        <span class="share-btn-icon" aria-hidden="true">𝕏</span>
+        <span>Xで共有する</span>
+      </button>
+      <button class="share-btn" type="button" data-share="line">
+        <svg class="share-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d="M19.365 9.863c.349 0 .631.285.631.631 0 .345-.282.63-.631.63H17.61v1.125h1.755c.349 0 .631.283.631.63 0 .344-.282.629-.631.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .63.283.63.63 0 .344-.282.629-.63.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+        </svg>
+        <span>LINEで共有する</span>
+      </button>
+      <button class="share-btn" type="button" data-share="copy">
+        <svg class="share-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"/>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"/>
+        </svg>
+        <span>リンクをコピー</span>
+      </button>
     </div>
-    <div class="footer-company-row">
-      <dt>代表</dt>
-      <dd>亀井 智英</dd>
-    </div>
-    <div class="footer-company-row">
-      <dt>所在地</dt>
-      <dd>東京都渋谷区渋谷 2-19-15 宮益坂ビルディング</dd>
-    </div>
-    <div class="footer-company-row">
-      <dt>WEB</dt>
-      <dd><a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">nextlabs.jp<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a></dd>
-    </div>
-  </dl>
-  <p class="footer-meta">
-    実装の99%をAIが書きました
-  </p>
-</footer>
+  </div>
+  <div id="share-toast" class="share-toast" role="status" aria-live="polite"></div>
+</section>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="

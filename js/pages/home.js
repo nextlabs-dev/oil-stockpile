@@ -5,12 +5,25 @@
  * fetch失敗時はカウンター部にエラーを表示し、可能な範囲で停止する。
  */
 
-import { initBreakdown } from '../components/breakdown.js';
 import { initChart } from '../components/chart.js';
 import { initCounter } from '../components/counter.js';
+import { initKpi } from '../components/kpi.js';
 import { initShare } from '../components/share.js';
 import { initTankGauge } from '../components/tank-gauge.js';
 import { loadHistory } from '../core/data.js';
+import { setText } from '../core/dom.js';
+
+function formatBannerDate(iso) {
+  if (!iso) return '—';
+  return iso.replaceAll('-', '.');
+}
+
+function populateHeaderAndBanner(history) {
+  const latest = history[history.length - 1];
+  if (!latest) return;
+  setText('update-banner-date', formatBannerDate(latest.published));
+  setText('header-last-updated', formatBannerDate(latest.published));
+}
 
 function showLoadError(err) {
   console.error('Failed to load history:', err);
@@ -41,9 +54,9 @@ async function main() {
     console.error('counter:', e);
   }
   try {
-    initBreakdown(history);
+    initKpi(history);
   } catch (e) {
-    console.error('breakdown:', e);
+    console.error('kpi:', e);
   }
   try {
     initChart(history);
@@ -51,7 +64,7 @@ async function main() {
     console.error('chart:', e);
   }
   try {
-    initTankGauge();
+    initTankGauge(history);
   } catch (e) {
     console.error('tank-gauge:', e);
   }
@@ -60,6 +73,7 @@ async function main() {
   } catch (e) {
     console.error('share:', e);
   }
+  populateHeaderAndBanner(history);
 }
 
 if (document.readyState === 'loading') {

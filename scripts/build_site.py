@@ -137,6 +137,10 @@ def render_page(
     script_tags_value = text_value(page.get("script_tags"))
     extra_head = f"{extra_head_value}\n" if extra_head_value else ""
     script_tags = f"{script_tags_value}\n" if script_tags_value else ""
+    default_site_brand = '      <h1 class="site-title">あと何日？日本の石油備蓄</h1>'
+    site_brand = text_value(page.get("site_brand")) or default_site_brand
+    header_meta_value = text_value(page.get("header_meta"))
+    header_meta = f"{header_meta_value}\n" if header_meta_value else ""
     return template.substitute(
         title=page["title"],
         description=page["description"],
@@ -151,7 +155,10 @@ def render_page(
         font_href=site["font_href"],
         extra_head=extra_head,
         stylesheet=stylesheet,
+        body_class=page.get("body_class", ""),
         home_href=page["root_path"],
+        site_brand=site_brand,
+        header_meta=header_meta,
         nav=render_nav(page, site_config["nav_labels"], site_config["nav_order"]),
         content=content,
         footer_source=text_value(page.get("footer_source")),

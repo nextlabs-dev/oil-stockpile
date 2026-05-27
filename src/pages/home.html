@@ -1,115 +1,124 @@
-<main id="main" class="site-main">
+<main id="main" class="site-main dashboard">
 
-  <!-- F-01: Real-time counter -->
-  <section class="counter-section is-hero" aria-labelledby="counter-heading">
-    <h2 id="counter-heading" class="lead">いま、日本の石油備蓄は</h2>
-    <div class="counter" role="timer" aria-label="日本の石油備蓄 推計日数">
-      <div class="counter-days-row">
-        <span id="counter-days" class="counter-num">—</span>
-        <span class="counter-unit">日</span>
-      </div>
-      <div class="counter-time-row" aria-hidden="true">
-        <span id="counter-hours" class="counter-time-num">--</span><span class="counter-sep">:</span><span id="counter-minutes" class="counter-time-num">--</span><span class="counter-sep">:</span><span id="counter-seconds" class="counter-time-num">--</span>
-      </div>
-    </div>
-    <p class="counter-note">
-      端末時刻に基づく秒按分の推計値。元データは経済産業省「石油備蓄の現況」速報PDFです。
-    </p>
-    <p id="stale-warning" class="stale-warning" hidden>
-      ⚠ 最新データから2週間以上経過しています。値が古い可能性があります。
-    </p>
+  <section class="update-banner" aria-label="更新情報">
+    <span class="update-banner-label">最新の更新情報</span>
+    <span class="update-banner-divider" aria-hidden="true">｜</span>
+    <span class="update-banner-date" id="update-banner-date">—</span>
+    <span class="update-banner-divider" aria-hidden="true">｜</span>
+    <span class="update-banner-text">石油備蓄の現況を更新</span>
   </section>
 
-  <!-- F-02: Tank gauge -->
-  <section class="tank-section" aria-labelledby="tank-heading">
-    <h2 id="tank-heading" class="section-title">備蓄残量</h2>
-    <div class="tank-layout">
-      <div class="tank-svg-wrap" id="tank-svg-wrap">
-        <!-- SVG injected by js/tank-gauge.js -->
-      </div>
-      <dl class="tank-meta">
-        <div class="tank-meta-row">
-          <dt>充填率</dt>
-          <dd><span id="tank-percent">—</span><span class="tank-meta-unit">%</span></dd>
+  <div class="dashboard-grid">
+
+    <!-- Hero card -->
+    <section class="dash-card dash-card--hero counter-section" aria-labelledby="counter-heading">
+      <h2 id="counter-heading" class="visually-hidden">石油備蓄カウンター</h2>
+      <div class="hero-top">
+        <div class="hero-left">
+          <span class="dash-card-eyebrow dash-card-eyebrow--brand">今、日本の石油備蓄は</span>
+          <div class="counter-days-row" role="timer" aria-label="日本の石油備蓄 推計日数">
+            <span id="counter-days" class="counter-num">—</span>
+            <span class="counter-unit-stack">
+              <span class="counter-unit">日分</span>
+              <span class="counter-sub-label">DAYS LEFT</span>
+            </span>
+          </div>
+          <div class="hero-clock">
+            <span class="dash-card-eyebrow">現在時刻</span>
+            <div class="counter-time-row" aria-hidden="true">
+              <span id="counter-hours" class="counter-time-num">--</span><span class="counter-sep">:</span><span id="counter-minutes" class="counter-time-num">--</span><span class="counter-sep">:</span><span id="counter-seconds" class="counter-time-num">--</span>
+            </div>
+            <p class="counter-note">
+              端末時刻に基づく秒単位の推計値。データは経済産業省「石油備蓄の現況」速報です。
+            </p>
+          </div>
         </div>
-        <div class="tank-meta-row">
-          <dt>基準（最大値）</dt>
-          <dd><span id="tank-peak-days">247</span><span class="tank-meta-unit">日</span></dd>
+        <div class="hero-illustration" aria-hidden="true">
+          <img src="assets/counter_top.png" alt="" width="320" height="400" loading="eager" decoding="async" />
         </div>
-        <div class="tank-meta-row tank-meta-source">
-          <dt>基準の出典</dt>
-          <dd id="tank-peak-source">経産省 速報PDF（直近実績）</dd>
+      </div>
+
+      <div class="hero-share">
+        <span class="hero-share-label">備蓄状況を共有する</span>
+        <div class="share-buttons">
+          <button class="share-btn" type="button" data-share="x">
+            <span class="share-btn-icon" aria-hidden="true">𝕏</span>
+            <span>Xで共有する</span>
+          </button>
+          <button class="share-btn" type="button" data-share="line">
+            <svg class="share-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M19.365 9.863c.349 0 .631.285.631.631 0 .345-.282.63-.631.63H17.61v1.125h1.755c.349 0 .631.283.631.63 0 .344-.282.629-.631.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .63.283.63.63 0 .344-.282.629-.63.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+            </svg>
+            <span>LINEで共有する</span>
+          </button>
+          <button class="share-btn" type="button" data-share="copy">
+            <svg class="share-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"/>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"/>
+            </svg>
+            <span>リンクをコピー</span>
+          </button>
         </div>
-      </dl>
-    </div>
-  </section>
-
-  <!-- F-03: History chart -->
-  <section class="chart-section" aria-labelledby="chart-heading">
-    <h2 id="chart-heading" class="section-title">備蓄日数の推移</h2>
-    <div class="chart-controls">
-      <label class="chart-toggle">
-        <input type="checkbox" id="chart-toggle-segments">
-        <span>3区分の内訳も表示する</span>
-      </label>
-    </div>
-    <figure class="chart-figure" aria-labelledby="chart-heading">
-      <div class="chart-wrap" id="chart-wrap">
-        <!-- table + SVG injected by js/chart.js -->
       </div>
-    </figure>
-    <p class="chart-hint" id="chart-hint">
-      点にカーソルを当てる、または Tab キーで選択すると公表日と内訳が表示されます。
-    </p>
-  </section>
+    </section>
 
-  <!-- 3-segment breakdown (常時表示) -->
-  <section class="breakdown-section" aria-labelledby="breakdown-heading">
-    <h2 id="breakdown-heading" class="section-title">3区分内訳</h2>
-    <dl class="breakdown-list">
-      <div class="breakdown-row">
-        <dt>国家備蓄</dt>
-        <dd><span id="breakdown-national">—</span><span class="breakdown-unit">日</span></dd>
+    <!-- KPI 1: 備蓄残量（全体） -->
+    <section class="dash-card dash-kpi" aria-labelledby="kpi-fill-label">
+      <span id="kpi-fill-label" class="dash-card-eyebrow">備蓄残量（全体）</span>
+      <div class="dash-kpi-value">
+        <span id="tank-percent" class="dash-kpi-num">—</span>
+        <span class="dash-kpi-unit">%</span>
       </div>
-      <div class="breakdown-row">
-        <dt>民間備蓄</dt>
-        <dd><span id="breakdown-private">—</span><span class="breakdown-unit">日</span></dd>
-      </div>
-      <div class="breakdown-row">
-        <dt>産油国共同備蓄</dt>
-        <dd><span id="breakdown-joint">—</span><span class="breakdown-unit">日</span></dd>
-      </div>
-    </dl>
-    <p class="breakdown-note">
-      ※ 内訳の合計と総備蓄日数が一致しないことがあります（出典PDFの丸めによるものです）。
-    </p>
-  </section>
+      <span class="dash-kpi-badge">基準値<span id="tank-peak-days">247</span>日</span>
+    </section>
 
-  <!-- F-05: Share -->
-  <section class="share-section" aria-labelledby="share-heading">
-    <h2 id="share-heading" class="visually-hidden">シェア</h2>
-    <div class="share-buttons">
-      <button id="share-x" class="share-btn share-btn--primary" type="button">
-        <span class="share-btn-icon" aria-hidden="true">𝕏</span>
-        <span>でシェア</span>
-      </button>
-      <button id="share-line" class="share-btn share-btn--line" type="button">
-        <svg class="share-btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-          <path d="M19.365 9.863c.349 0 .631.285.631.631 0 .345-.282.63-.631.63H17.61v1.125h1.755c.349 0 .631.283.631.63 0 .344-.282.629-.631.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .63.283.63.63 0 .344-.282.629-.63.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
-        </svg>
-        <span>LINEでシェア</span>
-      </button>
-      <button id="share-facebook" class="share-btn share-btn--facebook" type="button">
-        <svg class="share-btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-          <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z"/>
-        </svg>
-        <span>Facebookでシェア</span>
-      </button>
-      <button id="share-copy" class="share-btn" type="button">
-        リンクをコピー
-      </button>
-    </div>
-    <div id="share-toast" class="share-toast" role="status" aria-live="polite"></div>
-  </section>
+    <!-- KPI 2: 稼働中タンカー（AIS） -->
+    <section class="dash-card dash-kpi" aria-labelledby="kpi-tankers-label">
+      <span id="kpi-tankers-label" class="dash-card-eyebrow">稼働中タンカー（AIS）</span>
+      <div class="dash-kpi-value">
+        <span id="kpi-tankers" class="dash-kpi-num">—</span>
+        <span class="dash-kpi-unit">隻</span>
+      </div>
+      <span class="dash-kpi-badge dash-kpi-badge--live">
+        <span class="live-dot" aria-hidden="true"></span>AIS LIVE
+      </span>
+    </section>
 
+    <!-- KPI 3: 今日の消費ベース -->
+    <section class="dash-card dash-kpi" aria-labelledby="kpi-burn-label">
+      <span id="kpi-burn-label" class="dash-card-eyebrow">今日の消費ベース</span>
+      <div class="dash-kpi-value">
+        <span id="kpi-burn" class="dash-kpi-num">—</span>
+        <span class="dash-kpi-unit">%日</span>
+      </div>
+      <span class="dash-kpi-badge">前日比 <span id="kpi-delta">—</span>日</span>
+    </section>
+
+    <!-- 内訳 donut -->
+    <section class="dash-card dash-donut" aria-labelledby="donut-label">
+      <h3 id="donut-label" class="dash-card-title">内訳</h3>
+      <div class="donut-layout">
+        <div class="donut-wrap" id="tank-svg-wrap">
+          <!-- SVG donut injected by js/tank-gauge.js -->
+        </div>
+        <dl class="donut-legend" id="donut-legend">
+          <!-- legend injected by js/tank-gauge.js -->
+        </dl>
+      </div>
+    </section>
+
+    <!-- Chart -->
+    <section class="dash-card dash-card--full chart-section" aria-labelledby="chart-heading">
+      <h3 id="chart-heading" class="dash-card-title">備蓄の推移（全体）</h3>
+      <figure class="chart-figure" aria-labelledby="chart-heading">
+        <div class="chart-wrap" id="chart-wrap">
+          <!-- table + SVG injected by js/chart.js -->
+        </div>
+      </figure>
+      <p class="chart-hint" id="chart-hint">
+        点にカーソルを当てる、または Tab キーで選択すると公表日と内訳が表示されます。
+      </p>
+    </section>
+
+  </div>
 </main>
