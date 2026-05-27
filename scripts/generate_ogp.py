@@ -26,6 +26,7 @@ from __future__ import annotations
 import argparse
 import sys
 from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -33,6 +34,9 @@ from PIL import Image, ImageDraw, ImageFont
 from lib.constants import PEAK_DAYS  # SSOT: src/constants.json
 from lib.io import read_json
 from lib.paths import ASSETS_DIR, REPO_ROOT, SNAPSHOTS_PATH
+
+JST = timezone(timedelta(hours=9))
+SECONDS_PER_DAY = 86_400.0
 
 DEFAULT_OUTPUT = ASSETS_DIR / "og-image.png"
 
@@ -116,6 +120,20 @@ def pick_latest_snapshot(rows: list[dict]) -> Snapshot:
         private_=int(r["private"]),
         joint=int(r["joint"]),
     )
+
+
+def compute_current_days(snapshot: Snapshot, now: datetime | None = None) -> float:
+    """
+    サイト本体 (js/core/data.js:computeCurrentDays) と同じ式で「いま時点」の備蓄日数を返す。
+    モデル: 「1 日経過 = 1 日分減る」（asOf を JST 0:00 として now との差分日数を減算）。
+    OG 画像は事前生成のため、cron 実行時刻の値で固定される（次の実行までは更新されない）。
+    """
+    if now is None:
+        now = datetime.now(timezone.utc)
+    as_of_jst = datetime.fromisoformat(f"{snapshot.as_of}T00:00:00+09:00")
+    elapsed_days = (now - as_of_jst).total_seconds() / SECONDS_PER_DAY
+    days = snapshot.total - elapsed_days
+    return max(0.0, min(float(snapshot.total), days))
 
 
 def compute_fill_ratio(days: float, peak: int = PEAK_DAYS) -> float:
@@ -236,7 +254,12 @@ def draw_tank_gauge(
         draw.text((tick_x, y), label, font=label_font, fill=FG_MUTED, anchor="lm")
 
 
-def render_image(snapshot: Snapshot, *, peak: int = PEAK_DAYS) -> Image.Image:
+def render_image(
+    snapshot: Snapshot,
+    *,
+    current_days: float,
+    peak: int = PEAK_DAYS,
+) -> Image.Image:
     img = Image.new("RGB", (WIDTH, HEIGHT), BG)
     draw = ImageDraw.Draw(img)
 
@@ -270,8 +293,9 @@ def render_image(snapshot: Snapshot, *, peak: int = PEAK_DAYS) -> Image.Image:
         anchor="lt",
     )
 
-    # ── メインカウンター: N 日
-    days_str = str(snapshot.total)
+    # ── メインカウンター: N 日（サイト側 Math.floor と一致させる）
+    days_int = int(current_days)
+    days_str = str(days_int)
     days_y = lead_y + 60
     days_w, _ = _text_size(draw, days_str, f_days_num)
     draw.text((pad_x, days_y), days_str, font=f_days_num, fill=FG, anchor="lt")
@@ -281,7 +305,7 @@ def render_image(snapshot: Snapshot, *, peak: int = PEAK_DAYS) -> Image.Image:
     draw.text((unit_x, unit_y), "日分", font=f_days_unit, fill=FG_SUB, anchor="ls")
 
     # ── 右側: タンクゲージ（数字なしの視覚アクセントとして配置）
-    ratio = compute_fill_ratio(snapshot.total, peak)
+    ratio = compute_fill_ratio(current_days, peak)
     gauge_cx = WIDTH - 200
     gauge_cy = HEIGHT // 2 + 30
     gauge_w = 160
@@ -350,8 +374,11 @@ def main() -> int:
         print(f"::error::Failed to load snapshots: {e}", file=sys.stderr)
         return 1
 
+    current_days = compute_current_days(snapshot)
+    days_int = int(current_days)
+
     try:
-        img = render_image(snapshot)
+        img = render_image(snapshot, current_days=current_days)
     except Exception as e:
         print(f"::error::Failed to render OGP image: {e}", file=sys.stderr)
         return 1
@@ -359,7 +386,8 @@ def main() -> int:
     if args.dry_run:
         print(
             f"::notice::dry-run: would write {args.output} "
-            f"(latest asOf={snapshot.as_of}, total={snapshot.total})",
+            f"(latest asOf={snapshot.as_of}, total={snapshot.total}, "
+            f"currentDays={days_int})",
         )
         return 0
 
@@ -372,7 +400,7 @@ def main() -> int:
 
     print(
         f"::notice::Wrote {args.output.relative_to(REPO_ROOT)} "
-        f"(asOf={snapshot.as_of}, total={snapshot.total})",
+        f"(asOf={snapshot.as_of}, total={snapshot.total}, currentDays={days_int})",
     )
     return 0
 
