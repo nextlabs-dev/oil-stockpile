@@ -45,35 +45,36 @@ $header_meta  </div>
 
 $content
 
-<footer class="site-footer">
-  <p class="footer-source">
-    $footer_source
-  </p>
-  <p class="footer-disclaimer">
-    $footer_disclaimer
-  </p>
-  <dl class="footer-company" aria-label="運営会社">
-    <div class="footer-company-row">
-      <dt>提供</dt>
-      <dd>株式会社ネクストラボ（<span lang="en">NextLab Inc.</span>）</dd>
+<section class="footer-share-section" aria-labelledby="footer-share-heading">
+  <h2 id="footer-share-heading" class="visually-hidden">運営とシェア</h2>
+  <div class="footer-share-row">
+    <p class="footer-share-org">
+      <span lang="ja">株式会社ネクストラボ</span>（<span lang="en">NextLab Inc.</span>）
+      ／
+      <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer"><span lang="en">nextlabs.jp</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+    </p>
+    <div class="share-buttons">
+      <button class="share-btn" type="button" data-share="x">
+        <span class="share-btn-icon" aria-hidden="true">𝕏</span>
+        <span>Xで共有する</span>
+      </button>
+      <button class="share-btn" type="button" data-share="line">
+        <svg class="share-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d="M19.365 9.863c.349 0 .631.285.631.631 0 .345-.282.63-.631.63H17.61v1.125h1.755c.349 0 .631.283.631.63 0 .344-.282.629-.631.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .63.283.63.63 0 .344-.282.629-.63.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+        </svg>
+        <span>LINEで共有する</span>
+      </button>
+      <button class="share-btn" type="button" data-share="copy">
+        <svg class="share-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"/>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"/>
+        </svg>
+        <span>リンクをコピー</span>
+      </button>
     </div>
-    <div class="footer-company-row">
-      <dt>代表</dt>
-      <dd>亀井 智英</dd>
-    </div>
-    <div class="footer-company-row">
-      <dt>所在地</dt>
-      <dd>東京都渋谷区渋谷 2-19-15 宮益坂ビルディング</dd>
-    </div>
-    <div class="footer-company-row">
-      <dt>WEB</dt>
-      <dd><a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">nextlabs.jp<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a></dd>
-    </div>
-  </dl>
-  <p class="footer-meta">
-    実装の99%をAIが書きました
-  </p>
-</footer>
+  </div>
+  <div id="share-toast" class="share-toast" role="status" aria-live="polite"></div>
+</section>
 
 $script_tags</body>
 </html>

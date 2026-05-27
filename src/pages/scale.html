@@ -1,119 +1,65 @@
-<main id="main" class="site-main">
+<main id="main" class="site-main scale-layout">
 
-  <!-- Hero: 現在備蓄日数（カウンタータブとの接続） -->
-  <section class="scale-hero is-hero" aria-labelledby="scale-heading">
-    <h2 id="scale-heading" class="visually-hidden">石油のものさし</h2>
-    <p class="lead">いま、日本の石油備蓄</p>
-    <div class="scale-num-row">
-      <span id="scale-days" class="scale-num">—</span>
-      <span class="scale-unit">日分を、別の単位で見る</span>
-    </div>
-    <p class="scale-sub">
-      経産省の最新公表値（<span id="scale-as-of">—</span>時点）をもとに、容積換算・スケール比較・関連豆知識の3つの視点で並べます。
+  <!-- Hero card -->
+  <section class="scale-hero-card" aria-labelledby="scale-heading">
+    <span class="scale-eyebrow">経産省 最新速報値・<span id="scale-as-of">—</span>時点</span>
+    <h1 id="scale-heading" class="scale-hero-title">石油ものさし</h1>
+    <p class="scale-hero-lead">
+      <strong><span id="scale-days">—</span>日分</strong>を、容量・スケール・豆知識の3つの視点から体感できる形に変換します。
     </p>
   </section>
 
-  <!-- Sub-tabs -->
-  <section class="subtabs-section" aria-label="石油のものさし セクション切替">
-    <div class="subtabs" role="tablist" aria-label="石油のものさし">
-      <button class="subtab subtab--active" role="tab" id="subtab-units" aria-selected="true" aria-controls="panel-units" type="button">単位換算</button>
-      <button class="subtab" role="tab" id="subtab-scale" aria-selected="false" aria-controls="panel-scale" tabindex="-1" type="button">スケール比較</button>
-      <button class="subtab" role="tab" id="subtab-trivia" aria-selected="false" aria-controls="panel-trivia" tabindex="-1" type="button">豆知識</button>
-    </div>
+  <!-- 2x2 metric grid -->
+  <div class="scale-grid">
 
-    <!-- Panel 1: 単位換算 -->
-    <div class="subtab-panel" role="tabpanel" id="panel-units" aria-labelledby="subtab-units">
-      <h2 class="section-title">容積に換算する</h2>
-      <p class="panel-lead">
-        備蓄日数を「1日あたり消費量」で掛け戻し、kL・バレル・リットルに換算します。
-      </p>
-      <dl class="unit-list">
-        <div class="unit-row">
-          <dt>キロリットル</dt>
-          <dd><span id="unit-kl">—</span><span class="unit-suffix">kL</span></dd>
-        </div>
-        <div class="unit-row">
-          <dt>バレル</dt>
-          <dd><span id="unit-barrels">—</span><span class="unit-suffix">バレル</span></dd>
-        </div>
-        <div class="unit-row">
-          <dt>リットル</dt>
-          <dd><span id="unit-liters">—</span><span class="unit-suffix">L</span></dd>
-        </div>
-      </dl>
-      <p class="panel-note">
-        ※ 1 日あたり消費量を 約 28 万 kL（約 176 万バレル）として概算しています。
-        備蓄日数の母数は経産省の公表方式に準じた近似値で、実需要量とは数%程度の差が生じます。
-        <br>
-        ※ 換算係数: 1 バレル = 158.987 リットル / 1 kL = 約 6.29 バレル。
-      </p>
-    </div>
-
-    <!-- Panel 2: スケール比較 -->
-    <div class="subtab-panel" role="tabpanel" id="panel-scale" aria-labelledby="subtab-scale" hidden>
-      <h2 class="section-title">スケールで比べる</h2>
-      <p class="panel-lead">
-        身近に置き換えにくい「N 日分」を、目で見える単位に置き換えます。
-      </p>
-
-      <div class="compare-card">
-        <p class="compare-label">VLCC（大型原油タンカー）に積み替えると</p>
-        <p class="compare-value">
-          <span id="compare-vlcc">—</span><span class="compare-unit">隻分</span>
-        </p>
-        <p class="compare-meta">VLCC 1 隻の積載量を 約 200 万バレル（約 32 万 kL）と仮定。</p>
+    <!-- 容量: バレル -->
+    <section class="scale-card" aria-labelledby="card-barrels-label">
+      <span id="card-barrels-label" class="scale-card-label">バレル</span>
+      <div class="scale-card-value">
+        <span id="unit-barrels" class="scale-card-num">—</span>
+        <span class="scale-card-suffix">Barrel</span>
       </div>
+    </section>
 
-      <div class="compare-card">
-        <p class="compare-label">日本の年間消費量と比べると</p>
-        <p class="compare-value">
-          <span id="compare-year-pct">—</span><span class="compare-unit">%</span>
-        </p>
-        <p class="compare-meta">365 日分を 100% とした比率。<span id="compare-year-frac">—</span> 年分に相当します。</p>
+    <!-- 容量: リットル -->
+    <section class="scale-card" aria-labelledby="card-liters-label">
+      <span id="card-liters-label" class="scale-card-label">リットル</span>
+      <div class="scale-card-value">
+        <span id="unit-liters" class="scale-card-num">—</span>
+        <span class="scale-card-suffix">L</span>
       </div>
+    </section>
 
-      <div class="compare-card">
-        <p class="compare-label">IEA 90 日備蓄義務を基準にすると</p>
-        <p class="compare-value">
-          <span id="compare-iea-pct">—</span><span class="compare-unit">%</span>
-        </p>
-        <p class="compare-meta">IEA 加盟国の備蓄義務（純輸入量の 90 日分）を 100% とした比率。</p>
+    <!-- スケール: VLCC -->
+    <section class="scale-card scale-card--with-inner" aria-labelledby="card-vlcc-label">
+      <span id="card-vlcc-label" class="scale-card-title">VLCCタンカー何隻分？</span>
+      <div class="scale-inner">
+        <div class="scale-card-value">
+          <span id="compare-vlcc-prefix" class="scale-card-prefix">約</span>
+          <span id="compare-vlcc" class="scale-card-num">—</span>
+          <span class="scale-card-suffix">隻</span>
+        </div>
       </div>
-    </div>
-
-    <!-- Panel 3: 豆知識 -->
-    <div class="subtab-panel" role="tabpanel" id="panel-trivia" aria-labelledby="subtab-trivia" hidden>
-      <h2 class="section-title">石油備蓄の豆知識</h2>
-      <ul class="trivia-list">
-        <li>
-          <strong>1 バレル = 158.987 リットル。</strong>
-          語源は 19 世紀のペンシルベニアでウイスキー樽（barrel）を流用したことに由来する、世界共通の取引単位です。
-        </li>
-        <li>
-          <strong>日本の備蓄義務は 90 日分。</strong>
-          IEA（国際エネルギー機関）加盟国に課された義務で、現在の備蓄日数はこれを大きく上回る水準で運用されています。
-        </li>
-        <li>
-          <strong>国家備蓄基地は全国 10 基地。</strong>
-          むつ小川原・苫小牧東部・福井・志布志など、地理的に分散配置することで地震・有事のリスクを低減しています。
-        </li>
-        <li>
-          <strong>備蓄は 3 区分で構成される。</strong>
-          国（JOGMEC が管理）・民間（石油元売り・販売業者の義務量）・産油国共同備蓄（UAE・サウジアラビアとの共同事業）。
-        </li>
-        <li>
-          <strong>VLCC は全長 約 330 m。</strong>
-          東京タワー（333 m）に匹敵する長さで、満載時には 約 200 万バレル（約 32 万 kL）を運びます。
-        </li>
-        <li>
-          <strong>日本は石油の 約 97% を輸入に依存。</strong>
-          中東依存度は約 95%（直近実績）で、シーレーン安全保障と備蓄量が常にセットで議論される理由です。
-        </li>
-      </ul>
-      <p class="panel-note">
-        ※ 数値は経産省・JOGMEC・財務省貿易統計の公開情報をもとにした概算で、年度・基準により多少の変動があります。
+      <p class="scale-card-meta">
+        超大型原油タンカー 1 隻を約 30 万 kL として換算。東京湾に並ぶイメージ。
       </p>
-    </div>
-  </section>
+    </section>
+
+    <!-- スケール: お風呂 -->
+    <section class="scale-card scale-card--with-inner" aria-labelledby="card-bath-label">
+      <span id="card-bath-label" class="scale-card-title">お風呂何杯分？</span>
+      <div class="scale-inner">
+        <div class="scale-card-value">
+          <span class="scale-card-prefix">約</span>
+          <span id="compare-bath" class="scale-card-num">—</span>
+          <span id="compare-bath-suffix" class="scale-card-suffix">杯</span>
+        </div>
+      </div>
+      <p class="scale-card-meta">
+        家庭用お風呂 1 杯を約 300 L として換算。全国民が毎日入り続けて 約 <span id="compare-bath-years">—</span> 日分に相当。
+      </p>
+    </section>
+
+  </div>
 
 </main>

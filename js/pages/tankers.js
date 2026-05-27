@@ -8,13 +8,18 @@
  * リアルタイムストリームではなく、バックエンドが定期取得した snapshot を読むだけ。
  */
 
+import { initCounter } from '../components/counter.js';
+import { initShare } from '../components/share.js';
 import { initTankerMap } from '../components/tanker-map.js';
-import { loadJson } from '../core/data.js';
+import { loadHistory, loadJson } from '../core/data.js';
 import { setText, showElement } from '../core/dom.js';
 import { formatJaDateTime } from '../core/format.js';
 
 const TANKERS_URL = '../data/tankers.json';
 const STALE_HOURS = 6;
+const VLCC_KL_PER_SHIP = 32; // 万 kL / VLCC 1 隻
+const SHIP_ICON_JP_SRC = '../assets/tanker_japan.png';
+const SHIP_ICON_OTHER_SRC = '../assets/tanker_other.png';
 
 async function loadTankers() {
   return loadJson(TANKERS_URL, (data) => {
@@ -25,13 +30,33 @@ async function loadTankers() {
 }
 
 function showLoadError() {
-  const el = document.getElementById('total-tankers');
-  if (el) el.textContent = '—';
-  const sub = document.querySelector('.tanker-sub');
-  if (sub) {
-    sub.textContent = 'データの読み込みに失敗しました。時間をおいて再読み込みしてください。';
-    sub.style.color = 'var(--tank-fill-warn)';
+  setText('total-tankers', '—');
+  setText('japan-bound', '—');
+  setText('tankers-other', '—');
+  const note = document.querySelector('.ais-live-note');
+  if (note) {
+    note.textContent = 'データの読み込みに失敗しました。時間をおいて再読み込みしてください。';
+    note.style.color = 'var(--accent-live, #c2410c)';
   }
+}
+
+function renderShipViz(japanBound, other) {
+  const wrap = document.getElementById('ship-viz');
+  if (!wrap) return;
+  const jp = Math.max(0, Number(japanBound) || 0);
+  const ot = Math.max(0, Number(other) || 0);
+  const parts = [];
+  for (let i = 0; i < jp; i++) {
+    parts.push(
+      `<img class="ship-icon ship-icon--jp" src="${SHIP_ICON_JP_SRC}" alt="" aria-hidden="true" loading="lazy" decoding="async">`,
+    );
+  }
+  for (let i = 0; i < ot; i++) {
+    parts.push(
+      `<img class="ship-icon ship-icon--other" src="${SHIP_ICON_OTHER_SRC}" alt="" aria-hidden="true" loading="lazy" decoding="async">`,
+    );
+  }
+  wrap.innerHTML = parts.join('');
 }
 
 function renderPorts(ports, unknownCount) {
@@ -94,18 +119,40 @@ async function main() {
     return;
   }
 
-  setText('total-tankers', String(data.totalTankersInRegion));
-  setText('japan-bound', String(data.japanBoundTankers));
+  const total = Number(data.totalTankersInRegion) || 0;
+  const jp = Number(data.japanBoundTankers) || 0;
+  const other = Math.max(0, total - jp);
+  const jpKl = jp * VLCC_KL_PER_SHIP;
+  setText('total-tankers', String(total));
+  setText('japan-bound', String(jp));
+  setText('japan-bound-2', String(jp));
+  setText('tankers-other', String(other));
+  setText('jp-volume-kl', String(jpKl));
+  setText('ais-note-jp', String(jp));
+  setText('ais-note-kl', String(jpKl));
+  setText('ais-note-days', String(jp));
+  setText('jp-volume-days', String(jp));
 
+  renderShipViz(jp, other);
   renderPorts(data.topDestinationPorts, data.japanBoundUnknownPort);
 
   setText('fetched-at', formatJaDateTime(data.fetchedAt));
+  setText('header-last-updated', (data.fetchedAt ?? '').slice(0, 10).replaceAll('-', '.') || '—');
   setText('sampling-duration', `約 ${Math.round((data.samplingDurationSec || 0) / 60)} 分`);
   setText('bounding-box', data.boundingBox || '—');
 
   initTankerMap(data.vessels);
 
   checkStaleness(data.fetchedAt);
+
+  // Load snapshot history just to enable the share button to show "いま N 日分"
+  try {
+    const history = await loadHistory('../data/snapshots.json');
+    initCounter(history);
+  } catch (e) {
+    console.error('snapshots load (for share):', e);
+  }
+  initShare();
 }
 
 if (document.readyState === 'loading') {

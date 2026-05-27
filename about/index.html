@@ -28,14 +28,18 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
-<body class="">
+<body class="page-about">
 
 <a class="skip-link" href="#main">本文へスキップ</a>
 
 <header class="site-header">
   <div class="site-header-inner">
     <a class="site-brand" href="../" aria-label="あと何日？日本の石油備蓄 ホーム">
-      <h1 class="site-title">あと何日？日本の石油備蓄</h1>
+      <span class="site-logo" aria-hidden="true"></span>
+      <span class="site-brand-text">
+        <span class="site-title">JAPAN OIL STOCKPILE</span>
+        <span class="site-tagline">あと何日、日本は持つのか。</span>
+      </span>
     </a>
     <nav class="tabs" aria-label="セクション">
       <a class="tab" href="../">カウンター</a>
@@ -43,208 +47,241 @@
       <a class="tab" href="../scale/">石油のものさし</a>
       <a class="tab tab--active" href="./" aria-current="page">about</a>
     </nav>
+    <div class="site-header-meta">
+      <span class="site-header-meta-label">最終更新</span>
+      <span class="site-header-meta-value" id="header-last-updated">—</span>
+    </div>
   </div>
 </header>
 
-<main id="main" class="site-main">
+<main id="main" class="site-main about-layout">
+  <div class="about-grid">
 
-  <!-- Hero -->
-  <section class="about-hero is-hero" aria-labelledby="about-heading">
-    <h2 id="about-heading" class="about-hero-title">このサイトについて</h2>
-    <p class="about-lead">
-      日本の石油備蓄を、出典付き・最小限の数字で静かに可視化する非公式サイトです。
-    </p>
-  </section>
+    <!-- Sidebar nav -->
+    <aside class="about-sidebar" aria-label="ページ内ナビゲーション">
+      <nav class="about-nav" aria-label="目次">
+        <a class="about-nav-link is-active" href="#purpose" data-section="purpose">目的</a>
+        <a class="about-nav-link" href="#method" data-section="method">計算方法と限界</a>
+        <a class="about-nav-link" href="#disclaimer" data-section="disclaimer">免責事項</a>
+        <a class="about-nav-link" href="#newsletter" data-section="newsletter">メールマガジン</a>
+        <a class="about-nav-link" href="#company" data-section="company">運営・会社概要</a>
+        <a class="about-nav-link" href="#media" data-section="media">メディア対応</a>
+        <a class="about-nav-link" href="#sources" data-section="sources">出典・参考資料</a>
+      </nav>
+    </aside>
 
-  <!-- 目的・課題 -->
-  <section class="about-section" aria-labelledby="purpose-heading">
-    <h2 id="purpose-heading" class="section-title">目的</h2>
-    <div class="about-prose">
-      <p>
-        日本は石油の 約 97% を輸入に依存し、IEA 基準で 90 日分の備蓄義務を負うエネルギー安全保障の脆弱国です。経済産業省は「石油備蓄の現況」速報を日次 PDF で公表していますが、その存在自体が一般に認知されておらず、「215 日分」のような数値単体では多寡の比較基準を持てないため、ニュース感度の高い層であっても「いま日本の備蓄が安全圏にあるのか」を肌感覚として把握しづらい状態にあります。
-      </p>
-      <p>
-        本サイトは経産省の速報 PDF を自動取得・パースし、<strong>「日本の石油備蓄、いま N 日分」</strong>という単一指標を訪問から数秒以内に把握できるように設計されています。総量を秒単位で減算するカウンター、過去最高値に対するタンクゲージ、12 ヶ月推移、日本周辺タンカー集計、kL・バレル換算といった複数の視点で「多いか少ないか」の比較基準を提供することを目的にしています。
-      </p>
+    <!-- Main content column -->
+    <div class="about-main">
+
+      <!-- Intro -->
+      <section class="about-card about-card--intro" aria-labelledby="about-heading">
+        <span class="about-eyebrow">about</span>
+        <h1 id="about-heading" class="about-card-title about-card-title--lg">このサイトについて</h1>
+        <p class="about-lead">
+          日本の石油備蓄を、出典付き・最小限の数字で静かに可視化する非公式サイトです。
+        </p>
+      </section>
+
+      <!-- 目的 -->
+      <section class="about-card" id="purpose" aria-labelledby="purpose-heading">
+        <h2 id="purpose-heading" class="about-card-title">目的</h2>
+        <div class="about-prose">
+          <p>
+            日本は石油の約 97% を輸入に依存し、IEA 基準で 90 日分の備蓄義務を負うエネルギー安全保障の脆弱国です。経済産業省は「石油備蓄の現況」速報を日次 PDF で公表していますが、その存在自体が一般に認知されておらず、「215 日分」のような数値単体では多寡の比較基準を持てないため、ニュース感度の高い層であっても「いま日本の備蓄が安全圏にあるのか」を肌感覚として把握しづらい状態にあります。
+          </p>
+          <p>
+            本サイトは経産省の速報 PDF を自動取得・パースし、<strong>「日本の石油備蓄、いま N 日分」</strong>という単一指標を訪問から数秒以内に把握できるように設計されています。
+          </p>
+        </div>
+      </section>
+
+      <!-- 計算方法と限界 -->
+      <section class="about-card" id="method" aria-labelledby="method-heading">
+        <h2 id="method-heading" class="about-card-title">計算方法と限界</h2>
+        <div class="formula-grid">
+          <div class="formula-box">
+            <span class="formula-box-label">BASIC FORMULA</span>
+            <div class="formula-box-body">
+              <span class="formula-fraction">
+                <span class="formula-numerator">備蓄日数 = 概算量</span>
+                <span class="formula-divider" aria-hidden="true"></span>
+                <span class="formula-denominator">1日あたりの推定消費量</span>
+              </span>
+            </div>
+          </div>
+          <div class="formula-box formula-box--limit">
+            <span class="formula-box-label">LIMITATION</span>
+            <div class="formula-box-body">
+              <p class="formula-text">
+                速報値・推計値をもとにした可視化であり、即時性で実企業を観測するものではありません。
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="about-prose about-prose--compact">
+          <p>
+            トップページのカウンターは、経済産業省が公表した最新データの「集計日」を起点に、1 日経過するごとに 1 日分減るという計算で表示しています。実際に備蓄量を秒単位で観測しているわけではなく、ページを開き直すたびに公表値からの再計算になります。
+          </p>
+          <p>
+            タンクゲージの「100%」にあたる基準値には、過去に公表された中で最も高い水準を採用しています。これを上回る値が新しく公表された場合は、サイト側で手動で更新します。なお、国家備蓄・民間備蓄・産油国共同備蓄の 3 つを足した合計は、端数処理の都合で総備蓄日数とわずかにずれることがあります。
+          </p>
+        </div>
+      </section>
+
+      <!-- 免責事項 -->
+      <section class="about-card" id="disclaimer" aria-labelledby="disclaimer-heading">
+        <h2 id="disclaimer-heading" class="about-card-title">免責事項</h2>
+        <div class="about-prose">
+          <p>
+            本サイトは経済産業省公表の速報（推計値）および AIS データに基づく<strong>非公式の情報サイト</strong>です。正確性・完全性・最新性について保証するものではありません。個人情報の収集・保存は一切行いません。
+          </p>
+        </div>
+      </section>
+
+      <!-- メールマガジン -->
+      <section class="about-card about-card--newsletter" id="newsletter" aria-labelledby="newsletter-heading">
+        <h2 id="newsletter-heading" class="about-card-title">メールマガジン</h2>
+        <p class="about-card-subhead">ネクストラボからのお知らせ</p>
+        <p class="about-card-desc">
+          新着情報・新サービス情報を不定期でお届けします。
+        </p>
+        <form class="newsletter-form" id="newsletter-form" novalidate>
+          <label class="visually-hidden" for="newsletter-email">メールアドレス</label>
+          <input
+            class="newsletter-input"
+            id="newsletter-email"
+            type="email"
+            name="email"
+            placeholder="メールアドレスを入力"
+            autocomplete="email"
+            required
+          >
+          <button class="newsletter-submit" type="submit">登録する</button>
+        </form>
+        <p class="newsletter-note">
+          ※不定期配信。いつでも解除できます。ご登録後に確認メールをお送りします。
+        </p>
+        <p class="newsletter-status" id="newsletter-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <!-- 運営・会社概要 -->
+      <section class="about-card" id="company" aria-labelledby="company-heading">
+        <h2 id="company-heading" class="about-card-title">運営・会社概要</h2>
+        <dl class="company-dl">
+          <div class="company-row">
+            <dt>会社名</dt>
+            <dd>株式会社ネクストラボ（<span lang="en">NextLab Inc.</span>）</dd>
+          </div>
+          <div class="company-row">
+            <dt>代表者</dt>
+            <dd>亀井 智英（<span lang="en">Founder / CEO</span>）</dd>
+          </div>
+          <div class="company-row">
+            <dt>所在地</dt>
+            <dd>〒150-0002 東京都渋谷区渋谷 2-19-15 宮益坂ビルディング</dd>
+          </div>
+          <div class="company-row">
+            <dt>設立</dt>
+            <dd>2021 年 8 月</dd>
+          </div>
+          <div class="company-row">
+            <dt>事業内容</dt>
+            <dd>BtoB ソリューション開発 / AI 実装コンサルティング / 新規事業開発支援</dd>
+          </div>
+          <div class="company-row">
+            <dt>WEB</dt>
+            <dd>
+              <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">nextlabs.jp<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- メディア対応 -->
+      <section class="about-card" id="media" aria-labelledby="media-heading">
+        <h2 id="media-heading" class="about-card-title">メディア・報道関係者の方へ</h2>
+        <div class="media-callout">
+          <span class="media-callout-title">事前許諾なしで利用できます</span>
+          <p class="media-callout-desc">
+            カウンター数値、タンクゲージ画像、グラフ、石油のものさしの図表を引用いただければ、報道・記事・番組・SNS 等で自由にご利用いただけます。
+          </p>
+          <div class="media-citation">
+            <span class="media-citation-line">出典：日本の石油備蓄メーター</span>
+            <span class="media-citation-line">提供：株式会社ネクストラボ</span>
+          </div>
+        </div>
+        <dl class="media-contact">
+          <div class="media-contact-row">
+            <dt>取材・お問い合わせ</dt>
+            <dd>
+              <a href="https://nextlabs.jp/#contact" target="_blank" rel="noopener noreferrer">nextlabs.jp/#contact<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+            </dd>
+          </div>
+          <div class="media-contact-row">
+            <dt>社名</dt>
+            <dd>株式会社ネクストラボ 代表：亀井 智英</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- 出典 -->
+      <section class="about-card" id="sources" aria-labelledby="sources-heading">
+        <h2 id="sources-heading" class="about-card-title">出典・参考資料</h2>
+        <dl class="company-dl">
+          <div class="company-row">
+            <dt>備蓄日数</dt>
+            <dd>
+              経済産業省「<a href="https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/" target="_blank" rel="noopener noreferrer">石油備蓄の現況<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>」速報 PDF を毎朝 07:00 JST に自動取得・パース。
+            </dd>
+          </div>
+          <div class="company-row">
+            <dt>タンカー隻数</dt>
+            <dd>
+              <a href="https://aisstream.io/" target="_blank" rel="noopener noreferrer"><span lang="en">aisstream.io</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（<span lang="en">BETA</span>）の AIS リアルタイムストリーム。
+            </dd>
+          </div>
+          <div class="company-row">
+            <dt>換算・比較</dt>
+            <dd>経産省「資源・エネルギー統計」、IEA「<span lang="en">Oil Stocks of IEA Countries</span>」、JOGMEC 公開情報。</dd>
+          </div>
+        </dl>
+      </section>
+
     </div>
-  </section>
-
-  <!-- データ出典 -->
-  <section class="about-section" aria-labelledby="sources-heading">
-    <h2 id="sources-heading" class="section-title">データ出典</h2>
-    <dl class="about-dl">
-      <div class="about-dl-row">
-        <dt>備蓄日数（カウンター・タンクゲージ・グラフ）</dt>
-        <dd>
-          経済産業省「<a href="https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/" target="_blank" rel="noopener noreferrer">石油備蓄の現況<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>」速報 PDF を毎朝 07:00 JST に自動取得・パースして反映しています。
-        </dd>
-      </div>
-      <div class="about-dl-row">
-        <dt>タンカー隻数</dt>
-        <dd>
-          <a href="https://aisstream.io/" target="_blank" rel="noopener noreferrer"><span lang="en">aisstream.io</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（<span lang="en">BETA</span>）の AIS リアルタイムストリームを毎時サンプリングして集計しています。AIS 船種コード 80–89（Tanker）のみを対象とし、地図ではサンプル中に観測できた船名・destination・MMSI・位置を表示しています。
-        </dd>
-      </div>
-      <div class="about-dl-row">
-        <dt>単位換算・スケール比較</dt>
-        <dd>
-          経産省「資源・エネルギー統計」の代表値、IEA「<span lang="en">Oil Stocks of IEA Countries</span>」、JOGMEC 公開情報をもとにした概算値を採用しています。実値とは数% 程度の誤差が生じます。
-        </dd>
-      </div>
-      <div class="about-dl-row">
-        <dt>輸入量を確認したい場合</dt>
-        <dd>
-          実際の月次原油輸入量は <a href="https://www.customs.go.jp/toukei/info/tsdl.htm" target="_blank" rel="noopener noreferrer">財務省貿易統計<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（HS 2709.00 原油）をご参照ください。
-        </dd>
-      </div>
-    </dl>
-  </section>
-
-  <!-- 計算方法・表示しているもの／していないもの -->
-  <section class="about-section" aria-labelledby="method-heading">
-    <h2 id="method-heading" class="section-title">計算方法と限界</h2>
-    <div class="about-prose">
-      <p>
-        トップページのカウンターは、最新公表値の <code>asOf</code> 時点を起点に「1 日経過 = 1 日分減る」というモデルで秒按分の推計表示をしています。実数を秒単位で観測するものではなく、ページ遷移時にスナップショット値へリセットされます。
-      </p>
-      <p>
-        タンクゲージの基準値（最大値）は過去公表値の高水準を採用しており、新しい高値が観測された場合に手動で更新します。3 区分（国家・民間・産油国共同）の合計は丸めの影響で総備蓄日数と一致しないことがあります。
-      </p>
-      <p>
-        タンカータブの隻数は <strong>サンプル時間中に AIS 静的データを送信したタンカー数</strong> です。<code>destination</code> は船員の手入力情報のため、実際の入港数とは異なります。積載量・バレル数の推計は誤解を招くため表示していません。
-      </p>
-      <p>
-        備蓄: <code>asOf</code> から 14 日以上、タンカー: 最終取得から 6 時間以上経過すると、自動取得が停止している可能性を示す警告バナーを表示します。取得失敗時は古いデータを保持し、壊れた値を出さない設計にしています。
-      </p>
-    </div>
-  </section>
-
-  <!-- 運営会社 -->
-  <section class="about-section" aria-labelledby="company-heading">
-    <h2 id="company-heading" class="section-title">運営</h2>
-    <dl class="about-dl">
-      <div class="about-dl-row">
-        <dt>会社名</dt>
-        <dd>株式会社ネクストラボ（<span lang="en">NextLab Inc.</span>）</dd>
-      </div>
-      <div class="about-dl-row">
-        <dt>代表者</dt>
-        <dd>亀井 智英（<span lang="en">Founder / CEO</span>）</dd>
-      </div>
-      <div class="about-dl-row">
-        <dt>所在地</dt>
-        <dd>〒150-0002 東京都渋谷区渋谷 2-19-15 宮益坂ビルディング</dd>
-      </div>
-      <div class="about-dl-row">
-        <dt>設立</dt>
-        <dd>2021 年 8 月</dd>
-      </div>
-      <div class="about-dl-row">
-        <dt>事業内容</dt>
-        <dd>
-          BtoB ソリューション開発（<span lang="en">Bakuage, Readable</span>）<br>
-          AI 実装コンサルティング<br>
-          新規事業開発支援
-        </dd>
-      </div>
-      <div class="about-dl-row">
-        <dt>ウェブサイト</dt>
-        <dd>
-          <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">nextlabs.jp<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
-        </dd>
-      </div>
-    </dl>
-  </section>
-
-  <!-- メディア・報道関係者 -->
-  <section class="about-section" aria-labelledby="media-heading">
-    <h2 id="media-heading" class="section-title">メディア・報道関係者の方へ</h2>
-    <div class="about-prose">
-      <p>
-        「日本の石油備蓄メーター」に掲載されている情報（カウンター数値、タンクゲージ画像、グラフ、石油のものさし等）は、出典として本サイト名と URL を明記いただければ、報道・記事・番組・SNS 投稿等において、事前の許諾なくご自由にご利用いただけます。
-      </p>
-      <p class="about-prose-subhead">ご利用時の出典記載例</p>
-      <blockquote class="about-citation">
-        <span class="about-citation-line">出典：日本の石油備蓄メーター（<a href="https://tkysi-mi.github.io/oil-stockpile/" target="_blank" rel="noopener noreferrer">https://tkysi-mi.github.io/oil-stockpile/<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>）</span>
-        <span class="about-citation-line">提供：株式会社ネクストラボ</span>
-      </blockquote>
-      <p>
-        なお、本サイトは経済産業省「石油備蓄の現況」速報 PDF 等を可視化する非公式の情報サイトです。元データの出典については、サイト内の各ページの注記をあわせてご参照ください。
-      </p>
-      <p class="about-prose-subhead">取材・お問い合わせ</p>
-      <p>
-        本サービスに関する取材のお申し込み、データの利用方法に関するご質問、その他のお問い合わせは、提供企業の株式会社ネクストラボまでご連絡ください。
-      </p>
-      <p>
-        <strong>株式会社ネクストラボ</strong>（<span lang="en">NextLab Inc.</span>）<br>
-        代表者：亀井 智英（<span lang="en">Founder / CEO</span>）<br>
-        所在地：〒150-0002 東京都渋谷区渋谷 2-19-15 宮益坂ビルディング<br>
-        WEB：<a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">nextlabs.jp<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a><br>
-        お問い合わせ：<a href="https://nextlabs.jp/#contact" target="_blank" rel="noopener noreferrer">nextlabs.jp/#contact<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
-      </p>
-    </div>
-  </section>
-
-  <!-- 免責 -->
-  <section class="about-section" aria-labelledby="disclaimer-heading">
-    <h2 id="disclaimer-heading" class="section-title">免責事項</h2>
-    <div class="about-prose">
-      <p>
-        本サイトは経済産業省公表の速報（推計値）および AIS データに基づく <strong>非公式の情報サイト</strong> です。確報値・実測値とは差が生じる場合があります。表示情報はベストエフォートで運用しており、内容の正確性・完全性・最新性について保証するものではありません。本サイトの情報を利用したことによるいかなる損害についても、運営者は責任を負いかねます。
-      </p>
-      <p>
-        個人情報・ログイン情報の収集・保存は一切行いません。
-      </p>
-    </div>
-  </section>
-
-  <!-- CTA: 関連サービスへの遷移動線 -->
-  <section class="cta-section" aria-labelledby="cta-heading">
-    <h2 id="cta-heading" class="visually-hidden">お問い合わせ</h2>
-    <p class="cta-lead">
-      AI 実装・新規事業開発・BtoB ソリューション開発のご相談を承ります。
-    </p>
-    <a class="cta-btn" href="https://nextlabs.jp/#contact" target="_blank" rel="noopener noreferrer">
-      <span class="cta-btn-text">ネクストラボに問い合わせる</span>
-      <span class="cta-btn-arrow" aria-hidden="true">→</span>
-      <span class="visually-hidden">（外部サイト・別タブで開きます）</span>
-    </a>
-  </section>
-
+  </div>
 </main>
 
-<footer class="site-footer">
-  <p class="footer-source">
-    <strong>主要データ出典:</strong>
-    経済産業省「<a href="https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/" target="_blank" rel="noopener noreferrer">石油備蓄の現況<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>」速報 PDF
-    ／
-    <a href="https://aisstream.io/" target="_blank" rel="noopener noreferrer"><span lang="en">aisstream.io</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>（<span lang="en">BETA</span>）
-  </p>
-  <p class="footer-disclaimer">
-    本サイトは経産省公表の速報（推計値）と AIS データを可視化する非公式の情報サイトです。確報値・実測値とは差が生じる場合があります。
-  </p>
-  <dl class="footer-company" aria-label="運営会社">
-    <div class="footer-company-row">
-      <dt>提供</dt>
-      <dd>株式会社ネクストラボ（<span lang="en">NextLab Inc.</span>）</dd>
+<section class="footer-share-section" aria-labelledby="footer-share-heading">
+  <h2 id="footer-share-heading" class="visually-hidden">運営とシェア</h2>
+  <div class="footer-share-row">
+    <p class="footer-share-org">
+      <span lang="ja">株式会社ネクストラボ</span>（<span lang="en">NextLab Inc.</span>）
+      ／
+      <a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer"><span lang="en">nextlabs.jp</span><span class="visually-hidden">（外部サイト・別タブで開きます）</span></a>
+    </p>
+    <div class="share-buttons">
+      <button class="share-btn" type="button" data-share="x">
+        <span class="share-btn-icon" aria-hidden="true">𝕏</span>
+        <span>Xで共有する</span>
+      </button>
+      <button class="share-btn" type="button" data-share="line">
+        <svg class="share-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d="M19.365 9.863c.349 0 .631.285.631.631 0 .345-.282.63-.631.63H17.61v1.125h1.755c.349 0 .631.283.631.63 0 .344-.282.629-.631.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .63.283.63.63 0 .344-.282.629-.63.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+        </svg>
+        <span>LINEで共有する</span>
+      </button>
+      <button class="share-btn" type="button" data-share="copy">
+        <svg class="share-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"/>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"/>
+        </svg>
+        <span>リンクをコピー</span>
+      </button>
     </div>
-    <div class="footer-company-row">
-      <dt>代表</dt>
-      <dd>亀井 智英</dd>
-    </div>
-    <div class="footer-company-row">
-      <dt>所在地</dt>
-      <dd>東京都渋谷区渋谷 2-19-15 宮益坂ビルディング</dd>
-    </div>
-    <div class="footer-company-row">
-      <dt>WEB</dt>
-      <dd><a href="https://nextlabs.jp/" target="_blank" rel="noopener noreferrer">nextlabs.jp<span class="visually-hidden">（外部サイト・別タブで開きます）</span></a></dd>
-    </div>
-  </dl>
-  <p class="footer-meta">
-    実装の99%をAIが書きました
-  </p>
-</footer>
+  </div>
+  <div id="share-toast" class="share-toast" role="status" aria-live="polite"></div>
+</section>
 
+<script type="module" src="../js/pages/about.js"></script>
 </body>
 </html>

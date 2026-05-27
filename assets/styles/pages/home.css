@@ -18,8 +18,8 @@
   --rule: #dde3ef;
   --rule-soft: #e8ecf5;
 
-  --brand: #4361ee;
-  --brand-strong: #2a4cd6;
+  --brand: #5983f1;
+  --brand-strong: #4870e8;
   --brand-soft: #eef2ff;
   --brand-ink: #1e2a78;
 
@@ -29,14 +29,14 @@
   --badge-bg: #eef2ff;
   --badge-text: #3f4cc9;
 
-  --donut-national: #3b5bf0;
-  --donut-private: #34c759;
-  --donut-joint: #b889e6;
-  --donut-other: #c4cad8;
+  --donut-national: #5983f1;
+  --donut-private: #63b684;
+  --donut-joint: #8562f1;
+  --donut-other: #d9d9d9;
 
-  --chart-line-total: #4361ee;
+  --chart-line-total: #5983f1;
   --chart-line-1: #fb7185;
-  --chart-line-2: #4361ee;
+  --chart-line-2: #5983f1;
   --chart-line-3: #fbbf24;
 
   --link: var(--brand);
@@ -51,121 +51,6 @@
 
 .page-home a {
   color: var(--link);
-}
-
-/* =============================================================
-   Header (dark navy on home — reference reproduction)
-   ============================================================= */
-.page-home .site-header {
-  background: #0f1535;
-  border-bottom: none;
-}
-
-.page-home .site-header-inner {
-  max-width: 1200px;
-  padding: var(--space-3) var(--space-5);
-  align-items: center;
-  gap: var(--space-4);
-}
-
-.page-home .site-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.page-home .site-logo {
-  display: inline-block;
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  background: #252b4a;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.page-home .site-logo::after {
-  content: "";
-  position: absolute;
-  inset: 6px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.page-home .site-brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-}
-
-.page-home .site-brand .site-title {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: #ffffff;
-}
-
-.page-home .site-tagline {
-  font-size: 11px;
-  color: #9ea7c0;
-  letter-spacing: 0.02em;
-  margin-top: 2px;
-}
-
-.page-home .tabs {
-  flex: 1;
-  justify-content: center;
-  gap: 4px;
-  align-items: center;
-}
-
-.page-home .tab {
-  font-size: 13px;
-  font-weight: 500;
-  padding: 8px 18px;
-  border-radius: 999px;
-  border-bottom: none;
-  color: #a5b0c8;
-  transition:
-    background 0.15s,
-    color 0.15s;
-}
-
-.page-home .tab:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.page-home .tab--active {
-  background: var(--brand);
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.page-home .tab--active:hover {
-  background: var(--brand-strong);
-  color: #ffffff;
-}
-
-.page-home .site-header-meta {
-  display: flex;
-  flex-direction: column;
-  text-align: right;
-  line-height: 1.2;
-  flex-shrink: 0;
-}
-
-.page-home .site-header-meta-label {
-  font-size: 11px;
-  color: #9ea7c0;
-}
-
-.page-home .site-header-meta-value {
-  font-size: 12px;
-  color: #cfd5e6;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.02em;
 }
 
 /* =============================================================
@@ -229,17 +114,22 @@
   gap: 22px;
 }
 
-.page-home .dash-kpi:nth-of-type(2) {
-  grid-column: 2;
+.page-home .dash-kpi-group {
+  grid-column: 2 / span 3;
   grid-row: 1;
+  flex-direction: row;
+  padding: 0;
+  gap: 0;
 }
-.page-home .dash-kpi:nth-of-type(3) {
-  grid-column: 3;
-  grid-row: 1;
+
+.page-home .dash-kpi-group .dash-kpi {
+  flex: 1 1 0;
+  min-width: 0;
+  border-right: 1px solid #f0f0f0;
 }
-.page-home .dash-kpi:nth-of-type(4) {
-  grid-column: 4;
-  grid-row: 1;
+
+.page-home .dash-kpi-group .dash-kpi:last-child {
+  border-right: none;
 }
 
 .page-home .dash-donut {
@@ -417,66 +307,18 @@
 }
 
 /* =============================================================
-   Share buttons (pill style)
-   ============================================================= */
-.page-home .share-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.page-home .share-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 18px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--brand);
-  background: #ffffff;
-  border: 1px solid #dbe4f5;
-  border-radius: 10px;
-  transition:
-    background 0.12s,
-    border-color 0.12s,
-    color 0.12s;
-}
-
-.page-home .share-btn:hover {
-  background: var(--brand-soft);
-  color: var(--brand-strong);
-  border-color: var(--brand);
-}
-
-.page-home .share-btn-icon {
-  font-size: 14px;
-  line-height: 1;
-  color: currentColor;
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.page-home .share-toast {
-  margin-top: 6px;
-  font-size: 11px;
-  color: var(--fg-sub);
-  min-height: 1.4em;
-  transition: opacity 0.2s;
-  opacity: 0;
-}
-
-.page-home .share-toast.is-visible {
-  opacity: 1;
-}
-
-/* =============================================================
    KPI cards
    ============================================================= */
 .page-home .dash-kpi {
-  justify-content: space-between;
-  gap: 10px;
-  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 26px 20px 22px;
+}
+
+.page-home .dash-kpi .dash-kpi-badge {
+  margin-top: auto;
 }
 
 .page-home .dash-kpi-value {
@@ -708,51 +550,6 @@
   border: 0;
 }
 
-/* =============================================================
-   Footer share row (inside main)
-   ============================================================= */
-.page-home .footer-share-section {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: var(--space-4) 8px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.page-home .footer-share-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-}
-
-.page-home .footer-share-org {
-  font-size: 12px;
-  color: var(--fg-muted);
-  margin: 0;
-}
-
-.page-home .footer-share-org a {
-  color: var(--fg-sub);
-  text-decoration: underline;
-  text-decoration-color: var(--rule);
-}
-
-.page-home .footer-share-org a:hover {
-  color: var(--brand);
-  text-decoration-color: currentColor;
-}
-
-/* =============================================================
-   Common footer hidden on home (reference has inline share row only)
-   ============================================================= */
-.page-home .site-footer {
-  display: none;
-}
-
 .page-home .skip-link {
   background: var(--brand);
   color: #ffffff;
@@ -769,14 +566,9 @@
     grid-column: 1 / -1;
     grid-row: auto;
   }
-  .page-home .dash-kpi:nth-of-type(2),
-  .page-home .dash-kpi:nth-of-type(3),
-  .page-home .dash-kpi:nth-of-type(4) {
-    grid-column: auto;
-    grid-row: auto;
-  }
-  .page-home .dash-kpi:nth-of-type(4) {
+  .page-home .dash-kpi-group {
     grid-column: 1 / -1;
+    grid-row: auto;
   }
   .page-home .dash-donut {
     grid-column: 1 / -1;
@@ -791,10 +583,15 @@
   .page-home .dashboard-grid {
     grid-template-columns: 1fr;
   }
-  .page-home .dash-kpi:nth-of-type(2),
-  .page-home .dash-kpi:nth-of-type(3),
-  .page-home .dash-kpi:nth-of-type(4) {
-    grid-column: 1;
+  .page-home .dash-kpi-group {
+    flex-direction: column;
+  }
+  .page-home .dash-kpi-group .dash-kpi {
+    border-right: none;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .page-home .dash-kpi-group .dash-kpi:last-child {
+    border-bottom: none;
   }
   .page-home .hero-top {
     grid-template-columns: 1fr;
@@ -814,20 +611,9 @@
   .page-home .donut-legend {
     grid-template-columns: 1fr;
   }
-  .page-home .site-header-inner {
-    flex-wrap: wrap;
-  }
-  .page-home .tabs {
-    flex-basis: 100%;
-    justify-content: flex-start;
-  }
-  .page-home .site-header-meta {
-    text-align: left;
-    flex-direction: row;
-    gap: 6px;
-  }
   .page-home .footer-share-row {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    gap: var(--space-3);
   }
 }

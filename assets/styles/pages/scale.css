@@ -1,212 +1,232 @@
 /* =============================================================
    Scale page (scale/index.html)
+   Scope: body.page-scale
+   Card-based layout: hero card + 2x2 metric grid + 豆知識
    ============================================================= */
-.scale-hero {
-  text-align: center;
+
+.page-scale {
+  --bg-gradient: linear-gradient(180deg, #e3e9f5 0%, #eef2fa 100%);
+  --bg-card: #ffffff;
+  --bg-inner: #eef3fc;
+
+  --fg-strong: #0f1430;
+  --fg: #14182c;
+  --fg-sub: #51587a;
+  --fg-muted: #828aa6;
+
+  --rule-soft: #e8ecf5;
+
+  --brand: #5983f1;
+  --brand-strong: #4870e8;
+  --brand-soft: #eef2ff;
+
+  --num-gradient: linear-gradient(180deg, #8ba0fb 0%, #4569ef 55%, #2541c7 100%);
+
+  --link: var(--brand);
+  --focus: var(--brand);
+
+  background: var(--bg-gradient);
+  color: var(--fg);
+  min-height: 100vh;
 }
 
-.scale-num-row {
+.page-scale a {
+  color: var(--link);
+}
+
+/* =============================================================
+   Main layout
+   ============================================================= */
+.page-scale .site-main.scale-layout {
+  max-width: 1200px;
+  padding: var(--space-5) var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* =============================================================
+   Hero card
+   ============================================================= */
+.page-scale .scale-hero-card {
+  background:
+    radial-gradient(ellipse 60% 140% at 100% 40%, rgba(124, 151, 248, 0.26), transparent 70%),
+    var(--bg-card);
+  border: 1px solid var(--rule-soft);
+  border-radius: 14px;
+  padding: 32px 44px 36px;
+  box-shadow: 0 4px 16px rgba(44, 64, 120, 0.05);
+}
+
+.page-scale .scale-eyebrow {
+  display: inline-block;
+  padding: 5px 12px;
+  background: #e7ecf5;
+  color: #6b7390;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.page-scale .scale-hero-title {
+  font-size: clamp(26px, 2.4vw, 32px);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: var(--fg-strong);
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+.page-scale .scale-hero-lead {
+  font-size: 13px;
+  color: var(--fg-sub);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 720px;
+}
+
+.page-scale .scale-hero-lead strong {
+  font-weight: 700;
+  color: var(--fg-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+/* =============================================================
+   2x2 metric grid
+   ============================================================= */
+.page-scale .scale-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.page-scale .scale-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule-soft);
+  border-radius: 14px;
+  padding: 28px 32px 30px;
+  box-shadow: 0 4px 16px rgba(44, 64, 120, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* Top-row variant: simple label + big number */
+.page-scale .scale-card-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-strong);
+  letter-spacing: 0.01em;
+}
+
+/* Bottom-row variant: title above an inner blue-tinted box */
+.page-scale .scale-card--with-inner {
+  gap: 10px;
+}
+
+.page-scale .scale-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg-strong);
+  letter-spacing: 0.01em;
+}
+
+.page-scale .scale-inner {
+  background: var(--bg-inner);
+  border-radius: 10px;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  min-height: 90px;
+}
+
+.page-scale .scale-card-value {
   display: inline-flex;
   align-items: baseline;
-  gap: 12px;
+  gap: 0;
   font-variant-numeric: tabular-nums;
-  margin-bottom: var(--space-4);
-}
-
-.scale-num {
-  font-family: var(--font-sans);
-  font-size: clamp(64px, 16vw, 144px);
-  font-weight: 200;
   line-height: 1;
+}
+
+.page-scale .scale-card-prefix {
+  font-size: clamp(18px, 1.7vw, 22px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  background: var(--num-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-right: 2px;
+}
+
+.page-scale .scale-card-num {
+  font-family: "Inter", var(--font-sans);
+  font-size: clamp(28px, 2.8vw, 36px);
+  font-weight: 800;
   letter-spacing: -0.02em;
-  color: var(--fg);
-}
-
-.scale-unit {
-  font-size: clamp(14px, 2.6vw, 20px);
-  font-weight: 300;
-  color: var(--fg-sub);
-}
-
-.scale-sub {
-  font-size: var(--text-md);
-  color: var(--fg-sub);
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* In-page sub-tabs (ARIA tablist) */
-.subtabs-section {
-  /* base section padding inherited from .site-main > section */
-}
-
-.subtabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 var(--space-4);
-  border-bottom: 1px solid var(--rule);
-  margin-bottom: var(--space-4);
-}
-
-.subtab {
-  background: none;
-  border: 0;
-  border-bottom: 3px solid transparent;
-  padding: var(--space-2) 0;
-  margin-bottom: -1px;
-  font-size: var(--text-md);
-  color: var(--fg-sub);
-  font-weight: 400;
-  cursor: pointer;
+  background: var(--num-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   white-space: nowrap;
-  transition:
-    color 0.15s,
-    border-color 0.15s;
 }
 
-.subtab:hover {
-  color: var(--fg);
+.page-scale .scale-card-suffix {
+  font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 700;
+  color: #2541c7;
+  margin-left: 4px;
+  letter-spacing: 0.01em;
 }
 
-.subtab--active {
-  color: var(--fg);
-  font-weight: 600;
-  border-bottom-color: var(--fg);
-}
-
-.subtab-panel {
-  /* hidden 属性で表示制御 */
-}
-
-.panel-lead {
-  font-size: var(--text-md);
-  color: var(--fg-sub);
-  margin-bottom: var(--space-4);
-}
-
-.panel-note {
-  margin-top: var(--space-3);
-  font-size: var(--text-xs);
-  color: var(--fg-muted);
-  line-height: 1.7;
-}
-
-/* 単位換算リスト */
-.unit-list {
-  display: grid;
-  gap: var(--space-2);
-  margin: 0;
-}
-
-.unit-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 12px var(--space-3);
-  background: var(--bg-card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-sm);
-  gap: var(--space-3);
-  flex-wrap: wrap;
-}
-
-.unit-row dt {
-  font-size: var(--text-sm);
-  color: var(--fg-sub);
-  letter-spacing: 0.02em;
-}
-
-.unit-row dd {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: 22px;
-  font-weight: 300;
-  color: var(--fg);
-  text-align: right;
-}
-
-.unit-suffix {
+.page-scale .scale-card-meta {
   font-size: 12px;
   color: var(--fg-sub);
-  margin-left: var(--space-1);
-  font-weight: 400;
-}
-
-/* スケール比較カード */
-.compare-card {
-  background: var(--bg-card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-sm);
-  padding: var(--space-3) var(--space-4);
-  margin-bottom: var(--space-3);
-}
-
-.compare-card:last-of-type {
-  margin-bottom: 0;
-}
-
-.compare-label {
-  font-size: var(--text-sm);
-  color: var(--fg-sub);
-  letter-spacing: 0.02em;
-  margin-bottom: var(--space-2);
-}
-
-.compare-value {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: 40px;
-  font-weight: 200;
-  line-height: 1.1;
-  color: var(--fg);
-  letter-spacing: -0.01em;
-}
-
-.compare-unit {
-  font-size: 16px;
-  color: var(--fg-sub);
-  margin-left: var(--space-1);
-  font-weight: 400;
-}
-
-.compare-meta {
-  margin-top: var(--space-2);
-  font-size: var(--text-xs);
-  color: var(--fg-muted);
   line-height: 1.7;
-}
-
-/* 豆知識リスト */
-.trivia-list {
-  display: grid;
-  gap: var(--space-3);
-  list-style: none;
-  padding: 0;
   margin: 0;
 }
 
-.trivia-list li {
-  position: relative;
-  padding: var(--space-3) var(--space-4);
-  background: var(--bg-card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-sm);
-  line-height: 1.8;
-  color: var(--fg-sub);
+.page-scale .scale-card-meta #compare-bath-years {
+  font-weight: 600;
+  color: var(--fg-strong);
+  font-variant-numeric: tabular-nums;
 }
 
-.trivia-list li strong {
-  color: var(--fg);
-  font-weight: 500;
+.page-scale .skip-link {
+  background: var(--brand);
+  color: #ffffff;
 }
 
-@media (max-width: 520px) {
-  .compare-value {
-    font-size: 32px;
+/* =============================================================
+   Responsive
+   ============================================================= */
+@media (max-width: 760px) {
+  .page-scale .site-main.scale-layout {
+    padding: var(--space-3);
+    gap: 14px;
   }
-  .unit-row dd {
-    font-size: 18px;
+  .page-scale .scale-hero-card {
+    padding: 28px 22px;
+    border-radius: 14px;
+  }
+  .page-scale .scale-hero-title {
+    font-size: 26px;
+  }
+  .page-scale .scale-eyebrow {
+    margin-bottom: 18px;
+  }
+  .page-scale .scale-card {
+    padding: 22px 20px;
+    border-radius: 14px;
+  }
+  .page-scale .scale-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .page-scale .scale-inner {
+    padding: 18px 20px;
   }
 }

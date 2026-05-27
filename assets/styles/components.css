@@ -7,38 +7,57 @@
   margin-bottom: var(--space-3);
 }
 
-/* Tabs (used as page nav, right side of header) */
-.tabs {
+/* Tabs — pill style, lives in the dark site header.
+   Scoped under .site-header so page-level "a { color: ... }" overrides
+   (e.g. .page-home a) lose the specificity battle. */
+.site-header .tabs {
   display: flex;
+  flex: 1;
   flex-wrap: wrap;
-  gap: var(--space-1) var(--space-4);
-  align-items: baseline;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
 }
 
-.tab {
+.site-header .tab {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   gap: 6px;
-  padding: var(--space-2) 0;
-  font-size: var(--text-md);
-  color: var(--fg-sub);
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #a5b0c8;
   text-decoration: none;
-  border-bottom: 3px solid transparent;
+  border: none;
+  border-radius: 999px;
   white-space: nowrap;
   transition:
-    color 0.15s,
-    border-color 0.15s;
+    background 0.15s,
+    color 0.15s;
 }
 
-.tab:hover {
-  color: var(--fg);
+.site-header .tab:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
   text-decoration: none;
 }
 
-.tab--active {
-  color: var(--fg);
-  border-bottom-color: var(--fg);
+.site-header .tab--active {
+  background: #5983f1;
+  color: #ffffff;
   font-weight: 600;
+}
+
+.site-header .tab--active:hover {
+  background: #4870e8;
+  color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .site-header .tabs {
+    flex-basis: 100%;
+    justify-content: flex-start;
+  }
 }
 
 .stale-warning {
@@ -54,4 +73,60 @@
 
 .stale-warning[hidden] {
   display: none;
+}
+
+/* =============================================================
+   Share buttons — used by hero cards and the global footer share band
+   ============================================================= */
+.share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5983f1;
+  background: #ffffff;
+  border: 1px solid #dbe4f5;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background 0.12s,
+    border-color 0.12s,
+    color 0.12s;
+}
+
+.share-btn:hover {
+  background: #eef2ff;
+  color: #4870e8;
+  border-color: #5983f1;
+}
+
+.share-btn-icon {
+  font-size: 14px;
+  line-height: 1;
+  color: currentColor;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.share-toast {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #51587a;
+  min-height: 1.4em;
+  text-align: center;
+  transition: opacity 0.2s;
+  opacity: 0;
+}
+
+.share-toast.is-visible {
+  opacity: 1;
 }
