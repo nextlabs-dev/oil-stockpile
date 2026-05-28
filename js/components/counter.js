@@ -13,7 +13,6 @@
 
 import { computeCurrentDays as computeFromSnapshot, STALE_THRESHOLD_DAYS } from '../core/data.js';
 import { setText, showElement } from '../core/dom.js';
-import { formatJaDate } from '../core/format.js';
 
 const MS_PER_DAY = 86_400_000;
 
@@ -100,10 +99,6 @@ function tick() {
  */
 export function initCounter(history) {
   setLatest(history);
-
-  // フッターの「データ時点」「公表」を埋める
-  setText('footer-as-of', formatJaDate(latestSnapshot.asOf));
-  setText('footer-published', formatJaDate(latestSnapshot.published));
 
   // 古さ警告（asOf から閾値日数以上経過しているとき）
   const elapsedDays = getElapsedDays();

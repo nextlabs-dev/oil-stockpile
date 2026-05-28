@@ -3,7 +3,7 @@
 Run from project root:
     python -m unittest discover -s scripts -p 'test_*.py'
 
-I/O から切り離した純粋関数 (expand_tokens / text_value / render_nav /
+I/O から切り離した純粋関数 (text_value / render_nav /
 render_page / _check_peak_reference_in_sync) をカバーする。
 """
 
@@ -15,9 +15,7 @@ from string import Template
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from build_site import (  # noqa: E402
-    EXTERNAL_NOTE,
     _check_peak_reference_in_sync,
-    expand_tokens,
     render_nav,
     render_page,
     text_value,
@@ -112,27 +110,6 @@ class CheckPeakReferenceInSyncTest(unittest.TestCase):
         )
 
 
-class ExpandTokensTest(unittest.TestCase):
-    def test_replaces_external_note_in_string(self):
-        result = expand_tokens("a {{ external_note }} b")
-        self.assertEqual(result, f"a {EXTERNAL_NOTE} b")
-
-    def test_returns_unchanged_when_token_absent(self):
-        self.assertEqual(expand_tokens("plain text"), "plain text")
-
-    def test_recurses_into_list(self):
-        result = expand_tokens(["a", "x {{ external_note }} y"])
-        self.assertEqual(result, ["a", f"x {EXTERNAL_NOTE} y"])
-
-    def test_recurses_into_dict(self):
-        result = expand_tokens({"k": "{{ external_note }}", "n": 1})
-        self.assertEqual(result, {"k": EXTERNAL_NOTE, "n": 1})
-
-    def test_passes_through_non_string_types(self):
-        self.assertEqual(expand_tokens(42), 42)
-        self.assertIsNone(expand_tokens(None))
-
-
 class TextValueTest(unittest.TestCase):
     def test_none_returns_empty_string(self):
         self.assertEqual(text_value(None), "")
@@ -180,7 +157,7 @@ class RenderPageTest(unittest.TestCase):
         "OG_IMG=$og_image|FAVI=$favicon|CSS=$stylesheet|"
         "FONT=$font_href|EXTRA=[$extra_head]|BODY_CLASS=[$body_class]|HOME=$home_href|"
         "NAV=[$nav]|BODY=$content|"
-        "FS=$footer_source|FD=$footer_disclaimer|SCRIPTS=[$script_tags]|"
+        "SCRIPTS=[$script_tags]|"
         "OG_TITLE=$og_title|OG_DESC=$og_description|"
         "TW_TITLE=$twitter_title|TW_DESC=$twitter_description|"
         "OG_ALT=$og_image_alt"

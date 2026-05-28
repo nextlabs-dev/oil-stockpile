@@ -40,13 +40,6 @@
       "twitter_description": "経済産業省の速報値から、日本の石油備蓄日数を静かに可視化します。",
       "active_nav": "home",
       "script_tags": "<script type=\"module\" src=\"js/pages/home.js\"></script>",
-      "footer_source": [
-        "<strong>データ出典:</strong>",
-        "    経済産業省「<a href=\"https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/\" target=\"_blank\" rel=\"noopener noreferrer\">石油備蓄の現況{{ external_note }}</a>」速報PDF",
-        "    ／ データ時点 <span id=\"footer-as-of\">—</span>",
-        "    ／ 公表 <span id=\"footer-published\">—</span>"
-      ],
-      "footer_disclaimer": "本サイトは経産省公表の速報（推計値）を可視化する非公式の情報サイトです。確報値とは差が生じる場合があります。トップの「現在値」は端末時刻に基づく秒按分の推計表示で、実数を秒単位で観測するものではありません。",
       "root_path": "./",
       "nav": {
         "home": "./",
@@ -92,11 +85,6 @@
         "        crossorigin=\"anonymous\"></script>",
         "<script type=\"module\" src=\"../js/pages/tankers.js\"></script>"
       ],
-      "footer_source": [
-        "<strong>データソース:</strong>",
-        "    <a href=\"https://aisstream.io/\" target=\"_blank\" rel=\"noopener noreferrer\"><span lang=\"en\">aisstream.io</span>{{ external_note }}</a>（<span lang=\"en\">BETA</span>）の AIS リアルタイムストリーム"
-      ],
-      "footer_disclaimer": "本サイトは AIS データに基づく非公式の集計です。AIS は IMO 規定により公開放送される情報で、地図には個別船舶の名称・destination・位置を表示しています。実流入量は財務省貿易統計をご参照ください。",
       "root_path": "../",
       "nav": {
         "home": "../",
@@ -132,12 +120,6 @@
       "twitter_description": "備蓄日数を kL・バレル・VLCC隻数・年間消費比に換算して、肌感覚を補強します。",
       "active_nav": "scale",
       "script_tags": "<script type=\"module\" src=\"../js/pages/scale.js\"></script>",
-      "footer_source": [
-        "<strong>データ出典:</strong>",
-        "    経済産業省「<a href=\"https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/\" target=\"_blank\" rel=\"noopener noreferrer\">石油備蓄の現況{{ external_note }}</a>」速報PDF",
-        "    ／ 換算根拠: 経産省「資源・エネルギー統計」、IEA「<span lang=\"en\">Oil Stocks of IEA Countries</span>」、JOGMEC 公開情報"
-      ],
-      "footer_disclaimer": "本ページの換算値は概算です。1 日あたり消費量・VLCC 積載量・年間消費量は公開統計の代表的な値を採用しており、実値とは数%程度の誤差が生じます。引用時は元データの出典に当たってください。",
       "root_path": "../",
       "nav": {
         "home": "../",
@@ -173,13 +155,6 @@
       "twitter_description": "サイトの目的・データ出典・計算方法・運営会社情報。",
       "active_nav": "about",
       "script_tags": "<script type=\"module\" src=\"../js/pages/about.js\"></script>",
-      "footer_source": [
-        "<strong>主要データ出典:</strong>",
-        "    経済産業省「<a href=\"https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/\" target=\"_blank\" rel=\"noopener noreferrer\">石油備蓄の現況{{ external_note }}</a>」速報 PDF",
-        "    ／",
-        "    <a href=\"https://aisstream.io/\" target=\"_blank\" rel=\"noopener noreferrer\"><span lang=\"en\">aisstream.io</span>{{ external_note }}</a>（<span lang=\"en\">BETA</span>）"
-      ],
-      "footer_disclaimer": "本サイトは経産省公表の速報（推計値）と AIS データを可視化する非公式の情報サイトです。確報値・実測値とは差が生じる場合があります。",
       "root_path": "../",
       "nav": {
         "home": "../",

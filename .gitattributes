@@ -1,0 +1,17 @@
+# 生成 HTML は build_site.py が LF で書き出す。Windows (autocrlf) でも
+# 改行差分で「変更あり」にならないよう、テキストは LF に固定する。
+* text=auto eol=lf
+
+# バイナリは改行正規化の対象外
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg text eol=lf
+*.ttf binary
+*.ttc binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.pdf binary

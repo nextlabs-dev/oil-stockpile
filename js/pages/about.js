@@ -3,14 +3,9 @@
  *  - Sidebar nav highlights the section currently in view via IntersectionObserver.
  */
 
-import { initCounter } from '../components/counter.js';
 import { loadHistory } from '../core/data.js';
 import { setText } from '../core/dom.js';
-
-function formatBannerDate(iso) {
-  if (!iso) return '—';
-  return iso.replaceAll('-', '.');
-}
+import { formatDotDate } from '../core/format.js';
 
 function initSidebarScrollSpy() {
   const links = Array.from(document.querySelectorAll('.about-nav-link'));
@@ -57,9 +52,8 @@ function initSidebarScrollSpy() {
 async function main() {
   try {
     const history = await loadHistory('../data/snapshots.json');
-    initCounter(history);
     const latest = history[history.length - 1];
-    if (latest) setText('header-last-updated', formatBannerDate(latest.published));
+    if (latest) setText('header-last-updated', formatDotDate(latest.published));
   } catch (e) {
     console.error('history:', e);
   }

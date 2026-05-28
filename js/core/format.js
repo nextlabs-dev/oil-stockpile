@@ -27,7 +27,8 @@ export function formatInt(n) {
   return Math.round(n).toLocaleString('ja-JP');
 }
 
-export function formatFixed1(n) {
-  if (n == null || !Number.isFinite(n)) return '—';
-  return n.toFixed(1);
+/** ISO 日付 (YYYY-MM-DD) をドット区切り (YYYY.MM.DD) に。空なら '—'。 */
+export function formatDotDate(iso) {
+  if (!iso) return '—';
+  return iso.replaceAll('-', '.');
 }

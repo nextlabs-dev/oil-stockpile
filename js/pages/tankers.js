@@ -11,13 +11,14 @@
 import { initCounter } from '../components/counter.js';
 import { initShare } from '../components/share.js';
 import { initTankerMap } from '../components/tanker-map.js';
-import { loadHistory, loadJson } from '../core/data.js';
+import { loadHistory, loadJson, VLCC_CAPACITY_KL } from '../core/data.js';
 import { setText, showElement } from '../core/dom.js';
-import { formatJaDateTime } from '../core/format.js';
+import { formatDotDate, formatJaDateTime } from '../core/format.js';
 
 const TANKERS_URL = '../data/tankers.json';
 const STALE_HOURS = 6;
-const VLCC_KL_PER_SHIP = 32; // 万 kL / VLCC 1 隻
+// VLCC 1 隻あたりの概算容量 [万 kL]。SSOT は js/core/data.js の VLCC_CAPACITY_KL [kL]。
+const VLCC_MAN_KL_PER_SHIP = VLCC_CAPACITY_KL / 10_000;
 const SHIP_ICON_JP_SRC = '../assets/tanker_japan.png';
 const SHIP_ICON_OTHER_SRC = '../assets/tanker_other.png';
 
@@ -122,7 +123,7 @@ async function main() {
   const total = Number(data.totalTankersInRegion) || 0;
   const jp = Number(data.japanBoundTankers) || 0;
   const other = Math.max(0, total - jp);
-  const jpKl = jp * VLCC_KL_PER_SHIP;
+  const jpKl = jp * VLCC_MAN_KL_PER_SHIP;
   setText('total-tankers', String(total));
   setText('japan-bound', String(jp));
   setText('japan-bound-2', String(jp));
@@ -137,7 +138,7 @@ async function main() {
   renderPorts(data.topDestinationPorts, data.japanBoundUnknownPort);
 
   setText('fetched-at', formatJaDateTime(data.fetchedAt));
-  setText('header-last-updated', (data.fetchedAt ?? '').slice(0, 10).replaceAll('-', '.') || '—');
+  setText('header-last-updated', formatDotDate((data.fetchedAt ?? '').slice(0, 10)));
   setText('sampling-duration', `約 ${Math.round((data.samplingDurationSec || 0) / 60)} 分`);
   setText('bounding-box', data.boundingBox || '—');
 

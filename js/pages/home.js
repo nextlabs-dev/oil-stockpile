@@ -12,17 +12,13 @@ import { initShare } from '../components/share.js';
 import { initTankGauge } from '../components/tank-gauge.js';
 import { loadHistory } from '../core/data.js';
 import { setText } from '../core/dom.js';
-
-function formatBannerDate(iso) {
-  if (!iso) return '—';
-  return iso.replaceAll('-', '.');
-}
+import { formatDotDate } from '../core/format.js';
 
 function populateHeaderAndBanner(history) {
   const latest = history[history.length - 1];
   if (!latest) return;
-  setText('update-banner-date', formatBannerDate(latest.published));
-  setText('header-last-updated', formatBannerDate(latest.published));
+  setText('update-banner-date', formatDotDate(latest.published));
+  setText('header-last-updated', formatDotDate(latest.published));
 }
 
 function showLoadError(err) {

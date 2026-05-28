@@ -25,19 +25,6 @@ TEMPLATES_DIR = SRC_DIR / "templates"
 BASE_TEMPLATE = TEMPLATES_DIR / "base.html"
 
 
-EXTERNAL_NOTE = '<span class="visually-hidden">（外部サイト・別タブで開きます）</span>'
-
-
-def expand_tokens(value: Any) -> Any:
-    if isinstance(value, str):
-        return value.replace("{{ external_note }}", EXTERNAL_NOTE)
-    if isinstance(value, list):
-        return [expand_tokens(item) for item in value]
-    if isinstance(value, dict):
-        return {key: expand_tokens(item) for key, item in value.items()}
-    return value
-
-
 def text_value(value: str | list[str] | None) -> str:
     if value is None:
         return ""
@@ -47,7 +34,7 @@ def text_value(value: str | list[str] | None) -> str:
 
 
 def load_site_config() -> dict[str, Any]:
-    return expand_tokens(read_json(SITE_CONFIG_PATH))
+    return read_json(SITE_CONFIG_PATH)
 
 
 _DATA_JS_PATH = REPO_ROOT / "js" / "core" / "data.js"
@@ -163,8 +150,6 @@ def render_page(
         header_meta=header_meta,
         nav=render_nav(page, site_config["nav_labels"], site_config["nav_order"]),
         content=content,
-        footer_source=text_value(page.get("footer_source")),
-        footer_disclaimer=text_value(page.get("footer_disclaimer")),
         script_tags=script_tags,
     )
 

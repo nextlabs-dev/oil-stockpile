@@ -9,17 +9,15 @@
  * Japan 番組向けの「億・万」区切り表記に整形する formatJaNumber を用意。
  */
 
-import { computeCurrentDays, loadHistory } from '../core/data.js';
+import { computeCurrentDays, loadHistory, VLCC_CAPACITY_KL } from '../core/data.js';
 import { setText } from '../core/dom.js';
-import { formatInt } from '../core/format.js';
+import { formatDotDate, formatInt } from '../core/format.js';
 
 const CONSTANTS = {
   /** エネ庁備蓄算出ベース（純消費量、原油換算）約 28 万 kL/日。 */
   DAILY_CONSUMPTION_KL: 280_000,
   /** 1 バレル = 158.987 L (USA Petroleum barrel)。 */
   LITERS_PER_BARREL: 158.987,
-  /** VLCC 1 隻の典型的積載量。30 万 kL（リファレンスの説明文に合わせる）。 */
-  VLCC_CAPACITY_KL: 300_000,
   /** 家庭用お風呂 1 杯。一般的に 200–300 L とされ、本実装では 300 L を採用。 */
   BATH_VOLUME_L: 300,
   /** 日本の総人口（概算）。 */
@@ -73,7 +71,7 @@ function renderCards(days) {
   const totalKl = days * CONSTANTS.DAILY_CONSUMPTION_KL;
   const totalL = totalKl * 1_000;
   const totalBarrels = totalL / CONSTANTS.LITERS_PER_BARREL;
-  const vlccCount = totalKl / CONSTANTS.VLCC_CAPACITY_KL;
+  const vlccCount = totalKl / VLCC_CAPACITY_KL;
   const bathCount = totalL / CONSTANTS.BATH_VOLUME_L;
   // 全国民が 1 日 1 杯入る場合、備蓄でまかなえる日数
   const bathDays = bathCount / CONSTANTS.POPULATION;
@@ -99,7 +97,7 @@ async function main() {
   const days = computeCurrentDays(snapshot);
   setText('scale-days', String(Math.floor(days)));
   setText('scale-as-of', formatYearMonth(snapshot.asOf));
-  setText('header-last-updated', snapshot.published?.replaceAll('-', '.') ?? '—');
+  setText('header-last-updated', formatDotDate(snapshot.published));
 
   renderCards(days);
 }

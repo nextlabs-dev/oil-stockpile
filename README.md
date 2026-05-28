@@ -39,8 +39,8 @@ oil-stockpile/
 │   └── og-image.png        -- OGP 画像（毎日 generate_ogp.py が再生成）
 ├── js/
 │   ├── core/               -- data / dom / format / escape ヘルパ
-│   ├── components/         -- counter / chart / breakdown / share / tank-gauge / tanker-map
-│   └── pages/              -- home.js / tankers.js / scale.js
+│   ├── components/         -- counter / chart / kpi / nav / share / tank-gauge（内訳ドーナツ） / tanker-map
+│   └── pages/              -- home.js / tankers.js / scale.js / about.js
 ├── data/
 │   ├── snapshots.json      -- 備蓄日数（毎日自動更新）
 │   └── tankers.json        -- タンカー集計（毎時自動更新）

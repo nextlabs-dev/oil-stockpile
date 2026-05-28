@@ -64,6 +64,13 @@ export const SITE_CONFIG = {
 export const STALE_THRESHOLD_DAYS = 14;
 
 /**
+ * VLCC（大型原油タンカー）1 隻の典型的積載量 [kL]。
+ * scale ページの換算・tankers ページの概算容量で共通参照する SSOT。
+ * 30 万 kL は一般に流通する代表値。
+ */
+export const VLCC_CAPACITY_KL = 300_000;
+
+/**
  * snapshot の asOf 時点からの経過分を引いた「いまこの瞬間の推計備蓄日数」を返す。
  * モデル: 「1 日経過 = 1 日分減る」（年間消費量推計を別途持たなくても整合）。
  *

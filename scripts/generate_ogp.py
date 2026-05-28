@@ -389,14 +389,6 @@ def draw_text_letter_spaced(
     return x
 
 
-def _measure(font: ImageFont.FreeTypeFont, text: str, em_spacing: float = 0.0) -> int:
-    """letter-spaced テキストの幅を実測する。"""
-    if em_spacing == 0.0:
-        return int(round(font.getlength(text)))
-    extra = em_spacing * font.size
-    return int(round(sum(font.getlength(ch) + extra for ch in text)))
-
-
 # ─────────────────────────────────────────────────────────────────────────────
 # 描画リージョン
 # ─────────────────────────────────────────────────────────────────────────────
@@ -468,12 +460,9 @@ def draw_header_band(base: Image.Image, *, published_iso: str) -> None:
 
     # 右側: 最終更新 YYYY年M月D日
     meta_label_font = resolve_cjk("regular", 12)
-    meta_value_font = resolve_inter("semibold", 14)
     right_x = WIDTH - PAD_X
     label_text = "最終更新"
-    label_w = int(round(meta_label_font.getlength(label_text)))
     value_text = format_jst_date(published_iso)
-    value_w = _measure(meta_value_font, value_text)
 
     label_y = logo_y + 3
     value_y = label_y + 20
@@ -487,7 +476,6 @@ def draw_header_band(base: Image.Image, *, published_iso: str) -> None:
     )
     # value は CJK 混在（"年/月/日" を含む）なので CJK Bold で描く
     value_font = resolve_cjk("bold", 14)
-    value_w = int(round(value_font.getlength(value_text)))
     draw.text(
         (right_x, value_y),
         value_text,
@@ -495,7 +483,6 @@ def draw_header_band(base: Image.Image, *, published_iso: str) -> None:
         fill=HEADER_META_VALUE,
         anchor="rt",
     )
-    _ = label_w, meta_value_font  # 静的解析の未使用警告抑制（将来 Inter で再描画する余地）
 
 
 def _load_illustration(width: int) -> Image.Image:
