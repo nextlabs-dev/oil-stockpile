@@ -1,12 +1,9 @@
 /**
  * About page entry.
- *  - Share buttons (X / LINE / Copy) reuse the home share module.
  *  - Sidebar nav highlights the section currently in view via IntersectionObserver.
- *  - Newsletter form is local-only (no backend yet): shows a confirmation toast.
  */
 
 import { initCounter } from '../components/counter.js';
-import { initShare } from '../components/share.js';
 import { loadHistory } from '../core/data.js';
 import { setText } from '../core/dom.js';
 
@@ -57,26 +54,6 @@ function initSidebarScrollSpy() {
   }
 }
 
-function initNewsletterForm() {
-  const form = document.getElementById('newsletter-form');
-  const status = document.getElementById('newsletter-status');
-  if (!form || !status) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const input = form.querySelector('input[type="email"]');
-    const value = (input?.value ?? '').trim();
-    if (!value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      status.textContent = 'メールアドレスをご確認ください。';
-      status.classList.add('is-error');
-      return;
-    }
-    status.classList.remove('is-error');
-    status.textContent = 'ご登録ありがとうございます。確認メールをお送りしました。';
-    form.reset();
-  });
-}
-
 async function main() {
   try {
     const history = await loadHistory('../data/snapshots.json');
@@ -87,19 +64,9 @@ async function main() {
     console.error('history:', e);
   }
   try {
-    initShare();
-  } catch (e) {
-    console.error('share:', e);
-  }
-  try {
     initSidebarScrollSpy();
   } catch (e) {
     console.error('scrollspy:', e);
-  }
-  try {
-    initNewsletterForm();
-  } catch (e) {
-    console.error('newsletter:', e);
   }
 }
 

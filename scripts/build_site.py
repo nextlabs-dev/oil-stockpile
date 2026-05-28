@@ -133,6 +133,7 @@ def render_page(
     asset_root = "" if page["root_path"] == "./" else page["root_path"]
     favicon = asset_root + "assets/favicon.svg"
     stylesheet = asset_root + "assets/styles.css"
+    nav_script = asset_root + "js/components/nav.js"
     extra_head_value = text_value(page.get("extra_head"))
     script_tags_value = text_value(page.get("script_tags"))
     extra_head = f"{extra_head_value}\n" if extra_head_value else ""
@@ -155,6 +156,7 @@ def render_page(
         font_href=site["font_href"],
         extra_head=extra_head,
         stylesheet=stylesheet,
+        nav_script=nav_script,
         body_class=page.get("body_class", ""),
         home_href=page["root_path"],
         site_brand=site_brand,

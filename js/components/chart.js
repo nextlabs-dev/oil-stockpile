@@ -144,7 +144,8 @@ function renderChartSvg(data, showSegments) {
       ${buildHiddenTable(data)}
       <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         ${renderGridSvg(model)}
-        <text class="chart-axis-label" x="${((PAD_L + (W - PAD_R)) / 2).toFixed(1)}" y="${(H - 4).toFixed(1)}" text-anchor="middle">データ時点（月/日）</text>
+        <text class="chart-axis-label" x="${((PAD_L + (W - PAD_R)) / 2).toFixed(1)}" y="${(H - 4).toFixed(1)}" text-anchor="middle">日付（月／日）</text>
+        <text class="chart-axis-label" x="${PAD_L}" y="${(PAD_T - 4).toFixed(1)}" text-anchor="start">備蓄日数（日）</text>
         ${renderSegmentLinesSvg(model.points, showSegments)}
         <path class="chart-line-total" d="${linePath(model.points, 'yTotal')}" />
         ${renderPointsSvg(model.points)}

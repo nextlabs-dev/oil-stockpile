@@ -5,7 +5,7 @@ data/snapshots.json の最新値から OGP 画像 (assets/og-image.png, 1200x630
     - サイト本体（ブラウザ側）と数字のソースを共有する（snapshots.json 経由）
     - 真の動的生成ではなく、毎日の自動取得に追従して PNG を更新する事前生成方式
     - 失敗時は既存 og-image.png を維持し、abort（exit non-zero）して人間に通知
-    - レイアウトは index.html のカウンター + タンクゲージのミニチュアを目指す
+    - レイアウトは index.html のヒーローカード（カウンター + counter_top.png）を踏襲
 
 入力:
     data/snapshots.json
@@ -18,7 +18,7 @@ data/snapshots.json の最新値から OGP 画像 (assets/og-image.png, 1200x630
 
 出口コード:
     0 — 成功
-    1 — 失敗（snapshots.json 不在/不正、Pillow エラー等）
+    1 — 失敗（snapshots.json 不在/不正、Pillow エラー、必須フォント不在 等）
 """
 
 from __future__ import annotations
@@ -28,8 +28,9 @@ import sys
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Literal
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 from lib.constants import PEAK_DAYS  # SSOT: src/constants.json
 from lib.io import read_json
@@ -44,20 +45,47 @@ DEFAULT_OUTPUT = ASSETS_DIR / "og-image.png"
 WIDTH = 1200
 HEIGHT = 630
 
-# 色（assets/styles.css の :root 変数と一致）
-BG = (250, 250, 250)              # --bg
-CARD_BG = (255, 255, 255)         # --bg-card
-FG = (17, 17, 17)                 # --fg
-FG_SUB = (89, 89, 89)             # --fg-sub
-FG_MUTED = (107, 107, 107)        # --fg-muted
-RULE = (229, 229, 229)            # --rule
-TANK_OK = (26, 26, 26)            # ratio>=0.8
-TANK_MID = (119, 119, 119)        # 0.4<=ratio<0.8
-TANK_WARN = (192, 57, 43)         # ratio<0.4
+# 色（assets/styles/pages/home.css と assets/styles/layout.css の :root 変数と一致）
+BG_TOP = (227, 233, 245)            # #e3e9f5
+BG_BOTTOM = (238, 242, 250)         # #eef2fa
 
-# フォント候補（先に見つかった順に採用）。
-# GitHub Actions Ubuntu には apt で fonts-noto-cjk を入れる前提。
-FONT_CANDIDATES_REGULAR = [
+HEADER_NAVY = (15, 21, 53)          # #0f1535
+LOGO_NAVY = (37, 43, 74)            # #252b4a
+HEADER_TITLE = (255, 255, 255)
+HEADER_TAGLINE = (158, 167, 192)    # #9ea7c0
+HEADER_META_VALUE = (207, 213, 230) # #cfd5e6
+
+CARD_BG = (255, 255, 255)
+CARD_BORDER = (232, 236, 245)       # #e8ecf5
+
+BRAND_BLUE = (89, 131, 241)         # #5983f1
+FG_STRONG = (15, 20, 48)            # #0f1430
+FG_SUB = (81, 88, 122)              # #51587a
+FG_MUTED = (130, 138, 166)          # #828aa6
+
+GRADIENT_TOP = (124, 151, 248)      # #7c97f8
+GRADIENT_MID = (59, 92, 240)        # #3b5cf0
+GRADIENT_BOTTOM = (37, 65, 199)     # #2541c7
+GRADIENT_MID_STOP = 0.55
+
+# カード影 (CSS は rgba(44,64,120,0.06) blur=16 だが Pillow の Gaussian は CSS より散逸が速い
+# ため、視認可能な α を実測ベースで強めに採る)
+SHADOW_COLOR_RGBA = (44, 64, 120, 38)
+SHADOW_BLUR = 14
+SHADOW_OFFSET = (0, 4)
+
+# 画像内アセット
+ILLUSTRATION_PATH = ASSETS_DIR / "counter_top.png"
+INTER_FONT_DIR = ASSETS_DIR / "fonts" / "inter"
+
+# Inter フォント候補（必ずリポジトリ同梱の TTF を最優先）。
+FONT_CANDIDATES_INTER_SEMIBOLD = [str(INTER_FONT_DIR / "Inter-SemiBold.ttf")]
+FONT_CANDIDATES_INTER_BOLD = [str(INTER_FONT_DIR / "Inter-Bold.ttf")]
+FONT_CANDIDATES_INTER_EXTRABOLD = [str(INTER_FONT_DIR / "Inter-ExtraBold.ttf")]
+
+# CJK 用フォント候補（"日分", 日本語ラベル）。
+# GitHub Actions Ubuntu には apt で fonts-noto-cjk を入れている前提。
+FONT_CANDIDATES_CJK_REGULAR = [
     "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
     "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc",
     "/usr/share/fonts/opentype/noto/NotoSansJP-Regular.otf",
@@ -67,7 +95,7 @@ FONT_CANDIDATES_REGULAR = [
     "C:/Windows/Fonts/meiryo.ttc",
     "C:/Windows/Fonts/msgothic.ttc",
 ]
-FONT_CANDIDATES_BOLD = [
+FONT_CANDIDATES_CJK_BOLD = [
     "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
     "/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc",
     "/usr/share/fonts/opentype/noto/NotoSansJP-Bold.otf",
@@ -76,12 +104,6 @@ FONT_CANDIDATES_BOLD = [
     "C:/Windows/Fonts/yugothb.ttc",
     "C:/Windows/Fonts/meiryob.ttc",
     "C:/Windows/Fonts/msgothic.ttc",
-]
-FONT_CANDIDATES_LIGHT = [
-    "/usr/share/fonts/opentype/noto/NotoSansCJK-Light.ttc",
-    "/usr/share/fonts/truetype/noto/NotoSansCJK-Light.ttc",
-    "/usr/share/fonts/opentype/noto/NotoSansJP-Light.otf",
-    *FONT_CANDIDATES_REGULAR,  # Light がなければ Regular にフォールバック
 ]
 
 
@@ -93,6 +115,11 @@ class Snapshot:
     national: int
     private_: int
     joint: int
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# データ読込・計算（サイト側 js/core/data.js と同じ式）
+# ─────────────────────────────────────────────────────────────────────────────
 
 
 def load_snapshots(path: Path) -> list[dict]:
@@ -148,14 +175,6 @@ def compute_fill_ratio(days: float, peak: int = PEAK_DAYS) -> float:
     return r
 
 
-def color_for_ratio(r: float) -> tuple[int, int, int]:
-    if r >= 0.8:
-        return TANK_OK
-    if r >= 0.4:
-        return TANK_MID
-    return TANK_WARN
-
-
 def format_jst_date(iso: str) -> str:
     """'2026-04-28' → '2026年4月28日'。"""
     parts = iso.split("-")
@@ -168,90 +187,484 @@ def format_jst_date(iso: str) -> str:
         return iso
 
 
-def find_font(candidates: list[str], size: int) -> ImageFont.ImageFont:
+# ─────────────────────────────────────────────────────────────────────────────
+# フォント解決
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def _find_font(candidates: list[str], size: int) -> ImageFont.FreeTypeFont | None:
     for path in candidates:
         if Path(path).exists():
             try:
                 return ImageFont.truetype(path, size=size)
             except OSError:
                 continue
-    # 最終フォールバック: Pillow デフォルト（日本語は描画できない）
-    print(
-        "::warning::No CJK font found; falling back to Pillow default. "
-        "Japanese characters will render as boxes.",
-        file=sys.stderr,
+    return None
+
+
+def resolve_inter(
+    weight: Literal["semibold", "bold", "extrabold"],
+    size: int,
+) -> ImageFont.FreeTypeFont:
+    """Inter のリポジトリ同梱 TTF を解決する。失敗は致命（OGP の見た目が壊れる）。"""
+    candidates = {
+        "semibold": FONT_CANDIDATES_INTER_SEMIBOLD,
+        "bold": FONT_CANDIDATES_INTER_BOLD,
+        "extrabold": FONT_CANDIDATES_INTER_EXTRABOLD,
+    }[weight]
+    font = _find_font(candidates, size)
+    if font is None:
+        raise RuntimeError(
+            f"Inter {weight} TTF not found. Expected at: {candidates[0]}. "
+            "Bundle the font in assets/fonts/inter/ (see plan)."
+        )
+    return font
+
+
+def resolve_cjk(
+    weight: Literal["regular", "bold"],
+    size: int,
+) -> ImageFont.FreeTypeFont:
+    """日本語グリフ用フォント。Linux/Windows/macOS のシステムフォントに依存する。"""
+    candidates = (
+        FONT_CANDIDATES_CJK_BOLD if weight == "bold" else FONT_CANDIDATES_CJK_REGULAR
     )
-    return ImageFont.load_default()
+    font = _find_font(candidates, size)
+    if font is None:
+        raise RuntimeError(
+            "No CJK font found. On CI install fonts-noto-cjk; "
+            "locally rely on system Yu Gothic / Noto Sans CJK."
+        )
+    return font
 
 
-def _text_size(draw: ImageDraw.ImageDraw, text: str, font) -> tuple[int, int]:
-    """anchor='lt' 基準のテキスト寸法 (w, h)。"""
-    bbox = draw.textbbox((0, 0), text, font=font)
-    return bbox[2] - bbox[0], bbox[3] - bbox[1]
+# ─────────────────────────────────────────────────────────────────────────────
+# 描画プリミティブ
+# ─────────────────────────────────────────────────────────────────────────────
 
 
-def draw_tank_gauge(
-    draw: ImageDraw.ImageDraw,
+def _interpolate(
+    c1: tuple[int, int, int],
+    c2: tuple[int, int, int],
+    t: float,
+) -> tuple[int, int, int]:
+    return (
+        int(round(c1[0] + (c2[0] - c1[0]) * t)),
+        int(round(c1[1] + (c2[1] - c1[1]) * t)),
+        int(round(c1[2] + (c2[2] - c1[2]) * t)),
+    )
+
+
+def make_vertical_gradient(
+    size: tuple[int, int],
+    top: tuple[int, int, int],
+    bottom: tuple[int, int, int],
+    mid: tuple[int, int, int] | None = None,
+    mid_stop: float = 0.5,
+) -> Image.Image:
+    """1×H ストリップを補間で作り (W, H) に拡大して返す。3 stop 対応。"""
+    w, h = size
+    strip = Image.new("RGB", (1, h))
+    for y in range(h):
+        t = y / max(1, h - 1)
+        if mid is None:
+            color = _interpolate(top, bottom, t)
+        else:
+            if t <= mid_stop:
+                color = _interpolate(top, mid, t / mid_stop if mid_stop > 0 else 0.0)
+            else:
+                color = _interpolate(
+                    mid, bottom, (t - mid_stop) / (1.0 - mid_stop) if mid_stop < 1 else 0.0
+                )
+        strip.putpixel((0, y), color)
+    return strip.resize((w, h), Image.Resampling.BILINEAR)
+
+
+def make_rounded_rect_mask(size: tuple[int, int], radius: int) -> Image.Image:
+    """角丸長方形の "L" マスクを返す。"""
+    mask = Image.new("L", size, 0)
+    ImageDraw.Draw(mask).rounded_rectangle(
+        [(0, 0), (size[0] - 1, size[1] - 1)], radius=radius, fill=255
+    )
+    return mask
+
+
+def draw_soft_shadow(
+    base: Image.Image,
     *,
-    cx: int,
-    cy: int,
-    width: int,
-    height: int,
+    rect: tuple[int, int, int, int],  # (left, top, right, bottom)
+    radius: int,
+    blur: int,
+    offset: tuple[int, int],
+    color_rgba: tuple[int, int, int, int],
+) -> None:
+    """rounded_rect のソフトシャドウをベース画像にアルファ合成で焼き込む。"""
+    pad = blur * 3
+    left, top, right, bottom = rect
+    w = right - left
+    h = bottom - top
+    layer = Image.new("RGBA", (w + pad * 2, h + pad * 2), (0, 0, 0, 0))
+    ImageDraw.Draw(layer).rounded_rectangle(
+        [(pad, pad), (pad + w - 1, pad + h - 1)],
+        radius=radius,
+        fill=color_rgba,
+    )
+    layer = layer.filter(ImageFilter.GaussianBlur(radius=blur))
+
+    paste_x = left - pad + offset[0]
+    paste_y = top - pad + offset[1]
+    if base.mode != "RGBA":
+        rgba = base.convert("RGBA")
+        rgba.alpha_composite(layer, dest=(paste_x, paste_y))
+        composited = rgba.convert(base.mode)
+        base.paste(composited, (0, 0))
+    else:
+        base.alpha_composite(layer, dest=(paste_x, paste_y))
+
+
+def draw_gradient_text(
+    base: Image.Image,
+    text: str,
+    *,
+    font: ImageFont.FreeTypeFont,
+    xy: tuple[int, int],
+    anchor: str,
+    gradient_top: tuple[int, int, int],
+    gradient_mid: tuple[int, int, int],
+    gradient_bottom: tuple[int, int, int],
+    mid_stop: float = 0.5,
+) -> tuple[int, int, int, int]:
+    """
+    指定位置に縦 3 stop グラデーションでテキストを描く。
+    マスク合成方式: L モードでテキストを白で焼き、同サイズの RGB グラデーションタイルを
+    マスク経由で base に貼る。返値は描画 bbox (left, top, right, bottom)。
+    """
+    draw = ImageDraw.Draw(base)
+    bbox = draw.textbbox(xy, text, font=font, anchor=anchor)
+    left, top, right, bottom = bbox
+
+    pad = 8  # AA の端を取りこぼさないための余白
+    tile_w = right - left + pad * 2
+    tile_h = bottom - top + pad * 2
+
+    # マスク: L モードに textbbox 起点 (anchor='lt') で白文字を焼く
+    mask = Image.new("L", (tile_w, tile_h), 0)
+    mdraw = ImageDraw.Draw(mask)
+    # base 側 xy から bbox を取った時点で baseline 等が解決済み。
+    # マスク側はそれを原点 (pad, pad) にオフセットして描き直す。
+    mdraw.text((xy[0] - left + pad, xy[1] - top + pad), text, font=font, fill=255, anchor=anchor)
+
+    grad = make_vertical_gradient(
+        (tile_w, tile_h),
+        gradient_top,
+        gradient_bottom,
+        mid=gradient_mid,
+        mid_stop=mid_stop,
+    )
+
+    base.paste(grad, (left - pad, top - pad), mask=mask)
+    return bbox
+
+
+def draw_text_letter_spaced(
+    draw: ImageDraw.ImageDraw,
+    xy: tuple[int, int],
+    text: str,
+    font: ImageFont.FreeTypeFont,
+    fill: tuple[int, int, int],
+    em_spacing: float,
+    anchor: str = "lt",
+) -> int:
+    """
+    1 文字ずつ前進量に em_spacing(em) を足して描く。
+    対応 anchor: "lt"（左上）/ "ls"（左ベースライン）。返値は最終 x（右端）。
+    """
+    x, y = xy
+    # 1em ≒ font.size
+    extra = em_spacing * font.size
+    for ch in text:
+        draw.text((x, y), ch, font=font, fill=fill, anchor=anchor)
+        adv = font.getlength(ch)
+        x += int(round(adv + extra))
+    return x
+
+
+def _measure(font: ImageFont.FreeTypeFont, text: str, em_spacing: float = 0.0) -> int:
+    """letter-spaced テキストの幅を実測する。"""
+    if em_spacing == 0.0:
+        return int(round(font.getlength(text)))
+    extra = em_spacing * font.size
+    return int(round(sum(font.getlength(ch) + extra for ch in text)))
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 描画リージョン
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+HEADER_H = 76
+PAD_X = 64
+
+
+def draw_header_band(base: Image.Image, *, published_iso: str) -> None:
+    """上部の濃紺ヘッダ帯（site.layout の .site-header と同一トーン）。"""
+    draw = ImageDraw.Draw(base)
+    draw.rectangle([(0, 0), (WIDTH, HEADER_H)], fill=HEADER_NAVY)
+
+    # ロゴ箱 (28×28, radius 6, inner inset 6 highlight)
+    logo_size = 28
+    logo_x = PAD_X
+    logo_y = (HEADER_H - logo_size) // 2
+    draw.rounded_rectangle(
+        [(logo_x, logo_y), (logo_x + logo_size, logo_y + logo_size)],
+        radius=6,
+        fill=LOGO_NAVY,
+    )
+    inner_inset = 6
+    inner = (255, 255, 255, 15)  # rgba(255,255,255,0.06) ≒ alpha 15
+    inner_layer = Image.new("RGBA", base.size, (0, 0, 0, 0))
+    ImageDraw.Draw(inner_layer).rounded_rectangle(
+        [
+            (logo_x + inner_inset, logo_y + inner_inset),
+            (logo_x + logo_size - inner_inset, logo_y + logo_size - inner_inset),
+        ],
+        radius=3,
+        fill=inner,
+    )
+    rgba = base.convert("RGBA")
+    rgba.alpha_composite(inner_layer)
+    base.paste(rgba.convert(base.mode), (0, 0))
+
+    # 再構築後の draw を取り直す
+    draw = ImageDraw.Draw(base)
+
+    text_x = logo_x + logo_size + 12
+
+    # JAPAN OIL STOCKPILE (Inter Bold 14, letter-spacing 0.1em, 白)
+    title_font = resolve_inter("bold", 17)  # OGP は 14px より少し大きめに（視認性確保）
+    title_text = "JAPAN OIL STOCKPILE"
+    em_spacing = 0.1
+    title_y = logo_y + 1
+    draw_text_letter_spaced(
+        draw,
+        (text_x, title_y),
+        title_text,
+        title_font,
+        HEADER_TITLE,
+        em_spacing,
+        anchor="lt",
+    )
+
+    # タグライン (Noto Regular 13)
+    tagline_font = resolve_cjk("regular", 13)
+    tagline_y = title_y + 22
+    draw.text(
+        (text_x, tagline_y),
+        "あと何日、日本は持つのか。",
+        font=tagline_font,
+        fill=HEADER_TAGLINE,
+        anchor="lt",
+    )
+
+    # 右側: 最終更新 YYYY年M月D日
+    meta_label_font = resolve_cjk("regular", 12)
+    meta_value_font = resolve_inter("semibold", 14)
+    right_x = WIDTH - PAD_X
+    label_text = "最終更新"
+    label_w = int(round(meta_label_font.getlength(label_text)))
+    value_text = format_jst_date(published_iso)
+    value_w = _measure(meta_value_font, value_text)
+
+    label_y = logo_y + 3
+    value_y = label_y + 20
+
+    draw.text(
+        (right_x, label_y),
+        label_text,
+        font=meta_label_font,
+        fill=HEADER_TAGLINE,
+        anchor="rt",
+    )
+    # value は CJK 混在（"年/月/日" を含む）なので CJK Bold で描く
+    value_font = resolve_cjk("bold", 14)
+    value_w = int(round(value_font.getlength(value_text)))
+    draw.text(
+        (right_x, value_y),
+        value_text,
+        font=value_font,
+        fill=HEADER_META_VALUE,
+        anchor="rt",
+    )
+    _ = label_w, meta_value_font  # 静的解析の未使用警告抑制（将来 Inter で再描画する余地）
+
+
+def _load_illustration(width: int) -> Image.Image:
+    img = Image.open(ILLUSTRATION_PATH).convert("RGBA")
+    if img.width == 0:
+        raise RuntimeError(f"illustration has zero width: {ILLUSTRATION_PATH}")
+    ratio = width / img.width
+    new_h = max(1, int(round(img.height * ratio)))
+    return img.resize((width, new_h), Image.Resampling.LANCZOS)
+
+
+def draw_hero_card(
+    base: Image.Image,
+    *,
+    snapshot: Snapshot,
+    current_days: float,
     ratio: float,
     peak: int,
 ) -> None:
-    """中心 (cx, cy) を基準にタンクゲージを描く。tank-gauge.js のミニチュア。"""
-    half_w = width // 2
-    half_h = height // 2
-    left = cx - half_w
-    right = cx + half_w
-    top = cy - half_h
-    bottom = cy + half_h
+    """中央の白いヒーローカード（カウンター + counter_top.png イラスト）。"""
+    card_left = 60
+    card_right = WIDTH - 60
+    card_top = HEADER_H + 28
+    card_bottom = HEADER_H + 28 + 388
+    card_w = card_right - card_left
+    card_h = card_bottom - card_top
+    radius = 14
 
-    stroke = 3
-    inset_top = top + stroke
-    inset_bottom = bottom - stroke
-    inset_left = left + stroke
-    inset_right = right - stroke
-    inset_h = inset_bottom - inset_top
-
-    # 背景パネル（凡そカードに収まる感）
-    fill_h = int(inset_h * ratio)
-    fill_top = inset_bottom - fill_h
-    color = color_for_ratio(ratio)
-
-    # フィル（角丸クリップは Pillow の単純実装で省略。長方形で十分視認できる）
-    if fill_h > 0:
-        draw.rectangle(
-            [(inset_left, fill_top), (inset_right, inset_bottom)],
-            fill=color,
-        )
-
-    # 枠
-    draw.rectangle(
-        [(left, top), (right, bottom)],
-        outline=FG,
-        width=stroke,
+    # 影
+    draw_soft_shadow(
+        base,
+        rect=(card_left, card_top, card_right, card_bottom),
+        radius=radius,
+        blur=SHADOW_BLUR,
+        offset=SHADOW_OFFSET,
+        color_rgba=SHADOW_COLOR_RGBA,
     )
 
-    # 上部パイプ（演出）
-    pipe_w = max(20, width // 5)
-    pipe_h = max(8, height // 30)
-    draw.rectangle(
-        [(cx - pipe_w // 2, top - pipe_h), (cx + pipe_w // 2, top)],
-        fill=FG,
+    # カード塗り (rounded rect, マスク経由)
+    card_layer = Image.new("RGB", (card_w, card_h), CARD_BG)
+    mask = make_rounded_rect_mask((card_w, card_h), radius)
+    base.paste(card_layer, (card_left, card_top), mask=mask)
+
+    # 1px ボーダー
+    draw = ImageDraw.Draw(base)
+    draw.rounded_rectangle(
+        [(card_left, card_top), (card_right - 1, card_bottom - 1)],
+        radius=radius,
+        outline=CARD_BORDER,
+        width=1,
     )
 
-    # 右側目盛りラベル: peak / half / 0
-    tick_x = right + 12
-    half_y = inset_bottom - inset_h // 2
-    label_font = find_font(FONT_CANDIDATES_REGULAR, 22)
-    for label, y in (
-        (str(peak), inset_top),
-        (str(peak // 2), half_y),
-        ("0", inset_bottom),
-    ):
-        draw.text((tick_x, y), label, font=label_font, fill=FG_MUTED, anchor="lm")
+    # ─── 右側: イラスト ──────────────────────────────────────────────
+    illu = _load_illustration(width=290)
+    illu_x = card_right - 32 - illu.width
+    illu_y = card_top + (card_h - illu.height) // 2
+    # alpha を mask に流して合成
+    if base.mode == "RGB":
+        rgba = base.convert("RGBA")
+        rgba.alpha_composite(illu, dest=(illu_x, illu_y))
+        base.paste(rgba.convert("RGB"), (0, 0))
+    else:
+        base.alpha_composite(illu, dest=(illu_x, illu_y))
+
+    # 描画後の draw を取り直す
+    draw = ImageDraw.Draw(base)
+
+    # ─── 左側: カウンター ────────────────────────────────────────────
+    left_x = card_left + 44
+
+    # eyebrow: 今、日本の石油備蓄は
+    eyebrow_font = resolve_cjk("bold", 22)
+    eyebrow_y = card_top + 36
+    draw.text(
+        (left_x, eyebrow_y),
+        "今、日本の石油備蓄は",
+        font=eyebrow_font,
+        fill=BRAND_BLUE,
+        anchor="lt",
+    )
+
+    # 大きな数字: Inter ExtraBold + 3 stop gradient
+    days_int = int(current_days)
+    days_str = str(days_int)
+    num_font_size = 220
+    num_font = resolve_inter("extrabold", num_font_size)
+
+    # 数字の baseline 位置を決める（card 下端から逆算）
+    baseline_y = card_top + card_h - 110
+    num_bbox = draw_gradient_text(
+        base,
+        days_str,
+        font=num_font,
+        xy=(left_x, baseline_y),
+        anchor="ls",
+        gradient_top=GRADIENT_TOP,
+        gradient_mid=GRADIENT_MID,
+        gradient_bottom=GRADIENT_BOTTOM,
+        mid_stop=GRADIENT_MID_STOP,
+    )
+    # base.paste 後、再度 draw 取得
+    draw = ImageDraw.Draw(base)
+    num_right = num_bbox[2]
+
+    # 「日分」（Noto Bold） + 「DAYS LEFT」（Inter Bold, letter-spaced）スタック
+    unit_x = num_right + 14
+    unit_font = resolve_cjk("bold", 44)
+    sublabel_font = resolve_inter("bold", 13)
+
+    # CSS 上のスタック: 上=「日分」, 下=「DAYS LEFT」(flex column)。
+    # 親 row の align-items: flex-end + padding-bottom:10px により、
+    # 「DAYS LEFT」の下端が数字のベースラインから ~10px 上に来る。
+    days_left_baseline_y = baseline_y - 6
+    unit_baseline_y = days_left_baseline_y - 22  # DAYS LEFT のキャップハイト + 余白
+    draw.text(
+        (unit_x, unit_baseline_y),
+        "日分",
+        font=unit_font,
+        fill=FG_STRONG,
+        anchor="ls",
+    )
+    draw_text_letter_spaced(
+        draw,
+        (unit_x, days_left_baseline_y),
+        "DAYS LEFT",
+        sublabel_font,
+        FG_MUTED,
+        em_spacing=0.1,
+        anchor="ls",
+    )
+
+    # 「基準 247 日比 XX%」サブテキスト
+    sub_font = resolve_cjk("regular", 17)
+    sub_text = f"基準 {peak} 日比 {ratio * 100:.0f}%"
+    draw.text(
+        (left_x, card_top + card_h - 56),
+        sub_text,
+        font=sub_font,
+        fill=FG_SUB,
+        anchor="lt",
+    )
+
+
+def draw_footer_line(base: Image.Image, *, as_of_iso: str) -> None:
+    """カードの下、出典 + データ時点。"""
+    draw = ImageDraw.Draw(base)
+    src_font = resolve_cjk("regular", 16)
+    asof_font = resolve_cjk("regular", 16)
+    y = HEIGHT - 32
+    draw.text(
+        (PAD_X, y),
+        "経済産業省「石油備蓄の現況」速報値より",
+        font=src_font,
+        fill=FG_MUTED,
+        anchor="ls",
+    )
+    asof_text = f"データ時点 {format_jst_date(as_of_iso)}"
+    draw.text(
+        (WIDTH - PAD_X, y),
+        asof_text,
+        font=asof_font,
+        fill=FG_SUB,
+        anchor="rs",
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# オーケストレータ
+# ─────────────────────────────────────────────────────────────────────────────
 
 
 def render_image(
@@ -260,96 +673,24 @@ def render_image(
     current_days: float,
     peak: int = PEAK_DAYS,
 ) -> Image.Image:
-    img = Image.new("RGB", (WIDTH, HEIGHT), BG)
-    draw = ImageDraw.Draw(img)
+    """OGP 画像本体。1200×630 RGB を返す。"""
+    bg = make_vertical_gradient((WIDTH, HEIGHT), BG_TOP, BG_BOTTOM)
+    base = bg.copy()
 
-    # フォント
-    f_lead = find_font(FONT_CANDIDATES_REGULAR, 36)
-    f_days_num = find_font(FONT_CANDIDATES_LIGHT, 320)
-    f_days_unit = find_font(FONT_CANDIDATES_REGULAR, 64)
-    f_meta = find_font(FONT_CANDIDATES_REGULAR, 22)
-    f_brand = find_font(FONT_CANDIDATES_BOLD, 26)
-    f_gauge_caption = find_font(FONT_CANDIDATES_REGULAR, 20)
+    draw_header_band(base, published_iso=snapshot.published)
 
-    # ── ヘッダ（左上）: ブランド
-    pad_x = 64
-    pad_y = 56
-    draw.text((pad_x, pad_y), "あと何日？", font=f_brand, fill=FG, anchor="lt")
-    draw.text(
-        (pad_x, pad_y + 38),
-        "日本の石油備蓄",
-        font=f_meta,
-        fill=FG_SUB,
-        anchor="lt",
-    )
-
-    # ── 中央左: 「いま、日本の石油備蓄は」
-    lead_y = 200
-    draw.text(
-        (pad_x, lead_y),
-        "いま、日本の石油備蓄は",
-        font=f_lead,
-        fill=FG_SUB,
-        anchor="lt",
-    )
-
-    # ── メインカウンター: N 日（サイト側 Math.floor と一致させる）
-    days_int = int(current_days)
-    days_str = str(days_int)
-    days_y = lead_y + 60
-    days_w, _ = _text_size(draw, days_str, f_days_num)
-    draw.text((pad_x, days_y), days_str, font=f_days_num, fill=FG, anchor="lt")
-    # 「日分」
-    unit_x = pad_x + days_w + 28
-    unit_y = days_y + 230
-    draw.text((unit_x, unit_y), "日分", font=f_days_unit, fill=FG_SUB, anchor="ls")
-
-    # ── 右側: タンクゲージ（数字なしの視覚アクセントとして配置）
     ratio = compute_fill_ratio(current_days, peak)
-    gauge_cx = WIDTH - 200
-    gauge_cy = HEIGHT // 2 + 30
-    gauge_w = 160
-    gauge_h = 360
-    draw_tank_gauge(
-        draw,
-        cx=gauge_cx,
-        cy=gauge_cy,
-        width=gauge_w,
-        height=gauge_h,
+    draw_hero_card(
+        base,
+        snapshot=snapshot,
+        current_days=current_days,
         ratio=ratio,
         peak=peak,
     )
 
-    # ゲージのキャプション（タンク真上、ピプの上）
-    caption = f"備蓄日数（基準 {peak} 日比 {ratio * 100:.0f}%）"
-    cap_w, _ = _text_size(draw, caption, f_gauge_caption)
-    draw.text(
-        (gauge_cx, gauge_cy - gauge_h // 2 - 38),
-        caption,
-        font=f_gauge_caption,
-        fill=FG_SUB,
-        anchor="mb",
-    )
+    draw_footer_line(base, as_of_iso=snapshot.as_of)
 
-    # ── フッタ: 出典 + データ時点
-    footer_y = HEIGHT - 56
-    draw.line(
-        [(pad_x, footer_y - 28), (WIDTH - pad_x, footer_y - 28)],
-        fill=RULE,
-        width=1,
-    )
-    src_text = "経済産業省「石油備蓄の現況」速報値より"
-    asof_text = f"データ時点 {format_jst_date(snapshot.as_of)}"
-    draw.text((pad_x, footer_y), src_text, font=f_meta, fill=FG_MUTED, anchor="ls")
-    draw.text(
-        (WIDTH - pad_x, footer_y),
-        asof_text,
-        font=f_meta,
-        fill=FG_MUTED,
-        anchor="rs",
-    )
-
-    return img
+    return base
 
 
 def main() -> int:
@@ -398,8 +739,12 @@ def main() -> int:
         print(f"::error::Failed to write {args.output}: {e}", file=sys.stderr)
         return 1
 
+    try:
+        out_label = str(args.output.relative_to(REPO_ROOT))
+    except ValueError:
+        out_label = str(args.output)
     print(
-        f"::notice::Wrote {args.output.relative_to(REPO_ROOT)} "
+        f"::notice::Wrote {out_label} "
         f"(asOf={snapshot.as_of}, total={snapshot.total}, currentDays={days_int})",
     )
     return 0

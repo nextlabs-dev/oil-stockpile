@@ -9,8 +9,6 @@
  * Japan 番組向けの「億・万」区切り表記に整形する formatJaNumber を用意。
  */
 
-import { initCounter } from '../components/counter.js';
-import { initShare } from '../components/share.js';
 import { computeCurrentDays, loadHistory } from '../core/data.js';
 import { setText } from '../core/dom.js';
 import { formatInt } from '../core/format.js';
@@ -98,16 +96,12 @@ async function main() {
   }
   const snapshot = history[history.length - 1];
 
-  // initCounter populates latestSnapshot for the share module to read
-  initCounter(history);
-
   const days = computeCurrentDays(snapshot);
   setText('scale-days', String(Math.floor(days)));
   setText('scale-as-of', formatYearMonth(snapshot.asOf));
   setText('header-last-updated', snapshot.published?.replaceAll('-', '.') ?? '—');
 
   renderCards(days);
-  initShare();
 }
 
 if (document.readyState === 'loading') {

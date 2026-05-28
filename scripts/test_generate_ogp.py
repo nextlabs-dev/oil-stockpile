@@ -7,13 +7,14 @@ or:
     python -m unittest discover -s scripts -p 'test_*.py'
 
 Pillow 描画の出力ピクセルはテストしない（フォント可用性で結果が変わるため）。
-本テストは「ロジック」を持つ関数だけを集中的に守る:
+本テストは「ロジック」を持つ関数と、リデザイン後の必須前提条件だけを守る:
     - pick_latest_snapshot : asOf 昇順末尾を最新として返す
     - compute_current_days : サイト側と同じ式で「いま時点」の日数を返す
     - compute_fill_ratio   : 0..1 にクランプ・peak<=0 を 0 で扱う
-    - color_for_ratio      : 閾値 0.4 / 0.8 の境界
     - format_jst_date      : '2026-04-28' → '2026年4月28日'
-    - render_image (smoke) : 例外を投げず Image を返す
+    - resolve_inter        : リポジトリ同梱 Inter TTF が解決できる
+    - counter_top.png      : OGP の右側ビジュアル素材が存在する
+    - render_image (smoke) : 例外を投げず 1200x630 Image を返す
 """
 
 import os
@@ -21,20 +22,20 @@ import sys
 import unittest
 from datetime import datetime, timezone
 
+from PIL import Image, ImageFont
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from generate_ogp import (  # noqa: E402
+    ILLUSTRATION_PATH,
     PEAK_DAYS,
-    TANK_MID,
-    TANK_OK,
-    TANK_WARN,
     Snapshot,
-    color_for_ratio,
     compute_current_days,
     compute_fill_ratio,
     format_jst_date,
     pick_latest_snapshot,
     render_image,
+    resolve_inter,
 )
 
 
@@ -121,20 +122,6 @@ class FillRatioTest(unittest.TestCase):
         self.assertEqual(compute_fill_ratio(100, -1), 0.0)
 
 
-class ColorForRatioTest(unittest.TestCase):
-    def test_high(self):
-        self.assertEqual(color_for_ratio(1.0), TANK_OK)
-        self.assertEqual(color_for_ratio(0.8), TANK_OK)
-
-    def test_mid(self):
-        self.assertEqual(color_for_ratio(0.79), TANK_MID)
-        self.assertEqual(color_for_ratio(0.4), TANK_MID)
-
-    def test_low(self):
-        self.assertEqual(color_for_ratio(0.39), TANK_WARN)
-        self.assertEqual(color_for_ratio(0.0), TANK_WARN)
-
-
 class FormatJstDateTest(unittest.TestCase):
     def test_basic(self):
         self.assertEqual(format_jst_date("2026-04-28"), "2026年4月28日")
@@ -145,6 +132,35 @@ class FormatJstDateTest(unittest.TestCase):
     def test_invalid_returns_original(self):
         self.assertEqual(format_jst_date("not-a-date"), "not-a-date")
         self.assertEqual(format_jst_date(""), "")
+
+
+class InterFontResolvesTest(unittest.TestCase):
+    """リポジトリ同梱 Inter TTF が読めることを確認。
+    OGP の見た目はこの 3 ファイルに依存する。"""
+
+    def test_extrabold_resolves(self):
+        font = resolve_inter("extrabold", 220)
+        self.assertIsInstance(font, ImageFont.FreeTypeFont)
+        self.assertEqual(font.getname()[0], "Inter")
+
+    def test_bold_resolves(self):
+        font = resolve_inter("bold", 17)
+        self.assertIsInstance(font, ImageFont.FreeTypeFont)
+        self.assertEqual(font.getname()[0], "Inter")
+
+    def test_semibold_resolves(self):
+        font = resolve_inter("semibold", 14)
+        self.assertIsInstance(font, ImageFont.FreeTypeFont)
+        self.assertEqual(font.getname()[0], "Inter")
+
+
+class CounterTopExistsTest(unittest.TestCase):
+    """OGP のヒーローカード右側に貼るイラストが残っていることを確認する安全装置。"""
+
+    def test_file_present_and_openable(self):
+        self.assertTrue(ILLUSTRATION_PATH.exists(), f"{ILLUSTRATION_PATH} missing")
+        with Image.open(ILLUSTRATION_PATH) as img:
+            img.verify()
 
 
 class RenderSmokeTest(unittest.TestCase):

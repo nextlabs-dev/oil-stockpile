@@ -89,14 +89,90 @@
   letter-spacing: 0.02em;
 }
 
+/* Nav wrapper: transparent on desktop so .tabs / meta flow in the header
+   flex row exactly as before; becomes a real dropdown panel on mobile. */
+.site-nav {
+  display: contents;
+}
+
+/* Hamburger toggle — hidden on desktop, shown ≤640px */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin: 0 auto;
+  background: #cfd5e6;
+  border-radius: 2px;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 @media (max-width: 640px) {
   .site-header-inner {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    padding: var(--space-3);
+    gap: var(--space-3);
+    position: relative;
+  }
+  .nav-toggle {
+    display: flex;
+    margin-left: auto;
+  }
+  /* Override display:contents → a positioned dropdown panel */
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    left: 0;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background: #141a3d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    z-index: 60;
+  }
+  .site-nav.is-open {
+    display: flex;
   }
   .site-header-meta {
     text-align: left;
     flex-direction: row;
     gap: 6px;
+    padding-top: var(--space-2);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
 
@@ -135,7 +211,7 @@
 }
 
 /* =============================================================
-   Footer share band — visible above the slim site-footer on all pages
+   Footer band — site-wide運営クレジット
    ============================================================= */
 .footer-share-section {
   background: #ffffff;
@@ -168,29 +244,4 @@
 .footer-share-org a:hover {
   color: #4870e8;
   text-decoration: underline;
-}
-
-.footer-share-section .share-btn {
-  background: #5983f1;
-  color: #ffffff;
-  border-color: #5983f1;
-}
-
-.footer-share-section .share-btn:hover {
-  background: #4870e8;
-  color: #ffffff;
-  border-color: #4870e8;
-}
-
-/* Hide any legacy site-footer markup still present in manually-edited pages. */
-.site-footer {
-  display: none;
-}
-
-@media (max-width: 640px) {
-  .footer-share-row {
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-3);
-  }
 }

@@ -46,7 +46,7 @@
 .page-home {
   background: var(--bg-gradient);
   color: var(--fg);
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .page-home a {
@@ -480,12 +480,30 @@
   overflow: hidden;
 }
 
-/* Reference chart is minimal: just the line. Hide grid/ticks/labels. */
-.page-home .chart-grid,
-.page-home .chart-axis-label,
-.page-home .chart-xtick,
-.page-home .chart-ytick {
-  display: none;
+.page-home .chart-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.page-home .chart-grid {
+  stroke: var(--rule-soft);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+
+.page-home .chart-ytick,
+.page-home .chart-xtick {
+  fill: var(--fg-muted);
+  font-size: 11px;
+  font-family: "Inter", "Noto Sans JP", system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.page-home .chart-axis-label {
+  fill: var(--fg-sub);
+  font-size: 11px;
+  font-family: "Inter", "Noto Sans JP", system-ui, sans-serif;
 }
 
 .page-home .chart-line-total {
@@ -580,6 +598,12 @@
 }
 
 @media (max-width: 640px) {
+  .page-home .update-banner {
+    display: none;
+  }
+  .page-home .site-main.dashboard {
+    padding: var(--space-3) var(--space-3) var(--space-5);
+  }
   .page-home .dashboard-grid {
     grid-template-columns: 1fr;
   }
@@ -610,10 +634,5 @@
   }
   .page-home .donut-legend {
     grid-template-columns: 1fr;
-  }
-  .page-home .footer-share-row {
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-3);
   }
 }

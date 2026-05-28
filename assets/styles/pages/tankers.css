@@ -38,7 +38,7 @@
 .page-tankers {
   background: var(--bg-gradient);
   color: var(--fg);
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .page-tankers a {
@@ -690,8 +690,12 @@
 }
 
 @media (max-width: 640px) {
+  .page-tankers .site-main.dashboard {
+    padding: var(--space-3) var(--space-3) var(--space-5);
+  }
   .page-tankers .ais-live-top {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
     gap: 16px;
   }
   .page-tankers .ais-breakdown-box {
@@ -700,6 +704,16 @@
   }
   .page-tankers .ais-num {
     font-size: clamp(56px, 18vw, 80px);
+  }
+  .page-tankers .ship-viz-footer {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .page-tankers .ship-viz-footer-right {
+    padding-left: 0;
+    padding-top: 14px;
+    border-left: none;
+    border-top: 1px solid var(--rule-soft);
   }
   .page-tankers .tanker-map {
     height: 320px;
