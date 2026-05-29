@@ -1,0 +1,45 @@
+name: Lint
+
+# Biome (formatter + linter) を CI で強制する。
+# ローカルの pre-commit はバイパス (--no-verify)・husky 未インストールのクローン・
+# GitHub Web 編集で擦り抜けるため、中央でも JS/CSS/JSON/MD の整形と lint を担保する。
+# data/ 配下の自動スナップショット commit では走らせない (Biome 側も data を除外済み)。
+
+on:
+  push:
+    paths:
+      - '**/*.js'
+      - '**/*.css'
+      - '**/*.md'
+      - '**/*.json'
+      - '!data/**'
+      - '.github/workflows/lint.yml'
+  pull_request:
+    paths:
+      - '**/*.js'
+      - '**/*.css'
+      - '**/*.md'
+      - '**/*.json'
+      - '!data/**'
+      - '.github/workflows/lint.yml'
+  workflow_dispatch: {}
+
+jobs:
+  biome:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          HUSKY: 0 # CI では git hook を入れない
+
+      - name: Run Biome check (format + lint)
+        run: npm run check
