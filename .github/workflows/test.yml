@@ -37,6 +37,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r scripts/requirements.txt
 
+      # generate_ogp の RenderSmokeTest が CJK フォントを必須とするため、
+      # fetch-daily.yml と同様に CI にも導入する。
+      - name: Install CJK fonts (for OGP render test)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+
       - name: Run unit tests
         run: python -m unittest discover -s scripts -p 'test_*.py' -v
 
