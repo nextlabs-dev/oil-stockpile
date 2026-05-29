@@ -21,6 +21,10 @@ on:
       - '.github/workflows/test.yml'
   workflow_dispatch: {}
 
+# テスト実行と生成物 drift の git diff チェックのみで、commit/push はしないため読み取り権限のみ。
+permissions:
+  contents: read
+
 jobs:
   unit:
     runs-on: ubuntu-latest
