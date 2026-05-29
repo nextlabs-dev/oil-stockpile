@@ -22,7 +22,7 @@ const PAD_T = 16;
 const PAD_B = 56;
 const MAX_X_LABELS = 9;
 
-function pickXLabelIndices(n, max) {
+export function pickXLabelIndices(n, max) {
   if (n <= 0) return [];
   if (n <= max) return Array.from({ length: n }, (_, i) => i);
   const out = [];
@@ -55,7 +55,7 @@ function buildHiddenTable(data) {
   );
 }
 
-function getYDomain(totals, showSegments) {
+export function getYDomain(totals, showSegments) {
   if (showSegments) {
     return {
       yMin: 0,
@@ -68,7 +68,7 @@ function getYDomain(totals, showSegments) {
   };
 }
 
-function buildChartModel(data, showSegments) {
+export function buildChartModel(data, showSegments) {
   const totals = data.map((r) => r.total);
   const { yMin, yMax } = getYDomain(totals, showSegments);
   const plotW = W - PAD_L - PAD_R;

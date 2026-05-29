@@ -56,3 +56,23 @@ jobs:
             echo "::error::Generated HTML is out of date. Run 'python scripts/build_site.py' locally and commit the result."
             exit 1
           fi
+
+  # js/ の純ロジック（escapeHtml / カウンター計算 / グラフ算術）を node:test で検証する。
+  js-unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          HUSKY: 0 # CI では git hook を入れない
+
+      - name: Run JS unit tests
+        run: npm test
