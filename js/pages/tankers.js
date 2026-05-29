@@ -12,7 +12,7 @@ import { initCounter } from '../components/counter.js';
 import { initShare } from '../components/share.js';
 import { initTankerMap } from '../components/tanker-map.js';
 import { loadHistory, loadJson, VLCC_CAPACITY_KL } from '../core/data.js';
-import { setText, showElement } from '../core/dom.js';
+import { onReady, setText, showElement } from '../core/dom.js';
 import { formatDotDate, formatJaDateTime } from '../core/format.js';
 
 const TANKERS_URL = '../data/tankers.json';
@@ -65,16 +65,13 @@ function renderPorts(ports, unknownCount) {
   const empty = document.getElementById('ports-empty');
   const unknown = document.getElementById('ports-unknown');
   const unknownCountEl = document.getElementById('ports-unknown-count');
+  const none = document.getElementById('ports-none');
+  const noneCountEl = document.getElementById('ports-none-count');
   if (!list) return;
 
   list.innerHTML = '';
   const hasPorts = Array.isArray(ports) && ports.length > 0;
   const hasUnknown = typeof unknownCount === 'number' && unknownCount > 0;
-
-  if (!hasPorts && !hasUnknown) {
-    if (empty) empty.hidden = false;
-    return;
-  }
 
   if (hasPorts) {
     for (const { port, count } of ports) {
@@ -93,11 +90,20 @@ function renderPorts(ports, unknownCount) {
       li.appendChild(countEl);
       list.appendChild(li);
     }
+    // 一部の港を特定できた場合のみ「上記のほか N 隻…」を補足する
+    if (hasUnknown && unknown) {
+      if (unknownCountEl) unknownCountEl.textContent = String(unknownCount);
+      unknown.hidden = false;
+    }
+    return;
   }
 
-  if (hasUnknown && unknown) {
-    if (unknownCountEl) unknownCountEl.textContent = String(unknownCount);
-    unknown.hidden = false;
+  // 港を 1 つも特定できなかった: 未特定の有無で文言を出し分ける
+  if (hasUnknown && none) {
+    if (noneCountEl) noneCountEl.textContent = String(unknownCount);
+    none.hidden = false;
+  } else if (empty) {
+    empty.hidden = false;
   }
 }
 
@@ -156,8 +162,4 @@ async function main() {
   initShare();
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', main);
-} else {
-  main();
-}
+onReady(main);

@@ -71,6 +71,14 @@ export const STALE_THRESHOLD_DAYS = 14;
 export const VLCC_CAPACITY_KL = 300_000;
 
 /**
+ * asOf 日付文字列 (YYYY-MM-DD) を JST 0時の epoch ms に変換する。
+ * UTC 計算ズレを防ぐため必ず +09:00 を明示する。
+ */
+export function asOfToMs(asOf) {
+  return new Date(`${asOf}T00:00:00+09:00`).getTime();
+}
+
+/**
  * snapshot の asOf 時点からの経過分を引いた「いまこの瞬間の推計備蓄日数」を返す。
  * モデル: 「1 日経過 = 1 日分減る」（年間消費量推計を別途持たなくても整合）。
  *
@@ -81,7 +89,7 @@ export function computeCurrentDays(snapshot, now = Date.now()) {
   if (!snapshot || typeof snapshot.total !== 'number' || !snapshot.asOf) {
     return NaN;
   }
-  const asOfMs = new Date(`${snapshot.asOf}T00:00:00+09:00`).getTime();
+  const asOfMs = asOfToMs(snapshot.asOf);
   const elapsedDays = (now - asOfMs) / 86_400_000;
   // 端末時計が asOf より過去寄りでも total を超えた値を返さないよう上限で cap
   return Math.min(snapshot.total, Math.max(0, snapshot.total - elapsedDays));

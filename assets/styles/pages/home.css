@@ -4,25 +4,7 @@
    ============================================================= */
 
 .page-home {
-  --bg: #e9eef7;
-  --bg-gradient: linear-gradient(180deg, #e3e9f5 0%, #eef2fa 100%);
-  --bg-card: #ffffff;
-  --bg-soft: #f1f5fb;
-  --bg-banner: #dde6f5;
-
-  --fg: #14182c;
-  --fg-strong: #0f1430;
-  --fg-sub: #51587a;
-  --fg-muted: #828aa6;
-
-  --rule: #dde3ef;
-  --rule-soft: #e8ecf5;
-
-  --brand: #5983f1;
-  --brand-strong: #4870e8;
-  --brand-soft: #eef2ff;
-  --brand-ink: #1e2a78;
-
+  /* 共有トークンは base.css :root。ここはホーム固有色のみ。 */
   --accent-live: #dc2626;
   --accent-live-bg: #fef2f2;
 
@@ -38,9 +20,6 @@
   --chart-line-1: #fb7185;
   --chart-line-2: #5983f1;
   --chart-line-3: #fbbf24;
-
-  --link: var(--brand);
-  --focus: var(--brand);
 }
 
 .page-home {
@@ -95,18 +74,6 @@
   gap: var(--space-3);
 }
 
-.page-home .dash-card {
-  background: var(--bg-card);
-  border: 1px solid var(--rule-soft);
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 4px 16px rgba(44, 64, 120, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  min-width: 0;
-}
-
 .page-home .dash-card--hero {
   grid-column: 1;
   grid-row: 1 / span 2;
@@ -137,28 +104,9 @@
   grid-row: 2;
 }
 
-.page-home .dash-card--full {
-  grid-column: 1 / -1;
-}
-
-.page-home .dash-card-eyebrow {
-  font-size: 12px;
-  color: var(--fg-sub);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-}
-
 .page-home .dash-card-eyebrow--brand {
   color: var(--brand);
   font-weight: 600;
-}
-
-.page-home .dash-card-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--fg-strong);
-  margin: 0;
-  letter-spacing: 0.02em;
 }
 
 /* =============================================================
@@ -362,25 +310,6 @@
   gap: 6px;
   color: var(--accent-live);
   background: var(--accent-live-bg);
-}
-
-.page-home .live-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-live);
-  animation: live-pulse 1.6s ease-in-out infinite;
-}
-
-@keyframes live-pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.35;
-  }
 }
 
 /* =============================================================

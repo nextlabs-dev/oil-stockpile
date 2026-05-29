@@ -69,6 +69,61 @@
   }
 }
 
+/* =============================================================
+   Dashboard card — shared by home & tankers dashboards.
+   Grid placement (grid-column/row) and modifiers stay page-scoped.
+   ============================================================= */
+.dash-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.dash-card--full {
+  grid-column: 1 / -1;
+}
+
+.dash-card-eyebrow {
+  font-size: 12px;
+  color: var(--fg-sub);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.dash-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg-strong);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* Live indicator dot — color comes from each page's --accent-live */
+.live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-live);
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
 .stale-warning {
   margin-top: var(--space-3);
   padding: var(--space-2) var(--space-3);

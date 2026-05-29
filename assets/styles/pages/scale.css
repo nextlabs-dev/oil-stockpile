@@ -5,25 +5,9 @@
    ============================================================= */
 
 .page-scale {
-  --bg-gradient: linear-gradient(180deg, #e3e9f5 0%, #eef2fa 100%);
-  --bg-card: #ffffff;
+  /* 共有トークンは base.css :root。ここはスケールページ固有色のみ。 */
   --bg-inner: #eef3fc;
-
-  --fg-strong: #0f1430;
-  --fg: #14182c;
-  --fg-sub: #51587a;
-  --fg-muted: #828aa6;
-
-  --rule-soft: #e8ecf5;
-
-  --brand: #5983f1;
-  --brand-strong: #4870e8;
-  --brand-soft: #eef2ff;
-
   --num-gradient: linear-gradient(180deg, #8ba0fb 0%, #4569ef 55%, #2541c7 100%);
-
-  --link: var(--brand);
-  --focus: var(--brand);
 
   background: var(--bg-gradient);
   color: var(--fg);
@@ -53,9 +37,9 @@
     radial-gradient(ellipse 60% 140% at 100% 40%, rgba(124, 151, 248, 0.26), transparent 70%),
     var(--bg-card);
   border: 1px solid var(--rule-soft);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   padding: 32px 44px 36px;
-  box-shadow: 0 4px 16px rgba(44, 64, 120, 0.05);
+  box-shadow: var(--shadow-card);
 }
 
 .page-scale .scale-eyebrow {
@@ -105,9 +89,9 @@
 .page-scale .scale-card {
   background: var(--bg-card);
   border: 1px solid var(--rule-soft);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   padding: 28px 32px 30px;
-  box-shadow: 0 4px 16px rgba(44, 64, 120, 0.05);
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -210,7 +194,7 @@
   }
   .page-scale .scale-hero-card {
     padding: 28px 22px;
-    border-radius: 14px;
+    border-radius: var(--radius-lg);
   }
   .page-scale .scale-hero-title {
     font-size: 26px;
@@ -220,7 +204,7 @@
   }
   .page-scale .scale-card {
     padding: 22px 20px;
-    border-radius: 14px;
+    border-radius: var(--radius-lg);
   }
   .page-scale .scale-grid {
     grid-template-columns: 1fr;

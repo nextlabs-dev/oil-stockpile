@@ -6,31 +6,8 @@
    ============================================================= */
 
 .page-about {
-  --bg: #e9eef7;
-  --bg-gradient: linear-gradient(180deg, #e3e9f5 0%, #eef2fa 100%);
-  --bg-card: #ffffff;
-  --bg-soft: #f1f5fb;
-  --bg-banner: #dde6f5;
+  /* 共有トークンは base.css :root。ここは About ページ固有色のみ。 */
   --bg-formula: #f3f6fd;
-
-  --fg: #14182c;
-  --fg-strong: #0f1430;
-  --fg-sub: #51587a;
-  --fg-muted: #828aa6;
-
-  --rule: #dde3ef;
-  --rule-soft: #e8ecf5;
-
-  --brand: #5983f1;
-  --brand-strong: #4870e8;
-  --brand-soft: #eef2ff;
-  --brand-ink: #1e2a78;
-
-  --badge-bg: #eef2ff;
-  --badge-text: #3f4cc9;
-
-  --link: var(--brand);
-  --focus: var(--brand);
 }
 
 .page-about {
@@ -136,9 +113,9 @@
 .page-about .about-card {
   background: var(--bg-card);
   border: 1px solid var(--rule-soft);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   padding: 28px 32px;
-  box-shadow: 0 4px 16px rgba(44, 64, 120, 0.06);
+  box-shadow: var(--shadow-card);
   scroll-margin-top: 24px;
 }
 

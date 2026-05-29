@@ -10,7 +10,7 @@
  */
 
 import { computeCurrentDays, loadHistory, VLCC_CAPACITY_KL } from '../core/data.js';
-import { setText } from '../core/dom.js';
+import { onReady, setText } from '../core/dom.js';
 import { formatDotDate, formatInt } from '../core/format.js';
 
 const CONSTANTS = {
@@ -102,8 +102,4 @@ async function main() {
   renderCards(days);
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', main);
-} else {
-  main();
-}
+onReady(main);

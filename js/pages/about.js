@@ -4,7 +4,7 @@
  */
 
 import { loadHistory } from '../core/data.js';
-import { setText } from '../core/dom.js';
+import { onReady, safeInit, setText } from '../core/dom.js';
 import { formatDotDate } from '../core/format.js';
 
 function initSidebarScrollSpy() {
@@ -57,15 +57,7 @@ async function main() {
   } catch (e) {
     console.error('history:', e);
   }
-  try {
-    initSidebarScrollSpy();
-  } catch (e) {
-    console.error('scrollspy:', e);
-  }
+  safeInit('scrollspy', initSidebarScrollSpy);
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', main);
-} else {
-  main();
-}
+onReady(main);

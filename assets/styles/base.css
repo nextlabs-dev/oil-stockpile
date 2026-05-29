@@ -3,27 +3,31 @@
    ============================================================= */
 
 :root {
-  /* 色 */
-  --bg: #fafafa;
+  /* 色 — 全ページ共有パレット (SSOT)。
+     ページ固有色（アクセント・ドーナツ・チャート等）は各 .page-* ブロックで定義する。 */
+  --bg: #e9eef7;
+  --bg-gradient: linear-gradient(180deg, #e3e9f5 0%, #eef2fa 100%);
   --bg-card: #ffffff;
-  --fg: #111111;
-  --fg-sub: #595959;
-  --fg-muted: #6b6b6b; /* WCAG AA 4.5:1 on #fafafa */
-  --fg-strong-hover: #2a2a2a;
-  --rule: #e5e5e5;
-  --rule-strong: #cccccc;
+  --bg-soft: #f1f5fb;
+  --bg-banner: #dde6f5;
 
-  --tank-fill-ok: #1a1a1a;
-  --tank-fill-mid: #777777;
+  --fg: #14182c;
+  --fg-strong: #0f1430;
+  --fg-sub: #51587a;
+  --fg-muted: #828aa6;
+
+  --rule: #dde3ef;
+  --rule-soft: #e8ecf5;
+
+  --brand: #5983f1;
+  --brand-strong: #4870e8;
+  --brand-soft: #eef2ff;
+  --brand-ink: #1e2a78;
+
   --tank-fill-warn: #c0392b;
 
-  --chart-line-1: #444444;
-  --chart-line-2: #888888;
-  --chart-line-3: #bbbbbb;
-
-  --link: #0a58ca;
-
-  --focus: #0066ff;
+  --link: var(--brand);
+  --focus: var(--brand);
 
   /* スペーシング */
   --space-1: 0.25rem; /* 4px */
@@ -38,6 +42,10 @@
   /* ボーダー半径 */
   --radius-sm: 4px;
   --radius-md: 8px;
+  --radius-lg: 14px;
+
+  /* シャドウ */
+  --shadow-card: 0 4px 16px rgba(44, 64, 120, 0.06);
 
   /* タイポ重複サイズ */
   --text-xs: 11px;

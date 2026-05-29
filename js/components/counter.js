@@ -11,7 +11,11 @@
  * を asOf 昇順で並べた配列。
  */
 
-import { computeCurrentDays as computeFromSnapshot, STALE_THRESHOLD_DAYS } from '../core/data.js';
+import {
+  asOfToMs,
+  computeCurrentDays as computeFromSnapshot,
+  STALE_THRESHOLD_DAYS,
+} from '../core/data.js';
 import { setText, showElement } from '../core/dom.js';
 
 const MS_PER_DAY = 86_400_000;
@@ -24,8 +28,7 @@ function setLatest(history) {
     throw new Error('history is empty');
   }
   latestSnapshot = history[history.length - 1];
-  // JST明示。UTC計算ズレを防ぐため必ず +09:00 を付ける
-  asOfTimestamp = new Date(`${latestSnapshot.asOf}T00:00:00+09:00`).getTime();
+  asOfTimestamp = asOfToMs(latestSnapshot.asOf);
 }
 
 export function computeCurrentDays(now = Date.now()) {

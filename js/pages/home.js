@@ -11,7 +11,7 @@ import { initKpi } from '../components/kpi.js';
 import { initShare } from '../components/share.js';
 import { initTankGauge } from '../components/tank-gauge.js';
 import { loadHistory } from '../core/data.js';
-import { setText } from '../core/dom.js';
+import { onReady, safeInit, setText } from '../core/dom.js';
 import { formatDotDate } from '../core/format.js';
 
 function populateHeaderAndBanner(history) {
@@ -43,37 +43,14 @@ async function main() {
 
   // counter を先に初期化することで、続く tank-gauge の subscribe() が
   // 即座に正しい値で同期される（latestSnapshot 未設定で NaN が DOM に
-  // 書き込まれる隙間を作らない）。
-  try {
-    initCounter(history);
-  } catch (e) {
-    console.error('counter:', e);
-  }
-  try {
-    initKpi(history);
-  } catch (e) {
-    console.error('kpi:', e);
-  }
-  try {
-    initChart(history);
-  } catch (e) {
-    console.error('chart:', e);
-  }
-  try {
-    initTankGauge(history);
-  } catch (e) {
-    console.error('tank-gauge:', e);
-  }
-  try {
-    initShare();
-  } catch (e) {
-    console.error('share:', e);
-  }
+  // 書き込まれる隙間を作らない）。順序を保つため逐次に呼ぶ。
+  safeInit('counter', () => initCounter(history));
+  safeInit('kpi', () => initKpi(history));
+  safeInit('chart', () => initChart(history));
+  safeInit('tank-gauge', () => initTankGauge(history));
+  safeInit('share', () => initShare());
+
   populateHeaderAndBanner(history);
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', main);
-} else {
-  main();
-}
+onReady(main);
