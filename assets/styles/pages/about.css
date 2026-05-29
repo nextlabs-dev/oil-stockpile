@@ -279,89 +279,6 @@
 }
 
 /* =============================================================
-   Newsletter form
-   ============================================================= */
-.page-about .about-card--newsletter {
-  /* room for the form */
-}
-
-.page-about .newsletter-form {
-  display: flex;
-  gap: 8px;
-  align-items: stretch;
-  margin-top: 4px;
-}
-
-.page-about .newsletter-input {
-  flex: 1;
-  min-width: 0;
-  padding: 10px 14px;
-  font-family: inherit;
-  font-size: 13px;
-  color: var(--fg-strong);
-  background: #ffffff;
-  border: 1px solid var(--rule);
-  border-radius: 8px;
-  transition:
-    border-color 0.15s,
-    box-shadow 0.15s;
-}
-
-.page-about .newsletter-input::placeholder {
-  color: var(--fg-muted);
-}
-
-.page-about .newsletter-input:focus {
-  outline: none;
-  border-color: var(--brand);
-  box-shadow: 0 0 0 3px rgba(89, 131, 241, 0.18);
-}
-
-.page-about .newsletter-submit {
-  padding: 10px 22px;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  color: #ffffff;
-  background: var(--brand);
-  border: 1px solid var(--brand);
-  border-radius: 8px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition:
-    background 0.15s,
-    border-color 0.15s,
-    transform 0.05s;
-}
-
-.page-about .newsletter-submit:hover {
-  background: var(--brand-strong);
-  border-color: var(--brand-strong);
-}
-
-.page-about .newsletter-submit:active {
-  transform: translateY(1px);
-}
-
-.page-about .newsletter-note {
-  font-size: 11px;
-  color: var(--fg-muted);
-  line-height: 1.6;
-  margin: 10px 0 0;
-}
-
-.page-about .newsletter-status {
-  font-size: 12px;
-  color: var(--brand);
-  margin: 6px 0 0;
-  min-height: 1.4em;
-}
-
-.page-about .newsletter-status.is-error {
-  color: #c0392b;
-}
-
-/* =============================================================
    Company DL (and Sources DL — same style)
    ============================================================= */
 .page-about .company-dl {
@@ -543,12 +460,6 @@
   }
   .page-about .about-card-title--lg {
     font-size: 20px;
-  }
-  .page-about .newsletter-form {
-    flex-direction: column;
-  }
-  .page-about .newsletter-submit {
-    width: 100%;
   }
   .page-about .company-row {
     grid-template-columns: 1fr;
