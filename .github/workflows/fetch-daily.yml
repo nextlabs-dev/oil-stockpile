@@ -58,10 +58,23 @@ jobs:
           if [[ ${#changed_paths[@]} -gt 0 ]]; then
             git add "${changed_paths[@]}"
             git commit -m "data: auto-update $(date -u +%Y-%m-%d)"
-            # 取得中に main に他の commit が積まれている場合があるため rebase してから push
-            git pull --rebase --autostash origin main
-            git push
-            echo "::notice::pushed: ${changed_paths[*]}"
+            # 取得中に main へ他 commit（tankers 等）が積まれていると push が弾かれる。
+            # rebase してから push を最大3回試行する（fetch-tankers.yml と堅牢性を揃える）。
+            # daily の commit は snapshots.json / og-image.png のみに触れ、tankers は
+            # tankers.json のみなのでファイル集合が交わらず rebase は衝突しない。
+            for attempt in 1 2 3; do
+              if ! git pull --rebase --autostash origin main; then
+                git rebase --abort 2>/dev/null || true
+              fi
+              if git push; then
+                echo "::notice::pushed: ${changed_paths[*]}"
+                exit 0
+              fi
+              echo "::warning::push failed on attempt ${attempt}; retrying on latest main"
+              sleep 2
+            done
+            echo "::error::failed to push after retries"
+            exit 1
           else
             echo "::notice::No changes; PDF and OGP were identical to existing"
           fi

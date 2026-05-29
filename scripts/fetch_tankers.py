@@ -9,7 +9,8 @@ data/tankers.json を更新する。
     - WebSocket で 5-8 分間サンプル → ShipStaticData / PositionReport を集める
     - vessel type 80-89 (Tanker) のみ集計対象
     - destination を日本港名/UN-LOCODE と部分一致で「日本向け」判定
-    - 出力は集計値のみ（隻数 + 上位港）。船舶識別情報 (MMSI / 船名) は出さない
+    - 出力は集計値（隻数 + 上位港）に加え、個別タンカー情報（MMSI/船名/destination/
+      位置）も出力する。位置は緯度経度を4桁(~11m)に丸める（aggregate 参照）
 
 出力 (data/tankers.json):
     {
