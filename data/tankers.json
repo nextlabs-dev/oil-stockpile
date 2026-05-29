@@ -1,167 +1,95 @@
 {
-  "fetchedAt": "2026-05-29T08:59:33+00:00",
+  "fetchedAt": "2026-05-29T12:34:57+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 21,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 0,
+  "totalTankersInRegion": 20,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [
     {
-      "port": "KAWASAKI",
+      "port": "SAKAI",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 440000000,
-      "name": "",
-      "destination": "BUSAN KOREA",
+      "mmsi": 440014870,
+      "name": "MS CLEAN",
+      "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": 35.0923,
-      "lon": 129.0331
+      "lat": 37.4126,
+      "lon": 126.5652
     },
     {
-      "mmsi": 352005657,
-      "name": "SUN BIRDIE",
-      "destination": "KR USN WM",
-      "isJapanBound": false,
-      "lat": 35.2489,
-      "lon": 129.5652
-    },
-    {
-      "mmsi": 371350000,
-      "name": "ACE HANA",
-      "destination": "KR USN",
-      "isJapanBound": false,
-      "lat": 35.1276,
-      "lon": 129.7059
-    },
-    {
-      "mmsi": 440331080,
-      "name": "KUMBOKHO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.123,
-      "lon": 129.0517
-    },
-    {
-      "mmsi": 440304320,
-      "name": "DOO LA NO.7",
-      "destination": "KR ICN",
-      "isJapanBound": false,
-      "lat": 37.4992,
-      "lon": 126.6303
-    },
-    {
-      "mmsi": 441361000,
-      "name": "YN OCEAN",
-      "destination": "KR PSN",
-      "isJapanBound": false,
-      "lat": 35.0906,
-      "lon": 129.0808
-    },
-    {
-      "mmsi": 440178690,
-      "name": "DAIN3HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0991,
-      "lon": 129.0776
-    },
-    {
-      "mmsi": 440220160,
-      "name": "CHEON WANG  HO",
+      "mmsi": 440155010,
+      "name": "YU SUNG HO",
       "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0521
-    },
-    {
-      "mmsi": 440116410,
-      "name": "DL DIAMOND",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.1052,
-      "lon": 129.0925
-    },
-    {
-      "mmsi": 440714100,
-      "name": "DAON",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1199,
-      "lon": 129.0503
-    },
-    {
-      "mmsi": 563079900,
-      "name": "GOLDEN CYGNUS",
-      "destination": "CNJIJ",
-      "isJapanBound": false,
-      "lat": 34.9454,
-      "lon": 129.261
-    },
-    {
-      "mmsi": 440048210,
-      "name": "GREEN HO",
-      "destination": "",
       "isJapanBound": false,
       "lat": 35.1211,
-      "lon": 129.0515
+      "lon": 129.0508
     },
     {
-      "mmsi": 440500300,
-      "name": "SONGRIM HO",
+      "mmsi": 440410930,
+      "name": "CHARIS",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1208,
+      "lat": 35.1209,
       "lon": 129.0504
     },
     {
-      "mmsi": 431001112,
-      "name": "NO.10 HASSHOMARU",
-      "destination": "JP KWS OFF",
-      "isJapanBound": true,
-      "lat": 35.481,
-      "lon": 139.8237
-    },
-    {
-      "mmsi": 440036020,
-      "name": "GYEONG SEONG HO",
-      "destination": "ULSAN",
+      "mmsi": 477929300,
+      "name": "CHEM RON",
+      "destination": "BUSAN OPL",
       "isJapanBound": false,
-      "lat": 35.0291,
-      "lon": 129.1136
+      "lat": 34.9917,
+      "lon": 130.288
     },
     {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
+      "mmsi": 440138770,
+      "name": "LUCKY OCEAN HO",
+      "destination": "GAMCEON",
+      "isJapanBound": false,
+      "lat": 35.0418,
+      "lon": 129.019
+    },
+    {
+      "mmsi": 440112380,
+      "name": "KUKDONG3HO",
       "destination": "",
       "isJapanBound": false,
       "lat": 35.1222,
       "lon": 129.0519
     },
     {
-      "mmsi": 440305160,
-      "name": "YUHAN1",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.0834,
-      "lon": 129.1151
+      "mmsi": 441422000,
+      "name": "KEOYOUNG BLUE 7",
+      "destination": "JP/SAKAI           B",
+      "isJapanBound": true,
+      "lat": 35.0855,
+      "lon": 129.7447
     },
     {
-      "mmsi": 440321070,
-      "name": "DONGSOO1",
-      "destination": "BUSAN.KR",
+      "mmsi": 440331080,
+      "name": "KUMBOKHO",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.0506,
-      "lon": 129.0005
+      "lat": 35.1232,
+      "lon": 129.0517
     },
     {
-      "mmsi": 368196110,
-      "name": "HAINA PATRIOT",
-      "destination": "BUSAN ROK",
+      "mmsi": 440220160,
+      "name": "CHEON WANG  HO",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1178,
-      "lon": 129.0703
+      "lat": 35.1082,
+      "lon": 129.0925
+    },
+    {
+      "mmsi": 431608000,
+      "name": "ENERGY PROGRESS",
+      "destination": "KRYOS",
+      "isJapanBound": false,
+      "lat": 30.9633,
+      "lon": 129.7847
     },
     {
       "mmsi": 440400900,
@@ -172,12 +100,76 @@
       "lon": 129.0499
     },
     {
-      "mmsi": 353465000,
-      "name": "BUENA DIOSA",
-      "destination": "KR PUS",
+      "mmsi": 440105720,
+      "name": "DAE JEONG",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.05,
-      "lon": 129.0645
+      "lat": 35.1215,
+      "lon": 129.0517
+    },
+    {
+      "mmsi": 441918000,
+      "name": "KEOJE ESION",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.104,
+      "lon": 129.0906
+    },
+    {
+      "mmsi": 431005242,
+      "name": "KAKUSHO MARU",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.2068,
+      "lon": 135.116
+    },
+    {
+      "mmsi": 440185570,
+      "name": "SOO KYEONG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1092,
+      "lon": 129.055
+    },
+    {
+      "mmsi": 440300120,
+      "name": "M/T BK25",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1209,
+      "lon": 129.0492
+    },
+    {
+      "mmsi": 440002690,
+      "name": "HY BUSAN",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.1197,
+      "lon": 129.0508
+    },
+    {
+      "mmsi": 440197410,
+      "name": "HWA JEONG ACE",
+      "destination": "YEOSU",
+      "isJapanBound": false,
+      "lat": 35.1089,
+      "lon": 129.0933
+    },
+    {
+      "mmsi": 368196110,
+      "name": "HAINA PATRIOT",
+      "destination": "BUSAN ROK",
+      "isJapanBound": false,
+      "lat": 35.1178,
+      "lon": 129.0703
+    },
+    {
+      "mmsi": 440409260,
+      "name": "ASUNG",
+      "destination": "0",
+      "isJapanBound": false,
+      "lat": 35.1228,
+      "lon": 129.0523
     }
   ],
   "boundingBox": "24-46N / 122-146E",
