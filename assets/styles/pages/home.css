@@ -89,16 +89,6 @@
   gap: 0;
 }
 
-.page-home .dash-kpi-group .dash-kpi {
-  flex: 1 1 0;
-  min-width: 0;
-  border-right: 1px solid #f0f0f0;
-}
-
-.page-home .dash-kpi-group .dash-kpi:last-child {
-  border-right: none;
-}
-
 .page-home .dash-donut {
   grid-column: 2 / span 3;
   grid-row: 2;
@@ -259,8 +249,16 @@
   padding: 26px 20px 22px;
 }
 
-.page-home .dash-kpi .dash-kpi-badge {
-  margin-top: auto;
+/* 横並びグループ内の各カード（均等幅・カード間の区切り線）。
+   基底 .dash-kpi の後に置き、特異度の降順警告を避ける。 */
+.page-home .dash-kpi-group .dash-kpi {
+  flex: 1 1 0;
+  min-width: 0;
+  border-right: 1px solid #f0f0f0;
+}
+
+.page-home .dash-kpi-group .dash-kpi:last-child {
+  border-right: none;
 }
 
 .page-home .dash-kpi-value {
@@ -304,6 +302,12 @@
   gap: 6px;
   color: var(--accent-live);
   background: var(--accent-live-bg);
+}
+
+/* KPI カード内のバッジを下端に寄せる（カード高さが揃うよう margin で押し下げ）。
+   .dash-kpi-badge 系の後に置き、特異度の降順警告を避ける。 */
+.page-home .dash-kpi .dash-kpi-badge {
+  margin-top: auto;
 }
 
 /* =============================================================
