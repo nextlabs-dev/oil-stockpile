@@ -28,7 +28,7 @@ function showLoadError(err) {
   const note = document.querySelector('.counter-note');
   if (note) {
     note.textContent = 'データの読み込みに失敗しました。時間をおいて再読み込みしてください。';
-    note.style.color = 'var(--tank-fill-warn)';
+    note.classList.add('is-error');
   }
 }
 

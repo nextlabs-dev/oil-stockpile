@@ -8,17 +8,17 @@
   --accent-live: #dc2626;
   --accent-live-bg: #fef2f2;
 
-  --badge-bg: #eef2ff;
+  --badge-bg: var(--brand-soft);
   --badge-text: #3f4cc9;
 
-  --donut-national: #5983f1;
+  --donut-national: var(--brand);
   --donut-private: #63b684;
   --donut-joint: #8562f1;
   --donut-other: #d9d9d9;
 
-  --chart-line-total: #5983f1;
+  --chart-line-total: var(--brand);
   --chart-line-1: #fb7185;
-  --chart-line-2: #5983f1;
+  --chart-line-2: var(--brand);
   --chart-line-3: #fbbf24;
 }
 
@@ -231,15 +231,9 @@
   margin: 0;
 }
 
-.page-home .stale-warning {
-  margin-top: var(--space-2);
-  padding: 6px 10px;
-  display: inline-block;
-  font-size: 11px;
-  background: #fff7ed;
-  color: #c2410c;
-  border: 1px solid #fed7aa;
-  border-radius: 6px;
+/* 読み込みエラー時に JS が付与する状態クラス */
+.page-home .counter-note.is-error {
+  color: var(--tank-fill-warn);
 }
 
 .page-home .hero-share {

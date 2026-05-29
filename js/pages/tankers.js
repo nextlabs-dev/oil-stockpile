@@ -37,7 +37,7 @@ function showLoadError() {
   const note = document.querySelector('.ais-live-note');
   if (note) {
     note.textContent = 'データの読み込みに失敗しました。時間をおいて再読み込みしてください。';
-    note.style.color = 'var(--accent-live, #c2410c)';
+    note.classList.add('is-error');
   }
 }
 

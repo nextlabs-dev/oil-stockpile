@@ -26,6 +26,22 @@
 
   --tank-fill-warn: #c0392b;
 
+  /* 警告 (amber) — 古さ警告など stale 表示用サーフェス */
+  --warn-bg: #fff7ed;
+  --warn-fg: #c2410c;
+  --warn-border: #fed7aa;
+
+  /* ダークヘッダー専用パレット。
+     白文字は --bg-card(#fff) と値が一致するが「濃紺地の上の文字」という別概念のため統合しない。 */
+  --header-bg: #0f1535;
+  --header-panel: #141a3d; /* モバイルのドロップダウン背景 */
+  --header-logo: #252b4a;
+  --header-fg-strong: #ffffff; /* タイトル / アクティブタブ文字 */
+  --header-fg: #cfd5e6; /* メタ値 / トグルバー */
+  --header-fg-muted: #9ea7c0; /* タグライン / メタラベル */
+  --header-tab-fg: #a5b0c8; /* 非アクティブタブ文字 */
+  --header-overlay: rgba(255, 255, 255, 0.06); /* ロゴ内側 / ホバー地 */
+
   --link: var(--brand);
   --focus: var(--brand);
 

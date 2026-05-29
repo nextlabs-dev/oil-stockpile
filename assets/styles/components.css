@@ -26,7 +26,7 @@
   padding: 8px 18px;
   font-size: 13px;
   font-weight: 500;
-  color: #a5b0c8;
+  color: var(--header-tab-fg);
   text-decoration: none;
   border: none;
   border-radius: 999px;
@@ -37,20 +37,20 @@
 }
 
 .site-header .tab:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--header-fg-strong);
+  background: var(--header-overlay);
   text-decoration: none;
 }
 
 .site-header .tab--active {
-  background: #5983f1;
-  color: #ffffff;
+  background: var(--brand);
+  color: var(--header-fg-strong);
   font-weight: 600;
 }
 
 .site-header .tab--active:hover {
-  background: #4870e8;
-  color: #ffffff;
+  background: var(--brand-strong);
+  color: var(--header-fg-strong);
 }
 
 @media (max-width: 640px) {
@@ -124,15 +124,16 @@
   }
 }
 
+/* 古さ警告サーフェス。amber トークンを SSOT とし、各ページは差分のみ指定する */
 .stale-warning {
-  margin-top: var(--space-3);
-  padding: var(--space-2) var(--space-3);
+  margin-top: var(--space-2);
+  padding: 8px 12px;
   display: inline-block;
-  border: 1px solid var(--tank-fill-warn);
-  color: var(--tank-fill-warn);
-  font-size: 12px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-card);
+  border: 1px solid var(--warn-border);
+  color: var(--warn-fg);
+  font-size: 11px;
+  border-radius: var(--radius-md);
+  background: var(--warn-bg);
 }
 
 .stale-warning[hidden] {
@@ -155,8 +156,8 @@
   padding: 9px 18px;
   font-size: 13px;
   font-weight: 600;
-  color: #5983f1;
-  background: #ffffff;
+  color: var(--brand);
+  background: var(--bg-card);
   border: 1px solid #dbe4f5;
   border-radius: 10px;
   cursor: pointer;
@@ -167,9 +168,9 @@
 }
 
 .share-btn:hover {
-  background: #eef2ff;
-  color: #4870e8;
-  border-color: #5983f1;
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+  border-color: var(--brand);
 }
 
 .share-btn-icon {
@@ -184,7 +185,7 @@
 .share-toast {
   margin-top: 6px;
   font-size: 11px;
-  color: #51587a;
+  color: var(--fg-sub);
   min-height: 1.4em;
   text-align: center;
   transition: opacity 0.2s;

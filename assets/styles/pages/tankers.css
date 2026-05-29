@@ -145,6 +145,11 @@
   margin: 0 1px;
 }
 
+/* 読み込みエラー時に JS が付与する状態クラス */
+.page-tankers .ais-live-note.is-error {
+  color: var(--tank-fill-warn);
+}
+
 .page-tankers .ais-breakdown-box {
   display: flex;
   flex-direction: column;
@@ -583,17 +588,6 @@
   text-align: right;
   font-variant-numeric: tabular-nums;
   margin: 0;
-}
-
-.page-tankers .stale-warning {
-  margin-top: 8px;
-  padding: 8px 12px;
-  display: inline-block;
-  font-size: 11px;
-  background: #fff7ed;
-  color: #c2410c;
-  border: 1px solid #fed7aa;
-  border-radius: 8px;
 }
 
 /* =============================================================
