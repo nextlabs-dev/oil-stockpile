@@ -1,42 +1,58 @@
 {
-  "fetchedAt": "2026-06-02T11:50:06+00:00",
+  "fetchedAt": "2026-06-02T17:02:22+00:00",
   "samplingDurationSec": 480,
   "totalTankersInRegion": 12,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 3,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440191790,
-      "name": "ARA1HO",
+      "mmsi": 440130480,
+      "name": "STELLA HO",
+      "destination": "TONGYEONG",
+      "isJapanBound": false,
+      "lat": 35.1217,
+      "lon": 129.0514
+    },
+    {
+      "mmsi": 440031780,
+      "name": "SINJEONG3HO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.0836,
-      "lon": 129.0884
+      "lat": 35.1234,
+      "lon": 129.0511
     },
     {
-      "mmsi": 440112380,
-      "name": "KUKDONG3HO",
-      "destination": "",
+      "mmsi": 431006718,
+      "name": "AZUMA MARU NO.21",
+      "destination": ">JP AFG OFF",
+      "isJapanBound": true,
+      "lat": 39.7837,
+      "lon": 139.9712
+    },
+    {
+      "mmsi": 311000222,
+      "name": "EMERALD SPIRIT",
+      "destination": "OUT OF BAY",
       "isJapanBound": false,
-      "lat": 35.0382,
-      "lon": 129.0711
+      "lat": 34.6914,
+      "lon": 139.6985
     },
     {
-      "mmsi": 357261000,
-      "name": "LYCASTE PEACE",
-      "destination": "JP URAGA OUT",
-      "isJapanBound": true,
-      "lat": 35.0537,
-      "lon": 139.2998
+      "mmsi": 352006277,
+      "name": "PVT NOVA",
+      "destination": "KR USN   ET",
+      "isJapanBound": false,
+      "lat": 35.1919,
+      "lon": 129.4841
     },
     {
-      "mmsi": 431015647,
-      "name": "SHOWAMARU",
-      "destination": "JP FNB F-10 OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "mmsi": 440103440,
+      "name": "A-ONE",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1212,
+      "lon": 129.0506
     },
     {
       "mmsi": 440410930,
@@ -47,58 +63,42 @@
       "lon": 129.0507
     },
     {
-      "mmsi": 440401790,
-      "name": "SONG DEOG",
-      "destination": "BUSAN",
+      "mmsi": 440155380,
+      "name": "KEUMHYANG",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.0504
+      "lat": 35.1232,
+      "lon": 129.0527
     },
     {
-      "mmsi": 440331980,
-      "name": "BU KWANG 9 HO",
-      "destination": "YEOSU",
+      "mmsi": 441020000,
+      "name": "JN JUPITER",
+      "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 35.0995,
-      "lon": 129.0739
+      "lat": 35.2107,
+      "lon": 129.4176
     },
     {
-      "mmsi": 538004779,
-      "name": "BLUE ARROW",
-      "destination": "KR BUSAN",
-      "isJapanBound": false,
-      "lat": 35.0833,
-      "lon": 129.0884
-    },
-    {
-      "mmsi": 440130480,
-      "name": "STELLA HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1592,
-      "lon": 129.2255
-    },
-    {
-      "mmsi": 209407000,
-      "name": "GRAND ELENA",
-      "destination": "RU_PGN",
-      "isJapanBound": false,
-      "lat": 34.1756,
-      "lon": 138.5386
-    },
-    {
-      "mmsi": 440400900,
-      "name": "WOOWONHO",
-      "destination": "YEOSU",
-      "isJapanBound": false,
-      "lat": 35.1199,
-      "lon": 129.0509
-    },
-    {
-      "mmsi": 431101164,
-      "name": "KISEIMARU",
-      "destination": ">JP URAYASU OFF",
+      "mmsi": 431002935,
+      "name": "TAMARIKI MARU NO.8",
+      "destination": ">JP AFG OFF",
       "isJapanBound": true,
+      "lat": 39.7748,
+      "lon": 139.9776
+    },
+    {
+      "mmsi": 368196110,
+      "name": "HAINA PATRIOT",
+      "destination": "BUSAN ROK",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 414469000,
+      "name": "YONG LE",
+      "destination": "SINGAPORE",
+      "isJapanBound": false,
       "lat": null,
       "lon": null
     }
