@@ -549,8 +549,7 @@
     text-align: left;
   }
   .page-home .hero-illustration {
-    width: 120px;
-    margin-left: auto;
+    display: none;
   }
   .page-home .donut-layout {
     grid-template-columns: 1fr;
@@ -561,5 +560,7 @@
   }
   .page-home .donut-legend {
     grid-template-columns: 1fr;
+    justify-self: center;
+    text-align: left;
   }
 }
