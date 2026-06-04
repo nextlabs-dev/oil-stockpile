@@ -1,106 +1,74 @@
 {
-  "fetchedAt": "2026-06-04T10:52:08+00:00",
+  "fetchedAt": "2026-06-04T14:18:25+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 14,
+  "totalTankersInRegion": 11,
   "japanBoundTankers": 0,
   "japanBoundUnknownPort": 0,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440331750,
-      "name": "BO WON HO",
-      "destination": "BSN",
+      "mmsi": 440714100,
+      "name": "DAON",
+      "destination": "BVSAN",
       "isJapanBound": false,
-      "lat": 35.1,
-      "lon": 129.0942
+      "lat": 35.1195,
+      "lon": 129.051
     },
     {
-      "mmsi": 440105250,
-      "name": "JEONG SEONG",
+      "mmsi": 440305160,
+      "name": "YUHAN1",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.0365,
+      "lon": 129.0665
+    },
+    {
+      "mmsi": 440103970,
+      "name": "GEUM CHANG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1211,
+      "lon": 129.0498
+    },
+    {
+      "mmsi": 440331080,
+      "name": "KUMBOKHO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.0849,
-      "lon": 129.1024
+      "lat": 35.0499,
+      "lon": 129.0588
     },
     {
-      "mmsi": 613541600,
-      "name": "SEAHORSE",
-      "destination": "KRPUS",
-      "isJapanBound": false,
-      "lat": 35.0076,
-      "lon": 129.0469
-    },
-    {
-      "mmsi": 440100190,
-      "name": "NO.11 BOKYUNG",
+      "mmsi": 440130790,
+      "name": "7 MIREU",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1229,
+      "lat": 35.122,
+      "lon": 129.0519
+    },
+    {
+      "mmsi": 440504030,
+      "name": "DONGHAE SEASTAR",
+      "destination": "NEWBUSAN",
+      "isJapanBound": false,
+      "lat": 35.1193,
+      "lon": 129.0511
+    },
+    {
+      "mmsi": 440321070,
+      "name": "DONGSOO1",
+      "destination": "BUSAN.KR",
+      "isJapanBound": false,
+      "lat": 35.0512,
+      "lon": 129.0009
+    },
+    {
+      "mmsi": 440108790,
+      "name": "3MYEONGGWANG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1216,
       "lon": 129.0518
-    },
-    {
-      "mmsi": 440409790,
-      "name": "ARAM",
-      "destination": "BUSAN#5P",
-      "isJapanBound": false,
-      "lat": 35.12,
-      "lon": 129.0503
-    },
-    {
-      "mmsi": 368196110,
-      "name": "HAINA PATRIOT",
-      "destination": "BUSAN ROK",
-      "isJapanBound": false,
-      "lat": 35.1179,
-      "lon": 129.0703
-    },
-    {
-      "mmsi": 441361000,
-      "name": "YN OCEAN",
-      "destination": "KR PSN",
-      "isJapanBound": false,
-      "lat": 35.0907,
-      "lon": 129.0801
-    },
-    {
-      "mmsi": 440178690,
-      "name": "DAIN3HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1241,
-      "lon": 129.1893
-    },
-    {
-      "mmsi": 477922500,
-      "name": "EMEI",
-      "destination": "FOR ORDERS",
-      "isJapanBound": false,
-      "lat": 34.7673,
-      "lon": 129.1677
-    },
-    {
-      "mmsi": 440303500,
-      "name": "CHEONGDAM",
-      "destination": "BSN#5MRJ",
-      "isJapanBound": false,
-      "lat": 35.1215,
-      "lon": 129.0499
-    },
-    {
-      "mmsi": 440101370,
-      "name": "BONG EUN",
-      "destination": "BUSAM",
-      "isJapanBound": false,
-      "lat": 35.0808,
-      "lon": 129.1082
-    },
-    {
-      "mmsi": 373982000,
-      "name": "SULFUR BRAVE",
-      "destination": "BUSAN_KR",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
     },
     {
       "mmsi": 440155350,
@@ -111,12 +79,20 @@
       "lon": 129.0509
     },
     {
-      "mmsi": 440014910,
-      "name": "CHANG YONG 1HO",
+      "mmsi": 440115430,
+      "name": "TAHITI",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.1219,
+      "lon": 129.0519
+    },
+    {
+      "mmsi": 440105720,
+      "name": "DAE JEONG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1211,
+      "lon": 129.0506
     }
   ],
   "boundingBox": "24-46N / 122-146E",
