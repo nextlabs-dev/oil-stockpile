@@ -4,7 +4,7 @@
 
 - 元データ（備蓄日数）: https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/
 - 元データ（タンカー）: https://aisstream.io/
-- 公開 URL: https://tkysi-mi.github.io/oil-stockpile/
+- 公開 URL: https://countieereturns.github.io/oil-stockpile/
 
 ## ページ構成
 
@@ -264,11 +264,11 @@ python -m http.server 8080
 
 ## デプロイ（GitHub Pages）
 
-公開 URL は `https://tkysi-mi.github.io/oil-stockpile/`。コード内の絶対 URL は `src/site.json` の `site.url` / `site.og_image` と `js/core/data.js` の `SITE_CONFIG.url` に集約されています。
+公開 URL は `https://countieereturns.github.io/oil-stockpile/`。コード内の絶対 URL は `src/site.json` の `site.url` / `site.og_image` と `js/core/data.js` の `SITE_CONFIG.url` に集約されています。
 
 ### 初回セットアップ
 
-1. リポジトリ `tkysi-mi/oil-stockpile` の **Settings → Pages**
+1. リポジトリ `CountieeReturns/oil-stockpile` の **Settings → Pages**
    - Source: **Deploy from a branch**
    - Branch: **main** / **/ (root)**
 2. **Settings → Actions → General → Workflow permissions** を **Read and write permissions** に変更（Bot が `data/*.json` と `assets/og-image.png` を自動 push できるように）
@@ -284,7 +284,7 @@ python -m http.server 8080
 
 ### カスタムドメインに切り替える場合
 
-1. **Settings → Pages → Custom domain** で独自ドメインを設定 + DNS で CNAME を `tkysi-mi.github.io` に向ける
+1. **Settings → Pages → Custom domain** で独自ドメインを設定 + DNS で CNAME を `countieereturns.github.io` に向ける
 2. 絶対 URL を新ドメインに置換:
    - `src/site.json` の `site.url` / `site.og_image`
    - `js/core/data.js` の `SITE_CONFIG.url`
