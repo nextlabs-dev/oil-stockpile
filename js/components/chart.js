@@ -14,13 +14,36 @@
 import { escapeHtml } from '../core/escape.js';
 import { formatJaDate, formatMd } from '../core/format.js';
 
-const W = 720;
-const H = 280;
-const PAD_L = 44;
-const PAD_R = 16;
-const PAD_T = 16;
-const PAD_B = 56;
-const MAX_X_LABELS = 9;
+const DESKTOP_DIMS = {
+  W: 720,
+  H: 280,
+  PAD_L: 44,
+  PAD_R: 16,
+  PAD_T: 16,
+  PAD_B: 56,
+  MAX_X_LABELS: 9,
+};
+
+// モバイル(≤640px)は viewBox を小さく・縦長にして SVG の縮小率を抑える。
+// 文字サイズはユーザー単位固定で SVG と一緒に拡縮されるため、縮小率が下がると
+// ラベルが相対的に大きく描画され、グラフ自体も縦に伸びて読み取りやすくなる。
+const MOBILE_DIMS = {
+  W: 400,
+  H: 300,
+  PAD_L: 40,
+  PAD_R: 14,
+  PAD_T: 18,
+  PAD_B: 52,
+  MAX_X_LABELS: 5,
+};
+
+function getChartDims() {
+  const isMobile =
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(max-width: 640px)').matches;
+  return isMobile ? MOBILE_DIMS : DESKTOP_DIMS;
+}
 
 export function pickXLabelIndices(n, max) {
   if (n <= 0) return [];
@@ -68,7 +91,8 @@ export function getYDomain(totals, showSegments) {
   };
 }
 
-export function buildChartModel(data, showSegments) {
+export function buildChartModel(data, showSegments, dims = DESKTOP_DIMS) {
+  const { W, H, PAD_L, PAD_R, PAD_T, PAD_B } = dims;
   const totals = data.map((r) => r.total);
   const { yMin, yMax } = getYDomain(totals, showSegments);
   const plotW = W - PAD_L - PAD_R;
@@ -99,7 +123,8 @@ function linePath(points, key) {
     .join(' ');
 }
 
-function renderGridSvg(model) {
+function renderGridSvg(model, dims) {
+  const { W, H, PAD_L, PAD_R, PAD_T, PAD_B } = dims;
   const yTickCount = 4;
   let out = '';
   for (let t = 0; t <= yTickCount; t++) {
@@ -111,7 +136,8 @@ function renderGridSvg(model) {
   return out;
 }
 
-function renderXTicksSvg(points) {
+function renderXTicksSvg(points, dims) {
+  const { H, PAD_B, MAX_X_LABELS } = dims;
   const xIdx = pickXLabelIndices(points.length, MAX_X_LABELS);
   return xIdx
     .map((i) => {
@@ -138,18 +164,19 @@ function renderSegmentLinesSvg(points, showSegments) {
          <path class="chart-line-segment chart-line-national" d="${linePath(points, 'yNational')}" />`;
 }
 
-function renderChartSvg(data, showSegments) {
-  const model = buildChartModel(data, showSegments);
+function renderChartSvg(data, showSegments, dims) {
+  const { W, H, PAD_L, PAD_R, PAD_T } = dims;
+  const model = buildChartModel(data, showSegments, dims);
   return `
       ${buildHiddenTable(data)}
       <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        ${renderGridSvg(model)}
+        ${renderGridSvg(model, dims)}
         <text class="chart-axis-label" x="${((PAD_L + (W - PAD_R)) / 2).toFixed(1)}" y="${(H - 4).toFixed(1)}" text-anchor="middle">日付（月／日）</text>
         <text class="chart-axis-label" x="${PAD_L}" y="${(PAD_T - 4).toFixed(1)}" text-anchor="start">備蓄日数（日）</text>
         ${renderSegmentLinesSvg(model.points, showSegments)}
         <path class="chart-line-total" d="${linePath(model.points, 'yTotal')}" />
         ${renderPointsSvg(model.points)}
-        ${renderXTicksSvg(model.points)}
+        ${renderXTicksSvg(model.points, dims)}
       </svg>
     `;
 }
@@ -190,7 +217,7 @@ export function initChart(history) {
   const defaultHint = hint ? hint.textContent : '';
 
   function render(showSegments) {
-    wrap.innerHTML = renderChartSvg(data, showSegments);
+    wrap.innerHTML = renderChartSvg(data, showSegments, getChartDims());
 
     if (showSegments) wrap.classList.add('chart-segments-on');
     else wrap.classList.remove('chart-segments-on');
@@ -205,5 +232,13 @@ export function initChart(history) {
     toggle.addEventListener('change', () => {
       render(toggle.checked);
     });
+  }
+
+  // モバイル境界を跨いだら、その幅向けの viewBox で描き直す
+  if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+    const mq = window.matchMedia('(max-width: 640px)');
+    if (typeof mq.addEventListener === 'function') {
+      mq.addEventListener('change', () => render(!!toggle?.checked));
+    }
   }
 }
