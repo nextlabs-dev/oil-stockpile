@@ -1,26 +1,50 @@
 {
-  "fetchedAt": "2026-06-09T11:31:42+00:00",
+  "fetchedAt": "2026-06-09T13:25:33+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 1,
+  "totalTankersInRegion": 10,
+  "japanBoundTankers": 0,
+  "japanBoundUnknownPort": 0,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440103790,
-      "name": "13DAESIN",
+      "mmsi": 440016190,
+      "name": "TN RHEA",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1036,
-      "lon": 129.0716
+      "lat": 35.0975,
+      "lon": 129.0657
     },
     {
-      "mmsi": 431004858,
-      "name": "DAIEI MARU NO.1",
-      "destination": ">JP NAO 5PR/MN",
-      "isJapanBound": true,
-      "lat": 36.4829,
-      "lon": 136.0706
+      "mmsi": 440401790,
+      "name": "SONG DEOG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.021,
+      "lon": 129.0717
+    },
+    {
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1221,
+      "lon": 129.0519
+    },
+    {
+      "mmsi": 353172000,
+      "name": "AKANE",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": 35.0416,
+      "lon": 129.059
+    },
+    {
+      "mmsi": 440410930,
+      "name": "CHARIS",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1212,
+      "lon": 129.0505
     },
     {
       "mmsi": 440215590,
@@ -28,87 +52,39 @@
       "destination": "ULSAN",
       "isJapanBound": false,
       "lat": 35.1208,
+      "lon": 129.0504
+    },
+    {
+      "mmsi": 538012803,
+      "name": "DAMIANIA",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": 35.0424,
+      "lon": 129.0651
+    },
+    {
+      "mmsi": 440500300,
+      "name": "SONGRIM HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1217,
       "lon": 129.0505
     },
     {
-      "mmsi": 440308690,
-      "name": "CHEONGHAE3HO",
-      "destination": "ULSAN",
+      "mmsi": 632001090,
+      "name": "KRUGER",
+      "destination": "BUSAN S.ANCH.N-5",
       "isJapanBound": false,
-      "lat": 35.0774,
-      "lon": 129.1437
+      "lat": 35.0104,
+      "lon": 129.078
     },
     {
-      "mmsi": 352006789,
-      "name": "PIS TERNATE(S/T)",
-      "destination": "HHI H.2922 SEA TRIAL",
+      "mmsi": 441361000,
+      "name": "YN OCEAN",
+      "destination": "KR PUS",
       "isJapanBound": false,
-      "lat": 35.2269,
-      "lon": 129.5036
-    },
-    {
-      "mmsi": 440002690,
-      "name": "HY BUSAN",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.1051,
-      "lon": 129.1779
-    },
-    {
-      "mmsi": 353465000,
-      "name": "BUENA DIOSA",
-      "destination": "KR USN",
-      "isJapanBound": false,
-      "lat": 35.0498,
-      "lon": 129.0647
-    },
-    {
-      "mmsi": 440051760,
-      "name": "7DAEBOK",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.104,
-      "lon": 129.0904
-    },
-    {
-      "mmsi": 538011933,
-      "name": "SKY BLUE",
-      "destination": "SGSIN",
-      "isJapanBound": false,
-      "lat": 28.5268,
-      "lon": 123.9474
-    },
-    {
-      "mmsi": 440401790,
-      "name": "SONG DEOG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.0087,
-      "lon": 129.0493
-    },
-    {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1233,
-      "lon": 129.0527
-    },
-    {
-      "mmsi": 440115430,
-      "name": "TAHITI",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.122,
-      "lon": 129.052
-    },
-    {
-      "mmsi": 440410930,
-      "name": "CHARIS",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1211,
-      "lon": 129.0505
+      "lat": 34.9695,
+      "lon": 129.1482
     }
   ],
   "boundingBox": "24-46N / 122-146E",
