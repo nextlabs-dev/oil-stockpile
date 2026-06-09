@@ -1,74 +1,82 @@
 {
-  "fetchedAt": "2026-06-09T19:09:07+00:00",
+  "fetchedAt": "2026-06-09T20:04:49+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 12,
+  "totalTankersInRegion": 13,
   "japanBoundTankers": 0,
   "japanBoundUnknownPort": 0,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440112380,
-      "name": "KUKDONG3HO",
-      "destination": "",
+      "mmsi": 440101990,
+      "name": "DONG BANG 7HO",
+      "destination": "PUS",
       "isJapanBound": false,
-      "lat": 35.1226,
-      "lon": 129.0519
-    },
-    {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1221,
-      "lon": 129.0519
-    },
-    {
-      "mmsi": 440138770,
-      "name": "LUCKY OCEAN HO",
-      "destination": "USN",
-      "isJapanBound": false,
-      "lat": 34.9415,
-      "lon": 129.0808
-    },
-    {
-      "mmsi": 241412000,
-      "name": "OLYMPIC TROPHY",
-      "destination": "SGSIN PEBGC",
-      "isJapanBound": false,
-      "lat": 27.4655,
-      "lon": 122.8927
-    },
-    {
-      "mmsi": 632001090,
-      "name": "KRUGER",
-      "destination": "BUSAN S.@EDH.N-5",
-      "isJapanBound": false,
-      "lat": 35.0113,
-      "lon": 129.0787
-    },
-    {
-      "mmsi": 440049630,
-      "name": "SONG SOON HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.112,
-      "lon": 129.1828
+      "lat": null,
+      "lon": null
     },
     {
       "mmsi": 538011933,
       "name": "SKY BLUE",
       "destination": "SGSIN",
       "isJapanBound": false,
-      "lat": 27.4975,
-      "lon": 122.8724
+      "lat": 27.3729,
+      "lon": 122.7555
     },
     {
-      "mmsi": 440500300,
-      "name": "SONGRIM HO",
+      "mmsi": 636026161,
+      "name": "GRAND WINNER 7",
+      "destination": "KRONS",
+      "isJapanBound": false,
+      "lat": 33.9963,
+      "lon": 128.8138
+    },
+    {
+      "mmsi": 440115430,
+      "name": "TAHITI",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1217,
-      "lon": 129.0505
+      "lat": 35.122,
+      "lon": 129.052
+    },
+    {
+      "mmsi": 440010110,
+      "name": "3 SUNYEONG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1196,
+      "lon": 129.0512
+    },
+    {
+      "mmsi": 440304320,
+      "name": "DOO LA NO.7",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": 35.1078,
+      "lon": 129.0917
+    },
+    {
+      "mmsi": 440154960,
+      "name": "32DAEYOUNG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0557,
+      "lon": 129.1021
+    },
+    {
+      "mmsi": 440138770,
+      "name": "LUCKY OCEAN HO",
+      "destination": "USN",
+      "isJapanBound": false,
+      "lat": 35.1097,
+      "lon": 129.2094
+    },
+    {
+      "mmsi": 353465000,
+      "name": "BUENA DIOSA",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 35.049,
+      "lon": 129.065
     },
     {
       "mmsi": 440401790,
@@ -76,31 +84,31 @@
       "destination": "BUSAN",
       "isJapanBound": false,
       "lat": 35.1216,
-      "lon": 129.0504
+      "lon": 129.0505
     },
     {
-      "mmsi": 440194890,
-      "name": "KS HONOR",
+      "mmsi": 440414850,
+      "name": "7SEAHAN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0801,
+      "lon": 129.111
+    },
+    {
+      "mmsi": 563126200,
+      "name": "SERI ELBERT",
+      "destination": "CN LYG",
+      "isJapanBound": false,
+      "lat": 27.2284,
+      "lon": 122.9588
+    },
+    {
+      "mmsi": 353172000,
+      "name": "AKANE",
       "destination": "KR PUS",
       "isJapanBound": false,
-      "lat": 35.0522,
-      "lon": 129.0396
-    },
-    {
-      "mmsi": 440155010,
-      "name": "YU SUNG HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1197,
-      "lon": 129.051
-    },
-    {
-      "mmsi": 538012803,
-      "name": "DAMIANIA",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 35.0418,
-      "lon": 129.0652
+      "lat": 35.0414,
+      "lon": 129.0592
     }
   ],
   "boundingBox": "24-46N / 122-146E",
