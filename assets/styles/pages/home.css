@@ -81,14 +81,6 @@
   gap: 22px;
 }
 
-.page-home .dash-kpi-group {
-  grid-column: 2 / span 3;
-  grid-row: 1;
-  flex-direction: row;
-  padding: 0;
-  gap: 0;
-}
-
 .page-home .dash-donut {
   grid-column: 2 / span 3;
   grid-row: 2;
@@ -238,6 +230,11 @@
   font-weight: 600;
 }
 
+/* アイコンのみの共有ボタン：横長を抑え正方形寄りに（テキストは .visually-hidden で保持） */
+.page-home .hero-share .share-btn {
+  padding: 9px;
+}
+
 /* =============================================================
    KPI cards
    ============================================================= */
@@ -247,18 +244,6 @@
   justify-content: flex-start;
   gap: 6px;
   padding: 26px 20px 22px;
-}
-
-/* 横並びグループ内の各カード（均等幅・カード間の区切り線）。
-   基底 .dash-kpi の後に置き、特異度の降順警告を避ける。 */
-.page-home .dash-kpi-group .dash-kpi {
-  flex: 1 1 0;
-  min-width: 0;
-  border-right: 1px solid #f0f0f0;
-}
-
-.page-home .dash-kpi-group .dash-kpi:last-child {
-  border-right: none;
 }
 
 .page-home .dash-kpi-value {
@@ -511,10 +496,6 @@
     grid-column: 1 / -1;
     grid-row: auto;
   }
-  .page-home .dash-kpi-group {
-    grid-column: 1 / -1;
-    grid-row: auto;
-  }
   .page-home .dash-donut {
     grid-column: 1 / -1;
     grid-row: auto;
@@ -534,15 +515,29 @@
   .page-home .dashboard-grid {
     grid-template-columns: 1fr;
   }
-  .page-home .dash-kpi-group {
-    flex-direction: column;
+  /* KPIカード: 左にラベル+バッジ(2行)、右に数値を寄せて余白を活用 */
+  .page-home .dash-kpi {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "label value"
+      "badge value";
+    align-items: center;
+    column-gap: 16px;
   }
-  .page-home .dash-kpi-group .dash-kpi {
-    border-right: none;
-    border-bottom: 1px solid #f0f0f0;
+  .page-home .dash-kpi .dash-card-eyebrow {
+    grid-area: label;
+    align-self: end;
   }
-  .page-home .dash-kpi-group .dash-kpi:last-child {
-    border-bottom: none;
+  .page-home .dash-kpi .dash-kpi-value {
+    grid-area: value;
+    justify-self: end;
+  }
+  .page-home .dash-kpi .dash-kpi-badge {
+    grid-area: badge;
+    align-self: start;
+    justify-self: start;
+    margin-top: 0;
   }
   .page-home .hero-top {
     grid-template-columns: 1fr;
