@@ -1,71 +1,42 @@
 {
-  "fetchedAt": "2026-06-11T17:36:57+00:00",
+  "fetchedAt": "2026-06-11T19:22:44+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 17,
+  "totalTankersInRegion": 15,
   "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 3,
-  "topDestinationPorts": [
-    {
-      "port": "KAWASAKI",
-      "count": 1
-    }
-  ],
+  "japanBoundUnknownPort": 4,
+  "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440130790,
-      "name": "7 MIREU",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1223,
-      "lon": 129.0519
-    },
-    {
-      "mmsi": 440155350,
-      "name": "NO.11 SONGWON",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0504
-    },
-    {
-      "mmsi": 403529001,
-      "name": "NCC SAMA",
-      "destination": "KR USN",
-      "isJapanBound": false,
-      "lat": 34.9727,
-      "lon": 129.364
-    },
-    {
-      "mmsi": 440154950,
-      "name": "DONGJIN ACE",
+      "mmsi": 440103440,
+      "name": "A-ONE",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1082,
-      "lon": 129.0924
+      "lat": 35.1213,
+      "lon": 129.0506
     },
     {
-      "mmsi": 440194890,
-      "name": "KS HONOR",
-      "destination": "KR PUS",
+      "mmsi": 440000000,
+      "name": "",
+      "destination": "BUSAN KOREA",
       "isJapanBound": false,
-      "lat": 35.0531,
-      "lon": 129.0381
+      "lat": 37.3826,
+      "lon": 126.6558
     },
     {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1233,
-      "lon": 129.0529
+      "mmsi": 431019458,
+      "name": "IBUKI",
+      "destination": ">JP HKT OFF",
+      "isJapanBound": true,
+      "lat": 33.6183,
+      "lon": 130.3634
     },
     {
-      "mmsi": 440172660,
-      "name": "KUM KANG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.0522
+      "mmsi": 431000926,
+      "name": "WATATSUMI",
+      "destination": ">JP HKT OFF/WM",
+      "isJapanBound": true,
+      "lat": 33.8497,
+      "lon": 130.3375
     },
     {
       "mmsi": 431301706,
@@ -76,44 +47,36 @@
       "lon": 130.3868
     },
     {
+      "mmsi": 440101370,
+      "name": "BONG EUN",
+      "destination": "BUSAM",
+      "isJapanBound": false,
+      "lat": 35.0895,
+      "lon": 129.0912
+    },
+    {
+      "mmsi": 431003715,
+      "name": "MONE MARU",
+      "destination": "JP HKT/OFF/WS",
+      "isJapanBound": true,
+      "lat": 33.6141,
+      "lon": 130.3696
+    },
+    {
+      "mmsi": 440203830,
+      "name": "SKYMARS",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1211,
+      "lon": 129.0504
+    },
+    {
       "mmsi": 440151030,
       "name": "NEW DONGSIN",
       "destination": "",
       "isJapanBound": false,
       "lat": 35.1219,
       "lon": 129.052
-    },
-    {
-      "mmsi": 431026976,
-      "name": "SEITOKU NO.6",
-      "destination": "JP HKT SS",
-      "isJapanBound": true,
-      "lat": 33.6184,
-      "lon": 130.3713
-    },
-    {
-      "mmsi": 370425000,
-      "name": "FLORA EXPRESS",
-      "destination": "WAKAYAMA,JAPAN",
-      "isJapanBound": false,
-      "lat": 34.1553,
-      "lon": 135.1027
-    },
-    {
-      "mmsi": 374333000,
-      "name": "SM JEJU LNG2",
-      "destination": "KRTYG",
-      "isJapanBound": false,
-      "lat": 34.8677,
-      "lon": 128.8238
-    },
-    {
-      "mmsi": 636018848,
-      "name": "VEGA STAR",
-      "destination": "JP KWS DU",
-      "isJapanBound": true,
-      "lat": 35.4641,
-      "lon": 139.7817
     },
     {
       "mmsi": 440048210,
@@ -124,26 +87,42 @@
       "lon": 129.0937
     },
     {
-      "mmsi": 440206050,
-      "name": "BUKWANG NO 5",
+      "mmsi": 403529001,
+      "name": "NCC SAMA",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 35.1714,
+      "lon": 129.4058
+    },
+    {
+      "mmsi": 440006970,
+      "name": "OCEAN BEST",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1198,
-      "lon": 129.0506
+      "lat": 35.1178,
+      "lon": 129.197
     },
     {
-      "mmsi": 440072080,
-      "name": "DL RUBY",
-      "destination": "PUS,KR",
+      "mmsi": 440637000,
+      "name": "WOOGUM",
+      "destination": "KR YOS",
       "isJapanBound": false,
-      "lat": 35.05,
-      "lon": 129.0731
+      "lat": 34.9867,
+      "lon": 129.417
     },
     {
-      "mmsi": 431003681,
-      "name": "NO.11 KIN YU MARU",
-      "destination": ">JP KNM HESAKI OFF",
-      "isJapanBound": true,
+      "mmsi": 440215590,
+      "name": "DONGNAM ACE",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1156,
+      "lon": 129.1858
+    },
+    {
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
+      "destination": "",
+      "isJapanBound": false,
       "lat": null,
       "lon": null
     }
