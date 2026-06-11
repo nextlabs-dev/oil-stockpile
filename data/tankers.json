@@ -1,58 +1,55 @@
 {
-  "fetchedAt": "2026-06-11T19:22:44+00:00",
+  "fetchedAt": "2026-06-11T20:10:28+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 15,
-  "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 4,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 11,
+  "japanBoundTankers": 6,
+  "japanBoundUnknownPort": 5,
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 440103440,
-      "name": "A-ONE",
-      "destination": "BUSAN",
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.1213,
-      "lon": 129.0506
+      "lat": 37.4965,
+      "lon": 126.6235
     },
     {
-      "mmsi": 440000000,
-      "name": "",
-      "destination": "BUSAN KOREA",
+      "mmsi": 440130790,
+      "name": "7 MIREU",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 37.3826,
-      "lon": 126.6558
+      "lat": 35.087,
+      "lon": 129.0946
+    },
+    {
+      "mmsi": 440016190,
+      "name": "TN RHEA",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0976,
+      "lon": 129.0657
     },
     {
       "mmsi": 431019458,
       "name": "IBUKI",
       "destination": ">JP HKT OFF",
       "isJapanBound": true,
-      "lat": 33.6183,
-      "lon": 130.3634
+      "lat": 33.6182,
+      "lon": 130.3635
     },
     {
-      "mmsi": 431000926,
-      "name": "WATATSUMI",
-      "destination": ">JP HKT OFF/WM",
+      "mmsi": 431001112,
+      "name": "NO.10 HASSHOMARU",
+      "destination": "JP KWS/OFF",
       "isJapanBound": true,
-      "lat": 33.8497,
-      "lon": 130.3375
-    },
-    {
-      "mmsi": 431301706,
-      "name": "NANIWAMARU NO.23",
-      "destination": ">JP HKT S 8",
-      "isJapanBound": true,
-      "lat": 33.604,
-      "lon": 130.3868
-    },
-    {
-      "mmsi": 440101370,
-      "name": "BONG EUN",
-      "destination": "BUSAM",
-      "isJapanBound": false,
-      "lat": 35.0895,
-      "lon": 129.0912
+      "lat": 35.4836,
+      "lon": 139.8189
     },
     {
       "mmsi": 431003715,
@@ -60,69 +57,45 @@
       "destination": "JP HKT/OFF/WS",
       "isJapanBound": true,
       "lat": 33.6141,
-      "lon": 130.3696
+      "lon": 130.3697
     },
     {
-      "mmsi": 440203830,
-      "name": "SKYMARS",
+      "mmsi": 440062680,
+      "name": "JIN YANG 1HO",
+      "destination": "BSN",
+      "isJapanBound": false,
+      "lat": 35.0946,
+      "lon": 129.0755
+    },
+    {
+      "mmsi": 563089700,
+      "name": "JAZZ",
+      "destination": "JPKNM",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440172660,
+      "name": "KUM KANG",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1211,
-      "lon": 129.0504
+      "lat": 35.1218,
+      "lon": 129.0521
     },
     {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.052
+      "mmsi": 431026976,
+      "name": "SEITOKU NO.6",
+      "destination": "JP HKT SS",
+      "isJapanBound": true,
+      "lat": 33.6185,
+      "lon": 130.3712
     },
     {
-      "mmsi": 440048210,
-      "name": "GREEN HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1081,
-      "lon": 129.0937
-    },
-    {
-      "mmsi": 403529001,
-      "name": "NCC SAMA",
-      "destination": "KR USN",
-      "isJapanBound": false,
-      "lat": 35.1714,
-      "lon": 129.4058
-    },
-    {
-      "mmsi": 440006970,
-      "name": "OCEAN BEST",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1178,
-      "lon": 129.197
-    },
-    {
-      "mmsi": 440637000,
-      "name": "WOOGUM",
-      "destination": "KR YOS",
-      "isJapanBound": false,
-      "lat": 34.9867,
-      "lon": 129.417
-    },
-    {
-      "mmsi": 440215590,
-      "name": "DONGNAM ACE",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1156,
-      "lon": 129.1858
-    },
-    {
-      "mmsi": 440021230,
-      "name": "GWANG SEONG",
-      "destination": "",
-      "isJapanBound": false,
+      "mmsi": 431501853,
+      "name": "23KOUSINMARU",
+      "destination": "JP KAR OFF",
+      "isJapanBound": true,
       "lat": null,
       "lon": null
     }
