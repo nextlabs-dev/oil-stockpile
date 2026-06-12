@@ -546,6 +546,16 @@
   .page-home .hero-illustration {
     display: none;
   }
+  /* Hero: イラスト非表示で生じる余白を日数表示の拡大で埋める */
+  .page-home .counter-num {
+    font-size: clamp(64px, 30vw, 120px);
+  }
+  .page-home .counter-unit {
+    font-size: 22px;
+  }
+  .page-home .counter-sub-label {
+    font-size: 10px;
+  }
   .page-home .donut-layout {
     grid-template-columns: 1fr;
     text-align: center;
