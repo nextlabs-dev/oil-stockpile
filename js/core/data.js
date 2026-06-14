@@ -54,7 +54,7 @@ export const PEAK_REFERENCE = {
  * 本番デプロイ時に url を実 URL に書き換える。
  */
 export const SITE_CONFIG = {
-  url: 'https://countieereturns.github.io/oil-stockpile/',
+  url: 'https://oilstock.nextlabs.jp/',
   title: '日本の石油備蓄',
 };
 

@@ -4,7 +4,7 @@
 
 - 元データ（備蓄日数）: https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/
 - 元データ（タンカー）: https://aisstream.io/
-- 公開 URL: https://countieereturns.github.io/oil-stockpile/
+- 公開 URL: https://oilstock.nextlabs.jp/
 
 ## ページ構成
 
@@ -264,7 +264,7 @@ python -m http.server 8080
 
 ## デプロイ（GitHub Pages）
 
-公開 URL は `https://countieereturns.github.io/oil-stockpile/`。コード内の絶対 URL は `src/site.json` の `site.url` / `site.og_image` と `js/core/data.js` の `SITE_CONFIG.url` に集約されています。
+公開 URL は `https://oilstock.nextlabs.jp/`。コード内の絶対 URL は `src/site.json` の `site.url` / `site.og_image` と `js/core/data.js` の `SITE_CONFIG.url` に集約されています。
 
 ### 初回セットアップ
 
