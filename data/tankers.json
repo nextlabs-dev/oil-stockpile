@@ -1,106 +1,39 @@
 {
-  "fetchedAt": "2026-06-19T20:54:51+00:00",
+  "fetchedAt": "2026-06-19T21:49:26+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 18,
-  "japanBoundTankers": 10,
-  "japanBoundUnknownPort": 10,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 17,
+  "japanBoundTankers": 8,
+  "japanBoundUnknownPort": 7,
+  "topDestinationPorts": [
+    {
+      "port": "CHIBA",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 431005238,
-      "name": "ZUISEN MARU",
-      "destination": ">JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.2066,
-      "lon": 135.1185
-    },
-    {
-      "mmsi": 431026668,
-      "name": "KAKUSHIN MARU",
-      "destination": "JP HKT OFF/WM",
-      "isJapanBound": true,
-      "lat": 33.6324,
-      "lon": 130.3335
-    },
-    {
-      "mmsi": 441555000,
-      "name": "KTS WHITE",
-      "destination": "KR YOS",
+      "mmsi": 440400900,
+      "name": "WOOWONHO",
+      "destination": "YEOSU",
       "isJapanBound": false,
-      "lat": 34.8504,
-      "lon": 129.1023
-    },
-    {
-      "mmsi": 440409920,
-      "name": "HANNAM",
-      "destination": "BUSAN SIN SUN DAE#4",
-      "isJapanBound": false,
-      "lat": 35.12,
+      "lat": 35.1199,
       "lon": 129.0506
     },
     {
-      "mmsi": 431000661,
-      "name": "NANIWA MARU NO.65",
-      "destination": ">JP HKT SAITOZAKI",
+      "mmsi": 440173000,
+      "name": "WOODONG",
+      "destination": "JP CHB",
       "isJapanBound": true,
-      "lat": 33.6269,
-      "lon": 130.3498
+      "lat": 34.2056,
+      "lon": 134.9702
     },
     {
-      "mmsi": 431003715,
-      "name": "MONE MARU",
-      "destination": "JP HKT/OFF/WS",
-      "isJapanBound": true,
-      "lat": 33.6043,
-      "lon": 130.3732
-    },
-    {
-      "mmsi": 431001086,
-      "name": "DELPHINUS",
-      "destination": ">JP HKT S ENEOS 2",
-      "isJapanBound": true,
-      "lat": 33.6186,
-      "lon": 130.3663
-    },
-    {
-      "mmsi": 431002092,
-      "name": "EIZAN MARU NO.82",
-      "destination": "JP HKT OFF/WA",
-      "isJapanBound": true,
-      "lat": 33.6234,
-      "lon": 130.3454
-    },
-    {
-      "mmsi": 431005484,
-      "name": "KORYU MARU",
-      "destination": "JP HKT OFF/AS",
-      "isJapanBound": true,
-      "lat": 33.6219,
-      "lon": 130.3509
-    },
-    {
-      "mmsi": 440022810,
-      "name": "SANGA HO",
-      "destination": "INCHEON",
+      "mmsi": 440020220,
+      "name": "68 SE HAN",
+      "destination": "YEOSU",
       "isJapanBound": false,
-      "lat": 37.4966,
-      "lon": 126.6241
-    },
-    {
-      "mmsi": 440010110,
-      "name": "3 SUNYEONG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1201,
-      "lon": 129.0501
-    },
-    {
-      "mmsi": 440308690,
-      "name": "CHEONGHAE3HO",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.1063,
-      "lon": 129.0936
+      "lat": 35.1081,
+      "lon": 129.0937
     },
     {
       "mmsi": 431015824,
@@ -111,28 +44,44 @@
       "lon": 135.1502
     },
     {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1226,
-      "lon": 129.0515
-    },
-    {
-      "mmsi": 431029303,
-      "name": "SHIN KAIUN MARU NO.2",
-      "destination": ">JP HIJ OFF/E",
+      "mmsi": 431003715,
+      "name": "MONE MARU",
+      "destination": "JP HKT/OFF/WS",
       "isJapanBound": true,
-      "lat": 33.86,
-      "lon": 130.4188
+      "lat": 33.6044,
+      "lon": 130.3732
     },
     {
-      "mmsi": 440155350,
-      "name": "NO.11 SONGWON",
-      "destination": "",
+      "mmsi": 440101370,
+      "name": "BONG EUN",
+      "destination": "BUSAM",
       "isJapanBound": false,
-      "lat": 35.1212,
-      "lon": 129.0507
+      "lat": 35.1234,
+      "lon": 129.0518
+    },
+    {
+      "mmsi": 431026668,
+      "name": "KAKUSHIN MARU",
+      "destination": "JP HKT S",
+      "isJapanBound": true,
+      "lat": 33.6324,
+      "lon": 130.3336
+    },
+    {
+      "mmsi": 431005484,
+      "name": "KORYU MARU",
+      "destination": "JP HKT OFF/AS",
+      "isJapanBound": true,
+      "lat": 33.6219,
+      "lon": 130.351
+    },
+    {
+      "mmsi": 440191310,
+      "name": "BU KWANG HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.121,
+      "lon": 129.0506
     },
     {
       "mmsi": 440410930,
@@ -140,15 +89,63 @@
       "destination": "BUSAN",
       "isJapanBound": false,
       "lat": 35.1212,
-      "lon": 129.0504
+      "lon": 129.0505
     },
     {
-      "mmsi": 431013232,
-      "name": "SYOZAN",
-      "destination": ">JP HKT OFF/WS",
+      "mmsi": 440202770,
+      "name": "SKYCHEMI",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0963,
+      "lon": 129.0683
+    },
+    {
+      "mmsi": 431002092,
+      "name": "EIZAN MARU NO.82",
+      "destination": "JP HKT OFF/WA",
       "isJapanBound": true,
-      "lat": 33.6226,
-      "lon": 130.3576
+      "lat": 33.6235,
+      "lon": 130.3455
+    },
+    {
+      "mmsi": 431000661,
+      "name": "NANIWA MARU NO.65",
+      "destination": ">JP HKT SAITOZAKI",
+      "isJapanBound": true,
+      "lat": 33.6279,
+      "lon": 130.35
+    },
+    {
+      "mmsi": 440072080,
+      "name": "DL RUBY",
+      "destination": "PUS,KR",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431005238,
+      "name": "ZUISEN MARU",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.207,
+      "lon": 135.1188
+    },
+    {
+      "mmsi": 440331750,
+      "name": "BO WON HO",
+      "destination": "BSN",
+      "isJapanBound": false,
+      "lat": 35.1196,
+      "lon": 129.0508
     }
   ],
   "boundingBox": "24-46N / 122-146E",
