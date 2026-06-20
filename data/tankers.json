@@ -1,55 +1,74 @@
 {
-  "fetchedAt": "2026-06-20T12:03:06+00:00",
+  "fetchedAt": "2026-06-20T13:01:44+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 0,
-  "topDestinationPorts": [
-    {
-      "port": "CHIBA",
-      "count": 1
-    }
-  ],
+  "totalTankersInRegion": 12,
+  "japanBoundTankers": 4,
+  "japanBoundUnknownPort": 4,
+  "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 352275000,
-      "name": "CRANE REGULUS",
-      "destination": "CN DAG",
+      "mmsi": 440112380,
+      "name": "KUKDONG3HO",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 34.0284,
-      "lon": 130.1798
+      "lat": 35.1034,
+      "lon": 129.0822
     },
     {
-      "mmsi": 440527000,
-      "name": "ROYAL CRYSTAL 7",
-      "destination": "JP CHB OFF",
+      "mmsi": 431015824,
+      "name": "SUZUKA MARU NO.10",
+      "destination": ">JP WAK",
       "isJapanBound": true,
-      "lat": 35.4852,
-      "lon": 139.878
+      "lat": 34.2217,
+      "lon": 135.1502
     },
     {
-      "mmsi": 440102050,
-      "name": "MYUNGJIN",
-      "destination": "MASAN",
-      "isJapanBound": false,
-      "lat": 35.1197,
-      "lon": 129.0509
+      "mmsi": 431005426,
+      "name": "KOUHOU MARU",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1535,
+      "lon": 135.1655
     },
     {
-      "mmsi": 440789000,
-      "name": "D. SKY",
-      "destination": "BUSAN / S.KOREA",
-      "isJapanBound": false,
-      "lat": 34.949,
-      "lon": 129.087
-    },
-    {
-      "mmsi": 440044920,
-      "name": "NO21BUYOUNG",
+      "mmsi": 440500300,
+      "name": "SONGRIM HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1197,
-      "lon": 129.0507
+      "lat": 35.12,
+      "lon": 129.0508
+    },
+    {
+      "mmsi": 440202770,
+      "name": "SKYCHEMI",
+      "destination": "BUSAN              B",
+      "isJapanBound": false,
+      "lat": 35.0963,
+      "lon": 129.0683
+    },
+    {
+      "mmsi": 431005551,
+      "name": "YUHO MARU NO.6",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1629,
+      "lon": 135.1558
+    },
+    {
+      "mmsi": 431004586,
+      "name": "HASSYOMARU NO.5",
+      "destination": ">JP AFG W OFF",
+      "isJapanBound": true,
+      "lat": 39.767,
+      "lon": 139.9843
+    },
+    {
+      "mmsi": 636024358,
+      "name": "NEW OASIS",
+      "destination": "FOR ORDERS",
+      "isJapanBound": false,
+      "lat": 34.4459,
+      "lon": 129.792
     },
     {
       "mmsi": 440410930,
@@ -60,60 +79,28 @@
       "lon": 129.0505
     },
     {
-      "mmsi": 356248000,
-      "name": "SUN VENUS",
-      "destination": "KR USN",
+      "mmsi": 352275000,
+      "name": "CRANE REGULUS",
+      "destination": "CN DAG",
       "isJapanBound": false,
-      "lat": 35.2298,
-      "lon": 129.3705
+      "lat": 34.0134,
+      "lon": 129.9586
     },
     {
-      "mmsi": 440112380,
-      "name": "KUKDONG3HO",
-      "destination": "",
+      "mmsi": 440011120,
+      "name": "MINSUNG11",
+      "destination": "INCHEON",
       "isJapanBound": false,
-      "lat": 35.1223,
-      "lon": 129.0521
+      "lat": 37.4472,
+      "lon": 126.5806
     },
     {
-      "mmsi": 671388100,
-      "name": "ORIS",
-      "destination": "KR BUSAN",
+      "mmsi": 440331750,
+      "name": "BO WON HO",
+      "destination": "BSN",
       "isJapanBound": false,
-      "lat": 35.0537,
-      "lon": 129.0421
-    },
-    {
-      "mmsi": 440135400,
-      "name": "TRITON",
-      "destination": "N/JEJU",
-      "isJapanBound": false,
-      "lat": 35.2188,
-      "lon": 129.3467
-    },
-    {
-      "mmsi": 441964000,
-      "name": "HAPPY GAS",
-      "destination": "VN DNA",
-      "isJapanBound": false,
-      "lat": 26.2614,
-      "lon": 122.1044
-    },
-    {
-      "mmsi": 441126000,
-      "name": "MS PEACE",
-      "destination": "KR TSN",
-      "isJapanBound": false,
-      "lat": 33.9314,
-      "lon": 129.9445
-    },
-    {
-      "mmsi": 631010115,
-      "name": "ZEVEN",
-      "destination": "CHINA FOR ORDER",
-      "isJapanBound": false,
-      "lat": 27.9724,
-      "lon": 122.8776
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
