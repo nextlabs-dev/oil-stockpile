@@ -1,26 +1,34 @@
 {
-  "fetchedAt": "2026-06-20T07:44:36+00:00",
+  "fetchedAt": "2026-06-20T09:32:02+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 16,
-  "japanBoundTankers": 5,
-  "japanBoundUnknownPort": 5,
+  "totalTankersInRegion": 14,
+  "japanBoundTankers": 6,
+  "japanBoundUnknownPort": 6,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 352641000,
-      "name": "SUN LORD",
-      "destination": "KR YOS",
+      "mmsi": 440220160,
+      "name": "CHEON WANG  HO",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 34.2304,
-      "lon": 134.9922
+      "lat": 35.1089,
+      "lon": 129.0932
     },
     {
-      "mmsi": 431013291,
-      "name": "TOGENMARU",
-      "destination": ">JP AFG",
+      "mmsi": 431005426,
+      "name": "KOUHOU MARU",
+      "destination": ">JP WAK OFF",
       "isJapanBound": true,
-      "lat": 39.7516,
-      "lon": 140.0554
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431018886,
+      "name": "KUSHIDA MARU",
+      "destination": "> JP AFG OFF",
+      "isJapanBound": true,
+      "lat": 39.8354,
+      "lon": 139.9283
     },
     {
       "mmsi": 440010110,
@@ -31,60 +39,36 @@
       "lon": 129.0501
     },
     {
-      "mmsi": 440709700,
-      "name": "MUSUNG",
+      "mmsi": 441181000,
+      "name": "GIANT SAMBU",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 35.227,
+      "lon": 129.3186
+    },
+    {
+      "mmsi": 440191310,
+      "name": "BU KWANG HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1034,
-      "lon": 129.0844
+      "lat": 35.121,
+      "lon": 129.0506
     },
     {
-      "mmsi": 431013232,
-      "name": "SYOZAN",
-      "destination": ">JP OIP OFF/E",
+      "mmsi": 374065000,
+      "name": "SULFUR ADVANCE",
+      "destination": "ZHENJIANG,CN",
+      "isJapanBound": false,
+      "lat": 35.0478,
+      "lon": 129.2656
+    },
+    {
+      "mmsi": 431018707,
+      "name": "MEIKOU MARU",
+      "destination": ">JP WAK KAINAN OFF",
       "isJapanBound": true,
-      "lat": 33.6619,
-      "lon": 130.2889
-    },
-    {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1227,
-      "lon": 129.0516
-    },
-    {
-      "mmsi": 440005200,
-      "name": "SONG YANG NO.1",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.0943,
-      "lon": 129.0837
-    },
-    {
-      "mmsi": 431018889,
-      "name": "TAMAYOSHI MARU NO.8",
-      "destination": ">JP HKT S/WS",
-      "isJapanBound": true,
-      "lat": 33.5996,
-      "lon": 130.3918
-    },
-    {
-      "mmsi": 440002070,
-      "name": "SUN YEONG",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.0964,
-      "lon": 129.0469
-    },
-    {
-      "mmsi": 441126000,
-      "name": "MS PEACE",
-      "destination": "KR TSN",
-      "isJapanBound": false,
-      "lat": 34.0371,
-      "lon": 130.6991
+      "lat": 34.1565,
+      "lon": 135.1609
     },
     {
       "mmsi": 431015824,
@@ -95,41 +79,41 @@
       "lon": 135.1502
     },
     {
-      "mmsi": 440220160,
-      "name": "CHEON WANG  HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1089,
-      "lon": 129.0933
+      "mmsi": 431018889,
+      "name": "TAMAYOSHI MARU NO.8",
+      "destination": ">JP HKT S/WS",
+      "isJapanBound": true,
+      "lat": 33.5996,
+      "lon": 130.3918
     },
     {
-      "mmsi": 440092260,
-      "name": "7 SUN YEONG",
-      "destination": "KR BUS",
+      "mmsi": 440303500,
+      "name": "CHEONGDAM",
+      "destination": "BSN#5MRJ",
       "isJapanBound": false,
-      "lat": 35.0769,
-      "lon": 129.156
-    },
-    {
-      "mmsi": 440149000,
-      "name": "WOO HYUK",
-      "destination": "KR USN",
-      "isJapanBound": false,
-      "lat": 35.1792,
-      "lon": 129.3654
+      "lat": 35.12,
+      "lon": 129.0506
     },
     {
       "mmsi": 431001086,
       "name": "DELPHINUS",
       "destination": ">JP HKT S",
       "isJapanBound": true,
-      "lat": 33.6048,
-      "lon": 130.3863
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440331750,
-      "name": "BO WON HO",
-      "destination": "BSN",
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
+      "isJapanBound": false,
+      "lat": 35.0964,
+      "lon": 129.0469
+    },
+    {
+      "mmsi": 441089000,
+      "name": "WOO SUN",
+      "destination": "INCHEON",
       "isJapanBound": false,
       "lat": null,
       "lon": null
