@@ -1,11 +1,76 @@
 {
-  "fetchedAt": "2026-06-24T05:47:11+00:00",
+  "fetchedAt": "2026-06-24T09:33:12+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 0,
+  "totalTankersInRegion": 8,
   "japanBoundTankers": 0,
   "japanBoundUnknownPort": 0,
   "topDestinationPorts": [],
-  "vessels": [],
+  "vessels": [
+    {
+      "mmsi": 440036020,
+      "name": "GYEONG SEONG HO",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.0283,
+      "lon": 129.1011
+    },
+    {
+      "mmsi": 440403100,
+      "name": "SH GRACE",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1197,
+      "lon": 129.0507
+    },
+    {
+      "mmsi": 440101990,
+      "name": "DONG BANG 7HO",
+      "destination": "PUS",
+      "isJapanBound": false,
+      "lat": 35.1028,
+      "lon": 129.0804
+    },
+    {
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.122,
+      "lon": 129.0515
+    },
+    {
+      "mmsi": 440155350,
+      "name": "NO.11 SONGWON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1219,
+      "lon": 129.0497
+    },
+    {
+      "mmsi": 440135930,
+      "name": "JUNG WOO 1",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1232,
+      "lon": 129.0535
+    },
+    {
+      "mmsi": 440154960,
+      "name": "32DAEYOUNG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1351,
+      "lon": 129.2008
+    },
+    {
+      "mmsi": 440102050,
+      "name": "MYUNGJIN",
+      "destination": "BUSAN 5 PIER",
+      "isJapanBound": false,
+      "lat": 35.0747,
+      "lon": 129.1117
+    }
+  ],
   "boundingBox": "24-46N / 122-146E",
   "source": "aisstream.io"
 }
