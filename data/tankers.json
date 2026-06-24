@@ -1,79 +1,58 @@
 {
-  "fetchedAt": "2026-06-24T15:21:24+00:00",
+  "fetchedAt": "2026-06-24T16:10:51+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 18,
-  "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 1,
-  "topDestinationPorts": [
-    {
-      "port": "MIZUSHIMA",
-      "count": 1
-    }
-  ],
+  "totalTankersInRegion": 20,
+  "japanBoundTankers": 0,
+  "japanBoundUnknownPort": 0,
+  "topDestinationPorts": [],
   "vessels": [
-    {
-      "mmsi": 431932000,
-      "name": "GOLDEN DENEB",
-      "destination": "TW TPE",
-      "isJapanBound": false,
-      "lat": 30.0465,
-      "lon": 126.7743
-    },
-    {
-      "mmsi": 440115430,
-      "name": "TAHITI",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1233,
-      "lon": 129.0511
-    },
-    {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1231,
-      "lon": 129.0527
-    },
-    {
-      "mmsi": 431800699,
-      "name": "SHOKENMARU",
-      "destination": "JP TYO HANEDA OFF",
-      "isJapanBound": true,
-      "lat": 35.5015,
-      "lon": 139.8346
-    },
-    {
-      "mmsi": 613003907,
-      "name": "SHAAMIT",
-      "destination": "YOSU",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440305360,
-      "name": "5WOOYUNG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1208,
-      "lon": 129.0502
-    },
-    {
-      "mmsi": 354479000,
-      "name": "BRIGHT CREST",
-      "destination": "JP MIZ A",
-      "isJapanBound": true,
-      "lat": 34.1201,
-      "lon": 134.9485
-    },
     {
       "mmsi": 440315020,
       "name": "SPRING ALPHA",
       "destination": "YOS KR",
       "isJapanBound": false,
-      "lat": 34.9745,
-      "lon": 129.1921
+      "lat": 34.8895,
+      "lon": 129.0411
+    },
+    {
+      "mmsi": 440331080,
+      "name": "DAEHEUNG",
+      "destination": "@@@@@@@@@BL",
+      "isJapanBound": false,
+      "lat": 35.0775,
+      "lon": 129.1153
+    },
+    {
+      "mmsi": 440167480,
+      "name": "DL AMBER",
+      "destination": "BSN",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440155010,
+      "name": "YU SUNG HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0831,
+      "lon": 129.0889
+    },
+    {
+      "mmsi": 373982000,
+      "name": "SULFUR BRAVE",
+      "destination": "BUSAN_KR",
+      "isJapanBound": false,
+      "lat": 34.9965,
+      "lon": 129.082
+    },
+    {
+      "mmsi": 440092260,
+      "name": "7 SUN YEONG",
+      "destination": "KR BUS",
+      "isJapanBound": false,
+      "lat": 35.1197,
+      "lon": 129.0506
     },
     {
       "mmsi": 440101990,
@@ -84,76 +63,108 @@
       "lon": null
     },
     {
-      "mmsi": 440155350,
-      "name": "NO.11 SONGWON",
-      "destination": "",
+      "mmsi": 352006815,
+      "name": "PIS TIMOR(S/T)",
+      "destination": "HMD2923/SEA STRIAL",
       "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0497
+      "lat": 35.1578,
+      "lon": 129.3584
     },
     {
-      "mmsi": 440154950,
-      "name": "DONGJIN ACE",
+      "mmsi": 440103970,
+      "name": "31 WOO JEONG",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0751,
-      "lon": 129.114
-    },
-    {
-      "mmsi": 567629000,
-      "name": "SEA AVANI",
-      "destination": "HK HKG",
-      "isJapanBound": false,
-      "lat": 30.8203,
-      "lon": 127.5581
-    },
-    {
-      "mmsi": 650000110,
-      "name": "BIRTHV",
-      "destination": "FORE ORDRE",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 613522701,
-      "name": "JUN TONG",
-      "destination": "FOR ORDER",
-      "isJapanBound": false,
-      "lat": 34.7334,
-      "lon": 129.2518
+      "lat": 35.122,
+      "lon": 129.0495
     },
     {
       "mmsi": 352001359,
       "name": "CS HANA",
       "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 34.9871,
-      "lon": 129.2896
+      "lat": 35.1094,
+      "lon": 129.402
     },
     {
-      "mmsi": 440092260,
-      "name": "7 SUN YEONG",
-      "destination": "KR BUS",
+      "mmsi": 440141630,
+      "name": "77YOUNGDEOK",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.1197,
-      "lon": 129.0505
+      "lat": 35.0831,
+      "lon": 129.0888
     },
     {
-      "mmsi": 307078000,
-      "name": "URANUS",
-      "destination": "ZHOUSHAN",
+      "mmsi": 440215590,
+      "name": "DONGNAM ACE",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1211,
+      "lon": 129.0507
+    },
+    {
+      "mmsi": 440103700,
+      "name": "GEUMILHO",
+      "destination": "YU",
+      "isJapanBound": false,
+      "lat": 35.1199,
+      "lon": 129.0502
+    },
+    {
+      "mmsi": 440016180,
+      "name": "ES ROSE",
+      "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": 37.4944,
+      "lon": 126.6209
+    },
+    {
+      "mmsi": 273273980,
+      "name": "AKVILON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0195,
+      "lon": 129.0477
+    },
+    {
+      "mmsi": 440033210,
+      "name": "HANDONG 27HO",
+      "destination": "BUSAN NEW PORT",
+      "isJapanBound": false,
+      "lat": 35.0588,
+      "lon": 129.0271
+    },
+    {
+      "mmsi": 440115430,
+      "name": "TAHITI",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1233,
+      "lon": 129.0511
+    },
+    {
+      "mmsi": 440117010,
+      "name": "YOUNG JIN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1215,
+      "lon": 129.0497
+    },
+    {
+      "mmsi": 440400900,
+      "name": "WOOWONHO",
+      "destination": "YEOSU",
+      "isJapanBound": false,
+      "lat": 35.1196,
+      "lon": 129.0506
+    },
+    {
+      "mmsi": 538008703,
+      "name": "SOLAR SHARNA",
+      "destination": "KR INC",
       "isJapanBound": false,
       "lat": null,
       "lon": null
-    },
-    {
-      "mmsi": 441555000,
-      "name": "KTS WHITE",
-      "destination": "KR USN",
-      "isJapanBound": false,
-      "lat": 34.7788,
-      "lon": 129.0121
     }
   ],
   "boundingBox": "24-46N / 122-146E",
