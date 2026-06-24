@@ -1,74 +1,111 @@
 {
-  "fetchedAt": "2026-06-24T09:33:12+00:00",
+  "fetchedAt": "2026-06-24T11:25:06+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 8,
-  "japanBoundTankers": 0,
+  "totalTankersInRegion": 12,
+  "japanBoundTankers": 1,
   "japanBoundUnknownPort": 0,
-  "topDestinationPorts": [],
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 440036020,
-      "name": "GYEONG SEONG HO",
-      "destination": "ULSAN",
+      "mmsi": 440062680,
+      "name": "JIN YANG 1HO",
+      "destination": "USN",
       "isJapanBound": false,
-      "lat": 35.0283,
-      "lon": 129.1011
+      "lat": 35.111,
+      "lon": 129.1945
     },
     {
-      "mmsi": 440403100,
-      "name": "SH GRACE",
-      "destination": "",
+      "mmsi": 440314810,
+      "name": "21 DONGBANG",
+      "destination": "BURAN",
       "isJapanBound": false,
-      "lat": 35.1197,
-      "lon": 129.0507
-    },
-    {
-      "mmsi": 440101990,
-      "name": "DONG BANG 7HO",
-      "destination": "PUS",
-      "isJapanBound": false,
-      "lat": 35.1028,
-      "lon": 129.0804
-    },
-    {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.122,
+      "lat": 35.1218,
       "lon": 129.0515
     },
     {
-      "mmsi": 440155350,
-      "name": "NO.11 SONGWON",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0497
-    },
-    {
-      "mmsi": 440135930,
-      "name": "JUNG WOO 1",
+      "mmsi": 440500300,
+      "name": "SONGRIM HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1232,
-      "lon": 129.0535
+      "lat": 35.121,
+      "lon": 129.0504
     },
     {
-      "mmsi": 440154960,
-      "name": "32DAEYOUNG",
-      "destination": "",
+      "mmsi": 440215590,
+      "name": "DONGNAM ACE",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1351,
-      "lon": 129.2008
+      "lat": 35.1212,
+      "lon": 129.0507
+    },
+    {
+      "mmsi": 440155010,
+      "name": "YU SUNG HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0894,
+      "lon": 129.0849
+    },
+    {
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
+      "isJapanBound": false,
+      "lat": 35.0964,
+      "lon": 129.0469
+    },
+    {
+      "mmsi": 440115430,
+      "name": "TAHITI",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1233,
+      "lon": 129.0511
+    },
+    {
+      "mmsi": 613391701,
+      "name": "OMARA",
+      "destination": "FOR ORDER",
+      "isJapanBound": false,
+      "lat": 34.7293,
+      "lon": 127.8033
+    },
+    {
+      "mmsi": 431021934,
+      "name": "ICHIE MARU",
+      "destination": ">JP KWS SG ENEOS-3",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440167480,
+      "name": "DL AMBER",
+      "destination": "BSN",
+      "isJapanBound": false,
+      "lat": 35.0584,
+      "lon": 129.0567
+    },
+    {
+      "mmsi": 352005033,
+      "name": "KOHZAN MARU VII",
+      "destination": "KR YOS",
+      "isJapanBound": false,
+      "lat": 34.9835,
+      "lon": 129.3505
     },
     {
       "mmsi": 440102050,
       "name": "MYUNGJIN",
       "destination": "BUSAN 5 PIER",
       "isJapanBound": false,
-      "lat": 35.0747,
-      "lon": 129.1117
+      "lat": 35.0426,
+      "lon": 129.0621
     }
   ],
   "boundingBox": "24-46N / 122-146E",
