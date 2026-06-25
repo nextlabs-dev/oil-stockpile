@@ -1,0 +1,12 @@
+# Python 用 linter + formatter (Ruff)。
+# JS 側の Biome と対称に、CI (lint.yml) で強制する。
+# 目的: fetch-daily.yml が無人で回す scripts/ の静的解析を担保し、
+# 未使用 import・未定義名・到達不能コード・ループ変数キャプチャ等を検出する。
+
+target-version = "py312"     # CI / fetch ワークフローの Python に合わせる
+line-length = 100            # Biome の formatter.lineWidth と揃える (Single Source of Truth)
+
+[lint]
+# E/W=pycodestyle, F=pyflakes(未使用・未定義), I=import 整序,
+# B=flake8-bugbear(バグ傾向), UP=pyupgrade(モダン構文), SIM=簡約, C4=内包表記
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "C4"]

@@ -31,8 +31,7 @@ from fetch_pdf import (  # noqa: E402
 )
 
 
-def make_block(reiwa_y, mp, dp, ma, da, *, total, national, priv, joint,
-               extra_space=False):
+def make_block(reiwa_y, mp, dp, ma, da, *, total, national, priv, joint, extra_space=False):
     """ZEN→HAN 後のテキスト1ブロックを作る。"""
     sep = " " if extra_space else ""
     return (
@@ -93,18 +92,20 @@ class TestHeaderRegex(unittest.TestCase):
 
 class TestParseSnapshots(unittest.TestCase):
     def test_single_well_formed_block(self):
-        text = make_block(8, 5, 1, 4, 28,
-                          total=211, national=128, priv=81, joint=2)
+        text = make_block(8, 5, 1, 4, 28, total=211, national=128, priv=81, joint=2)
         result = parse_snapshots(text)
         self.assertEqual(len(result), 1)
-        self.assertEqual(result[0], {
-            "published": "2026-05-01",
-            "asOf": "2026-04-28",
-            "total": 211,
-            "national": 128,
-            "private": 81,
-            "joint": 2,
-        })
+        self.assertEqual(
+            result[0],
+            {
+                "published": "2026-05-01",
+                "asOf": "2026-04-28",
+                "total": 211,
+                "national": 128,
+                "private": 81,
+                "joint": 2,
+            },
+        )
 
     def test_multiple_blocks_preserve_doc_order(self):
         text = (
@@ -114,13 +115,11 @@ class TestParseSnapshots(unittest.TestCase):
         )
         result = parse_snapshots(text)
         self.assertEqual(len(result), 3)
-        self.assertEqual([r["asOf"] for r in result],
-                         ["2026-04-28", "2026-04-27", "2026-04-26"])
+        self.assertEqual([r["asOf"] for r in result], ["2026-04-28", "2026-04-27", "2026-04-26"])
 
     def test_year_wrap_jan_publish_dec_asof(self):
         # 公表 = 令和9年1月5日 (2027-01-05)、asOf = 12月28日 → 2026-12-28
-        text = make_block(9, 1, 5, 12, 28,
-                          total=200, national=120, priv=78, joint=2)
+        text = make_block(9, 1, 5, 12, 28, total=200, national=120, priv=78, joint=2)
         result = parse_snapshots(text)
         self.assertEqual(result[0]["published"], "2027-01-05")
         self.assertEqual(result[0]["asOf"], "2026-12-28")
@@ -144,8 +143,7 @@ class TestParseSnapshots(unittest.TestCase):
             "産油国共同備蓄 2日分\n"
             # 合計 行がない
         )
-        full = make_block(8, 4, 30, 4, 27,
-                          total=210, national=128, priv=80, joint=2)
+        full = make_block(8, 4, 30, 4, 27, total=210, national=128, priv=80, joint=2)
         result = parse_snapshots(partial + full)
         # partial はスキップ、full のみ採用
         self.assertEqual(len(result), 1)
@@ -153,9 +151,9 @@ class TestParseSnapshots(unittest.TestCase):
 
     def test_extra_whitespace_in_header(self):
         # 実PDF想定: 「４月 27日時点」のような半角スペース混入
-        text = make_block(8, 5, 1, 4, 28,
-                          total=211, national=128, priv=81, joint=2,
-                          extra_space=True)
+        text = make_block(
+            8, 5, 1, 4, 28, total=211, national=128, priv=81, joint=2, extra_space=True
+        )
         result = parse_snapshots(text)
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0]["asOf"], "2026-04-28")
@@ -171,8 +169,12 @@ class TestParseSnapshots(unittest.TestCase):
 class TestValidate(unittest.TestCase):
     def _ok_snap(self, **overrides):
         s = {
-            "published": "2026-05-01", "asOf": "2026-04-28",
-            "total": 211, "national": 128, "private": 81, "joint": 2,
+            "published": "2026-05-01",
+            "asOf": "2026-04-28",
+            "total": 211,
+            "national": 128,
+            "private": 81,
+            "joint": 2,
         }
         s.update(overrides)
         return s
@@ -211,8 +213,7 @@ class TestValidate(unittest.TestCase):
 
     def test_change_at_threshold_ok(self):
         # abs(210 - 180) = 30 → 30 > 30 が False → OK
-        validate(self._ok_snap(total=210, national=128, private=80, joint=2),
-                 prev_total=180)
+        validate(self._ok_snap(total=210, national=128, private=80, joint=2), prev_total=180)
 
     def test_change_above_threshold_raises(self):
         # abs(211 - 180) = 31 → fail
@@ -223,8 +224,12 @@ class TestValidate(unittest.TestCase):
 class TestMerge(unittest.TestCase):
     def _row(self, asof, total=200):
         return {
-            "published": asof, "asOf": asof, "total": total,
-            "national": 100, "private": 80, "joint": total - 180,
+            "published": asof,
+            "asOf": asof,
+            "total": total,
+            "national": 100,
+            "private": 80,
+            "joint": total - 180,
         }
 
     def test_all_new_added(self):
@@ -263,8 +268,7 @@ class TestMerge(unittest.TestCase):
         # わざと逆順で渡す
         existing = [self._row("2026-04-28"), self._row("2026-04-26")]
         merged, _, _ = merge(existing, [])
-        self.assertEqual([r["asOf"] for r in merged],
-                         ["2026-04-26", "2026-04-28"])
+        self.assertEqual([r["asOf"] for r in merged], ["2026-04-26", "2026-04-28"])
 
     def test_pdf_wins_on_conflict(self):
         # 既存と新規で値が違う場合、新規（PDF由来）が優先

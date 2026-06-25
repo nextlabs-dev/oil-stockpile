@@ -25,7 +25,6 @@ from build_site import (  # noqa: E402
     text_value,
 )
 
-
 SAMPLE_SOURCE = "経産省「石油備蓄の現況」過去公表値の高水準（2025年3月末ごろ）"
 SAMPLE_DATA_JS = f"""\
 export const PEAK_REFERENCE = {{
@@ -38,9 +37,7 @@ export const PEAK_REFERENCE = {{
 class CheckPeakReferenceInSyncTest(unittest.TestCase):
     def test_matches_returns_none(self):
         # 一致すれば例外を投げない
-        self.assertIsNone(
-            _check_peak_reference_in_sync(SAMPLE_DATA_JS, 247, SAMPLE_SOURCE)
-        )
+        self.assertIsNone(_check_peak_reference_in_sync(SAMPLE_DATA_JS, 247, SAMPLE_SOURCE))
 
     def test_days_mismatch_message_contains_both_values(self):
         with self.assertRaises(RuntimeError) as cm:
@@ -60,9 +57,7 @@ class CheckPeakReferenceInSyncTest(unittest.TestCase):
 
     def test_block_not_found_raises(self):
         with self.assertRaises(RuntimeError) as cm:
-            _check_peak_reference_in_sync(
-                "// no peak reference here\n", 247, SAMPLE_SOURCE
-            )
+            _check_peak_reference_in_sync("// no peak reference here\n", 247, SAMPLE_SOURCE)
         self.assertIn("not found", str(cm.exception))
 
     def test_days_field_missing_inside_block_raises(self):
@@ -85,9 +80,7 @@ class CheckPeakReferenceInSyncTest(unittest.TestCase):
             f"  source  :  '{SAMPLE_SOURCE}'  ,\n"
             "};"
         )
-        self.assertIsNone(
-            _check_peak_reference_in_sync(text, 247, SAMPLE_SOURCE)
-        )
+        self.assertIsNone(_check_peak_reference_in_sync(text, 247, SAMPLE_SOURCE))
 
     def test_picks_fields_inside_peak_reference_block(self):
         # PEAK_REFERENCE 以外のブロックに紛れた days は拾わないこと
@@ -98,20 +91,11 @@ class CheckPeakReferenceInSyncTest(unittest.TestCase):
           source: '{SAMPLE_SOURCE}',
         }};
         """
-        self.assertIsNone(
-            _check_peak_reference_in_sync(text, 247, SAMPLE_SOURCE)
-        )
+        self.assertIsNone(_check_peak_reference_in_sync(text, 247, SAMPLE_SOURCE))
 
     def test_supports_double_quoted_source(self):
-        text = (
-            "export const PEAK_REFERENCE = {\n"
-            "  days: 247,\n"
-            f'  source: "{SAMPLE_SOURCE}",\n'
-            "};"
-        )
-        self.assertIsNone(
-            _check_peak_reference_in_sync(text, 247, SAMPLE_SOURCE)
-        )
+        text = f'export const PEAK_REFERENCE = {{\n  days: 247,\n  source: "{SAMPLE_SOURCE}",\n}};'
+        self.assertIsNone(_check_peak_reference_in_sync(text, 247, SAMPLE_SOURCE))
 
 
 class TextValueTest(unittest.TestCase):
@@ -242,7 +226,10 @@ class RenderPageTest(unittest.TestCase):
         # cache-busting: ハッシュが渡されると og:image / twitter:image (同一変数) に
         # ?v=<hash> が付く。
         out = render_page(
-            self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY",
+            self.TEMPLATE,
+            self.SITE_CONFIG,
+            self._page(),
+            "BODY",
             og_image_version="abc12345",
         )
         self.assertIn("OG_IMG=https://example.com/og.png?v=abc12345|", out)

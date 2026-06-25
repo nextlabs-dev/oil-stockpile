@@ -26,15 +26,14 @@ from __future__ import annotations
 import argparse
 import sys
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Literal
-
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 from lib.constants import PEAK_DAYS  # SSOT: src/constants.json
 from lib.io import read_json
 from lib.paths import ASSETS_DIR, OG_IMAGE_PATH, REPO_ROOT, SNAPSHOTS_PATH
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 JST = timezone(timedelta(hours=9))
 SECONDS_PER_DAY = 86_400.0
@@ -46,26 +45,26 @@ WIDTH = 1200
 HEIGHT = 630
 
 # 色（assets/styles/pages/home.css と assets/styles/layout.css の :root 変数と一致）
-BG_TOP = (227, 233, 245)            # #e3e9f5
-BG_BOTTOM = (238, 242, 250)         # #eef2fa
+BG_TOP = (227, 233, 245)  # #e3e9f5
+BG_BOTTOM = (238, 242, 250)  # #eef2fa
 
-HEADER_NAVY = (15, 21, 53)          # #0f1535
-LOGO_NAVY = (37, 43, 74)            # #252b4a
+HEADER_NAVY = (15, 21, 53)  # #0f1535
+LOGO_NAVY = (37, 43, 74)  # #252b4a
 HEADER_TITLE = (255, 255, 255)
-HEADER_TAGLINE = (158, 167, 192)    # #9ea7c0
-HEADER_META_VALUE = (207, 213, 230) # #cfd5e6
+HEADER_TAGLINE = (158, 167, 192)  # #9ea7c0
+HEADER_META_VALUE = (207, 213, 230)  # #cfd5e6
 
 CARD_BG = (255, 255, 255)
-CARD_BORDER = (232, 236, 245)       # #e8ecf5
+CARD_BORDER = (232, 236, 245)  # #e8ecf5
 
-BRAND_BLUE = (89, 131, 241)         # #5983f1
-FG_STRONG = (15, 20, 48)            # #0f1430
-FG_SUB = (81, 88, 122)              # #51587a
-FG_MUTED = (130, 138, 166)          # #828aa6
+BRAND_BLUE = (89, 131, 241)  # #5983f1
+FG_STRONG = (15, 20, 48)  # #0f1430
+FG_SUB = (81, 88, 122)  # #51587a
+FG_MUTED = (130, 138, 166)  # #828aa6
 
-GRADIENT_TOP = (124, 151, 248)      # #7c97f8
-GRADIENT_MID = (59, 92, 240)        # #3b5cf0
-GRADIENT_BOTTOM = (37, 65, 199)     # #2541c7
+GRADIENT_TOP = (124, 151, 248)  # #7c97f8
+GRADIENT_MID = (59, 92, 240)  # #3b5cf0
+GRADIENT_BOTTOM = (37, 65, 199)  # #2541c7
 GRADIENT_MID_STOP = 0.55
 
 # カード影 (CSS は rgba(44,64,120,0.06) blur=16 だが Pillow の Gaussian は CSS より散逸が速い
@@ -156,7 +155,7 @@ def compute_current_days(snapshot: Snapshot, now: datetime | None = None) -> flo
     OG 画像は事前生成のため、cron 実行時刻の値で固定される（次の実行までは更新されない）。
     """
     if now is None:
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
     as_of_jst = datetime.fromisoformat(f"{snapshot.as_of}T00:00:00+09:00")
     elapsed_days = (now - as_of_jst).total_seconds() / SECONDS_PER_DAY
     days = snapshot.total - elapsed_days
@@ -226,9 +225,7 @@ def resolve_cjk(
     size: int,
 ) -> ImageFont.FreeTypeFont:
     """日本語グリフ用フォント。Linux/Windows/macOS のシステムフォントに依存する。"""
-    candidates = (
-        FONT_CANDIDATES_CJK_BOLD if weight == "bold" else FONT_CANDIDATES_CJK_REGULAR
-    )
+    candidates = FONT_CANDIDATES_CJK_BOLD if weight == "bold" else FONT_CANDIDATES_CJK_REGULAR
     font = _find_font(candidates, size)
     if font is None:
         raise RuntimeError(

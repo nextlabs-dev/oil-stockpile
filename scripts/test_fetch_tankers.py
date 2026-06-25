@@ -266,17 +266,21 @@ class TestAggregate(unittest.TestCase):
         # フォールバック判定された船は japanBoundUnknownPort に計上され、
         # topDestinationPorts には含まれない
         ships = {
-            1: {"static": {"type": 80, "destination": "JPYOK"}},      # 特定港 (YOKOHAMA)
-            2: {"static": {"type": 80, "destination": ">JP KZJ"}},    # 港名特定不可（KZJ は未登録 LOCODE）
-            3: {"static": {"type": 80, "destination": ">JP NAS OFF"}},  # 港名特定不可（NAS も未登録）
-            4: {"static": {"type": 80, "destination": "BUSAN"}},      # 日本向けでない
+            1: {"static": {"type": 80, "destination": "JPYOK"}},  # 特定港 (YOKOHAMA)
+            2: {
+                "static": {"type": 80, "destination": ">JP KZJ"}
+            },  # 港名特定不可（KZJ は未登録 LOCODE）
+            3: {
+                "static": {"type": 80, "destination": ">JP NAS OFF"}
+            },  # 港名特定不可（NAS も未登録）
+            4: {"static": {"type": 80, "destination": "BUSAN"}},  # 日本向けでない
         }
         result = aggregate(ships)
         self.assertEqual(result["totalTankersInRegion"], 4)
-        self.assertEqual(result["japanBoundTankers"], 3)              # 特定 1 + 不明 2
+        self.assertEqual(result["japanBoundTankers"], 3)  # 特定 1 + 不明 2
         self.assertEqual(result["japanBoundUnknownPort"], 2)
         ports = result["topDestinationPorts"]
-        self.assertEqual(ports, [{"port": "YOKOHAMA", "count": 1}])   # 特定港のみ
+        self.assertEqual(ports, [{"port": "YOKOHAMA", "count": 1}])  # 特定港のみ
 
     def test_all_unknown_jp_yields_empty_top_ports(self):
         # 全てフォールバック判定の場合、topDestinationPorts は空でも japanBoundTankers > 0
@@ -432,9 +436,11 @@ class TestSanityGuard(unittest.TestCase):
             return ships
 
         env = {"AISSTREAM_API_KEY": api_key} if api_key else {}
-        with mock.patch.dict(os.environ, env, clear=False), \
-                mock.patch.object(fetch_tankers, "sample", fake_sample), \
-                mock.patch.object(fetch_tankers, "write_json") as mock_write:
+        with (
+            mock.patch.dict(os.environ, env, clear=False),
+            mock.patch.object(fetch_tankers, "sample", fake_sample),
+            mock.patch.object(fetch_tankers, "write_json") as mock_write,
+        ):
             if not api_key:
                 os.environ.pop("AISSTREAM_API_KEY", None)
             rc = asyncio.run(fetch_tankers.main_async(args))
