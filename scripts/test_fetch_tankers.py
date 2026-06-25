@@ -9,7 +9,7 @@ or:
 WebSocket I/O は意図しないでカバーしない（websockets ライブラリのラッパに過ぎないため）。
 本テストはロジック関数のみ:
     - is_tanker_type
-    - normalize_destination
+    - _tokenize
     - match_japan_port
     - aggregate
     - check_error_frame（aisstream エラーフレーム検出の純粋ロジック）
@@ -27,11 +27,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import fetch_tankers  # noqa: E402
 from fetch_tankers import (  # noqa: E402
+    _tokenize,
     aggregate,
     is_japan_bound_destination,
     is_tanker_type,
     match_japan_port,
-    normalize_destination,
 )
 
 
@@ -51,35 +51,33 @@ class TestIsTankerType(unittest.TestCase):
         self.assertFalse(is_tanker_type("80"))
 
 
-class TestNormalizeDestination(unittest.TestCase):
-    def test_at_padding_removed(self):
-        self.assertEqual(normalize_destination("YOKOHAMA@@@"), "YOKOHAMA")
+class TestTokenize(unittest.TestCase):
+    def test_at_padding_dropped(self):
+        self.assertEqual(_tokenize("YOKOHAMA@@@"), ["YOKOHAMA"])
 
     def test_lowercase_uppercased(self):
-        self.assertEqual(normalize_destination("yokohama"), "YOKOHAMA")
+        self.assertEqual(_tokenize("yokohama"), ["YOKOHAMA"])
 
-    def test_internal_whitespace_removed(self):
-        self.assertEqual(normalize_destination("JP YOK"), "JPYOK")
+    def test_whitespace_separates_tokens(self):
+        # 連結せずトークン境界を保持する（連結による誤マッチ防止の要）
+        self.assertEqual(_tokenize("JP YOK"), ["JP", "YOK"])
 
-    def test_punctuation_removed(self):
-        self.assertEqual(normalize_destination("CHIBA-1"), "CHIBA1")
-        self.assertEqual(normalize_destination("KIIRE/JP"), "KIIREJP")
+    def test_punctuation_separates_tokens(self):
+        self.assertEqual(_tokenize("CHIBA-1"), ["CHIBA", "1"])
+        self.assertEqual(_tokenize("KIIRE/JP"), ["KIIRE", "JP"])
 
     def test_empty_string(self):
-        self.assertEqual(normalize_destination(""), "")
+        self.assertEqual(_tokenize(""), [])
 
     def test_none_returns_empty(self):
-        self.assertEqual(normalize_destination(None), "")
+        self.assertEqual(_tokenize(None), [])
 
     def test_only_at_signs(self):
-        self.assertEqual(normalize_destination("@@@@@@@@@@"), "")
+        self.assertEqual(_tokenize("@@@@@@@@@@"), [])
 
     def test_real_padded_format(self):
         # 実 AIS で見られる 20文字パディング
-        self.assertEqual(
-            normalize_destination("JP HKT              "),
-            "JPHKT",
-        )
+        self.assertEqual(_tokenize("JP HKT              "), ["JP", "HKT"])
 
 
 class TestMatchJapanPort(unittest.TestCase):
@@ -130,6 +128,15 @@ class TestMatchJapanPort(unittest.TestCase):
         self.assertIsNone(match_japan_port("@@@@@@@@@@"))
         self.assertIsNone(match_japan_port("ZZZZZ"))
 
+    def test_osaka_intl_does_not_falsely_match_sakai(self):
+        # 退行: 'OSAKAINTL' が 'SAKAI' を部分一致で含み大阪→堺と誤帰属していた。
+        # トークン境界でマッチすれば OSAKA も INTL も港キーワードと一致しない。
+        self.assertIsNone(match_japan_port("OSAKA INTL"))
+
+    def test_port_keyword_requires_full_token(self):
+        # 港キーワードは独立トークンと完全一致する必要がある（部分一致しない）
+        self.assertIsNone(match_japan_port("YOKOHAMAGAWA"))
+
     def test_empty_returns_none(self):
         self.assertIsNone(match_japan_port(""))
         self.assertIsNone(match_japan_port(None))
@@ -177,6 +184,19 @@ class TestIsJapanBoundDestination(unittest.TestCase):
         # LOCODE は JP+大文字3文字。JP+数字や JP+短い文字列はフォールバック対象外
         self.assertFalse(is_japan_bound_destination("JP12"))
         self.assertFalse(is_japan_bound_destination("FOOJP"))
+
+    def test_mid_string_jp_does_not_falsely_match(self):
+        # 退行: 'BANGKOKJPAGENT' が JP+AGE に誤マッチしていた（タイ仕向地を日本向けと誤判定）。
+        # 'JP' は先頭トークンでない限り国コード慣行とみなさない。
+        self.assertFalse(is_japan_bound_destination("BANGKOK JP AGENT"))
+
+    def test_jpn_agent_does_not_falsely_match(self):
+        # 退行: 'SGPORTJPNAGENT' が JPN+AGE に誤マッチしていた（シンガポール仕向地）
+        self.assertFalse(is_japan_bound_destination("SG PORT JPN AGENT"))
+
+    def test_literal_japan_word_is_japan_bound(self):
+        # 退行: 'JAPAN' 単語そのもの（港名特定不可だが文字どおり日本向け）を取りこぼしていた
+        self.assertTrue(is_japan_bound_destination("JAPAN"))
 
 
 class TestAggregate(unittest.TestCase):
