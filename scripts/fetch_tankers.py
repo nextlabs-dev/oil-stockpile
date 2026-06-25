@@ -64,6 +64,17 @@ WS_URL = "wss://stream.aisstream.io/v0/stream"
 DEFAULT_BBOX = [[24.0, 122.0], [46.0, 146.0]]
 DEFAULT_DURATION_SEC = 480  # 8分: AIS Type 5 が約6分間隔のため大半をカバー
 
+# サンプルを採用する totalTankersInRegion の下限。これ未満なら空・劣化サンプルと
+# みなし、書き込まず exit 1（fetch_pdf.py の 0 件中断と同じ思想）。デフォルト 1 は
+# 「0 隻のみ拒否」。日本近海が完全に無タンカーになることは現実にはなく、0 は AIS
+# 障害・認証エラー等の故障シグナル。--min-tankers で引き上げ可能。
+DEFAULT_MIN_TANKERS = 1
+
+
+class AisStreamError(RuntimeError):
+    """aisstream.io が返したエラーフレーム（API key 無効・スロットリング等）。"""
+
+
 # 日本の主要原油受入港のキーワード集合
 # 値は表示用の正規化された港名（複数別名→同じ canonical に集約）
 JAPAN_PORT_KEYWORDS = {
@@ -220,6 +231,21 @@ def aggregate(ships_seen):
     }
 
 
+def check_error_frame(msg):
+    """msg が aisstream のエラーフレームなら AisStreamError を送出する。
+
+    aisstream は API key 無効・スロットリング等の際に小文字フィールドで
+    {"error": "Api Key Is Not Valid"} を返す（公式ドキュメント "Error Message"）。
+    防御的に大文字始まりの "Error" も拾う。これにより 8 分のサンプリングを
+    待たずに fail-fast し、明確な診断メッセージを残せる。
+    """
+    if not isinstance(msg, dict):
+        return
+    err = msg.get("error") or msg.get("Error")
+    if err:
+        raise AisStreamError(str(err))
+
+
 async def sample(api_key, duration_sec, bbox):
     """WebSocket で duration_sec 秒間サンプリングして ships_seen を返す。"""
     import websockets  # ローカル import（テストでは不要）
@@ -249,6 +275,9 @@ async def sample(api_key, duration_sec, bbox):
                 msg = json.loads(raw)
             except (ValueError, TypeError):
                 continue
+
+            # エラーフレーム（{"error": ...}）なら即座に fail-fast
+            check_error_frame(msg)
 
             mmsi = msg.get("MetaData", {}).get("MMSI")
             if not mmsi:
@@ -317,6 +346,17 @@ async def main_async(args):
     print(f"[tankers] japan-bound: {summary['japanBoundTankers']}")
     print(f"[tankers] top: {summary['topDestinationPorts'][:5]}")
 
+    # サニティガード: 下限未満は空・劣化サンプルとみなし、書き込まず exit 1。
+    # dry-run より前に判定する（fetch_pdf.py の 0 件中断と同じ位置づけ）。
+    total = summary["totalTankersInRegion"]
+    if total < args.min_tankers:
+        print(
+            f"[tankers] only {total} tankers in region (< min {args.min_tankers}); "
+            "treating as empty/degraded sample, not writing tankers.json",
+            file=sys.stderr,
+        )
+        return 1
+
     if args.dry_run:
         print("[tankers] dry-run; not writing tankers.json")
         return 0
@@ -338,6 +378,16 @@ def main(argv):
         "--dry-run",
         action="store_true",
         help="Sample and aggregate but don't write tankers.json",
+    )
+    parser.add_argument(
+        "--min-tankers",
+        type=int,
+        default=DEFAULT_MIN_TANKERS,
+        help=(
+            "Minimum totalTankersInRegion to accept a sample. Below this, treat "
+            "as empty/degraded and exit 1 without writing tankers.json "
+            f"(default: {DEFAULT_MIN_TANKERS})"
+        ),
     )
     args = parser.parse_args(argv)
     return asyncio.run(main_async(args))
