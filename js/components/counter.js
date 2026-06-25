@@ -40,15 +40,21 @@ function getElapsedDays(now = Date.now()) {
   return (now - asOfTimestamp) / MS_PER_DAY;
 }
 
-function splitBreakdown(days) {
-  const total = Math.max(0, days);
-  const d = Math.floor(total);
-  const fracDay = total - d;
-  const hoursTotal = fracDay * 24;
-  const h = Math.floor(hoursTotal);
-  const minutesTotal = (hoursTotal - h) * 60;
-  const m = Math.floor(minutesTotal);
-  const s = Math.floor((minutesTotal - m) * 60);
+/**
+ * 残日数(float)を d/h/m/s に分解する。
+ *
+ * まず整数秒に丸めてから整数演算だけで分解する。段階的に「乗算→floor」を
+ * 繰り返すと各段で IEEE-754 の丸め誤差が累積し、本来ちょうどの秒が 1 つ下に
+ * floor されて秒の重複/スキップが起きるため（issue #11）。
+ */
+export function splitBreakdown(days) {
+  let rem = Math.max(0, Math.round(days * 86_400));
+  const d = Math.floor(rem / 86_400);
+  rem %= 86_400;
+  const h = Math.floor(rem / 3600);
+  rem %= 3600;
+  const m = Math.floor(rem / 60);
+  const s = rem % 60;
   return { d, h, m, s };
 }
 
