@@ -11,9 +11,9 @@
 import { setLatest } from '../components/counter.js';
 import { initShare } from '../components/share.js';
 import { initTankerMap } from '../components/tanker-map.js';
-import { loadHistory, loadJson, VLCC_CAPACITY_KL } from '../core/data.js';
+import { consumptionDaysFromKl, loadHistory, loadJson, VLCC_CAPACITY_KL } from '../core/data.js';
 import { onReady, setText, showElement } from '../core/dom.js';
-import { formatDotDate, formatJaDateTime } from '../core/format.js';
+import { formatDotDate, formatInt, formatJaDateTime } from '../core/format.js';
 
 const TANKERS_URL = '../data/tankers.json';
 const STALE_HOURS = 6;
@@ -130,6 +130,8 @@ async function main() {
   const jp = Number(data.japanBoundTankers) || 0;
   const other = Math.max(0, total - jp);
   const jpKl = jp * VLCC_MAN_KL_PER_SHIP;
+  // 「N 日分の原油消費量」欄: 隻数ではなく jpKl を日消費量で割った日数を入れる。
+  const jpDays = consumptionDaysFromKl(jp * VLCC_CAPACITY_KL);
   setText('total-tankers', String(total));
   setText('japan-bound', String(jp));
   setText('japan-bound-2', String(jp));
@@ -137,8 +139,8 @@ async function main() {
   setText('jp-volume-kl', String(jpKl));
   setText('ais-note-jp', String(jp));
   setText('ais-note-kl', String(jpKl));
-  setText('ais-note-days', String(jp));
-  setText('jp-volume-days', String(jp));
+  setText('ais-note-days', formatInt(jpDays));
+  setText('jp-volume-days', formatInt(jpDays));
 
   renderShipViz(jp, other);
   renderPorts(data.topDestinationPorts, data.japanBoundUnknownPort);
