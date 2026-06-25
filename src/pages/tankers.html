@@ -1,5 +1,5 @@
 <main id="main" class="site-main dashboard">
-  <h2 id="tanker-heading" class="visually-hidden">日本周辺のタンカー</h2>
+  <h1 id="tanker-heading" class="visually-hidden">日本周辺のタンカー</h1>
 
   <div class="dashboard-grid">
 
@@ -60,7 +60,7 @@
     <!-- Ship icon visualization -->
     <section class="dash-card ship-viz-card" aria-labelledby="ship-viz-heading">
       <div class="ship-viz-head">
-        <h3 id="ship-viz-heading" class="dash-card-title">船アイコン可視化</h3>
+        <h2 id="ship-viz-heading" class="dash-card-title">船アイコン可視化</h2>
         <p class="ship-viz-keylegend" aria-hidden="true">
           1アイコン=1隻 / 濃色=日本向け / 淡色=その他・通過
         </p>
@@ -99,7 +99,7 @@
 
     <!-- Map card -->
     <section class="dash-card dash-card--full map-card" aria-labelledby="map-heading">
-      <h3 id="map-heading" class="dash-card-title">海域内のタンカー位置</h3>
+      <h2 id="map-heading" class="dash-card-title">海域内のタンカー位置</h2>
       <p class="map-note">
         観測した個別タンカーの位置をプロット。マーカーをクリックすると船名・<span lang="en">destination</span>・<span lang="en">MMSI</span>・座標を表示します。
       </p>
@@ -115,7 +115,7 @@
 
     <!-- Top destinations -->
     <section class="dash-card ports-card" aria-labelledby="ports-heading">
-      <h3 id="ports-heading" class="dash-card-title">主な目的地</h3>
+      <h2 id="ports-heading" class="dash-card-title">主な目的地</h2>
       <ol class="ports-list" id="ports-list"></ol>
       <p class="ports-unknown" id="ports-unknown" hidden>
         上記のほか <strong id="ports-unknown-count">—</strong> 隻は <span lang="en">destination</span> から港名を特定できませんでした。
@@ -131,7 +131,7 @@
 
     <!-- Metadata -->
     <section class="dash-card meta-card" aria-labelledby="meta-heading">
-      <h3 id="meta-heading" class="dash-card-title">取得情報</h3>
+      <h2 id="meta-heading" class="dash-card-title">取得情報</h2>
       <dl class="meta-list">
         <div class="meta-row">
           <dt>最終取得</dt>
@@ -160,7 +160,7 @@
 
     <!-- Caveats -->
     <section class="dash-card dash-card--full caveats-card" aria-labelledby="caveats-heading">
-      <h3 id="caveats-heading" class="dash-card-title">この数字の限界</h3>
+      <h2 id="caveats-heading" class="dash-card-title">この数字の限界</h2>
       <ul class="caveat-list">
         <li><strong>destination は船員の手入力</strong>です。「日本港を次の目的地として申告した船」を数えており、実際の入港数とは異なる場合があります。</li>
         <li>対象は <strong>AIS の船種コード 80-89（Tanker）</strong>のみ。LNG専用船・小型船は計上されない場合があります。</li>
