@@ -104,6 +104,8 @@
         観測した個別タンカーの位置をプロット。マーカーをクリックすると船名・<span lang="en">destination</span>・<span lang="en">MMSI</span>・座標を表示します。
       </p>
       <div id="tanker-map" class="tanker-map" aria-label="日本周辺海域のタンカー位置図"></div>
+      <!-- 地図ポップアップ（マウス専用）の SR/キーボード等価物。tanker-map.js が隠し表を流し込む -->
+      <div id="tanker-table"></div>
       <p class="map-legend" aria-hidden="true">
         <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--japan"></span>日本港向け</span>
         <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--other"></span>日本港向け以外</span>
