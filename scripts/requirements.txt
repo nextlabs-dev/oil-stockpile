@@ -1,4 +1,8 @@
-pdfplumber>=0.11
-websockets>=13
-Pillow>=11
-curl-cffi>=0.7
+# 直接依存を厳密 == で固定する。fetch-daily(日次)/fetch-tankers(毎時) は
+# contents:write 権限 + AIS シークレットで pip install するため、新規リリースを
+# 無検証で自動取り込みするのを防ぐ。バージョンは現行 CI が解決していた既知良好版。
+# 更新は Dependabot (.github/dependabot.yml の pip) がレビュー済み PR で行う。
+pdfplumber==0.11.10
+websockets==16.0
+Pillow==12.2.0
+curl-cffi==0.15.0
