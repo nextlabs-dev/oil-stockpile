@@ -1,6 +1,8 @@
-# GitHub Actions と npm(dev依存) のバージョン更新を Dependabot に任せる。
-# pip(scripts/requirements.txt) は >= 指定で CI が毎回最新を取得するため
-# version-update からは外し、Settings の Dependabot security alerts に委ねる。
+# 依存のバージョン更新を Dependabot に集約する。
+# - github-actions: SHA ピン留め + 末尾コメント (# vX.Y.Z) を Dependabot がバンプする。
+# - npm(dev依存): package-lock.json をバンプする。
+# - pip(scripts/requirements.txt): == 固定し、レビュー済み PR で更新する。
+#   旧方針の「>= 指定で CI が毎回最新を取得」は供給網リスクのため廃止。
 version: 2
 updates:
   - package-ecosystem: "github-actions"
@@ -17,4 +19,12 @@ updates:
       interval: "monthly"
     groups:
       dev-deps:
+        patterns: ["*"]
+
+  - package-ecosystem: "pip"
+    directory: "/scripts"
+    schedule:
+      interval: "monthly"
+    groups:
+      pip-deps:
         patterns: ["*"]
