@@ -458,7 +458,7 @@
   stroke: var(--chart-line-3);
 }
 
-/* Points hidden by default; visible only on hover/focus for interaction */
+/* Decorative points hidden by default; revealed on hover (svg is aria-hidden) */
 .page-home .chart-point {
   fill: var(--bg-card);
   stroke: var(--brand);
@@ -470,8 +470,7 @@
     r 0.15s;
 }
 
-.page-home .chart-point:hover,
-.page-home .chart-point:focus {
+.page-home .chart-point:hover {
   r: 5;
   fill: var(--brand);
   opacity: 1;
