@@ -12,13 +12,15 @@ content. Shared head/header/footer markup is generated here.
 
 from __future__ import annotations
 
+import hashlib
 import re
+from pathlib import Path
 from string import Template
 from typing import Any
 
 from lib.constants import PEAK_DAYS, PEAK_SOURCE
 from lib.io import read_json
-from lib.paths import REPO_ROOT, SITE_CONFIG_PATH, SRC_DIR
+from lib.paths import OG_IMAGE_PATH, REPO_ROOT, SITE_CONFIG_PATH, SRC_DIR
 
 PAGES_DIR = SRC_DIR / "pages"
 TEMPLATES_DIR = SRC_DIR / "templates"
@@ -35,6 +37,18 @@ def text_value(value: str | list[str] | None) -> str:
 
 def load_site_config() -> dict[str, Any]:
     return read_json(SITE_CONFIG_PATH)
+
+
+def compute_og_image_version(path: Path) -> str:
+    """og:image URL の cache-busting 用に og-image.png の SHA-256[:8] を返す。
+
+    X は画像を URL 単位でキャッシュするため、画像内容が変わったらクエリも変わる
+    ようにして再クロールを促す。必須アセット欠損時は FileNotFoundError で fail
+    fast（クエリ無しで静かに継続して欠損を隠さない）。
+    """
+    if not path.exists():
+        raise FileNotFoundError(f"required OGP asset not found: {path}")
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:8]
 
 
 _DATA_JS_PATH = REPO_ROOT / "js" / "core" / "data.js"
@@ -114,9 +128,13 @@ def render_page(
     site_config: dict[str, Any],
     page: dict[str, Any],
     content: str,
+    og_image_version: str = "",
 ) -> str:
     site = site_config["site"]
     canonical = site["url"] + page["canonical_path"]
+    og_image = site["og_image"]
+    if og_image_version:
+        og_image += f"?v={og_image_version}"
     asset_root = "" if page["root_path"] == "./" else page["root_path"]
     favicon = asset_root + "assets/favicon.svg"
     stylesheet = asset_root + "assets/styles.css"
@@ -135,7 +153,7 @@ def render_page(
         canonical=canonical,
         og_title=page["og_title"],
         og_description=page["og_description"],
-        og_image=site["og_image"],
+        og_image=og_image,
         og_image_alt=site["og_image_alt"],
         twitter_title=page["twitter_title"],
         twitter_description=page["twitter_description"],
@@ -158,11 +176,12 @@ def main() -> int:
     verify_constants_in_sync()
     site_config = load_site_config()
     template = Template(BASE_TEMPLATE.read_text(encoding="utf-8"))
+    og_image_version = compute_og_image_version(OG_IMAGE_PATH)
     for page in site_config["pages"]:
         output = REPO_ROOT / page["output"]
         content = (PAGES_DIR / page["source"]).read_text(encoding="utf-8").strip()
         output.parent.mkdir(parents=True, exist_ok=True)
-        rendered = render_page(template, site_config, page, content)
+        rendered = render_page(template, site_config, page, content, og_image_version)
         output.write_text(rendered, encoding="utf-8", newline="\n")
         print(f"built {page['output']}")
     return 0
