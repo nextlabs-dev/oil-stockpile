@@ -132,12 +132,15 @@ def pick_latest_snapshot(rows: list[dict]) -> Snapshot:
     """asOf 昇順で末尾を最新とする。"""
     if not rows:
         raise ValueError("snapshots is empty")
-    sorted_rows = sorted(rows, key=lambda r: r["asOf"])
-    r = sorted_rows[-1]
+    # ソートキー (asOf) を含む必須キーをソート前に全行で検証する。
+    # ソートを先に行うと asOf 欠落行が不透明な KeyError を投げ、
+    # 下のドキュメント化された ValueError 経路に到達しない。
     required = ("published", "asOf", "total", "national", "private", "joint")
-    for k in required:
-        if k not in r:
-            raise ValueError(f"snapshot is missing key: {k}")
+    for row in rows:
+        for k in required:
+            if k not in row:
+                raise ValueError(f"snapshot is missing key: {k}")
+    r = sorted(rows, key=lambda row: row["asOf"])[-1]
     return Snapshot(
         published=r["published"],
         as_of=r["asOf"],
@@ -699,7 +702,11 @@ def main() -> int:
         print(f"::error::Failed to load snapshots: {e}", file=sys.stderr)
         return 1
 
-    current_days = compute_current_days(snapshot)
+    try:
+        current_days = compute_current_days(snapshot)
+    except Exception as e:
+        print(f"::error::Failed to compute current days: {e}", file=sys.stderr)
+        return 1
     days_int = int(current_days)
 
     try:
