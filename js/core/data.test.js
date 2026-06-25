@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { asOfToMs, computeCurrentDays } from './data.js';
+import { asOfToMs, computeCurrentDays, consumptionDaysFromKl } from './data.js';
 
 const DAY_MS = 86_400_000;
 
@@ -37,4 +37,23 @@ test('computeCurrentDays: 不正な入力は NaN を返す', () => {
   assert.ok(Number.isNaN(computeCurrentDays({ total: 200 }))); // asOf 欠落
   assert.ok(Number.isNaN(computeCurrentDays({ asOf: '2026-01-01' }))); // total 欠落
   assert.ok(Number.isNaN(computeCurrentDays({ asOf: '2026-01-01', total: 'x' }))); // total 非数値
+});
+
+test('consumptionDaysFromKl: 日消費量ちょうどの量は 1 日分', () => {
+  // DAILY_CONSUMPTION_KL = 280,000 kL/日
+  assert.equal(consumptionDaysFromKl(280_000), 1);
+});
+
+test('consumptionDaysFromKl: VLCC 1 隻ぶん(30万kL)は約 1.07 日分', () => {
+  assert.equal(consumptionDaysFromKl(300_000), 300_000 / 280_000);
+});
+
+test('consumptionDaysFromKl: 0 kL は 0 日分', () => {
+  assert.equal(consumptionDaysFromKl(0), 0);
+});
+
+test('consumptionDaysFromKl: 非有限な入力は NaN を返す', () => {
+  assert.ok(Number.isNaN(consumptionDaysFromKl(Number.NaN)));
+  assert.ok(Number.isNaN(consumptionDaysFromKl(Number.POSITIVE_INFINITY)));
+  assert.ok(Number.isNaN(consumptionDaysFromKl('x')));
 });
