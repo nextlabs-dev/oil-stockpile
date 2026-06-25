@@ -79,6 +79,15 @@ export function asOfToMs(asOf) {
 }
 
 /**
+ * asOf 時点から now までの経過日数（小数）を返す純粋関数。
+ * 古さ判定（STALE_THRESHOLD_DAYS との比較）に使う。
+ * asOf が不正なら NaN（NaN > しきい値 は false なので警告は出ない）。
+ */
+export function elapsedDaysSince(asOf, now = Date.now()) {
+  return (now - asOfToMs(asOf)) / 86_400_000;
+}
+
+/**
  * snapshot の asOf 時点からの経過分を引いた「いまこの瞬間の推計備蓄日数」を返す。
  * モデル: 「1 日経過 = 1 日分減る」（年間消費量推計を別途持たなくても整合）。
  *
