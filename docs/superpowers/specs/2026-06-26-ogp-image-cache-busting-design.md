@@ -68,17 +68,25 @@ Commit if changed → snapshots.json, og-image.png, *.html をコミット & pus
 
 ## 変更点
 
+### 0. `scripts/lib/paths.py`
+
+- `OG_IMAGE_PATH = ASSETS_DIR / "og-image.png"` 定数を追加し、`build_site.py` と
+  `generate_ogp.py`（現状は `DEFAULT_OUTPUT = ASSETS_DIR / "og-image.png"` をローカル定義）
+  で共有する。パスの二重定義を避ける（SSOT）。
+
 ### 1. `scripts/build_site.py`
 
-- `assets/og-image.png`（= `ASSETS_DIR / "og-image.png"`、`generate_ogp.py` の
-  `DEFAULT_OUTPUT` と同一パス）を読み、SHA-256 先頭8桁を返すヘルパーを追加。
-  パスの二重定義を避けるため、`lib/paths.py` に `OG_IMAGE_PATH` 定数を追加して
-  `generate_ogp.py` と共有することを実装時に検討する。
-- `render_page` で `og_image = site["og_image"] + f"?v={hash8}"` とする。
-  `base.html` は og:image・twitter:image の両方が `$og_image` を参照するため、
+- `compute_og_image_version(path) -> str` ヘルパーを追加。`path.read_bytes()` の
+  SHA-256 先頭8桁（hex）を返す。`og-image.png` が存在しない場合は例外を送出して
+  **fail fast**（必須アセットの欠損をクエリ無しで静かに継続して隠さない）。
+- **`render_page` の純粋性を保つ**：`render_page` は「I/O から切り離した純粋関数」
+  として設計・テストされている（`test_build_site.py` 冒頭コメント）。ハッシュ計算を
+  関数内に入れず、`render_page(..., og_image_version: str)` 引数を追加して内部で
+  `og_image = site["og_image"]; if og_image_version: og_image += f"?v={og_image_version}"`
+  とする。`base.html` は og:image・twitter:image の両方が `$og_image` を参照するため、
   1 箇所の変更で両方に反映される。
-- `og-image.png` が存在しない場合は **fail fast**（例外を送出して exit 1）。
-  必須アセットの欠損を、クエリ無しで静かに継続して隠さない。
+- `main()`（I/O 境界）で `compute_og_image_version(OG_IMAGE_PATH)` を 1 回計算し、
+  各ページの `render_page` に渡す。
 
 ### 2. `.github/workflows/fetch-daily.yml`
 

@@ -7,15 +7,19 @@ I/O から切り離した純粋関数 (text_value / render_nav /
 render_page / _check_peak_reference_in_sync) をカバーする。
 """
 
+import hashlib
 import os
 import sys
+import tempfile
 import unittest
+from pathlib import Path
 from string import Template
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from build_site import (  # noqa: E402
     _check_peak_reference_in_sync,
+    compute_og_image_version,
     render_nav,
     render_page,
     text_value,
@@ -233,6 +237,47 @@ class RenderPageTest(unittest.TestCase):
         page = self._page(body_class="page-home")
         out = render_page(self.TEMPLATE, self.SITE_CONFIG, page, "BODY")
         self.assertIn("BODY_CLASS=[page-home]|", out)
+
+    def test_og_image_version_appended_as_query(self):
+        # cache-busting: ハッシュが渡されると og:image / twitter:image (同一変数) に
+        # ?v=<hash> が付く。
+        out = render_page(
+            self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY",
+            og_image_version="abc12345",
+        )
+        self.assertIn("OG_IMG=https://example.com/og.png?v=abc12345|", out)
+
+    def test_og_image_no_query_when_version_empty(self):
+        # 省略時 (デフォルト空) はクエリを付けない。
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY")
+        self.assertIn("OG_IMG=https://example.com/og.png|", out)
+
+
+class ComputeOgImageVersionTest(unittest.TestCase):
+    """compute_og_image_version の SHA-256[:8] 算出と fail-fast を検証する。"""
+
+    def test_returns_sha256_first8_of_contents(self):
+        payload = b"fake png bytes"
+        expected = hashlib.sha256(payload).hexdigest()[:8]
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "og-image.png"
+            path.write_bytes(payload)
+            self.assertEqual(compute_og_image_version(path), expected)
+
+    def test_version_changes_when_contents_change(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "og-image.png"
+            path.write_bytes(b"version one")
+            first = compute_og_image_version(path)
+            path.write_bytes(b"version two")
+            second = compute_og_image_version(path)
+        self.assertNotEqual(first, second)
+
+    def test_raises_when_asset_missing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            missing = Path(tmp) / "og-image.png"
+            with self.assertRaises(FileNotFoundError):
+                compute_og_image_version(missing)
 
 
 if __name__ == "__main__":

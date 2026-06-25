@@ -41,6 +41,11 @@ jobs:
       - name: Generate OGP image
         run: python scripts/generate_ogp.py
 
+      - name: Build site
+        # og:image / twitter:image に og-image.png のハッシュ (?v=) を焼き直す。
+        # generate_ogp の後に置き、HTML が常にその時点の画像と一致するようにする。
+        run: python scripts/build_site.py
+
       - name: Commit if changed
         env:
           GIT_AUTHOR_NAME: github-actions[bot]
@@ -55,13 +60,19 @@ jobs:
           if [[ -n "$(git status --porcelain assets/og-image.png)" ]]; then
             changed_paths+=("assets/og-image.png")
           fi
+          # build_site が ?v=<hash> を焼き直した HTML も拾う。
+          for html in index.html tankers/index.html scale/index.html about/index.html; do
+            if [[ -n "$(git status --porcelain "$html")" ]]; then
+              changed_paths+=("$html")
+            fi
+          done
           if [[ ${#changed_paths[@]} -gt 0 ]]; then
             git add "${changed_paths[@]}"
             git commit -m "data: auto-update $(date -u +%Y-%m-%d)"
             # 取得中に main へ他 commit（tankers 等）が積まれていると push が弾かれる。
             # rebase してから push を最大3回試行する（fetch-tankers.yml と堅牢性を揃える）。
-            # daily の commit は snapshots.json / og-image.png のみに触れ、tankers は
-            # tankers.json のみなのでファイル集合が交わらず rebase は衝突しない。
+            # daily の commit は snapshots.json / og-image.png / 生成 HTML のみに触れ、
+            # tankers は tankers.json のみなのでファイル集合が交わらず rebase は衝突しない。
             for attempt in 1 2 3; do
               if ! git pull --rebase --autostash origin main; then
                 git rebase --abort 2>/dev/null || true

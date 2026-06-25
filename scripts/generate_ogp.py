@@ -34,12 +34,12 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 from lib.constants import PEAK_DAYS  # SSOT: src/constants.json
 from lib.io import read_json
-from lib.paths import ASSETS_DIR, REPO_ROOT, SNAPSHOTS_PATH
+from lib.paths import ASSETS_DIR, OG_IMAGE_PATH, REPO_ROOT, SNAPSHOTS_PATH
 
 JST = timezone(timedelta(hours=9))
 SECONDS_PER_DAY = 86_400.0
 
-DEFAULT_OUTPUT = ASSETS_DIR / "og-image.png"
+DEFAULT_OUTPUT = OG_IMAGE_PATH
 
 # OGP 推奨サイズ (Twitter/Facebook 共通)
 WIDTH = 1200
