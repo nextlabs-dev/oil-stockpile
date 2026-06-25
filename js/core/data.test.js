@@ -1,6 +1,12 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { asOfToMs, computeCurrentDays, consumptionDaysFromKl } from './data.js';
+import {
+  asOfToMs,
+  computeCurrentDays,
+  consumptionDaysFromKl,
+  elapsedDaysSince,
+  STALE_THRESHOLD_DAYS,
+} from './data.js';
 
 const DAY_MS = 86_400_000;
 
@@ -37,6 +43,32 @@ test('computeCurrentDays: 不正な入力は NaN を返す', () => {
   assert.ok(Number.isNaN(computeCurrentDays({ total: 200 }))); // asOf 欠落
   assert.ok(Number.isNaN(computeCurrentDays({ asOf: '2026-01-01' }))); // total 欠落
   assert.ok(Number.isNaN(computeCurrentDays({ asOf: '2026-01-01', total: 'x' }))); // total 非数値
+});
+
+test('elapsedDaysSince: asOf 当日0時(JST)では 0', () => {
+  assert.equal(elapsedDaysSince('2026-01-01', asOfToMs('2026-01-01')), 0);
+});
+
+test('elapsedDaysSince: 経過日数を小数で返す', () => {
+  const now = asOfToMs('2026-01-01') + 2.5 * DAY_MS;
+  assert.equal(elapsedDaysSince('2026-01-01', now), 2.5);
+});
+
+test('elapsedDaysSince: しきい値ちょうど(14日)は古さ判定の境界（> で false）', () => {
+  const now = asOfToMs('2026-01-01') + STALE_THRESHOLD_DAYS * DAY_MS;
+  const elapsed = elapsedDaysSince('2026-01-01', now);
+  assert.equal(elapsed, STALE_THRESHOLD_DAYS);
+  assert.equal(elapsed > STALE_THRESHOLD_DAYS, false);
+});
+
+test('elapsedDaysSince: しきい値超過(15日)は古さ判定が true', () => {
+  const now = asOfToMs('2026-01-01') + 15 * DAY_MS;
+  assert.equal(elapsedDaysSince('2026-01-01', now) > STALE_THRESHOLD_DAYS, true);
+});
+
+test('elapsedDaysSince: now が asOf より過去なら負値', () => {
+  const now = asOfToMs('2026-01-01') - 3 * DAY_MS;
+  assert.equal(elapsedDaysSince('2026-01-01', now), -3);
 });
 
 test('consumptionDaysFromKl: 日消費量ちょうどの量は 1 日分', () => {

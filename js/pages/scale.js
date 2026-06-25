@@ -12,10 +12,12 @@
 import {
   computeCurrentDays,
   DAILY_CONSUMPTION_KL,
+  elapsedDaysSince,
   loadHistory,
+  STALE_THRESHOLD_DAYS,
   VLCC_CAPACITY_KL,
 } from '../core/data.js';
-import { onReady, setText } from '../core/dom.js';
+import { onReady, setText, showElement } from '../core/dom.js';
 import { formatDotDate, formatInt } from '../core/format.js';
 
 const CONSTANTS = {
@@ -98,9 +100,22 @@ async function main() {
   const snapshot = history[history.length - 1];
 
   const days = computeCurrentDays(snapshot);
+  // 構造的に有効だが内容無効（total 非数値 / asOf 欠落・不正）なスナップショットを
+  // fetch 失敗と同じエラー状態に倒す。"NaN日分" を描かないためのガード。
+  if (!Number.isFinite(days)) {
+    console.error('invalid snapshot (computeCurrentDays returned NaN):', snapshot);
+    showLoadError();
+    return;
+  }
+
   setText('scale-days', String(Math.floor(days)));
   setText('scale-as-of', formatYearMonth(snapshot.asOf));
   setText('header-last-updated', formatDotDate(snapshot.published));
+
+  // データ取得が止まっている可能性の警告（counter と同じ 14 日しきい値）。
+  if (elapsedDaysSince(snapshot.asOf) > STALE_THRESHOLD_DAYS) {
+    showElement('scale-stale-warning');
+  }
 
   renderCards(days);
 }
