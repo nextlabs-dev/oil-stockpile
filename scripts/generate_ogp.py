@@ -26,7 +26,7 @@ from __future__ import annotations
 import argparse
 import sys
 from dataclasses import dataclass
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Literal
 
@@ -35,7 +35,6 @@ from lib.io import read_json
 from lib.paths import ASSETS_DIR, OG_IMAGE_PATH, REPO_ROOT, SNAPSHOTS_PATH
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-JST = timezone(timedelta(hours=9))
 SECONDS_PER_DAY = 86_400.0
 
 DEFAULT_OUTPUT = OG_IMAGE_PATH
