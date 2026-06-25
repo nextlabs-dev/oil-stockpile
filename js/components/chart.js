@@ -6,7 +6,8 @@
  *   ※ 3区分は値域が異なる（合計~230 / 国家~140 / 民間~85 / 産油国~5）ため、
  *      トグルONでY軸を0〜maxの広域に再スケールする。
  *
- * 各点に role="button" tabindex="0" を付与し、ホバー/フォーカスでヒント文を更新。
+ * SVG 全体は aria-hidden の装飾。各データ点は純装飾の <circle>（focusable にしない）で、
+ * マウスホバーで内訳ヒントを更新する。AT 向けの数値は buildHiddenTable の隠し表で提供する。
  *
  * initChart(history) で初期化。
  */
@@ -147,12 +148,16 @@ function renderXTicksSvg(points, dims) {
     .join('');
 }
 
-function renderPointsSvg(points) {
+export function renderPointsSvg(points) {
   return points
     .map((p) => {
       const r = p.row;
       const label = `${formatJaDate(r.asOf)} 合計${r.total}日（国家${r.national}・民間${r.private}・産油国共同${r.joint}）`;
-      return `<circle class="chart-point" cx="${p.x.toFixed(1)}" cy="${p.yTotal.toFixed(1)}" r="3" data-i="${p.i}" role="button" tabindex="0" aria-label="${escapeHtml(label)}"><title>${escapeHtml(label)}</title></circle>`;
+      // 点は装飾（祖先 <svg> が aria-hidden）。tabindex/role/aria-label は付けない:
+      // aria-hidden 下の focusable 要素は axe-core aria-hidden-focus 違反になり、
+      // 無言の「幽霊タブストップ」を生むため。AT 向けデータは buildHiddenTable が担う。
+      // <title> はマウスホバー時のネイティブツールチップ（視覚的補助）として残す。
+      return `<circle class="chart-point" cx="${p.x.toFixed(1)}" cy="${p.yTotal.toFixed(1)}" r="3" data-i="${p.i}"><title>${escapeHtml(label)}</title></circle>`;
     })
     .join('');
 }
@@ -192,10 +197,9 @@ function bindChartInteractions(wrap, data, hint, defaultHint) {
     const resetText = () => {
       if (hint) hint.textContent = defaultHint;
     };
+    // 点は focusable ではない（装飾）ため focus/blur は発火しない。ホバーのみ連動。
     el.addEventListener('mouseenter', setText);
     el.addEventListener('mouseleave', resetText);
-    el.addEventListener('focus', setText);
-    el.addEventListener('blur', resetText);
   });
 }
 
