@@ -1,8 +1,17 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { splitBreakdown } from './counter.js';
+import { asOfToMs } from '../core/data.js';
+import { computeCurrentDays, setLatest, splitBreakdown } from './counter.js';
 
 const SEC_PER_DAY = 86_400;
+
+test('setLatest: tick ループ/DOM 無しで共有テキスト用に computeCurrentDays が使える', () => {
+  // 共有ボタンだけ必要な tankers ページは、1Hz タイマーや counter DOM を起動する
+  // initCounter を呼ばずに値ソースだけ仕込めること（過結合の解消）を検証する。
+  setLatest([{ asOf: '2026-01-01', total: 200 }]);
+  assert.equal(computeCurrentDays(asOfToMs('2026-01-01')), 200);
+  assert.equal(computeCurrentDays(asOfToMs('2026-01-01') + 2.5 * 86_400_000), 200 - 2.5);
+});
 
 /** breakdown を通算秒に畳んで隣接 tick の差分を検査するためのヘルパ。 */
 function totalSeconds({ d, h, m, s }) {
