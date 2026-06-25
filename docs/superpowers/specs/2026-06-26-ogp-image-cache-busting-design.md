@@ -127,6 +127,14 @@ Commit if changed → snapshots.json, og-image.png, *.html をコミット & pus
 
 ## 運用上の注意
 
-- HTML 生成は CI（`fetch-daily.yml`）に委ねる。開発者がローカルで `build_site.py` を
-  走らせると、ローカルの `og-image.png` のハッシュが焼かれてしまうため、ローカルでの
-  `?v=` 差分はコミットしない運用とする（実装計画で明文化）。
+- **生成 HTML はコミット済み `og-image.png` と常に同期させる**。`test.yml` の
+  「Verify generated HTML is in sync with src/」が、push 毎に `build_site.py` を
+  実行してコミット済み HTML との差分が無いことを検証するため、`scripts/` `src/`
+  `assets/` `js/` を変更したら `build_site.py` を実行して 4 HTML をコミットする。
+  - 当初は「ローカルの `?v=` 差分はコミットしない（CI 任せ）」運用を想定したが、
+    上記同期ガードと両立しないため撤回した。`?v=` はコミット済み画像から決定的に
+    算出されるので、コミット済み画像と HTML が揃っていればローカル/CI で同一。
+- 毎日 cron（`fetch-daily.yml`）は `og-image.png` を再生成した後に `build_site.py` を
+  走らせ、画像・HTML をセットでコミットするため、同期は自動的に保たれる。
+- 注意点: `og-image.png` を再生成したら必ず `build_site.py` も走らせてセットで
+  コミットする（画像だけ／HTML だけのコミットは同期を壊す）。
