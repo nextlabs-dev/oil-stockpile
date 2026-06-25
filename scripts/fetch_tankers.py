@@ -8,7 +8,7 @@ data/tankers.json を更新する。
 設計:
     - WebSocket で 5-8 分間サンプル → ShipStaticData / PositionReport を集める
     - vessel type 80-89 (Tanker) のみ集計対象
-    - destination を日本港名/UN-LOCODE と部分一致で「日本向け」判定
+    - destination をトークン分割し日本港名/UN-LOCODE とトークン一致で「日本向け」判定
     - 出力は集計値（隻数 + 上位港）に加え、個別タンカー情報（MMSI/船名/destination/
       位置）も出力する。位置は緯度経度を4桁(~11m)に丸める（aggregate 参照）
 
@@ -114,51 +114,76 @@ def is_tanker_type(t):
     return isinstance(t, int) and 80 <= t <= 89
 
 
-def normalize_destination(dest):
-    """destination 文字列を正規化。@パディング、空白、記号を除去して大文字化。"""
+def _tokenize(dest):
+    """destination を英数字トークン列に分割する（大文字化）。
+
+    空白・記号・@ パディング等の非英数字をすべて区切りとして扱う。トークン境界を
+    保持することで、隣接トークンが連結されて生じる誤マッチ（'BANGKOK JP AGENT'
+    → 'BANGKOKJPAGENT' → 'JPAGE' 等）を防ぐ。
+    """
     if not dest:
-        return ""
-    s = dest.upper().strip()
-    s = s.replace("@", "")
-    s = re.sub(r"[\s\-_/.,;:]+", "", s)
-    return s
+        return []
+    return re.findall(r"[A-Z0-9]+", dest.upper())
+
+
+# 5 文字 UN/LOCODE トークン「JP」+3文字（例: JPYOK）のパターン。
+_JP_LOCODE_RE = re.compile(r"JP[A-Z]{3}")
+
+
+def _jp_locodes(tokens):
+    """トークン列から 5 文字の JP LOCODE 候補を抽出する。
+
+    対象は以下の 2 形態:
+      - 単独 5 文字トークン（'JPYOK'）
+      - 先頭が 'JP' で次が独立した 3 文字トークンの分割形（'JP YOK' → 'JPYOK'）
+    船員手入力では LOCODE が先頭に置かれるため、分割の再結合は先頭位置のみ対象とし、
+    中間の 'JP' + 任意トークンを誤って LOCODE 化しない。
+    """
+    codes = [t for t in tokens if _JP_LOCODE_RE.fullmatch(t)]
+    if (
+        len(tokens) >= 2
+        and tokens[0] == "JP"
+        and re.fullmatch(r"[A-Z]{3}", tokens[1])
+    ):
+        codes.append("JP" + tokens[1])
+    return codes
 
 
 def match_japan_port(dest):
-    """destination が日本港なら canonical name を返す。マッチしなければ None。"""
-    if not dest:
+    """destination が日本港なら canonical name を返す。マッチしなければ None。
+
+    港キーワードは独立トークンと完全一致でマッチする（部分一致しない）。
+    'OSAKA INTL' が 'SAKAI' を含み大阪→堺と誤帰属する類の問題を避けるため。
+    """
+    tokens = _tokenize(dest)
+    if not tokens:
         return None
-    norm = normalize_destination(dest)
-    if not norm:
-        return None
-    for kw, canonical in JAPAN_PORT_KEYWORDS.items():
-        if kw in norm:
+    for candidate in tokens + _jp_locodes(tokens):
+        canonical = JAPAN_PORT_KEYWORDS.get(candidate)
+        if canonical:
             return canonical
     return None
-
-
-# 「JP」+ 3 文字 LOCODE パターン。port 名特定不可だが日本向けと推定するためのフォールバック。
-_JP_LOCODE_RE = re.compile(r"JP[A-Z]{3}")
 
 
 def is_japan_bound_destination(dest):
     """destination が日本向けを示すか（特定港マッチに加えて、port 不明の日本向けも True）。
 
-    判定優先順:
+    判定（いずれもトークン境界にアンカーし、連結による誤マッチを防ぐ）:
       1. JAPAN_PORT_KEYWORDS にマッチ（特定可能な日本港）
-      2. ">JP" プレフィックスを含む（船員手入力フリーテキストでも日本向けの慣行）
-      3. "JP[A-Z]{3}" 形式の UN/LOCODE を含む（リスト未登録の日本港）
+      2. 'JAPAN' トークンを含む（港名特定不可だが文字どおり日本向け）
+      3. 先頭トークンが 'JP'（'>JP ...' 国コード慣行。先頭以外の 'JP' は対象外）
+      4. 独立した 'JP[A-Z]{3}' LOCODE トークンを含む（リスト未登録の日本港）
     """
-    if not dest:
-        return False
     if match_japan_port(dest) is not None:
         return True
-    norm = normalize_destination(dest)
-    if not norm:
+    tokens = _tokenize(dest)
+    if not tokens:
         return False
-    if ">JP" in norm:
+    if "JAPAN" in tokens:
         return True
-    if _JP_LOCODE_RE.search(norm):
+    if tokens[0] == "JP":
+        return True
+    if _jp_locodes(tokens):
         return True
     return False
 
