@@ -71,6 +71,22 @@ export const STALE_THRESHOLD_DAYS = 14;
 export const VLCC_CAPACITY_KL = 300_000;
 
 /**
+ * 日本の 1 日あたり原油消費量 [kL]。
+ * エネ庁備蓄算出ベース（純消費量、原油換算）約 28 万 kL/日。
+ * scale ページの容量換算・tankers ページの「N 日分」換算で共通参照する SSOT。
+ */
+export const DAILY_CONSUMPTION_KL = 280_000;
+
+/**
+ * 原油量 [kL] を「日本の原油消費量 N 日分」に換算する。SSOT は DAILY_CONSUMPTION_KL。
+ * 非有限な入力は NaN を返す（formatInt 側で '—' 表示になる）。
+ */
+export function consumptionDaysFromKl(kl) {
+  if (!Number.isFinite(kl)) return NaN;
+  return kl / DAILY_CONSUMPTION_KL;
+}
+
+/**
  * asOf 日付文字列 (YYYY-MM-DD) を JST 0時の epoch ms に変換する。
  * UTC 計算ズレを防ぐため必ず +09:00 を明示する。
  */

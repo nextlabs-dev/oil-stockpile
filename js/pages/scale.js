@@ -9,13 +9,16 @@
  * Japan 番組向けの「億・万」区切り表記に整形する formatJaNumber を用意。
  */
 
-import { computeCurrentDays, loadHistory, VLCC_CAPACITY_KL } from '../core/data.js';
+import {
+  computeCurrentDays,
+  DAILY_CONSUMPTION_KL,
+  loadHistory,
+  VLCC_CAPACITY_KL,
+} from '../core/data.js';
 import { onReady, setText } from '../core/dom.js';
 import { formatDotDate, formatInt } from '../core/format.js';
 
 const CONSTANTS = {
-  /** エネ庁備蓄算出ベース（純消費量、原油換算）約 28 万 kL/日。 */
-  DAILY_CONSUMPTION_KL: 280_000,
   /** 1 バレル = 158.987 L (USA Petroleum barrel)。 */
   LITERS_PER_BARREL: 158.987,
   /** 家庭用お風呂 1 杯。一般的に 200–300 L とされ、本実装では 300 L を採用。 */
@@ -68,7 +71,7 @@ function showLoadError() {
 }
 
 function renderCards(days) {
-  const totalKl = days * CONSTANTS.DAILY_CONSUMPTION_KL;
+  const totalKl = days * DAILY_CONSUMPTION_KL;
   const totalL = totalKl * 1_000;
   const totalBarrels = totalL / CONSTANTS.LITERS_PER_BARREL;
   const vlccCount = totalKl / VLCC_CAPACITY_KL;
