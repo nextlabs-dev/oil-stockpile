@@ -53,7 +53,7 @@ import os
 import re
 import sys
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from lib.io import write_json
 from lib.paths import TANKERS_PATH
@@ -96,11 +96,11 @@ JAPAN_PORT_KEYWORDS = {
     # 観測された短縮形（船員手入力で頻出するパターン）。JP プレフィックス必須の
     # 部分一致なので、独立した英単語との誤マッチは起こらない
     "JPMIZ": "MIZUSHIMA",  # ">JP MIZ B MINAI OFF" や ">JP MIZ TS OFF" 形式
-    "JPMUR": "MURORAN",    # 室蘭製油所・原油受入港
+    "JPMUR": "MURORAN",  # 室蘭製油所・原油受入港
     # 英語の港・地名（destination に頻出）
     "YOKOHAMA": "YOKOHAMA",
     "NEGISHI": "YOKOHAMA",  # 根岸製油所（横浜）
-    "KEIYO": "CHIBA",        # 京葉シーバース（千葉）
+    "KEIYO": "CHIBA",  # 京葉シーバース（千葉）
     "CHIBA": "CHIBA",
     "KAWASAKI": "KAWASAKI",
     "YOKKAICHI": "YOKKAICHI",
@@ -151,11 +151,7 @@ def _jp_locodes(tokens):
     中間の 'JP' + 任意トークンを誤って LOCODE 化しない。
     """
     codes = [t for t in tokens if _JP_LOCODE_RE.fullmatch(t)]
-    if (
-        len(tokens) >= 2
-        and tokens[0] == "JP"
-        and re.fullmatch(r"[A-Z]{3}", tokens[1])
-    ):
+    if len(tokens) >= 2 and tokens[0] == "JP" and re.fullmatch(r"[A-Z]{3}", tokens[1]):
         codes.append("JP" + tokens[1])
     return codes
 
@@ -194,9 +190,7 @@ def is_japan_bound_destination(dest):
         return True
     if tokens[0] == "JP":
         return True
-    if _jp_locodes(tokens):
-        return True
-    return False
+    return bool(_jp_locodes(tokens))
 
 
 def _round_coord(value):
@@ -242,10 +236,7 @@ def aggregate(ships_seen):
             japan_bound_unknown_port += 1
 
     counter = Counter(japan_bound_ports)
-    top = [
-        {"port": port, "count": count}
-        for port, count in counter.most_common(10)
-    ]
+    top = [{"port": port, "count": count} for port, count in counter.most_common(10)]
 
     return {
         "totalTankersInRegion": len(vessels),
@@ -293,7 +284,7 @@ async def sample(api_key, duration_sec, bbox):
             timeout = max(1.0, deadline - loop.time())
             try:
                 raw = await asyncio.wait_for(ws.recv(), timeout=timeout)
-            except asyncio.TimeoutError:
+            except TimeoutError:
                 break
 
             try:
@@ -330,12 +321,9 @@ async def sample(api_key, duration_sec, bbox):
 
 
 def write_output(summary, duration_sec, bbox):
-    bbox_str = (
-        f"{bbox[0][0]:g}-{bbox[1][0]:g}N / "
-        f"{bbox[0][1]:g}-{bbox[1][1]:g}E"
-    )
+    bbox_str = f"{bbox[0][0]:g}-{bbox[1][0]:g}N / {bbox[0][1]:g}-{bbox[1][1]:g}E"
     out = {
-        "fetchedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "fetchedAt": datetime.now(UTC).isoformat(timespec="seconds"),
         "samplingDurationSec": duration_sec,
         **summary,
         "boundingBox": bbox_str,

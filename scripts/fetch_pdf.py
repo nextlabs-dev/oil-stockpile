@@ -18,6 +18,7 @@ oil_daily.pdf をダウンロード・パースし、data/snapshots.json を更�
 from __future__ import annotations
 
 import argparse
+import contextlib
 import re
 import sys
 import time
@@ -25,13 +26,11 @@ from pathlib import Path
 
 import pdfplumber
 from curl_cffi import requests as crequests
-
 from lib.io import read_json, write_json
 from lib.paths import DATA_DIR, SNAPSHOTS_PATH
 
 PDF_URL = (
-    "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/"
-    "pl001/pdf-oil-res/oil_daily.pdf"
+    "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/pdf-oil-res/oil_daily.pdf"
 )
 
 TMP_PDF_PATH = DATA_DIR / ".oil_daily.pdf"
@@ -85,8 +84,7 @@ def download_pdf(
         except Exception as e:
             last_err = e
             print(
-                f"[fetch] download attempt {attempt}/{retries} failed: "
-                f"{type(e).__name__}: {e}",
+                f"[fetch] download attempt {attempt}/{retries} failed: {type(e).__name__}: {e}",
                 file=sys.stderr,
             )
             if attempt < retries:
@@ -111,6 +109,10 @@ def parse_snapshots(text: str) -> list[dict]:
 
     snapshots: list[dict] = []
 
+    def grab(block: str, label: str) -> int | None:
+        mm = re.search(rf"{label}\s*(\d+)\s*日分", block)
+        return int(mm.group(1)) if mm else None
+
     for i, m in enumerate(matches):
         ry, mp, dp, ma, da = (int(g) for g in m.groups())
         year_pub = reiwa_to_gregorian(ry)
@@ -126,14 +128,10 @@ def parse_snapshots(text: str) -> list[dict]:
         block_end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
         block = text[block_start:block_end]
 
-        def grab(label: str) -> int | None:
-            mm = re.search(rf"{label}\s*(\d+)\s*日分", block)
-            return int(mm.group(1)) if mm else None
-
-        national = grab("国家備蓄")
-        priv = grab("民間備蓄")
-        joint = grab("産油国共同備蓄")
-        total = grab("合計")
+        national = grab(block, "国家備蓄")
+        priv = grab(block, "民間備蓄")
+        joint = grab(block, "産油国共同備蓄")
+        total = grab(block, "合計")
 
         if None in (national, priv, joint, total):
             # ヘッダだけ見つかって本文が続かない異常ケースはスキップ
@@ -164,9 +162,7 @@ def validate(snapshot: dict, prev_total: int | None = None) -> None:
         )
     if prev_total is not None and abs(t - prev_total) > 30:
         # 日次変動が30日超は通常起こらない
-        raise RuntimeError(
-            f"daily change too large: prev {prev_total} -> {t} ({snapshot['asOf']})"
-        )
+        raise RuntimeError(f"daily change too large: prev {prev_total} -> {t} ({snapshot['asOf']})")
 
 
 def load_existing() -> list[dict]:
@@ -242,8 +238,8 @@ def main(argv: list[str]) -> int:
         return 1
     finally:
         if not args.keep_pdf and args.pdf_path is None:
-            try: TMP_PDF_PATH.unlink()
-            except FileNotFoundError: pass
+            with contextlib.suppress(FileNotFoundError):
+                TMP_PDF_PATH.unlink()
 
     if not new_snapshots:
         print("[fetch] no snapshots extracted (unexpected)", file=sys.stderr)

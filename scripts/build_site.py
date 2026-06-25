@@ -119,7 +119,9 @@ def render_nav(page: dict[str, Any], nav_labels: dict[str, str], nav_order: list
     for key in nav_order:
         classes = "tab tab--active" if key == page["active_nav"] else "tab"
         current = ' aria-current="page"' if key == page["active_nav"] else ""
-        links.append(f'      <a class="{classes}" href="{page["nav"][key]}"{current}>{nav_labels[key]}</a>')
+        links.append(
+            f'      <a class="{classes}" href="{page["nav"][key]}"{current}>{nav_labels[key]}</a>'
+        )
     return "\n".join(links)
 
 

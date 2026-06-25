@@ -51,7 +51,7 @@ class WriteJsonFormatContractTest(unittest.TestCase):
     def test_indent_is_two_spaces(self):
         text = self._read({"a": 1, "b": [1, 2]})
         self.assertIn('\n  "a"', text)
-        self.assertIn('\n    1', text)
+        self.assertIn("\n    1", text)
 
     def test_trailing_newline(self):
         text = self._read({"a": 1})
