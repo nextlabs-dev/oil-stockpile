@@ -23,7 +23,14 @@ const MS_PER_DAY = 86_400_000;
 let latestSnapshot = null;
 let asOfTimestamp = null;
 
-function setLatest(history) {
+/**
+ * 値ソース（最新スナップショット）だけを仕込む。tick 表示ループ・listener・
+ * stale 副作用とは分離してあるので、共有テキスト用に computeCurrentDays() だけ
+ * 必要なページ（tankers）は initCounter ではなくこちらを呼べばよい。
+ *
+ * @param {Array<{published:string,asOf:string,total:number,national:number,private:number,joint:number}>} history
+ */
+export function setLatest(history) {
   if (!Array.isArray(history) || history.length === 0) {
     throw new Error('history is empty');
   }
@@ -109,10 +116,12 @@ function tick() {
 export function initCounter(history) {
   setLatest(history);
 
-  // 古さ警告（asOf から閾値日数以上経過しているとき）
+  // 古さ警告（asOf から閾値日数以上経過しているとき）。
+  // カウンター固有の id を使う。home が所有する #counter-stale-warning を指し、
+  // tankers の #stale-warning（6時間タンカーバナー）を誤って点けない。
   const elapsedDays = getElapsedDays();
   if (elapsedDays > STALE_THRESHOLD_DAYS) {
-    showElement('stale-warning');
+    showElement('counter-stale-warning');
   }
 
   tick();

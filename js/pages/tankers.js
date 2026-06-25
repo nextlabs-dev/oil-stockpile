@@ -8,7 +8,7 @@
  * リアルタイムストリームではなく、バックエンドが定期取得した snapshot を読むだけ。
  */
 
-import { initCounter } from '../components/counter.js';
+import { setLatest } from '../components/counter.js';
 import { initShare } from '../components/share.js';
 import { initTankerMap } from '../components/tanker-map.js';
 import { loadHistory, loadJson, VLCC_CAPACITY_KL } from '../core/data.js';
@@ -152,10 +152,12 @@ async function main() {
 
   checkStaleness(data.fetchedAt);
 
-  // Load snapshot history just to enable the share button to show "いま N 日分"
+  // Load snapshot history just to enable the share button to show "いま N 日分".
+  // setLatest() だけ呼ぶ: tankers にはカウンター DOM が無いので、initCounter の
+  // 1Hz タイマー・visibilitychange listener・stale 副作用（油データの古さ警告）は不要。
   try {
     const history = await loadHistory('../data/snapshots.json');
-    initCounter(history);
+    setLatest(history);
   } catch (e) {
     console.error('snapshots load (for share):', e);
   }
