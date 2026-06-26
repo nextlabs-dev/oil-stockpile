@@ -1,58 +1,34 @@
 {
-  "fetchedAt": "2026-06-26T20:02:03+00:00",
+  "fetchedAt": "2026-06-26T20:59:06+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 0,
-  "japanBoundUnknownPort": 0,
+  "totalTankersInRegion": 8,
+  "japanBoundTankers": 1,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440714100,
-      "name": "DAON",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1209,
-      "lon": 129.0501
-    },
-    {
-      "mmsi": 374426000,
-      "name": "CRANE VESTA",
-      "destination": "BUSAN N3",
-      "isJapanBound": false,
-      "lat": 35.0579,
-      "lon": 129.0366
-    },
-    {
-      "mmsi": 440154960,
-      "name": "32DAEYOUNG",
+      "mmsi": 440155380,
+      "name": "KEUMHYANG",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1194,
-      "lon": 129.1906
+      "lat": 35.1232,
+      "lon": 129.0527
     },
     {
-      "mmsi": 373982000,
-      "name": "SULFUR BRAVE",
-      "destination": "BUSAN_KR",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
+      "mmsi": 440110750,
+      "name": "KEUMSUNG HO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0515
+      "lat": 35.1233,
+      "lon": 129.051
     },
     {
-      "mmsi": 416449000,
-      "name": "HUA YUN",
-      "destination": "SUAO,TW",
+      "mmsi": 440409920,
+      "name": "HANNAM",
+      "destination": "BUSAN NEW PORT NT05",
       "isJapanBound": false,
-      "lat": 24.9237,
-      "lon": 122.1094
+      "lat": 34.9683,
+      "lon": 129.0214
     },
     {
       "mmsi": 440105720,
@@ -63,28 +39,36 @@
       "lon": 129.0516
     },
     {
-      "mmsi": 440525000,
-      "name": "KEOJE CORDELIA",
-      "destination": "NINGBO CHINA",
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.0964,
+      "lon": 129.0469
     },
     {
-      "mmsi": 440500300,
-      "name": "SONGRIM HO",
+      "mmsi": 431401993,
+      "name": "SENRYUMARU",
+      "destination": ">JP TAW OFF",
+      "isJapanBound": true,
+      "lat": 34.3604,
+      "lon": 135.1615
+    },
+    {
+      "mmsi": 440400010,
+      "name": "PHOENIX",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1213,
-      "lon": 129.0504
+      "lat": 35.1215,
+      "lon": 129.0514
     },
     {
-      "mmsi": 440101990,
-      "name": "DONG BANG 7HO",
-      "destination": "PUS",
+      "mmsi": 440300120,
+      "name": "M/T BK25",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.1199,
-      "lon": 129.0503
+      "lat": 35.1208,
+      "lon": 129.0493
     }
   ],
   "boundingBox": "24-46N / 122-146E",
