@@ -6,7 +6,7 @@
  *   - VLCC 隻数 / お風呂杯数（スケール視点）
  *
  * 値の精度より「桁感」を優先し、すべて約・概算で表示する。
- * Japan 番組向けの「億・万」区切り表記に整形する formatJaNumber を用意。
+ * 大きな数値は core/format.js の formatJaNumber で「億・万」区切りに整形する。
  */
 
 import {
@@ -18,7 +18,7 @@ import {
   VLCC_CAPACITY_KL,
 } from '../core/data.js';
 import { onReady, setText, showElement } from '../core/dom.js';
-import { formatDotDate, formatInt } from '../core/format.js';
+import { formatDotDate, formatInt, formatJaNumber } from '../core/format.js';
 
 const CONSTANTS = {
   /** 1 バレル = 158.987 L (USA Petroleum barrel)。 */
@@ -28,29 +28,6 @@ const CONSTANTS = {
   /** 日本の総人口（概算）。 */
   POPULATION: 125_000_000,
 };
-
-/** 整数を「○億○,○○○万」表記に整形する（億・万のいずれか / 両方）。 */
-function formatJaNumber(n) {
-  if (n == null || !Number.isFinite(n)) return '—';
-  const x = Math.round(n);
-  const oku = 100_000_000;
-  const man = 10_000;
-  if (x >= oku) {
-    const okuPart = Math.floor(x / oku);
-    const manPart = Math.floor((x % oku) / man);
-    const head = okuPart.toLocaleString('ja-JP');
-    if (manPart === 0) return `${head}億`;
-    return `${head}億${manPart.toLocaleString('ja-JP')}万`;
-  }
-  if (x >= man) {
-    const manPart = Math.floor(x / man);
-    const remainder = x % man;
-    const head = manPart.toLocaleString('ja-JP');
-    if (remainder === 0) return `${head}万`;
-    return `${head}万${remainder.toLocaleString('ja-JP')}`;
-  }
-  return x.toLocaleString('ja-JP');
-}
 
 function formatYearMonth(iso) {
   if (!iso) return '—';
