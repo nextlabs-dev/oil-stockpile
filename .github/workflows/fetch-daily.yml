@@ -61,11 +61,13 @@ jobs:
             changed_paths+=("assets/og-image.png")
           fi
           # build_site が ?v=<hash> を焼き直した HTML も拾う。
-          for html in index.html tankers/index.html scale/index.html about/index.html; do
+          # 生成ページ一覧は src/site.json の pages[].output を SSOT とし、
+          # ここでハードコードしない（test.yml と重複させない）。
+          while IFS= read -r html; do
             if [[ -n "$(git status --porcelain "$html")" ]]; then
               changed_paths+=("$html")
             fi
-          done
+          done < <(python -c "import json;print('\n'.join(p['output'] for p in json.load(open('src/site.json', encoding='utf-8'))['pages']))")
           if [[ ${#changed_paths[@]} -gt 0 ]]; then
             git add "${changed_paths[@]}"
             git commit -m "data: auto-update $(date -u +%Y-%m-%d)"
