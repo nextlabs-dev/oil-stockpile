@@ -1,63 +1,79 @@
 {
-  "fetchedAt": "2026-06-26T15:17:58+00:00",
+  "fetchedAt": "2026-06-26T16:08:58+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 7,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 1,
+  "totalTankersInRegion": 9,
+  "japanBoundTankers": 0,
+  "japanBoundUnknownPort": 0,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 636022728,
-      "name": "DING HENG 38",
+      "mmsi": 440101990,
+      "name": "DONG BANG 7HO",
+      "destination": "PUS",
+      "isJapanBound": false,
+      "lat": 35.1199,
+      "lon": 129.0503
+    },
+    {
+      "mmsi": 273273980,
+      "name": "AKVILON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440105720,
+      "name": "DAE JEONG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1215,
+      "lon": 129.0515
+    },
+    {
+      "mmsi": 373982000,
+      "name": "SULFUR BRAVE",
+      "destination": "BUSAN_KR",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 273279370,
+      "name": "MELISSA",
+      "destination": "TBS",
+      "isJapanBound": false,
+      "lat": 35.0463,
+      "lon": 129.541
+    },
+    {
+      "mmsi": 538003883,
+      "name": "ALPINE LIBERTY",
+      "destination": "KR USN > AU DAM",
+      "isJapanBound": false,
+      "lat": 35.0871,
+      "lon": 129.3681
+    },
+    {
+      "mmsi": 440014870,
+      "name": "MS CLEAN",
+      "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": 35.2046,
+      "lon": 129.3637
+    },
+    {
+      "mmsi": 441587000,
+      "name": "LOTUS SAMBU",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 34.2163,
+      "lon": 134.9896
+    },
+    {
+      "mmsi": 440014500,
+      "name": "WOO CHAN",
       "destination": "KR INC",
-      "isJapanBound": false,
-      "lat": 37.4664,
-      "lon": 126.6066
-    },
-    {
-      "mmsi": 440507780,
-      "name": "23 BU GWANG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.104,
-      "lon": 129.0658
-    },
-    {
-      "mmsi": 440410930,
-      "name": "CHARIS",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1198,
-      "lon": 129.0504
-    },
-    {
-      "mmsi": 440714100,
-      "name": "DAON",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.0132,
-      "lon": 129.0763
-    },
-    {
-      "mmsi": 431007017,
-      "name": "RINDO MARU",
-      "destination": ">JP TYO HANEDA OFF",
-      "isJapanBound": true,
-      "lat": 35.5157,
-      "lon": 139.8419
-    },
-    {
-      "mmsi": 440102050,
-      "name": "MYUNGJIN",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.0638,
-      "lon": 129.1333
-    },
-    {
-      "mmsi": 440167480,
-      "name": "DL AMBER",
-      "destination": "BSN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
