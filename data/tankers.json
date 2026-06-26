@@ -1,34 +1,26 @@
 {
-  "fetchedAt": "2026-06-26T14:05:18+00:00",
+  "fetchedAt": "2026-06-26T15:17:58+00:00",
   "samplingDurationSec": 480,
   "totalTankersInRegion": 7,
-  "japanBoundTankers": 0,
-  "japanBoundUnknownPort": 0,
+  "japanBoundTankers": 1,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440115430,
-      "name": "TAHITI",
+      "mmsi": 636022728,
+      "name": "DING HENG 38",
+      "destination": "KR INC",
+      "isJapanBound": false,
+      "lat": 37.4664,
+      "lon": 126.6066
+    },
+    {
+      "mmsi": 440507780,
+      "name": "23 BU GWANG",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1083,
-      "lon": 129.0937
-    },
-    {
-      "mmsi": 440525000,
-      "name": "KEOJE CORDELIA",
-      "destination": "INCHEON KOREA",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0514
+      "lat": 35.104,
+      "lon": 129.0658
     },
     {
       "mmsi": 440410930,
@@ -39,25 +31,33 @@
       "lon": 129.0504
     },
     {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1232,
-      "lon": 129.0527
-    },
-    {
-      "mmsi": 538008043,
-      "name": "CHEMOCEAN LEO",
-      "destination": "TW MLI",
-      "isJapanBound": false,
-      "lat": 25.1339,
-      "lon": 122.1363
-    },
-    {
-      "mmsi": 440192560,
-      "name": "JINSUNG",
+      "mmsi": 440714100,
+      "name": "DAON",
       "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0132,
+      "lon": 129.0763
+    },
+    {
+      "mmsi": 431007017,
+      "name": "RINDO MARU",
+      "destination": ">JP TYO HANEDA OFF",
+      "isJapanBound": true,
+      "lat": 35.5157,
+      "lon": 139.8419
+    },
+    {
+      "mmsi": 440102050,
+      "name": "MYUNGJIN",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.0638,
+      "lon": 129.1333
+    },
+    {
+      "mmsi": 440167480,
+      "name": "DL AMBER",
+      "destination": "BSN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
