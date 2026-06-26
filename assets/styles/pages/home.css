@@ -17,9 +17,6 @@
   --donut-other: #d9d9d9;
 
   --chart-line-total: var(--brand);
-  --chart-line-1: #fb7185;
-  --chart-line-2: var(--brand);
-  --chart-line-3: #fbbf24;
 }
 
 .page-home {
@@ -433,29 +430,6 @@
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.page-home .chart-line-segment {
-  fill: none;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.page-home .chart-segments-on .chart-line-segment {
-  opacity: 0.85;
-}
-
-.page-home .chart-line-national {
-  stroke: var(--chart-line-1);
-}
-.page-home .chart-line-private {
-  stroke: var(--chart-line-2);
-}
-.page-home .chart-line-joint {
-  stroke: var(--chart-line-3);
 }
 
 /* Decorative points hidden by default; revealed on hover (svg is aria-hidden) */
