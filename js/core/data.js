@@ -109,6 +109,12 @@ export function elapsedDaysSince(asOf, now = Date.now()) {
  *
  * カウンターページ (秒按分) と石油のものさしページ (整数日) が
  * 同じ値起点で動くよう、両モジュールから本関数を呼ぶ。
+ *
+ * Python ミラー: scripts/generate_ogp.py compute_current_days（OGP 事前生成用）。
+ * 両実装の振る舞いは src/fixtures/current_days_cases.json（ゴールデン表）を
+ * 両言語のテストがアサートしてドリフトを検知する
+ * （js/core/data.test.js と scripts/test_generate_ogp.py）。
+ * 式を変えるときは表と両実装を同時に更新すること。
  */
 export function computeCurrentDays(snapshot, now = Date.now()) {
   if (!snapshot || typeof snapshot.total !== 'number' || !snapshot.asOf) {

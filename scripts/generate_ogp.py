@@ -155,6 +155,10 @@ def compute_current_days(snapshot: Snapshot, now: datetime | None = None) -> flo
     サイト本体 (js/core/data.js:computeCurrentDays) と同じ式で「いま時点」の備蓄日数を返す。
     モデル: 「1 日経過 = 1 日分減る」（asOf を JST 0:00 として now との差分日数を減算）。
     OG 画像は事前生成のため、cron 実行時刻の値で固定される（次の実行までは更新されない）。
+
+    両実装の振る舞いは src/fixtures/current_days_cases.json（ゴールデン表）を
+    両言語のテストがアサートしてドリフトを検知する
+    （scripts/test_generate_ogp.py と js/core/data.test.js）。
     """
     if now is None:
         now = datetime.now(UTC)
