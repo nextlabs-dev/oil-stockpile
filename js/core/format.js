@@ -27,6 +27,29 @@ export function formatInt(n) {
   return Math.round(n).toLocaleString('ja-JP');
 }
 
+/** 整数を「○億○,○○○万」表記に整形する（億・万のいずれか / 両方）。 */
+export function formatJaNumber(n) {
+  if (n == null || !Number.isFinite(n)) return '—';
+  const x = Math.round(n);
+  const oku = 100_000_000;
+  const man = 10_000;
+  if (x >= oku) {
+    const okuPart = Math.floor(x / oku);
+    const manPart = Math.floor((x % oku) / man);
+    const head = okuPart.toLocaleString('ja-JP');
+    if (manPart === 0) return `${head}億`;
+    return `${head}億${manPart.toLocaleString('ja-JP')}万`;
+  }
+  if (x >= man) {
+    const manPart = Math.floor(x / man);
+    const remainder = x % man;
+    const head = manPart.toLocaleString('ja-JP');
+    if (remainder === 0) return `${head}万`;
+    return `${head}万${remainder.toLocaleString('ja-JP')}`;
+  }
+  return x.toLocaleString('ja-JP');
+}
+
 /** ISO 日付 (YYYY-MM-DD) をドット区切り (YYYY.MM.DD) に。空なら '—'。 */
 export function formatDotDate(iso) {
   if (!iso) return '—';
