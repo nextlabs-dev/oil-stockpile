@@ -292,6 +292,20 @@ def make_rounded_rect_mask(size: tuple[int, int], radius: int) -> Image.Image:
     return mask
 
 
+def composite_layer(
+    base: Image.Image,
+    layer: Image.Image,
+    dest: tuple[int, int] = (0, 0),
+) -> None:
+    """RGBA の layer を RGBA の base へ in-place アルファ合成する。
+
+    render_image はレンダリング全体を RGBA で保持し、save() 直前に一度だけ RGB へ
+    戻す。base が RGBA でない場合 Pillow の alpha_composite が ValueError を投げて
+    早期に失敗する（不変条件: base.mode == "RGBA"）。
+    """
+    base.alpha_composite(layer, dest=dest)
+
+
 def draw_soft_shadow(
     base: Image.Image,
     *,
@@ -316,13 +330,7 @@ def draw_soft_shadow(
 
     paste_x = left - pad + offset[0]
     paste_y = top - pad + offset[1]
-    if base.mode != "RGBA":
-        rgba = base.convert("RGBA")
-        rgba.alpha_composite(layer, dest=(paste_x, paste_y))
-        composited = rgba.convert(base.mode)
-        base.paste(composited, (0, 0))
-    else:
-        base.alpha_composite(layer, dest=(paste_x, paste_y))
+    composite_layer(base, layer, (paste_x, paste_y))
 
 
 def draw_gradient_text(
@@ -426,12 +434,7 @@ def draw_header_band(base: Image.Image, *, published_iso: str) -> None:
         radius=3,
         fill=inner,
     )
-    rgba = base.convert("RGBA")
-    rgba.alpha_composite(inner_layer)
-    base.paste(rgba.convert(base.mode), (0, 0))
-
-    # 再構築後の draw を取り直す
-    draw = ImageDraw.Draw(base)
+    composite_layer(base, inner_layer)
 
     text_x = logo_x + logo_size + 12
 
@@ -542,16 +545,8 @@ def draw_hero_card(
     illu = _load_illustration(width=290)
     illu_x = card_right - 32 - illu.width
     illu_y = card_top + (card_h - illu.height) // 2
-    # alpha を mask に流して合成
-    if base.mode == "RGB":
-        rgba = base.convert("RGBA")
-        rgba.alpha_composite(illu, dest=(illu_x, illu_y))
-        base.paste(rgba.convert("RGB"), (0, 0))
-    else:
-        base.alpha_composite(illu, dest=(illu_x, illu_y))
-
-    # 描画後の draw を取り直す
-    draw = ImageDraw.Draw(base)
+    # イラストはそれ自体の alpha でカードへ合成する
+    composite_layer(base, illu, (illu_x, illu_y))
 
     # ─── 左側: カウンター ────────────────────────────────────────────
     left_x = card_left + 44
@@ -586,8 +581,6 @@ def draw_hero_card(
         gradient_bottom=GRADIENT_BOTTOM,
         mid_stop=GRADIENT_MID_STOP,
     )
-    # base.paste 後、再度 draw 取得
-    draw = ImageDraw.Draw(base)
     num_right = num_bbox[2]
 
     # 「日分」（Noto Bold） + 「DAYS LEFT」（Inter Bold, letter-spaced）スタック
@@ -664,8 +657,8 @@ def render_image(
     peak: int = PEAK_DAYS,
 ) -> Image.Image:
     """OGP 画像本体。1200×630 RGB を返す。"""
-    bg = make_vertical_gradient((WIDTH, HEIGHT), BG_TOP, BG_BOTTOM)
-    base = bg.copy()
+    # レイヤ合成は全体を RGBA で保持し、最後に一度だけ RGB へ戻す（composite_layer 参照）。
+    base = make_vertical_gradient((WIDTH, HEIGHT), BG_TOP, BG_BOTTOM).convert("RGBA")
 
     draw_header_band(base, published_iso=snapshot.published)
 
@@ -680,7 +673,7 @@ def render_image(
 
     draw_footer_line(base, as_of_iso=snapshot.as_of)
 
-    return base
+    return base.convert("RGB")
 
 
 def main() -> int:
