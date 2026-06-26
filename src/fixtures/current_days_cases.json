@@ -1,0 +1,44 @@
+[
+  {
+    "label": "at asOf midnight JST returns total",
+    "asOf": "2026-01-01",
+    "total": 200,
+    "now": "2026-01-01T00:00:00+09:00",
+    "expected": 200
+  },
+  {
+    "label": "same instant expressed in UTC locks the +09:00 conversion",
+    "asOf": "2026-01-01",
+    "total": 200,
+    "now": "2025-12-31T15:00:00Z",
+    "expected": 200
+  },
+  {
+    "label": "2.5 days elapsed decrements linearly",
+    "asOf": "2026-01-01",
+    "total": 200,
+    "now": "2026-01-03T12:00:00+09:00",
+    "expected": 197.5
+  },
+  {
+    "label": "whole day elapsed minus one",
+    "asOf": "2026-01-01",
+    "total": 200,
+    "now": "2026-01-02T00:00:00+09:00",
+    "expected": 199
+  },
+  {
+    "label": "now before asOf caps at total (upper clamp)",
+    "asOf": "2026-01-01",
+    "total": 200,
+    "now": "2025-12-22T00:00:00+09:00",
+    "expected": 200
+  },
+  {
+    "label": "large elapse floors at zero (lower clamp)",
+    "asOf": "2026-01-01",
+    "total": 3,
+    "now": "2026-03-01T00:00:00+09:00",
+    "expected": 0
+  }
+]
