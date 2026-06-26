@@ -35,8 +35,10 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Sample AIS stream
-        # aisstream.io は BETA で SLA 非保証。上流障害で run 全体が赤くなるのを避ける。
-        # 失敗時は tankers.json を書かないため、次の Commit if changed は no-op で抜ける。
+        # aisstream.io は BETA で SLA 非保証。上流の一時障害で run 全体が赤くなるのを
+        # 避けるため continue-on-error にする。失敗時は tankers.json を書かないため、次の
+        # Commit if changed は no-op で抜ける。鍵失効や持続障害でグリーンのまま凍結する
+        # ケースは、末尾の 'Guard against stale data' が fetchedAt 鮮度で検出して赤くする。
         continue-on-error: true
         env:
           AISSTREAM_API_KEY: ${{ secrets.AISSTREAM_API_KEY }}
@@ -58,11 +60,6 @@ jobs:
               git reset --hard origin/main
               cp "$sampled" data/tankers.json
 
-              if [[ -z "$(git status --porcelain data/tankers.json)" ]]; then
-                echo "::notice::No changes after refreshing main; tanker counts identical to latest data"
-                exit 0
-              fi
-
               git add data/tankers.json
               git commit -m "data: tankers snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
 
@@ -78,5 +75,12 @@ jobs:
             echo "::error::failed to push tanker snapshot after retries"
             exit 1
           else
-            echo "::notice::No changes; tanker counts identical to existing data"
+            echo "::notice::No tankers.json update to commit; AIS sampling wrote nothing (see 'Sample AIS stream' annotations)"
           fi
+
+      - name: Guard against stale data
+        # continue-on-error なしの独立ステップ。'Sample AIS stream' の continue-on-error が
+        # 鍵失効・aisstream の持続障害を握りつぶしてもジョブがグリーンのままになるのを防ぐ。
+        # tankers.json の fetchedAt が 6h より古ければ（毎時実行なので約6回連続失敗に相当）
+        # 持続的にデータが凍結しているとみなし、ジョブを赤くして保守者に通知する。
+        run: python scripts/check_tankers_fresh.py --max-age-hours 6
