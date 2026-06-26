@@ -1,10 +1,7 @@
 /**
  * F-03 推移グラフ（SVG手書き）
  *
- * メイン折れ線: 合計（黒、太め）
- * トグルON時: 国家/民間/産油国共同の3線を追加表示
- *   ※ 3区分は値域が異なる（合計~230 / 国家~140 / 民間~85 / 産油国~5）ため、
- *      トグルONでY軸を0〜maxの広域に再スケールする。
+ * 折れ線: 合計（黒、太め）の1本。Y軸は min-5..max+5 にスケールする。
  *
  * SVG 全体は aria-hidden の装飾。各データ点は純装飾の <circle>（focusable にしない）で、
  * マウスホバーで内訳ヒントを更新する。AT 向けの数値は buildHiddenTable の隠し表で提供する。
@@ -79,23 +76,17 @@ function buildHiddenTable(data) {
   );
 }
 
-export function getYDomain(totals, showSegments) {
-  if (showSegments) {
-    return {
-      yMin: 0,
-      yMax: Math.max(...totals) + 10,
-    };
-  }
+export function getYDomain(totals) {
   return {
     yMin: Math.max(0, Math.min(...totals) - 5),
     yMax: Math.max(...totals) + 5,
   };
 }
 
-export function buildChartModel(data, showSegments, dims = DESKTOP_DIMS) {
+export function buildChartModel(data, dims = DESKTOP_DIMS) {
   const { W, H, PAD_L, PAD_R, PAD_T, PAD_B } = dims;
   const totals = data.map((r) => r.total);
-  const { yMin, yMax } = getYDomain(totals, showSegments);
+  const { yMin, yMax } = getYDomain(totals);
   const plotW = W - PAD_L - PAD_R;
   const plotH = H - PAD_T - PAD_B;
   const n = data.length;
@@ -109,9 +100,6 @@ export function buildChartModel(data, showSegments, dims = DESKTOP_DIMS) {
     points: data.map((row, i) => ({
       x: xAt(i),
       yTotal: yAt(row.total),
-      yNational: yAt(row.national),
-      yPrivate: yAt(row.private),
-      yJoint: yAt(row.joint),
       row,
       i,
     })),
@@ -162,23 +150,15 @@ export function renderPointsSvg(points) {
     .join('');
 }
 
-function renderSegmentLinesSvg(points, showSegments) {
-  if (!showSegments) return '';
-  return `<path class="chart-line-segment chart-line-joint" d="${linePath(points, 'yJoint')}" />
-         <path class="chart-line-segment chart-line-private" d="${linePath(points, 'yPrivate')}" />
-         <path class="chart-line-segment chart-line-national" d="${linePath(points, 'yNational')}" />`;
-}
-
-function renderChartSvg(data, showSegments, dims) {
+function renderChartSvg(data, dims) {
   const { W, H, PAD_L, PAD_R, PAD_T } = dims;
-  const model = buildChartModel(data, showSegments, dims);
+  const model = buildChartModel(data, dims);
   return `
       ${buildHiddenTable(data)}
       <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         ${renderGridSvg(model, dims)}
         <text class="chart-axis-label" x="${((PAD_L + (W - PAD_R)) / 2).toFixed(1)}" y="${(H - 4).toFixed(1)}" text-anchor="middle">日付（月／日）</text>
         <text class="chart-axis-label" x="${PAD_L}" y="${(PAD_T - 4).toFixed(1)}" text-anchor="start">備蓄日数（日）</text>
-        ${renderSegmentLinesSvg(model.points, showSegments)}
         <path class="chart-line-total" d="${linePath(model.points, 'yTotal')}" />
         ${renderPointsSvg(model.points)}
         ${renderXTicksSvg(model.points, dims)}
@@ -209,7 +189,6 @@ function bindChartInteractions(wrap, data, hint, defaultHint) {
 export function initChart(history) {
   const wrap = document.getElementById('chart-wrap');
   const hint = document.getElementById('chart-hint');
-  const toggle = document.getElementById('chart-toggle-segments');
   if (!wrap) return;
 
   const data = history;
@@ -220,29 +199,18 @@ export function initChart(history) {
 
   const defaultHint = hint ? hint.textContent : '';
 
-  function render(showSegments) {
-    wrap.innerHTML = renderChartSvg(data, showSegments, getChartDims());
-
-    if (showSegments) wrap.classList.add('chart-segments-on');
-    else wrap.classList.remove('chart-segments-on');
-
+  function render() {
+    wrap.innerHTML = renderChartSvg(data, getChartDims());
     bindChartInteractions(wrap, data, hint, defaultHint);
   }
 
-  // Initial render (segments hidden)
-  render(false);
-
-  if (toggle) {
-    toggle.addEventListener('change', () => {
-      render(toggle.checked);
-    });
-  }
+  render();
 
   // モバイル境界を跨いだら、その幅向けの viewBox で描き直す
   if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
     const mq = window.matchMedia('(max-width: 640px)');
     if (typeof mq.addEventListener === 'function') {
-      mq.addEventListener('change', () => render(!!toggle?.checked));
+      mq.addEventListener('change', () => render());
     }
   }
 }

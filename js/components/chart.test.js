@@ -22,13 +22,9 @@ test('pickXLabelIndices: n>max は max個以下・両端を含む・昇順ユニ
   );
 });
 
-test('getYDomain: showSegments=true は 0 起点・max+10', () => {
-  assert.deepEqual(getYDomain([100, 200, 150], true), { yMin: 0, yMax: 210 });
-});
-
-test('getYDomain: showSegments=false は min-5..max+5（下限は0でクランプ）', () => {
-  assert.deepEqual(getYDomain([220, 230, 225], false), { yMin: 215, yMax: 235 });
-  assert.deepEqual(getYDomain([3, 4], false), { yMin: 0, yMax: 9 });
+test('getYDomain: min-5..max+5（下限は0でクランプ）', () => {
+  assert.deepEqual(getYDomain([220, 230, 225]), { yMin: 215, yMax: 235 });
+  assert.deepEqual(getYDomain([3, 4]), { yMin: 0, yMax: 9 });
 });
 
 const SAMPLE = [
@@ -38,7 +34,7 @@ const SAMPLE = [
 ];
 
 test('buildChartModel: 点数・index・元行を保持する', () => {
-  const m = buildChartModel(SAMPLE, false);
+  const m = buildChartModel(SAMPLE);
   assert.equal(m.points.length, SAMPLE.length);
   m.points.forEach((p, i) => {
     assert.equal(p.i, i);
@@ -47,28 +43,28 @@ test('buildChartModel: 点数・index・元行を保持する', () => {
 });
 
 test('buildChartModel: x は左から右へ単調増加する', () => {
-  const m = buildChartModel(SAMPLE, false);
+  const m = buildChartModel(SAMPLE);
   for (let i = 1; i < m.points.length; i++) {
     assert.ok(m.points[i].x > m.points[i - 1].x);
   }
 });
 
 test('buildChartModel: 値が大きいほど y は小さい（上にプロットされる）', () => {
-  const m = buildChartModel(SAMPLE, false);
+  const m = buildChartModel(SAMPLE);
   // total: 200, 210, 190 → 210 の y が最小、190 の y が最大
   assert.ok(m.points[1].yTotal < m.points[0].yTotal);
   assert.ok(m.points[2].yTotal > m.points[0].yTotal);
 });
 
 test('buildChartModel: 1点でも例外を投げず有限値を返す（中央寄せ）', () => {
-  const m = buildChartModel([SAMPLE[0]], false);
+  const m = buildChartModel([SAMPLE[0]]);
   assert.equal(m.points.length, 1);
   assert.ok(Number.isFinite(m.points[0].x));
   assert.ok(Number.isFinite(m.points[0].yTotal));
 });
 
 test('renderPointsSvg: 装飾点は aria-hidden な SVG 内でフォーカス・公開されない（aria-hidden-focus 防止）', () => {
-  const { points } = buildChartModel(SAMPLE, false);
+  const { points } = buildChartModel(SAMPLE);
   const svg = renderPointsSvg(points);
   // tabindex を持たせない＝キーボードのタブ順に「幽霊タブストップ」を作らない
   assert.ok(!/tabindex/.test(svg), 'tabindex を付与してはならない');
@@ -79,7 +75,7 @@ test('renderPointsSvg: 装飾点は aria-hidden な SVG 内でフォーカス・
 });
 
 test('renderPointsSvg: データ点ごとに装飾円を1つ描画し data-i を保持する（ホバー連動用）', () => {
-  const { points } = buildChartModel(SAMPLE, false);
+  const { points } = buildChartModel(SAMPLE);
   const svg = renderPointsSvg(points);
   const count = (svg.match(/class="chart-point"/g) || []).length;
   assert.equal(count, SAMPLE.length);
