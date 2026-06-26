@@ -1,20 +1,49 @@
 /**
  * F-05 シェア
  *  - X (Twitter) intent URL を新規タブで開く（テキスト＋URL）
- *  - LINE / Facebook 公式シェア URL を新規タブで開く（URL のみ。
- *    Facebook は quote 廃止済み、LINE の lineit/share も text 非対応のため）
+ *  - LINE 公式シェア URL を新規タブで開く（URL のみ。lineit/share は text 非対応のため）
  *  - Clipboard API でリンクとテキストをコピー
  *
  * X とコピーのシェアテキストは「いま{N}日分」を含む。N は computeCurrentDays() の整数部。
  *
- * バインドは `data-share="x|line|facebook|copy"` 属性で行い、ページ上の
+ * バインドは `data-share="x|line|copy"` 属性で行い、ページ上の
  * 複数インスタンス（例: ヒーロー内 + フッター内）に同時に作用する。
+ *
+ * 共有URL（X/LINE がクロールする URL）には og:image に焼かれた ?v=<hash> を
+ * 反映する。X 等のカードキャッシュは「共有URL単位」（X は約7日TTL）で、画像URL側を
+ * ?v= でバストしても共有URLが不変だと再クロールされない。画像が変わるたびに共有URLも
+ * 変えることで毎回再クロールさせ、最新カードを出させる。
  */
 
 import { SITE_CONFIG } from '../core/data.js';
 import { computeCurrentDays } from './counter.js';
 
 const TOAST_MS = 2400;
+
+/**
+ * og:image の content（例 '.../og-image.png?v=8b7353b1'）から ?v= の値を取り出し、
+ * ページURL（siteUrl）に同じ ?v= を付けて返す純粋関数。
+ * ハッシュが取れない／不正な値なら siteUrl をそのまま返す（fail safe・共有は止めない）。
+ */
+export function buildShareUrl(siteUrl, ogImage) {
+  let version = null;
+  if (ogImage) {
+    try {
+      version = new URL(ogImage).searchParams.get('v');
+    } catch {
+      // og:image が不正 URL なら cache-bust 無しで継続（version は null のまま）
+    }
+  }
+  if (!version) return siteUrl;
+  const url = new URL(siteUrl);
+  url.searchParams.set('v', version);
+  return url.toString();
+}
+
+function currentShareUrl() {
+  const ogImage = document.querySelector('meta[property="og:image"]')?.content;
+  return buildShareUrl(SITE_CONFIG.url, ogImage);
+}
 
 function buildShareText() {
   const days = computeCurrentDays();
@@ -40,17 +69,12 @@ function openShareX() {
     showToast('データを取得できていません');
     return;
   }
-  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(SITE_CONFIG.url)}`;
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(currentShareUrl())}`;
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
 function openShareLine() {
-  const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(SITE_CONFIG.url)}`;
-  window.open(url, '_blank', 'noopener,noreferrer');
-}
-
-function openShareFacebook() {
-  const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_CONFIG.url)}`;
+  const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(currentShareUrl())}`;
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
@@ -85,7 +109,6 @@ async function copyShareLink() {
 const HANDLERS = {
   x: openShareX,
   line: openShareLine,
-  facebook: openShareFacebook,
   copy: copyShareLink,
 };
 
