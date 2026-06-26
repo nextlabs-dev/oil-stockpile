@@ -214,13 +214,19 @@ def aggregate(ships_seen):
         last_pos = info.get("last_pos")
         if not isinstance(last_pos, dict):
             last_pos = None
+        lat = _round_coord(last_pos.get("lat")) if last_pos else None
+        lon = _round_coord(last_pos.get("lon")) if last_pos else None
+        # 座標はペアで原子的に扱う: 片側でも無効なら両方 None にする。
+        # 片側だけ有効な座標は地図に打点できず意味を持たないため出力しない。
+        if lat is None or lon is None:
+            lat = lon = None
         vessel = {
             "mmsi": int(mmsi) if isinstance(mmsi, (int, str)) and str(mmsi).isdigit() else mmsi,
             "name": (static.get("name") or "").strip(),
             "destination": destination,
             "isJapanBound": is_japan_bound_destination(destination),
-            "lat": _round_coord(last_pos.get("lat")) if last_pos else None,
-            "lon": _round_coord(last_pos.get("lon")) if last_pos else None,
+            "lat": lat,
+            "lon": lon,
         }
         vessels.append(vessel)
 

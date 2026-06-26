@@ -378,6 +378,8 @@ class TestVessels(unittest.TestCase):
         self.assertEqual(v["lon"], 140.9877)
 
     def test_invalid_position_yields_null_coords(self):
+        # 座標はペアで原子的に扱う: lat が無効なら lon が単体では valid でも
+        # ペア両方を None にする（不整合な片側座標を出力しない）。
         ships = {
             1: {
                 "static": {"type": 80, "name": "BAD", "destination": "JPYOK"},
@@ -387,8 +389,20 @@ class TestVessels(unittest.TestCase):
         result = aggregate(ships)
         v = result["vessels"][0]
         self.assertIsNone(v["lat"])
-        # lon も None を期待（lat が無効ならペアで無効扱い）
-        self.assertEqual(v["lon"], 140.0)  # 個別では valid なので残す
+        self.assertIsNone(v["lon"])
+
+    def test_invalid_lon_also_yields_null_coords(self):
+        # ペア無効化は対称: lon が無効なら lat が単体では valid でも両方 None。
+        ships = {
+            1: {
+                "static": {"type": 80, "name": "BAD", "destination": "JPYOK"},
+                "last_pos": {"lat": 35.0, "lon": "not-a-number"},
+            },
+        }
+        result = aggregate(ships)
+        v = result["vessels"][0]
+        self.assertIsNone(v["lat"])
+        self.assertIsNone(v["lon"])
 
 
 class TestCheckErrorFrame(unittest.TestCase):
