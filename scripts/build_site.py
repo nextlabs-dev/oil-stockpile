@@ -12,6 +12,7 @@ content. Shared head/header/footer markup is generated here.
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import re
 from pathlib import Path
@@ -114,6 +115,60 @@ def verify_constants_in_sync() -> None:
     )
 
 
+# 属性なしの <script>…</script>（gtag 初期化ブロック）だけにマッチする。
+# gtag ローダ (<script async src=…>) や module script (src 付き) は対象外。
+_INLINE_SCRIPT_RE = re.compile(r"<script>(?P<body>.*?)</script>", re.DOTALL)
+
+
+def compute_inline_script_hashes(template_text: str) -> list[str]:
+    """属性なしインライン <script> ごとに CSP の 'sha256-…' ソーストークンを返す。
+
+    ハッシュはタグの「間」のバイト列（UTF-8）に対して取る。これは CSP の
+    script-src ハッシュが一致を求める対象そのもの。base.html は LF 固定
+    （.gitattributes eol=lf）かつ生成 HTML も LF で書き出すため、テンプレート
+    から取ったハッシュが配信バイトと一致する。
+    """
+    hashes = []
+    for match in _INLINE_SCRIPT_RE.finditer(template_text):
+        digest = hashlib.sha256(match.group("body").encode("utf-8")).digest()
+        hashes.append("sha256-" + base64.b64encode(digest).decode("ascii"))
+    return hashes
+
+
+def build_csp(template_text: str) -> str:
+    """全ページ共通の Content-Security-Policy 値を組み立てる。
+
+    インライン gtag ブロックのハッシュをテンプレートから算出して埋めるため、
+    その script を変更してもポリシーが自動追従する（SSOT）。unpkg(Leaflet) と
+    tile.openstreetmap は /tankers/ でしか使わないが、全ページで許可しても
+    過剰許可は軽微で、単一の定義に保てる利点が勝る。
+
+    GitHub Pages は HTTP ヘッダを設定できないため meta で配信する。meta では
+    frame-ancestors / report-uri / sandbox は無効（クリックジャッキング対策は
+    本層では提供できない）。
+    """
+    inline = " ".join(f"'{token}'" for token in compute_inline_script_hashes(template_text))
+    script_src = "'self'"
+    if inline:
+        script_src += f" {inline}"
+    script_src += " https://www.googletagmanager.com https://unpkg.com"
+    directives = [
+        "default-src 'self'",
+        "base-uri 'self'",
+        "object-src 'none'",
+        f"script-src {script_src}",
+        "style-src 'self' https://fonts.googleapis.com https://unpkg.com",
+        "font-src 'self' https://fonts.gstatic.com",
+        "img-src 'self' data: https://tile.openstreetmap.org https://www.google-analytics.com",
+        (
+            "connect-src 'self' https://www.googletagmanager.com "
+            "https://www.google-analytics.com https://*.google-analytics.com"
+        ),
+        "form-action 'self'",
+    ]
+    return "; ".join(directives)
+
+
 def render_nav(page: dict[str, Any], nav_labels: dict[str, str], nav_order: list[str]) -> str:
     links = []
     for key in nav_order:
@@ -131,6 +186,7 @@ def render_page(
     page: dict[str, Any],
     content: str,
     og_image_version: str = "",
+    csp: str = "",
 ) -> str:
     site = site_config["site"]
     canonical = site["url"] + page["canonical_path"]
@@ -150,6 +206,7 @@ def render_page(
     header_meta_value = text_value(page.get("header_meta"))
     header_meta = f"{header_meta_value}\n" if header_meta_value else ""
     return template.substitute(
+        csp=csp,
         title=page["title"],
         description=page["description"],
         canonical=canonical,
@@ -177,13 +234,15 @@ def render_page(
 def main() -> int:
     verify_constants_in_sync()
     site_config = load_site_config()
-    template = Template(BASE_TEMPLATE.read_text(encoding="utf-8"))
+    base_text = BASE_TEMPLATE.read_text(encoding="utf-8")
+    template = Template(base_text)
+    csp = build_csp(base_text)
     og_image_version = compute_og_image_version(OG_IMAGE_PATH)
     for page in site_config["pages"]:
         output = REPO_ROOT / page["output"]
         content = (PAGES_DIR / page["source"]).read_text(encoding="utf-8").strip()
         output.parent.mkdir(parents=True, exist_ok=True)
-        rendered = render_page(template, site_config, page, content, og_image_version)
+        rendered = render_page(template, site_config, page, content, og_image_version, csp)
         output.write_text(rendered, encoding="utf-8", newline="\n")
         print(f"built {page['output']}")
     return 0
