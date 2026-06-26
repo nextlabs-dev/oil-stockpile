@@ -1,26 +1,50 @@
 {
-  "fetchedAt": "2026-06-26T18:01:42+00:00",
+  "fetchedAt": "2026-06-26T19:01:57+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
+  "totalTankersInRegion": 8,
   "japanBoundTankers": 1,
   "japanBoundUnknownPort": 1,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440191790,
-      "name": "ARA1HO",
-      "destination": "",
+      "mmsi": 416449000,
+      "name": "HUA YUN",
+      "destination": "SUAO,TW",
       "isJapanBound": false,
-      "lat": 35.0698,
-      "lon": 129.1299
+      "lat": 25.1043,
+      "lon": 122.0818
     },
     {
-      "mmsi": 440172660,
-      "name": "KUM KANG",
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
+      "isJapanBound": false,
+      "lat": 35.0964,
+      "lon": 129.0468
+    },
+    {
+      "mmsi": 440714100,
+      "name": "DAON",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0871,
-      "lon": 129.0848
+      "lat": 35.1209,
+      "lon": 129.0501
+    },
+    {
+      "mmsi": 440139560,
+      "name": "CHANYEONG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0964,
+      "lon": 129.0946
+    },
+    {
+      "mmsi": 440103970,
+      "name": "31 WOO JEONG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1221,
+      "lon": 129.0496
     },
     {
       "mmsi": 440115430,
@@ -31,60 +55,20 @@
       "lon": 129.0937
     },
     {
-      "mmsi": 440714100,
-      "name": "DAON",
-      "destination": "BUSAN",
+      "mmsi": 440201420,
+      "name": "BLUE OCEAN HO",
+      "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": 35.0863,
-      "lon": 129.0973
+      "lat": 35.1196,
+      "lon": 129.0506
     },
     {
-      "mmsi": 636020816,
-      "name": "NAVE ELECTRON",
-      "destination": "SG SIN",
-      "isJapanBound": false,
-      "lat": 24.6983,
-      "lon": 122.6613
-    },
-    {
-      "mmsi": 431401993,
-      "name": "SENRYUMARU",
-      "destination": ">JP TAW OFF",
+      "mmsi": 431016994,
+      "name": "KISAN",
+      "destination": ">JP ANE OFF",
       "isJapanBound": true,
-      "lat": 34.3602,
-      "lon": 135.1616
-    },
-    {
-      "mmsi": 440331080,
-      "name": "DAEHEUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1213,
-      "lon": 129.0491
-    },
-    {
-      "mmsi": 440116410,
-      "name": "DL DIAMOND",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.0869,
-      "lon": 129.0846
-    },
-    {
-      "mmsi": 671388100,
-      "name": "ORIS",
-      "destination": "KR BUSAN",
-      "isJapanBound": false,
-      "lat": 35.0515,
-      "lon": 129.0397
-    },
-    {
-      "mmsi": 441039000,
-      "name": "MS THANKS",
-      "destination": "CN ZAP",
-      "isJapanBound": false,
-      "lat": 34.9534,
-      "lon": 129.3091
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
