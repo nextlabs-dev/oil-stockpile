@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import {
   asOfToMs,
@@ -89,3 +90,20 @@ test('consumptionDaysFromKl: 非有限な入力は NaN を返す', () => {
   assert.ok(Number.isNaN(consumptionDaysFromKl(Number.POSITIVE_INFINITY)));
   assert.ok(Number.isNaN(consumptionDaysFromKl('x')));
 });
+
+// 振る舞いの SSOT を Python (scripts/test_generate_ogp.py) と共有してドリフトを検知する。
+const currentDaysCases = JSON.parse(
+  readFileSync(new URL('../../src/fixtures/current_days_cases.json', import.meta.url), 'utf8'),
+);
+
+test('shared fixture: ケースが空でない（vacuous pass を防ぐ）', () => {
+  assert.ok(currentDaysCases.length > 0);
+});
+
+for (const c of currentDaysCases) {
+  test(`shared fixture (computeCurrentDays): ${c.label}`, () => {
+    const now = new Date(c.now).getTime();
+    const got = computeCurrentDays({ asOf: c.asOf, total: c.total }, now);
+    assert.ok(Math.abs(got - c.expected) < 1e-9, `${c.label}: expected ${c.expected}, got ${got}`);
+  });
+}

@@ -41,6 +41,8 @@ from generate_ogp import (  # noqa: E402
     render_image,
     resolve_inter,
 )
+from lib.io import read_json  # noqa: E402
+from lib.paths import CURRENT_DAYS_FIXTURE_PATH  # noqa: E402
 
 
 class PickLatestTest(unittest.TestCase):
@@ -252,6 +254,29 @@ class RenderSmokeTest(unittest.TestCase):
         img = render_image(s, current_days=float(s.total), peak=PEAK_DAYS)
         self.assertEqual(img.size, (1200, 630))
         self.assertEqual(img.mode, "RGB")
+
+
+class SharedFixtureConsistencyTest(unittest.TestCase):
+    """js/core/data.js computeCurrentDays と同じゴールデン表
+    (src/fixtures/current_days_cases.json) をアサートし、JS 実装との
+    ドリフトを検知する。JS 側は js/core/data.test.js が同じ表を読む。"""
+
+    def test_matches_golden_table(self):
+        cases = read_json(CURRENT_DAYS_FIXTURE_PATH)
+        self.assertGreater(len(cases), 0, "fixture must not be empty")
+        for case in cases:
+            with self.subTest(label=case["label"]):
+                snap = Snapshot(
+                    published="2026-05-01",
+                    as_of=case["asOf"],
+                    total=case["total"],
+                    national=0,
+                    private_=0,
+                    joint=0,
+                )
+                now = datetime.fromisoformat(case["now"])
+                result = compute_current_days(snap, now)
+                self.assertAlmostEqual(result, case["expected"], places=6)
 
 
 if __name__ == "__main__":
