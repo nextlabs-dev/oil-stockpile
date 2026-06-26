@@ -1,110 +1,78 @@
 {
-  "fetchedAt": "2026-06-26T11:23:41+00:00",
+  "fetchedAt": "2026-06-26T12:11:44+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 1,
+  "totalTankersInRegion": 9,
+  "japanBoundTankers": 0,
+  "japanBoundUnknownPort": 0,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 311001680,
-      "name": "LAKE MORSKIE OKO",
-      "destination": "SEA TRIAL HWO H.2553",
+      "mmsi": 477023700,
+      "name": "NEW VICTORY",
+      "destination": "KRINC",
       "isJapanBound": false,
-      "lat": 34.9161,
-      "lon": 129.3078
+      "lat": 34.9166,
+      "lon": 129.2843
     },
     {
-      "mmsi": 440154950,
-      "name": "DONGJIN ACE",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.121,
-      "lon": 129.0506
-    },
-    {
-      "mmsi": 668116342,
-      "name": "PARAMITA",
-      "destination": "KR USN",
-      "isJapanBound": false,
-      "lat": 35.1435,
-      "lon": 129.4701
-    },
-    {
-      "mmsi": 440103790,
-      "name": "13DAESIN",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1014,
-      "lon": 129.0721
-    },
-    {
-      "mmsi": 636022728,
-      "name": "DING HENG 38",
-      "destination": "KR INC",
+      "mmsi": 351168000,
+      "name": "C.PRIMACY",
+      "destination": "SGSIN PJSB",
       "isJapanBound": false,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 440331080,
+      "name": "DAEHEUNG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0441,
+      "lon": 129.0954
+    },
+    {
+      "mmsi": 440191310,
+      "name": "BU KWANG HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1201,
+      "lon": 129.0504
     },
     {
       "mmsi": 440105720,
       "name": "DAE JEONG",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0902,
-      "lon": 129.1403
+      "lat": 35.1222,
+      "lon": 129.0519
     },
     {
-      "mmsi": 440215590,
-      "name": "DONGNAM ACE",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1208,
-      "lon": 129.0503
-    },
-    {
-      "mmsi": 374426000,
-      "name": "CRANE VESTA",
-      "destination": "BUSAN N3",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440316160,
-      "name": "INTRANS EDY",
+      "mmsi": 352181000,
+      "name": "CRANE AVANCE",
       "destination": "KR PUS",
       "isJapanBound": false,
-      "lat": 35.1039,
-      "lon": 129.0904
+      "lat": 35.0531,
+      "lon": 129.0525
     },
     {
-      "mmsi": 440305360,
-      "name": "5WOOYUNG",
-      "destination": "BUSAN",
+      "mmsi": 477153500,
+      "name": "BOCHEM PEGASOS",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 34.9925,
+      "lon": 129.3722
+    },
+    {
+      "mmsi": 440016180,
+      "name": "ES ROSE",
+      "destination": "INCHEON",
       "isJapanBound": false,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 440101370,
-      "name": "BONG EUN",
-      "destination": "BUSAM",
-      "isJapanBound": false,
-      "lat": 35.0324,
-      "lon": 129.0457
-    },
-    {
-      "mmsi": 431018478,
-      "name": "EISHO MARU NO.3",
-      "destination": "JP TYO HANEDA OFF",
-      "isJapanBound": true,
-      "lat": 35.525,
-      "lon": 139.8445
-    },
-    {
-      "mmsi": 538008703,
-      "name": "SOLAR SHARNA",
+      "mmsi": 636022728,
+      "name": "DING HENG 38",
       "destination": "KR INC",
       "isJapanBound": false,
       "lat": null,
