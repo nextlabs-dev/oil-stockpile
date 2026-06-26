@@ -7,6 +7,7 @@ I/O から切り離した純粋関数 (text_value / render_nav /
 render_page / _check_peak_reference_in_sync) をカバーする。
 """
 
+import base64
 import hashlib
 import os
 import sys
@@ -19,11 +20,19 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from build_site import (  # noqa: E402
     _check_peak_reference_in_sync,
+    build_csp,
+    compute_inline_script_hashes,
     compute_og_image_version,
     render_nav,
     render_page,
     text_value,
 )
+
+
+def _sha256_token(body: str) -> str:
+    digest = hashlib.sha256(body.encode("utf-8")).digest()
+    return "sha256-" + base64.b64encode(digest).decode("ascii")
+
 
 SAMPLE_SOURCE = "経産省「石油備蓄の現況」過去公表値の高水準（2025年3月末ごろ）"
 SAMPLE_DATA_JS = f"""\
@@ -238,6 +247,90 @@ class RenderPageTest(unittest.TestCase):
         # 省略時 (デフォルト空) はクエリを付けない。
         out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY")
         self.assertIn("OG_IMG=https://example.com/og.png|", out)
+
+
+class ComputeInlineScriptHashesTest(unittest.TestCase):
+    """インライン <script> の CSP ハッシュ算出を検証する。"""
+
+    def test_hash_is_sha256_of_body_between_tags(self):
+        # ハッシュは <script> と </script> の「間」のバイト列に対して取る
+        # （CSP の script-src ハッシュが一致すべき対象）。
+        body = "\n  gtag('config', 'G-XYZ');\n"
+        html = f"<script>{body}</script>"
+        self.assertEqual(compute_inline_script_hashes(html), [_sha256_token(body)])
+
+    def test_skips_scripts_with_src(self):
+        # gtag ローダや module script は src を持つので対象外。
+        html = (
+            '<script async src="https://x/gtag.js"></script>\n'
+            "<script>INNER</script>\n"
+            '<script type="module" src="../js/app.js"></script>'
+        )
+        self.assertEqual(compute_inline_script_hashes(html), [_sha256_token("INNER")])
+
+    def test_returns_one_token_per_inline_script(self):
+        html = "<script>A</script>\n<script>B</script>"
+        self.assertEqual(
+            compute_inline_script_hashes(html),
+            [_sha256_token("A"), _sha256_token("B")],
+        )
+
+    def test_no_inline_scripts_returns_empty(self):
+        self.assertEqual(compute_inline_script_hashes("<p>no script</p>"), [])
+
+
+class BuildCspTest(unittest.TestCase):
+    """build_csp が生成する Content-Security-Policy 値を検証する。"""
+
+    GTAG_BODY = "\n  window.dataLayer = window.dataLayer || [];\n"
+    TEMPLATE_TEXT = (
+        '<script async src="https://www.googletagmanager.com/gtag/js?id=G-X"></script>\n'
+        f"<script>{GTAG_BODY}</script>"
+    )
+
+    def setUp(self):
+        self.csp = build_csp(self.TEMPLATE_TEXT)
+        self.directives = {
+            d.split(" ", 1)[0]: d.split(" ", 1)[1]
+            for d in (part.strip() for part in self.csp.split(";"))
+            if d
+        }
+
+    def test_script_src_contains_inline_hash(self):
+        # インライン gtag ブロックのハッシュが script-src に入る。
+        self.assertIn(f"'{_sha256_token(self.GTAG_BODY)}'", self.directives["script-src"])
+
+    def test_script_src_has_no_unsafe_inline(self):
+        # Issue の主目的: 任意インライン script を許さない。
+        self.assertNotIn("unsafe-inline", self.directives["script-src"])
+
+    def test_script_src_allows_known_origins(self):
+        script_src = self.directives["script-src"]
+        self.assertIn("'self'", script_src)
+        self.assertIn("https://www.googletagmanager.com", script_src)
+        self.assertIn("https://unpkg.com", script_src)
+
+    def test_default_src_is_self(self):
+        self.assertEqual(self.directives["default-src"], "'self'")
+
+    def test_connect_src_allows_google_analytics_beacons(self):
+        connect_src = self.directives["connect-src"]
+        self.assertIn("'self'", connect_src)
+        self.assertIn("https://www.google-analytics.com", connect_src)
+        self.assertIn("https://*.google-analytics.com", connect_src)
+
+    def test_img_src_allows_tiles_and_data(self):
+        img_src = self.directives["img-src"]
+        self.assertIn("https://tile.openstreetmap.org", img_src)
+        self.assertIn("data:", img_src)
+
+    def test_font_and_style_allow_google_fonts(self):
+        self.assertIn("https://fonts.gstatic.com", self.directives["font-src"])
+        self.assertIn("https://fonts.googleapis.com", self.directives["style-src"])
+
+    def test_hardening_directives_present(self):
+        self.assertEqual(self.directives["object-src"], "'none'")
+        self.assertEqual(self.directives["base-uri"], "'self'")
 
 
 class ComputeOgImageVersionTest(unittest.TestCase):
