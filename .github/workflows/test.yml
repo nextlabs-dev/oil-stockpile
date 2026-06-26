@@ -52,7 +52,18 @@ jobs:
       - name: Verify generated HTML is in sync with src/
         run: |
           python scripts/build_site.py
-          if ! git diff --exit-code -- index.html tankers/index.html scale/index.html about/index.html; then
+          # 生成ページ一覧は src/site.json の pages[].output を SSOT とし、
+          # ここでハードコードしない（fetch-daily.yml と重複させない）。
+          mapfile -t pages < <(python -c "import json;print('\n'.join(p['output'] for p in json.load(open('src/site.json', encoding='utf-8'))['pages']))")
+          if [[ ${#pages[@]} -eq 0 ]]; then
+            echo "::error::No pages derived from src/site.json"
+            exit 1
+          fi
+          # intent-to-add で新規未追跡の生成 HTML も diff 対象に含める。
+          # ページ追加時に生成物のコミットを忘れても検知できるようにする
+          # （git diff は通常、未追跡ファイルを無視するため）。
+          git add --intent-to-add -- "${pages[@]}"
+          if ! git diff --exit-code -- "${pages[@]}"; then
             echo "::error::Generated HTML is out of date. Run 'python scripts/build_site.py' locally and commit the result."
             exit 1
           fi
