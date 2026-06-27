@@ -1,26 +1,26 @@
 {
-  "fetchedAt": "2026-06-27T17:46:38+00:00",
+  "fetchedAt": "2026-06-27T18:49:10+00:00",
   "samplingDurationSec": 480,
   "totalTankersInRegion": 15,
-  "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 2,
+  "japanBoundTankers": 0,
+  "japanBoundUnknownPort": 0,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440155350,
-      "name": "NO.11 SONGWON",
+      "mmsi": 440130790,
+      "name": "7 MIREU",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.0594,
-      "lon": 129.0506
+      "lat": 35.1213,
+      "lon": 129.0519
     },
     {
-      "mmsi": 440103970,
-      "name": "31 WOO JEONG",
-      "destination": "BUSAN",
+      "mmsi": 352181000,
+      "name": "CRANE AVANCE",
+      "destination": "KR PUS",
       "isJapanBound": false,
-      "lat": 35.012,
-      "lon": 129.0772
+      "lat": 35.0546,
+      "lon": 129.0525
     },
     {
       "mmsi": 440155380,
@@ -31,36 +31,36 @@
       "lon": 129.0527
     },
     {
-      "mmsi": 431008453,
-      "name": "MATSU MARU NO,21",
-      "destination": ">JP ANE OFF",
-      "isJapanBound": true,
-      "lat": 35.4739,
-      "lon": 139.8941
+      "mmsi": 440403100,
+      "name": "SH GRACE",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1197,
+      "lon": 129.0509
     },
     {
-      "mmsi": 440203830,
-      "name": "SKYMARS",
+      "mmsi": 440115430,
+      "name": "TAHITI",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0805,
-      "lon": 129.11
+      "lat": 35.1221,
+      "lon": 129.0518
     },
     {
-      "mmsi": 440002690,
-      "name": "HY BUSAN",
-      "destination": "ULSAN",
+      "mmsi": 440191310,
+      "name": "BU KWANG HO",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 34.9956,
-      "lon": 129.078
+      "lat": 35.1209,
+      "lon": 129.0508
     },
     {
-      "mmsi": 440365000,
-      "name": "OCEAN ACE 11",
-      "destination": "KR PUS AS",
+      "mmsi": 440714100,
+      "name": "DAON",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0899,
-      "lon": 129.0809
+      "lat": 35.1209,
+      "lon": 129.0502
     },
     {
       "mmsi": 440220160,
@@ -71,6 +71,22 @@
       "lon": 129.0517
     },
     {
+      "mmsi": 440049630,
+      "name": "SONG SOON HO",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.1211,
+      "lon": 129.0504
+    },
+    {
+      "mmsi": 273273980,
+      "name": "AKVILON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0227,
+      "lon": 129.0523
+    },
+    {
       "mmsi": 440201420,
       "name": "BLUE OCEAN HO",
       "destination": "ULSAN",
@@ -79,52 +95,36 @@
       "lon": 129.0506
     },
     {
-      "mmsi": 440112380,
-      "name": "KUKDONG3HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0366,
-      "lon": 129.088
-    },
-    {
-      "mmsi": 440014910,
-      "name": "CHANG YONG 1HO",
+      "mmsi": 440400010,
+      "name": "PHOENIX",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.122,
+      "lon": 129.0515
     },
     {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
+      "mmsi": 440400570,
+      "name": "DONGHAE GLORY",
+      "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": 35.1222,
-      "lon": 129.0516
+      "lat": 35.1197,
+      "lon": 129.0508
     },
     {
-      "mmsi": 440101370,
-      "name": "BONG EUN",
-      "destination": "BUSAM",
+      "mmsi": 373982000,
+      "name": "SULFUR BRAVE",
+      "destination": "BUSAN_KR",
       "isJapanBound": false,
-      "lat": 35.0402,
-      "lon": 129.1054
+      "lat": 35.0499,
+      "lon": 129.0696
     },
     {
-      "mmsi": 431005339,
-      "name": "KOUSYU MARU",
-      "destination": "JP WAK OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440115430,
-      "name": "TAHITI",
-      "destination": "BUSAN",
+      "mmsi": 671388100,
+      "name": "ORIS",
+      "destination": "KR BUSAN",
       "isJapanBound": false,
-      "lat": 35.1221,
-      "lon": 129.0518
+      "lat": 35.0527,
+      "lon": 129.0405
     }
   ],
   "boundingBox": "24-46N / 122-146E",
