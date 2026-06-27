@@ -1,9 +1,9 @@
 {
-  "fetchedAt": "2026-06-27T10:04:15+00:00",
+  "fetchedAt": "2026-06-27T11:03:20+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 0,
+  "totalTankersInRegion": 12,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [
     {
       "port": "KAWASAKI",
@@ -12,97 +12,89 @@
   ],
   "vessels": [
     {
-      "mmsi": 440401790,
-      "name": "SONG DEOG",
-      "destination": "BUSAN",
+      "mmsi": 228482600,
+      "name": "AL NIGYAN S/T",
+      "destination": "3387 SEA TRIAL",
       "isJapanBound": false,
-      "lat": 35.12,
-      "lon": 129.0504
+      "lat": 34.9072,
+      "lon": 129.3376
     },
     {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
+      "mmsi": 440112380,
+      "name": "KUKDONG3HO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1222,
-      "lon": 129.0514
-    },
-    {
-      "mmsi": 636026549,
-      "name": "NAVE POLARIS",
-      "destination": "KR USN>>JP CHB",
-      "isJapanBound": false,
-      "lat": 34.7356,
-      "lon": 129.1329
-    },
-    {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1231,
-      "lon": 129.0526
+      "lat": 35.1083,
+      "lon": 129.0937
     },
     {
       "mmsi": 440365000,
       "name": "OCEAN ACE 11",
       "destination": "KR PUS AS",
       "isJapanBound": false,
-      "lat": 35.0897,
-      "lon": 129.0808
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440500300,
-      "name": "SONGRIM HO",
+      "mmsi": 440714100,
+      "name": "DAON",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1214,
-      "lon": 129.0503
+      "lat": 35.1209,
+      "lon": 129.0502
     },
     {
-      "mmsi": 440049630,
-      "name": "SONG SOON HO",
-      "destination": "ULSAN",
+      "mmsi": 440220160,
+      "name": "CHEON WANG  HO",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.121,
-      "lon": 129.0504
+      "lat": 35.0818,
+      "lon": 129.1085
     },
     {
-      "mmsi": 373982000,
-      "name": "SULFUR BRAVE",
-      "destination": "BUSAN_KR",
+      "mmsi": 440033880,
+      "name": "ANGELA HO",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.0492,
-      "lon": 129.0694
+      "lat": 35.0103,
+      "lon": 129.0452
+    },
+    {
+      "mmsi": 440053280,
+      "name": "GO RYO 3 HO",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0972,
+      "lon": 129.044
+    },
+    {
+      "mmsi": 440154950,
+      "name": "DONGJIN ACE",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0716,
+      "lon": 129.1068
+    },
+    {
+      "mmsi": 431100938,
+      "name": "SHOAN MARU",
+      "destination": ">JP KWS OFF",
+      "isJapanBound": true,
+      "lat": 35.4877,
+      "lon": 139.8191
     },
     {
       "mmsi": 538008703,
       "name": "SOLAR SHARNA",
       "destination": "KR INC",
       "isJapanBound": false,
-      "lat": 37.4376,
-      "lon": 126.5691
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 477854500,
-      "name": "SILVER SAWSAN",
-      "destination": "KEELUNG TAIWAN",
-      "isJapanBound": false,
-      "lat": 24.9282,
-      "lon": 122.3334
-    },
-    {
-      "mmsi": 440101370,
-      "name": "BONG EUN",
-      "destination": "BUSAM",
-      "isJapanBound": false,
-      "lat": 35.1233,
-      "lon": 129.0517
-    },
-    {
-      "mmsi": 431100938,
-      "name": "SHOAN MARU",
-      "destination": ">JP KWS OFF",
+      "mmsi": 431005339,
+      "name": "KOUSYU MARU",
+      "destination": "JP WAK OFF",
       "isJapanBound": true,
       "lat": null,
       "lon": null
@@ -112,8 +104,8 @@
       "name": "DL AMBER",
       "destination": "BSN",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.0584,
+      "lon": 129.0577
     }
   ],
   "boundingBox": "24-46N / 122-146E",
