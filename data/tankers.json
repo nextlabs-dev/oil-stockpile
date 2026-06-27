@@ -1,50 +1,42 @@
 {
-  "fetchedAt": "2026-06-27T12:52:56+00:00",
+  "fetchedAt": "2026-06-27T14:01:35+00:00",
   "samplingDurationSec": 480,
   "totalTankersInRegion": 10,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 1,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440403100,
-      "name": "SH GRACE",
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
+      "isJapanBound": false,
+      "lat": 35.1194,
+      "lon": 129.0508
+    },
+    {
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.0103,
-      "lon": 129.0486
+      "lat": 35.1221,
+      "lon": 129.0514
     },
     {
-      "mmsi": 440076890,
-      "name": "YEONG ROO",
+      "mmsi": 440112380,
+      "name": "KUKDONG3HO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1089,
-      "lon": 129.0933
+      "lat": 35.1083,
+      "lon": 129.0937
     },
     {
-      "mmsi": 440365000,
-      "name": "OCEAN ACE 11",
-      "destination": "KR PUS AS",
-      "isJapanBound": false,
-      "lat": 35.0894,
-      "lon": 129.0811
-    },
-    {
-      "mmsi": 440049630,
-      "name": "SONG SOON HO",
+      "mmsi": 440400570,
+      "name": "DONGHAE GLORY",
       "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": 35.1211,
-      "lon": 129.0504
-    },
-    {
-      "mmsi": 440103970,
-      "name": "31 WOO JEONG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.0123,
-      "lon": 129.0727
+      "lat": 35.1198,
+      "lon": 129.0507
     },
     {
       "mmsi": 440714100,
@@ -55,36 +47,44 @@
       "lon": 129.0501
     },
     {
-      "mmsi": 440184000,
-      "name": "FORTUNE KAREN",
-      "destination": "KR INC",
-      "isJapanBound": false,
-      "lat": 37.3967,
-      "lon": 126.5639
-    },
-    {
-      "mmsi": 440112380,
-      "name": "KUKDONG3HO",
+      "mmsi": 440403100,
+      "name": "SH GRACE",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1084,
-      "lon": 129.0937
+      "lat": 35.0098,
+      "lon": 129.0499
     },
     {
-      "mmsi": 431005339,
-      "name": "KOUSYU MARU",
+      "mmsi": 431004474,
+      "name": "MEIWA MARU",
       "destination": "JP WAK OFF",
       "isJapanBound": true,
-      "lat": 34.1567,
-      "lon": 135.136
+      "lat": 34.1541,
+      "lon": 135.1504
     },
     {
-      "mmsi": 440002070,
-      "name": "SUN YEONG",
-      "destination": "KR BSN",
+      "mmsi": 461000246,
+      "name": "LEVEL",
+      "destination": "KR PUS",
       "isJapanBound": false,
-      "lat": 35.1194,
-      "lon": 129.0508
+      "lat": 35.021,
+      "lon": 129.0604
+    },
+    {
+      "mmsi": 440076890,
+      "name": "YEONG ROO",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0225,
+      "lon": 129.0574
+    },
+    {
+      "mmsi": 431001046,
+      "name": "REI MARU",
+      "destination": "JP ANE IDEMITSU",
+      "isJapanBound": true,
+      "lat": 35.4796,
+      "lon": 139.8929
     }
   ],
   "boundingBox": "24-46N / 122-146E",
