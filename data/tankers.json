@@ -1,138 +1,90 @@
 {
-  "fetchedAt": "2026-06-27T03:32:51+00:00",
+  "fetchedAt": "2026-06-27T05:43:11+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 16,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 3,
+  "totalTankersInRegion": 10,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [],
   "vessels": [
+    {
+      "mmsi": 440049630,
+      "name": "SONG SOON HO",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.1061,
+      "lon": 129.0668
+    },
+    {
+      "mmsi": 636021383,
+      "name": "LARGO EAGLE",
+      "destination": "KRONS > GUAPR",
+      "isJapanBound": false,
+      "lat": 35.0217,
+      "lon": 129.3767
+    },
+    {
+      "mmsi": 538010971,
+      "name": "GLOBAL PHENIX",
+      "destination": "KR YOS",
+      "isJapanBound": false,
+      "lat": 35.4764,
+      "lon": 139.768
+    },
+    {
+      "mmsi": 440410930,
+      "name": "CHARIS",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.2063,
+      "lon": 129.2769
+    },
+    {
+      "mmsi": 440714100,
+      "name": "DAON",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1208,
+      "lon": 129.0501
+    },
+    {
+      "mmsi": 431003074,
+      "name": "SUNNY NOAH",
+      "destination": "JP HANEDA OFF",
+      "isJapanBound": true,
+      "lat": 35.5182,
+      "lon": 139.8534
+    },
     {
       "mmsi": 440500300,
       "name": "SONGRIM HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1214,
+      "lat": 35.1213,
       "lon": 129.0503
-    },
-    {
-      "mmsi": 440155010,
-      "name": "YU SUNG HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.0934,
-      "lon": 129.0872
-    },
-    {
-      "mmsi": 440312010,
-      "name": "NO2 HAEJIN",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1239,
-      "lon": 129.0549
-    },
-    {
-      "mmsi": 440035420,
-      "name": "DAE IL",
-      "destination": "UL",
-      "isJapanBound": false,
-      "lat": 35.1209,
-      "lon": 129.0505
-    },
-    {
-      "mmsi": 440152720,
-      "name": "SAM SUNG HO",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.101,
-      "lon": 129.0564
-    },
-    {
-      "mmsi": 440144180,
-      "name": "M/T 5 HAN YU HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0979,
-      "lon": 129.0435
     },
     {
       "mmsi": 440112380,
       "name": "KUKDONG3HO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0514
+      "lat": 35.1082,
+      "lon": 129.0925
     },
     {
       "mmsi": 431007017,
       "name": "RINDO MARU",
       "destination": ">JP TYO HANEDA OFF",
       "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 35.5138,
+      "lon": 139.8412
     },
     {
       "mmsi": 440002070,
       "name": "SUN YEONG",
       "destination": "KR BSN",
       "isJapanBound": false,
-      "lat": 35.0963,
-      "lon": 129.0469
-    },
-    {
-      "mmsi": 440308690,
-      "name": "CHEONGHAE3HO",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.1224,
-      "lon": 129.0513
-    },
-    {
-      "mmsi": 440167480,
-      "name": "DL AMBER",
-      "destination": "BSN",
-      "isJapanBound": false,
-      "lat": 35.0592,
-      "lon": 129.0561
-    },
-    {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1222,
-      "lon": 129.0522
-    },
-    {
-      "mmsi": 431401993,
-      "name": "SENRYUMARU",
-      "destination": ">JP TAW OFF",
-      "isJapanBound": true,
-      "lat": 34.3602,
-      "lon": 135.1614
-    },
-    {
-      "mmsi": 431018478,
-      "name": "EISHO MARU NO.3",
-      "destination": "JP TYO HANEDA OFF",
-      "isJapanBound": true,
-      "lat": 35.5208,
-      "lon": 139.8179
-    },
-    {
-      "mmsi": 440130790,
-      "name": "7 MIREU",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0342,
-      "lon": 129.0556
-    },
-    {
-      "mmsi": 440172660,
-      "name": "KUM KANG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.0577,
-      "lon": 129.1175
+      "lat": 35.1194,
+      "lon": 129.0509
     }
   ],
   "boundingBox": "24-46N / 122-146E",
