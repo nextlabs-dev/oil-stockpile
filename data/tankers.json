@@ -1,42 +1,58 @@
 {
-  "fetchedAt": "2026-06-27T15:50:52+00:00",
+  "fetchedAt": "2026-06-27T16:47:16+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 8,
-  "japanBoundTankers": 0,
-  "japanBoundUnknownPort": 0,
+  "totalTankersInRegion": 13,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 3,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440002070,
-      "name": "SUN YEONG",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 34.9924,
-      "lon": 129.0598
-    },
-    {
-      "mmsi": 440400570,
-      "name": "DONGHAE GLORY",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.1196,
-      "lon": 129.0508
-    },
-    {
-      "mmsi": 440714100,
-      "name": "DAON",
+      "mmsi": 440191310,
+      "name": "BU KWANG HO",
       "destination": "BUSAN",
       "isJapanBound": false,
       "lat": 35.1209,
-      "lon": 129.0502
+      "lon": 129.0507
     },
     {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
+      "mmsi": 440103970,
+      "name": "31 WOO JEONG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0126,
+      "lon": 129.077
+    },
+    {
+      "mmsi": 440014910,
+      "name": "CHANG YONG 1HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1198,
+      "lon": 129.0507
+    },
+    {
+      "mmsi": 440365000,
+      "name": "OCEAN ACE 11",
+      "destination": "KR PUS AS",
+      "isJapanBound": false,
+      "lat": 35.0893,
+      "lon": 129.0813
+    },
+    {
+      "mmsi": 440500300,
+      "name": "SONGRIM HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1214,
+      "lon": 129.0503
+    },
+    {
+      "mmsi": 440048210,
+      "name": "GREEN HO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1221,
-      "lon": 129.0515
+      "lat": 35.1082,
+      "lon": 129.0925
     },
     {
       "mmsi": 440220160,
@@ -47,25 +63,49 @@
       "lon": 129.0517
     },
     {
-      "mmsi": 440191310,
-      "name": "BU KWANG HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1209,
-      "lon": 129.0507
-    },
-    {
-      "mmsi": 440201420,
-      "name": "BLUE OCEAN HO",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.1196,
-      "lon": 129.0506
-    },
-    {
-      "mmsi": 440184000,
-      "name": "FORTUNE KAREN",
+      "mmsi": 538008703,
+      "name": "SOLAR SHARNA",
       "destination": "KR INC",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431002092,
+      "name": "EIZAN MARU NO.82",
+      "destination": "JP KNX OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431005339,
+      "name": "KOUSYU MARU",
+      "destination": "JP WAK OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440102050,
+      "name": "MYUNGJIN",
+      "destination": "BUSAN NEW PORT",
+      "isJapanBound": false,
+      "lat": 35.1034,
+      "lon": 129.0757
+    },
+    {
+      "mmsi": 431000875,
+      "name": "EIZAN MARU NO.72",
+      "destination": "JP ANE OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440400570,
+      "name": "DONGHAE GLORY",
+      "destination": "ULSAN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
