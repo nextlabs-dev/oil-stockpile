@@ -1,41 +1,78 @@
 {
-  "fetchedAt": "2026-06-27T09:18:18+00:00",
+  "fetchedAt": "2026-06-27T10:04:15+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 0,
+  "totalTankersInRegion": 13,
+  "japanBoundTankers": 1,
   "japanBoundUnknownPort": 0,
-  "topDestinationPorts": [],
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 440400570,
-      "name": "DONGHAE GLORY",
-      "destination": "ULSAN",
+      "mmsi": 440401790,
+      "name": "SONG DEOG",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0869,
-      "lon": 129.1515
+      "lat": 35.12,
+      "lon": 129.0504
     },
     {
-      "mmsi": 228482600,
-      "name": "AL NIGYAN S/T",
-      "destination": "3387 SEA TRIAL",
-      "isJapanBound": false,
-      "lat": 35.089,
-      "lon": 129.5174
-    },
-    {
-      "mmsi": 440130790,
-      "name": "7 MIREU",
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1096,
-      "lon": 129.1813
+      "lat": 35.1222,
+      "lon": 129.0514
+    },
+    {
+      "mmsi": 636026549,
+      "name": "NAVE POLARIS",
+      "destination": "KR USN>>JP CHB",
+      "isJapanBound": false,
+      "lat": 34.7356,
+      "lon": 129.1329
+    },
+    {
+      "mmsi": 440155380,
+      "name": "KEUMHYANG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1231,
+      "lon": 129.0526
+    },
+    {
+      "mmsi": 440365000,
+      "name": "OCEAN ACE 11",
+      "destination": "KR PUS AS",
+      "isJapanBound": false,
+      "lat": 35.0897,
+      "lon": 129.0808
+    },
+    {
+      "mmsi": 440500300,
+      "name": "SONGRIM HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1214,
+      "lon": 129.0503
+    },
+    {
+      "mmsi": 440049630,
+      "name": "SONG SOON HO",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.121,
+      "lon": 129.0504
     },
     {
       "mmsi": 373982000,
       "name": "SULFUR BRAVE",
       "destination": "BUSAN_KR",
       "isJapanBound": false,
-      "lat": 35.0494,
+      "lat": 35.0492,
       "lon": 129.0694
     },
     {
@@ -43,24 +80,16 @@
       "name": "SOLAR SHARNA",
       "destination": "KR INC",
       "isJapanBound": false,
-      "lat": 37.4379,
-      "lon": 126.5692
+      "lat": 37.4376,
+      "lon": 126.5691
     },
     {
-      "mmsi": 273273980,
-      "name": "AKVILON",
-      "destination": "",
+      "mmsi": 477854500,
+      "name": "SILVER SAWSAN",
+      "destination": "KEELUNG TAIWAN",
       "isJapanBound": false,
-      "lat": 35.021,
-      "lon": 129.0468
-    },
-    {
-      "mmsi": 636026549,
-      "name": "NAVE POLARIS",
-      "destination": "KR USN>>JP CHB",
-      "isJapanBound": false,
-      "lat": 34.823,
-      "lon": 129.2149
+      "lat": 24.9282,
+      "lon": 122.3334
     },
     {
       "mmsi": 440101370,
@@ -71,20 +100,20 @@
       "lon": 129.0517
     },
     {
-      "mmsi": 273279370,
-      "name": "MELISSA",
-      "destination": "TBS",
-      "isJapanBound": false,
-      "lat": 34.9767,
-      "lon": 129.5769
+      "mmsi": 431100938,
+      "name": "SHOAN MARU",
+      "destination": ">JP KWS OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440707950,
-      "name": "SANLOUIS",
-      "destination": "",
+      "mmsi": 440167480,
+      "name": "DL AMBER",
+      "destination": "BSN",
       "isJapanBound": false,
-      "lat": 35.0982,
-      "lon": 129.0437
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
