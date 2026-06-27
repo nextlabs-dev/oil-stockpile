@@ -1,63 +1,50 @@
 {
-  "fetchedAt": "2026-06-27T14:59:32+00:00",
+  "fetchedAt": "2026-06-27T15:50:52+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 9,
-  "japanBoundTankers": 1,
+  "totalTankersInRegion": 8,
+  "japanBoundTankers": 0,
   "japanBoundUnknownPort": 0,
-  "topDestinationPorts": [
-    {
-      "port": "KAWASAKI",
-      "count": 1
-    }
-  ],
+  "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 431003074,
-      "name": "SUNNY NOAH",
-      "destination": "JP KWS HO 1",
-      "isJapanBound": true,
-      "lat": 35.518,
-      "lon": 139.8528
-    },
-    {
-      "mmsi": 440102050,
-      "name": "MYUNGJIN",
-      "destination": "BUSAN 5 PIER",
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
       "isJapanBound": false,
-      "lat": 35.1034,
-      "lon": 129.0757
+      "lat": 34.9924,
+      "lon": 129.0598
     },
     {
-      "mmsi": 440500300,
-      "name": "SONGRIM HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1215,
-      "lon": 129.0503
-    },
-    {
-      "mmsi": 440201420,
-      "name": "BLUE OCEAN HO",
+      "mmsi": 440400570,
+      "name": "DONGHAE GLORY",
       "destination": "ULSAN",
       "isJapanBound": false,
       "lat": 35.1196,
-      "lon": 129.0506
+      "lon": 129.0508
     },
     {
-      "mmsi": 613914700,
-      "name": "PACIFIC",
-      "destination": "KR PUS > FOR ORDER",
+      "mmsi": 440714100,
+      "name": "DAON",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 34.9565,
-      "lon": 129.0853
+      "lat": 35.1209,
+      "lon": 129.0502
     },
     {
-      "mmsi": 440112380,
-      "name": "KUKDONG3HO",
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1083,
-      "lon": 129.0937
+      "lat": 35.1221,
+      "lon": 129.0515
+    },
+    {
+      "mmsi": 440220160,
+      "name": "CHEON WANG  HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1233,
+      "lon": 129.0517
     },
     {
       "mmsi": 440191310,
@@ -68,20 +55,20 @@
       "lon": 129.0507
     },
     {
-      "mmsi": 440115430,
-      "name": "TAHITI",
-      "destination": "BUSAN",
+      "mmsi": 440201420,
+      "name": "BLUE OCEAN HO",
+      "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": 35.1182,
-      "lon": 129.0551
+      "lat": 35.1196,
+      "lon": 129.0506
     },
     {
-      "mmsi": 440403100,
-      "name": "SH GRACE",
-      "destination": "",
+      "mmsi": 440184000,
+      "name": "FORTUNE KAREN",
+      "destination": "KR INC",
       "isJapanBound": false,
-      "lat": 35.1022,
-      "lon": 129.0724
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
