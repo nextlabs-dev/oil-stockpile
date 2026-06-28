@@ -1,26 +1,74 @@
 {
-  "fetchedAt": "2026-06-28T05:53:17+00:00",
+  "fetchedAt": "2026-06-28T07:45:58+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 9,
+  "totalTankersInRegion": 12,
   "japanBoundTankers": 1,
   "japanBoundUnknownPort": 1,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440048210,
-      "name": "GREEN HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1217,
-      "lon": 129.0508
-    },
-    {
-      "mmsi": 440191310,
-      "name": "BU KWANG HO",
+      "mmsi": 440155010,
+      "name": "YU SUNG HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1211,
-      "lon": 129.0507
+      "lat": 35.1199,
+      "lon": 129.0503
+    },
+    {
+      "mmsi": 440154960,
+      "name": "32DAEYOUNG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0847,
+      "lon": 129.1419
+    },
+    {
+      "mmsi": 440010110,
+      "name": "3 SUNYEONG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1206,
+      "lon": 129.051
+    },
+    {
+      "mmsi": 440011120,
+      "name": "MINSUNG11",
+      "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": 37.4966,
+      "lon": 126.6235
+    },
+    {
+      "mmsi": 440016180,
+      "name": "ES ROSE",
+      "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": 37.389,
+      "lon": 126.5606
+    },
+    {
+      "mmsi": 431018528,
+      "name": "YUKOHMARU",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.2433,
+      "lon": 135.1033
+    },
+    {
+      "mmsi": 440192560,
+      "name": "JINSUNG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1053,
+      "lon": 129.0672
+    },
+    {
+      "mmsi": 440115430,
+      "name": "TAHITI",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1221,
+      "lon": 129.0518
     },
     {
       "mmsi": 440103970,
@@ -31,52 +79,28 @@
       "lon": 129.0507
     },
     {
-      "mmsi": 636015161,
-      "name": "BASTILLE STREET",
-      "destination": "USHNL",
+      "mmsi": 538008703,
+      "name": "SOLAR SHARNA",
+      "destination": "KR INC",
       "isJapanBound": false,
-      "lat": 35.346,
-      "lon": 129.4218
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440331980,
-      "name": "BU KWANG 9 HO",
-      "destination": "YEOSU",
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.1199,
-      "lon": 129.0505
-    },
-    {
-      "mmsi": 440101990,
-      "name": "DONG BANG 7HO",
-      "destination": "PUS",
-      "isJapanBound": false,
-      "lat": 35.0633,
-      "lon": 129.1292
-    },
-    {
-      "mmsi": 431003681,
-      "name": "NO.11 KIN YU MARU",
-      "destination": ">JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.2049,
-      "lon": 135.1253
-    },
-    {
-      "mmsi": 440365000,
-      "name": "OCEAN ACE 11",
-      "destination": "KR PUS AS",
-      "isJapanBound": false,
-      "lat": 35.0903,
-      "lon": 129.0812
+      "lat": 35.1222,
+      "lon": 129.0516
     },
     {
       "mmsi": 440503100,
       "name": "ES LILY",
       "destination": "KR PUS",
       "isJapanBound": false,
-      "lat": 35.1078,
-      "lon": 129.0917
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
