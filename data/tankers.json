@@ -1,7 +1,7 @@
 {
-  "fetchedAt": "2026-06-29T20:02:59+00:00",
+  "fetchedAt": "2026-06-29T21:01:01+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
+  "totalTankersInRegion": 9,
   "japanBoundTankers": 2,
   "japanBoundUnknownPort": 2,
   "topDestinationPorts": [],
@@ -9,82 +9,74 @@
     {
       "mmsi": 440331980,
       "name": "BU KWANG 9 HO",
-      "destination": "YEOSU",
+      "destination": "YEOSU    BE        B",
       "isJapanBound": false,
-      "lat": 34.9933,
-      "lon": 129.1003
+      "lat": 35.1153,
+      "lon": 129.0577
     },
     {
-      "mmsi": 440101370,
-      "name": "BONG EUN",
-      "destination": "BUSAM",
+      "mmsi": 440167480,
+      "name": "DL AMBER",
+      "destination": "BSN",
       "isJapanBound": false,
-      "lat": 35.0639,
-      "lon": 129.134
+      "lat": 35.0598,
+      "lon": 129.0562
     },
     {
-      "mmsi": 440125440,
-      "name": "96DONGBANG",
-      "destination": "",
+      "mmsi": 636026037,
+      "name": "LUMI AURORA",
+      "destination": "HO-2377 SEA TRIAL",
       "isJapanBound": false,
-      "lat": 35.0314,
-      "lon": 128.9973
+      "lat": 34.7005,
+      "lon": 129.1176
     },
     {
       "mmsi": 440155010,
       "name": "YU SUNG HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1207,
+      "lat": 35.1208,
       "lon": 129.0509
-    },
-    {
-      "mmsi": 441574000,
-      "name": "303 HYODONG CHEMI",
-      "destination": "KPO  KR",
-      "isJapanBound": false,
-      "lat": 34.7881,
-      "lon": 129.2589
-    },
-    {
-      "mmsi": 440365000,
-      "name": "OCEAN ACE 11",
-      "destination": "KR PUS AS",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431005551,
-      "name": "YUHO MARU NO.6",
-      "destination": ">JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.2051,
-      "lon": 135.1231
-    },
-    {
-      "mmsi": 431008726,
-      "name": "HOSYOMARU",
-      "destination": ">JP WAK NANKAI",
-      "isJapanBound": true,
-      "lat": 34.2096,
-      "lon": 135.1249
-    },
-    {
-      "mmsi": 440400010,
-      "name": "PHOENIX",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1392,
-      "lon": 129.2143
     },
     {
       "mmsi": 440178690,
       "name": "DAIN3HO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1031,
-      "lon": 129.0793
+      "lat": 35.1034,
+      "lon": 129.0822
+    },
+    {
+      "mmsi": 440103700,
+      "name": "GEUMILHO",
+      "destination": "YU",
+      "isJapanBound": false,
+      "lat": 34.9223,
+      "lon": 129.0239
+    },
+    {
+      "mmsi": 440115000,
+      "name": "SKY ROYAL",
+      "destination": "BUSAN@@@@CH",
+      "isJapanBound": false,
+      "lat": 35.069,
+      "lon": 129.0259
+    },
+    {
+      "mmsi": 431003171,
+      "name": "TAIOU MARU",
+      "destination": ">JP WAK/KAINAN",
+      "isJapanBound": true,
+      "lat": 34.1504,
+      "lon": 135.1581
+    },
+    {
+      "mmsi": 431010674,
+      "name": "TAISEI MARU NO,11",
+      "destination": "JP WAK NAKA 2GOU",
+      "isJapanBound": true,
+      "lat": 34.2145,
+      "lon": 135.1414
     }
   ],
   "boundingBox": "24-46N / 122-146E",
