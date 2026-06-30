@@ -1,87 +1,74 @@
 {
-  "fetchedAt": "2026-06-30T11:27:37+00:00",
+  "fetchedAt": "2026-06-30T13:06:02+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 9,
-  "japanBoundTankers": 2,
+  "totalTankersInRegion": 8,
+  "japanBoundTankers": 1,
   "japanBoundUnknownPort": 1,
-  "topDestinationPorts": [
-    {
-      "port": "KAWASAKI",
-      "count": 1
-    }
-  ],
+  "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440049630,
-      "name": "SONG SOON HO",
-      "destination": "ULSAN",
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
       "isJapanBound": false,
-      "lat": 35.1009,
-      "lon": 129.0719
-    },
-    {
-      "mmsi": 431004506,
-      "name": "YOSHITAKA MARU NO.93",
-      "destination": "JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.1542,
-      "lon": 135.1539
-    },
-    {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.0515
+      "lat": 35.1199,
+      "lon": 129.0504
     },
     {
       "mmsi": 373982000,
       "name": "SULFUR BRAVE",
       "destination": "BUSAN_KR",
       "isJapanBound": false,
-      "lat": 35.0493,
-      "lon": 129.0709
+      "lat": 35.0489,
+      "lon": 129.0712
     },
     {
-      "mmsi": 440300120,
-      "name": "M/T BK25",
+      "mmsi": 440155350,
+      "name": "NO.11 SONGWON",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.0711,
-      "lon": 129.1097
+      "lat": 35.1214,
+      "lon": 129.0502
     },
     {
-      "mmsi": 440365000,
-      "name": "OCEAN ACE 11",
-      "destination": "KR PUS AS",
+      "mmsi": 440103020,
+      "name": "98CHEONGHAE",
+      "destination": "",
       "isJapanBound": false,
+      "lat": 35.081,
+      "lon": 129.1248
+    },
+    {
+      "mmsi": 440206050,
+      "name": "BUKWANG NO 5",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1211,
+      "lon": 129.0505
+    },
+    {
+      "mmsi": 440101370,
+      "name": "BONG EUN",
+      "destination": "BUSAM",
+      "isJapanBound": false,
+      "lat": 35.0664,
+      "lon": 129.1325
+    },
+    {
+      "mmsi": 431014522,
+      "name": "HOKENMARU NO.3",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 431005056,
-      "name": "KINYOU",
-      "destination": ">JP KWS Y2 OFF",
-      "isJapanBound": true,
-      "lat": 35.4558,
-      "lon": 139.7331
-    },
-    {
-      "mmsi": 440208060,
-      "name": "CHEONGHAE NO1",
+      "mmsi": 440002690,
+      "name": "HY BUSAN",
       "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": 35.1027,
-      "lon": 129.0673
-    },
-    {
-      "mmsi": 440021230,
-      "name": "GWANG SEONG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.1194,
+      "lon": 129.0507
     }
   ],
   "boundingBox": "24-46N / 122-146E",
