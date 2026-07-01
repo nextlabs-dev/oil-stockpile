@@ -1,58 +1,18 @@
 {
-  "fetchedAt": "2026-07-01T19:04:01+00:00",
+  "fetchedAt": "2026-07-01T20:02:45+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 15,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 3,
+  "totalTankersInRegion": 19,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440504030,
-      "name": "DONGHAE SEASTAR",
-      "destination": "NEWBUSAN",
-      "isJapanBound": false,
-      "lat": 35.0289,
-      "lon": 129.1158
-    },
-    {
-      "mmsi": 440115430,
-      "name": "TAHITI",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1226,
-      "lon": 129.0513
-    },
-    {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
+      "mmsi": 273273980,
+      "name": "AKVILON",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1232,
-      "lon": 129.0528
-    },
-    {
-      "mmsi": 431000312,
-      "name": "DAI1HOUYOSHIMARU",
-      "destination": ">JP AFG W",
-      "isJapanBound": true,
-      "lat": 39.747,
-      "lon": 140.0622
-    },
-    {
-      "mmsi": 440103970,
-      "name": "31 WOO JEONG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0495
-    },
-    {
-      "mmsi": 440002070,
-      "name": "SUN YEONG",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.1198,
-      "lon": 129.0504
+      "lat": 35.0233,
+      "lon": 129.0487
     },
     {
       "mmsi": 440331080,
@@ -63,52 +23,12 @@
       "lon": 129.0494
     },
     {
-      "mmsi": 636026037,
-      "name": "LUMI AURORA",
-      "destination": "HO-2377 SEA TRIAL",
+      "mmsi": 440035420,
+      "name": "DAE IL",
+      "destination": "UL",
       "isJapanBound": false,
-      "lat": 34.7791,
-      "lon": 129.1964
-    },
-    {
-      "mmsi": 431010346,
-      "name": "KEIYO MARU NO.15",
-      "destination": "JP WAK",
-      "isJapanBound": true,
-      "lat": 34.2455,
-      "lon": 135.1003
-    },
-    {
-      "mmsi": 311001680,
-      "name": "LAKE MORSKIE OKO",
-      "destination": "SEA TRIAL HWO H.2553",
-      "isJapanBound": false,
-      "lat": 34.831,
-      "lon": 129.227
-    },
-    {
-      "mmsi": 371414000,
-      "name": "CHALLENGE PINNACLE",
-      "destination": "CHB OFF",
-      "isJapanBound": false,
-      "lat": 35.5629,
-      "lon": 139.9334
-    },
-    {
-      "mmsi": 440172660,
-      "name": "KUM KANG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.0864,
-      "lon": 129.0293
-    },
-    {
-      "mmsi": 440403100,
-      "name": "SH GRACE",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 34.9584,
-      "lon": 129.0328
+      "lat": 35.1034,
+      "lon": 129.0829
     },
     {
       "mmsi": 440147320,
@@ -119,12 +39,124 @@
       "lon": null
     },
     {
-      "mmsi": 431003171,
-      "name": "TAIOU MARU",
-      "destination": ">JP WAK/KAINAN",
+      "mmsi": 440103970,
+      "name": "31 WOO JEONG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1218,
+      "lon": 129.0496
+    },
+    {
+      "mmsi": 431002386,
+      "name": "NAIKAI MARU NO.2",
+      "destination": ">JP SSU OFF",
       "isJapanBound": true,
-      "lat": 34.1547,
-      "lon": 135.1601
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 311001680,
+      "name": "LAKE MORSKIE OKO",
+      "destination": "SEA TRIAL HWO H.2553",
+      "isJapanBound": false,
+      "lat": 34.7883,
+      "lon": 129.2446
+    },
+    {
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1218,
+      "lon": 129.0515
+    },
+    {
+      "mmsi": 373982000,
+      "name": "SULFUR BRAVE",
+      "destination": "BUSAN_KR",
+      "isJapanBound": false,
+      "lat": 35.0503,
+      "lon": 129.0706
+    },
+    {
+      "mmsi": 440000000,
+      "name": "",
+      "destination": "BUSAN KOREA",
+      "isJapanBound": false,
+      "lat": 35.0922,
+      "lon": 129.0331
+    },
+    {
+      "mmsi": 431010346,
+      "name": "KEIYO MARU NO.15",
+      "destination": "JP WAK",
+      "isJapanBound": true,
+      "lat": 34.2455,
+      "lon": 135.1003
+    },
+    {
+      "mmsi": 440014870,
+      "name": "MS CLEAN",
+      "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": 34.9366,
+      "lon": 129.1766
+    },
+    {
+      "mmsi": 636026037,
+      "name": "LUMI AURORA",
+      "destination": "HO-2377 SEA TRIAL",
+      "isJapanBound": false,
+      "lat": 34.78,
+      "lon": 129.2296
+    },
+    {
+      "mmsi": 440014910,
+      "name": "CHANG YONG 1HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440365000,
+      "name": "OCEAN ACE 11",
+      "destination": "KR PUS AS",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 441588000,
+      "name": "WOOLIM DRAGON 7",
+      "destination": "KR INC",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440300120,
+      "name": "M/T BK25",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1209,
+      "lon": 129.0493
+    },
+    {
+      "mmsi": 440154950,
+      "name": "DONGJIN ACE",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1089,
+      "lon": 129.0934
+    },
+    {
+      "mmsi": 440139560,
+      "name": "CHANYEONG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0983,
+      "lon": 129.0433
     }
   ],
   "boundingBox": "24-46N / 122-146E",
