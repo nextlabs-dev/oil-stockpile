@@ -1,98 +1,50 @@
 {
-  "fetchedAt": "2026-07-01T09:34:48+00:00",
+  "fetchedAt": "2026-07-01T11:32:35+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 1,
+  "totalTankersInRegion": 6,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440410930,
-      "name": "CHARIS",
-      "destination": "BUSAN              B",
-      "isJapanBound": false,
-      "lat": 35.0274,
-      "lon": 129.0539
-    },
-    {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1233,
-      "lon": 129.0528
+      "lat": 35.1219,
+      "lon": 129.0516
     },
     {
-      "mmsi": 477227900,
-      "name": "SENDA",
-      "destination": "RI ZHAO",
-      "isJapanBound": false,
-      "lat": 34.9398,
-      "lon": 129.3793
-    },
-    {
-      "mmsi": 440101370,
-      "name": "BONG EUN",
-      "destination": "BUSAM",
-      "isJapanBound": false,
-      "lat": 35.1187,
-      "lon": 129.0534
-    },
-    {
-      "mmsi": 431003171,
-      "name": "TAIOU MARU",
-      "destination": ">JP WAK/KAINAN",
+      "mmsi": 431009445,
+      "name": "KYOWA MARU NO.1",
+      "destination": "JP WAK KAI ENEOS 3",
       "isJapanBound": true,
-      "lat": 34.1537,
-      "lon": 135.1588
+      "lat": 34.1503,
+      "lon": 135.1556
     },
     {
-      "mmsi": 440005700,
-      "name": "ZIRCON",
-      "destination": "",
+      "mmsi": 311072200,
+      "name": "PACIFIC ARCADIA",
+      "destination": "RU PGN",
       "isJapanBound": false,
-      "lat": 35.0661,
-      "lon": 129.1335
+      "lat": 39.464,
+      "lon": 138.8596
     },
     {
-      "mmsi": 440331080,
-      "name": "DAEHEUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0601,
-      "lon": 129.1081
+      "mmsi": 431000312,
+      "name": "DAI1HOUYOSHIMARU",
+      "destination": ">JP AFG W",
+      "isJapanBound": true,
+      "lat": 39.747,
+      "lon": 140.0622
     },
     {
-      "mmsi": 440147320,
-      "name": "TN LETO",
-      "destination": "ULSAN",
+      "mmsi": 352002083,
+      "name": "GOLDEN AXIS",
+      "destination": "KR INC",
       "isJapanBound": false,
-      "lat": 34.891,
-      "lon": 129.0702
-    },
-    {
-      "mmsi": 538012280,
-      "name": "GAMY VANGUARD",
-      "destination": "SHI-2662 SEA TRIAL",
-      "isJapanBound": false,
-      "lat": 34.6991,
-      "lon": 129.2492
-    },
-    {
-      "mmsi": 352181000,
-      "name": "CRANE AVANCE",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 35.0529,
-      "lon": 129.0526
-    },
-    {
-      "mmsi": 440002070,
-      "name": "SUN YEONG",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.1199,
-      "lon": 129.0504
+      "lat": 37.4666,
+      "lon": 126.6067
     },
     {
       "mmsi": 440103700,
@@ -101,14 +53,6 @@
       "isJapanBound": false,
       "lat": 35.1198,
       "lon": 129.0506
-    },
-    {
-      "mmsi": 440413420,
-      "name": "BAEK KEAUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 37.4587,
-      "lon": 126.6227
     }
   ],
   "boundingBox": "24-46N / 122-146E",
