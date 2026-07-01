@@ -1,130 +1,90 @@
 {
-  "fetchedAt": "2026-07-01T20:02:45+00:00",
+  "fetchedAt": "2026-07-01T20:59:32+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 19,
-  "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 13,
+  "japanBoundTankers": 1,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 273273980,
-      "name": "AKVILON",
+      "mmsi": 440047430,
+      "name": "5 KEUM JIN",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.0233,
-      "lon": 129.0487
+      "lat": 35.1242,
+      "lon": 129.0526
     },
     {
-      "mmsi": 440331080,
-      "name": "DAEHEUNG",
-      "destination": "",
+      "mmsi": 671388100,
+      "name": "ORIS",
+      "destination": "KR ULSAN",
       "isJapanBound": false,
-      "lat": 35.1212,
-      "lon": 129.0494
+      "lat": 35.0492,
+      "lon": 129.0357
     },
     {
-      "mmsi": 440035420,
-      "name": "DAE IL",
-      "destination": "UL",
-      "isJapanBound": false,
-      "lat": 35.1034,
-      "lon": 129.0829
-    },
-    {
-      "mmsi": 440147320,
-      "name": "TN LETO",
+      "mmsi": 440144200,
+      "name": "FC VICTORY",
       "destination": "BUSAN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 440103970,
-      "name": "31 WOO JEONG",
+      "mmsi": 440154950,
+      "name": "DONGJIN ACE",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.0496
+      "lat": 35.1168,
+      "lon": 129.0562
     },
     {
-      "mmsi": 431002386,
-      "name": "NAIKAI MARU NO.2",
-      "destination": ">JP SSU OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 311001680,
-      "name": "LAKE MORSKIE OKO",
-      "destination": "SEA TRIAL HWO H.2553",
+      "mmsi": 440316150,
+      "name": "HAE WON",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 34.7883,
-      "lon": 129.2446
+      "lat": 35.1199,
+      "lon": 129.0502
     },
     {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
+      "mmsi": 440308690,
+      "name": "CHEONGHAE3HO",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.1215,
+      "lon": 129.0525
+    },
+    {
+      "mmsi": 440103020,
+      "name": "98CHEONGHAE",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.0515
-    },
-    {
-      "mmsi": 373982000,
-      "name": "SULFUR BRAVE",
-      "destination": "BUSAN_KR",
-      "isJapanBound": false,
-      "lat": 35.0503,
-      "lon": 129.0706
-    },
-    {
-      "mmsi": 440000000,
-      "name": "",
-      "destination": "BUSAN KOREA",
-      "isJapanBound": false,
-      "lat": 35.0922,
-      "lon": 129.0331
+      "lat": 35.1007,
+      "lon": 129.0751
     },
     {
       "mmsi": 431010346,
       "name": "KEIYO MARU NO.15",
       "destination": "JP WAK",
       "isJapanBound": true,
-      "lat": 34.2455,
+      "lat": 34.2454,
       "lon": 135.1003
     },
     {
-      "mmsi": 440014870,
-      "name": "MS CLEAN",
-      "destination": "INCHEON",
-      "isJapanBound": false,
-      "lat": 34.9366,
-      "lon": 129.1766
-    },
-    {
-      "mmsi": 636026037,
-      "name": "LUMI AURORA",
-      "destination": "HO-2377 SEA TRIAL",
-      "isJapanBound": false,
-      "lat": 34.78,
-      "lon": 129.2296
-    },
-    {
-      "mmsi": 440014910,
-      "name": "CHANG YONG 1HO",
-      "destination": "BUSAN",
+      "mmsi": 352181000,
+      "name": "CRANE AVANCE",
+      "destination": "KR PUS",
       "isJapanBound": false,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 440365000,
-      "name": "OCEAN ACE 11",
-      "destination": "KR PUS AS",
+      "mmsi": 621819061,
+      "name": "LIGERA",
+      "destination": "CN LSN",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 34.6976,
+      "lon": 129.1652
     },
     {
       "mmsi": 441588000,
@@ -143,20 +103,12 @@
       "lon": 129.0493
     },
     {
-      "mmsi": 440154950,
-      "name": "DONGJIN ACE",
+      "mmsi": 440103970,
+      "name": "31 WOO JEONG",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1089,
-      "lon": 129.0934
-    },
-    {
-      "mmsi": 440139560,
-      "name": "CHANYEONG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0983,
-      "lon": 129.0433
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
