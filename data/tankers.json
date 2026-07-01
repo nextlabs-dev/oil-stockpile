@@ -1,18 +1,82 @@
 {
-  "fetchedAt": "2026-07-01T21:55:11+00:00",
+  "fetchedAt": "2026-07-01T22:51:14+00:00",
   "samplingDurationSec": 480,
   "totalTankersInRegion": 12,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 3,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440316160,
-      "name": "INTRANS EDY",
-      "destination": "KR PUS",
+      "mmsi": 431010346,
+      "name": "KEIYO MARU NO.15",
+      "destination": "JP WAK",
+      "isJapanBound": true,
+      "lat": 34.2452,
+      "lon": 135.1007
+    },
+    {
+      "mmsi": 440308690,
+      "name": "CHEONGHAE3HO",
+      "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.1017,
+      "lon": 129.0702
+    },
+    {
+      "mmsi": 440320380,
+      "name": "KUM YANG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1193,
+      "lon": 129.0529
+    },
+    {
+      "mmsi": 273273980,
+      "name": "AKVILON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0229,
+      "lon": 129.0482
+    },
+    {
+      "mmsi": 440010110,
+      "name": "3 SUNYEONG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0869,
+      "lon": 129.1924
+    },
+    {
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
+      "isJapanBound": false,
+      "lat": 35.1199,
+      "lon": 129.0504
+    },
+    {
+      "mmsi": 477929300,
+      "name": "CHEM RON",
+      "destination": "KRPUS",
+      "isJapanBound": false,
+      "lat": 35.0086,
+      "lon": 129.0465
+    },
+    {
+      "mmsi": 440014910,
+      "name": "CHANG YONG 1HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1193,
+      "lon": 129.0598
+    },
+    {
+      "mmsi": 440172660,
+      "name": "KUM KANG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0097,
+      "lon": 129.043
     },
     {
       "mmsi": 440409920,
@@ -23,84 +87,20 @@
       "lon": 129.0313
     },
     {
-      "mmsi": 440016190,
-      "name": "TN RHEA",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.0982,
-      "lon": 129.0704
-    },
-    {
-      "mmsi": 440002070,
-      "name": "SUN YEONG",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.1199,
-      "lon": 129.0503
-    },
-    {
-      "mmsi": 431000312,
-      "name": "DAI1HOUYOSHIMARU",
-      "destination": ">JP AFG EN",
-      "isJapanBound": true,
-      "lat": 39.747,
-      "lon": 140.0622
-    },
-    {
-      "mmsi": 440152720,
-      "name": "SAM SUNG HO",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.0313,
-      "lon": 129.072
-    },
-    {
-      "mmsi": 431010346,
-      "name": "KEIYO MARU NO.15",
-      "destination": "JP WAK",
-      "isJapanBound": true,
-      "lat": 34.2453,
-      "lon": 135.1006
-    },
-    {
-      "mmsi": 440305360,
-      "name": "5WOOYUNG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.0503
-    },
-    {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0787,
-      "lon": 129.1078
-    },
-    {
       "mmsi": 563119700,
       "name": "MAREX MOM",
       "destination": "JP WAK NAKAFUTOH",
       "isJapanBound": true,
-      "lat": 34.218,
-      "lon": 135.1164
-    },
-    {
-      "mmsi": 440316150,
-      "name": "HAE WON",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1033,
-      "lon": 129.0939
-    },
-    {
-      "mmsi": 352002083,
-      "name": "GOLDEN AXIS",
-      "destination": "KR INC",
-      "isJapanBound": false,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 440301180,
+      "name": "GOLD3HO",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1232,
+      "lon": 129.0508
     }
   ],
   "boundingBox": "24-46N / 122-146E",
