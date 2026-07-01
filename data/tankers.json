@@ -1,104 +1,11 @@
 {
-  "fetchedAt": "2026-07-01T05:58:52+00:00",
+  "fetchedAt": "2026-07-01T07:56:38+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 16,
-  "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 3,
-  "topDestinationPorts": [
-    {
-      "port": "KAWASAKI",
-      "count": 1
-    }
-  ],
+  "totalTankersInRegion": 9,
+  "japanBoundTankers": 1,
+  "japanBoundUnknownPort": 1,
+  "topDestinationPorts": [],
   "vessels": [
-    {
-      "mmsi": 440331080,
-      "name": "DAEHEUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.105,
-      "lon": 129.1759
-    },
-    {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0423,
-      "lon": 129.0529
-    },
-    {
-      "mmsi": 440101370,
-      "name": "BONG EUN",
-      "destination": "BUSAM",
-      "isJapanBound": false,
-      "lat": 35.1194,
-      "lon": 129.0526
-    },
-    {
-      "mmsi": 441509000,
-      "name": "NEW CHALLENGE",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 34.9361,
-      "lon": 129.1994
-    },
-    {
-      "mmsi": 440321070,
-      "name": "DONGSOO1",
-      "destination": "DAESAN.KR",
-      "isJapanBound": false,
-      "lat": 35.0977,
-      "lon": 129.0699
-    },
-    {
-      "mmsi": 431000312,
-      "name": "DAI1HOUYOSHIMARU",
-      "destination": ">JP AFG W",
-      "isJapanBound": true,
-      "lat": 39.7475,
-      "lon": 140.0629
-    },
-    {
-      "mmsi": 431003171,
-      "name": "TAIOU MARU",
-      "destination": ">JP WAK/KAINAN",
-      "isJapanBound": true,
-      "lat": 34.1564,
-      "lon": 135.1547
-    },
-    {
-      "mmsi": 413378910,
-      "name": "DU JUAN",
-      "destination": "ULSAN-KOREA",
-      "isJapanBound": false,
-      "lat": 34.8011,
-      "lon": 129.1148
-    },
-    {
-      "mmsi": 352002083,
-      "name": "GOLDEN AXIS",
-      "destination": "KR INC",
-      "isJapanBound": false,
-      "lat": 37.4098,
-      "lon": 126.565
-    },
-    {
-      "mmsi": 440005700,
-      "name": "ZIRCON",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.121,
-      "lon": 129.0501
-    },
-    {
-      "mmsi": 440149000,
-      "name": "WOO HYUK",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
     {
       "mmsi": 440103700,
       "name": "GEUMILHO",
@@ -108,28 +15,44 @@
       "lon": 129.0506
     },
     {
-      "mmsi": 431200655,
-      "name": "28 TOKUEIMARU",
-      "destination": "JP KWS DU",
-      "isJapanBound": true,
-      "lat": 35.5223,
-      "lon": 139.765
+      "mmsi": 440103020,
+      "name": "98CHEONGHAE",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0459,
+      "lon": 129.0787
     },
     {
-      "mmsi": 477929300,
-      "name": "CHEM RON",
-      "destination": "KRPUS",
+      "mmsi": 440321070,
+      "name": "DONGSOO1",
+      "destination": "DAESAN.KR",
       "isJapanBound": false,
-      "lat": 35.0063,
-      "lon": 129.047
+      "lat": 35.0979,
+      "lon": 129.0698
     },
     {
-      "mmsi": 440127710,
-      "name": "3TAEKYENG",
-      "destination": "BUSAN",
+      "mmsi": 440051760,
+      "name": "7DAEBOK",
+      "destination": "INCHEON",
       "isJapanBound": false,
-      "lat": 35.1077,
-      "lon": 129.0531
+      "lat": 37.4782,
+      "lon": 126.5943
+    },
+    {
+      "mmsi": 440505620,
+      "name": "KYUNGSUNGHO",
+      "destination": "BUSAM",
+      "isJapanBound": false,
+      "lat": 35.1433,
+      "lon": 129.2136
+    },
+    {
+      "mmsi": 440117010,
+      "name": "YOUNG JIN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1205,
+      "lon": 129.0501
     },
     {
       "mmsi": 431009445,
@@ -138,6 +61,22 @@
       "isJapanBound": true,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 440009840,
+      "name": "NO.9 MINSUNG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1205,
+      "lon": 129.052
+    },
+    {
+      "mmsi": 440130790,
+      "name": "7 MIREU",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0483,
+      "lon": 129.0445
     }
   ],
   "boundingBox": "24-46N / 122-146E",
