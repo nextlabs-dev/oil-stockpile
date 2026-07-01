@@ -1,18 +1,34 @@
 {
-  "fetchedAt": "2026-07-01T18:02:38+00:00",
+  "fetchedAt": "2026-07-01T19:04:01+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 12,
-  "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 15,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 3,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440147320,
-      "name": "TN LETO",
+      "mmsi": 440504030,
+      "name": "DONGHAE SEASTAR",
+      "destination": "NEWBUSAN",
+      "isJapanBound": false,
+      "lat": 35.0289,
+      "lon": 129.1158
+    },
+    {
+      "mmsi": 440115430,
+      "name": "TAHITI",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0899,
-      "lon": 129.0826
+      "lat": 35.1226,
+      "lon": 129.0513
+    },
+    {
+      "mmsi": 440155380,
+      "name": "KEUMHYANG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1232,
+      "lon": 129.0528
     },
     {
       "mmsi": 431000312,
@@ -23,84 +39,92 @@
       "lon": 140.0622
     },
     {
-      "mmsi": 440504030,
-      "name": "DONGHAE SEASTAR",
-      "destination": "NEWBUSAN",
-      "isJapanBound": false,
-      "lat": 35.1256,
-      "lon": 129.2203
-    },
-    {
-      "mmsi": 440000000,
-      "name": "",
-      "destination": "BUSAN KOREA",
-      "isJapanBound": false,
-      "lat": 35.0922,
-      "lon": 129.0331
-    },
-    {
-      "mmsi": 440103700,
-      "name": "GEUMILHO",
-      "destination": "YU",
-      "isJapanBound": false,
-      "lat": 35.1083,
-      "lon": 129.0923
-    },
-    {
-      "mmsi": 352004850,
-      "name": "FLORA MARIS",
-      "destination": "MY TBI",
-      "isJapanBound": false,
-      "lat": 35.1308,
-      "lon": 129.4015
-    },
-    {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.0516
-    },
-    {
-      "mmsi": 440016190,
-      "name": "TN RHEA",
+      "mmsi": 440103970,
+      "name": "31 WOO JEONG",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0977,
-      "lon": 129.0708
+      "lat": 35.1219,
+      "lon": 129.0495
     },
     {
-      "mmsi": 431003171,
-      "name": "TAIOU MARU",
-      "destination": ">JP WAK/KAINAN",
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
+      "isJapanBound": false,
+      "lat": 35.1198,
+      "lon": 129.0504
+    },
+    {
+      "mmsi": 440331080,
+      "name": "DAEHEUNG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1212,
+      "lon": 129.0494
+    },
+    {
+      "mmsi": 636026037,
+      "name": "LUMI AURORA",
+      "destination": "HO-2377 SEA TRIAL",
+      "isJapanBound": false,
+      "lat": 34.7791,
+      "lon": 129.1964
+    },
+    {
+      "mmsi": 431010346,
+      "name": "KEIYO MARU NO.15",
+      "destination": "JP WAK",
       "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 34.2455,
+      "lon": 135.1003
     },
     {
       "mmsi": 311001680,
       "name": "LAKE MORSKIE OKO",
       "destination": "SEA TRIAL HWO H.2553",
       "isJapanBound": false,
-      "lat": 34.8154,
-      "lon": 129.2202
+      "lat": 34.831,
+      "lon": 129.227
     },
     {
-      "mmsi": 671388100,
-      "name": "ORIS",
-      "destination": "KR BUSAN",
+      "mmsi": 371414000,
+      "name": "CHALLENGE PINNACLE",
+      "destination": "CHB OFF",
       "isJapanBound": false,
-      "lat": 35.0527,
-      "lon": 129.0418
+      "lat": 35.5629,
+      "lon": 139.9334
     },
     {
-      "mmsi": 440316160,
-      "name": "INTRANS EDY",
-      "destination": "KR PUS",
+      "mmsi": 440172660,
+      "name": "KUM KANG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0864,
+      "lon": 129.0293
+    },
+    {
+      "mmsi": 440403100,
+      "name": "SH GRACE",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 34.9584,
+      "lon": 129.0328
+    },
+    {
+      "mmsi": 440147320,
+      "name": "TN LETO",
+      "destination": "BUSAN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 431003171,
+      "name": "TAIOU MARU",
+      "destination": ">JP WAK/KAINAN",
+      "isJapanBound": true,
+      "lat": 34.1547,
+      "lon": 135.1601
     }
   ],
   "boundingBox": "24-46N / 122-146E",
