@@ -1,74 +1,119 @@
 {
-  "fetchedAt": "2026-07-02T21:38:59+00:00",
+  "fetchedAt": "2026-07-02T23:28:33+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 2,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 18,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 1,
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 2
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 440144200,
-      "name": "FC VICTORY",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1003,
-      "lon": 129.0599
-    },
-    {
-      "mmsi": 431012553,
-      "name": "TOKUEIMARU NO.17",
-      "destination": ">JP WAK NISHIHAMA",
-      "isJapanBound": true,
-      "lat": 34.2099,
-      "lon": 135.1435
-    },
-    {
-      "mmsi": 440103970,
-      "name": "31 WOO JEONG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0496
-    },
-    {
-      "mmsi": 440191790,
-      "name": "ARA1HO",
+      "mmsi": 440707950,
+      "name": "SANLOUIS",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.0808,
-      "lon": 129.1423
+      "lat": 35.0584,
+      "lon": 129.0409
+    },
+    {
+      "mmsi": 538006822,
+      "name": "HERCULES I",
+      "destination": "KRONS",
+      "isJapanBound": false,
+      "lat": 35.291,
+      "lon": 129.5472
+    },
+    {
+      "mmsi": 440191310,
+      "name": "BU KWANG HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1208,
+      "lon": 129.0503
+    },
+    {
+      "mmsi": 440709700,
+      "name": "MUSUNG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0498,
+      "lon": 129.1029
+    },
+    {
+      "mmsi": 355493000,
+      "name": "CRANE URANUS",
+      "destination": ">JP KWS OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431001112,
+      "name": "NO.10 HASSHOMARU",
+      "destination": ">JP AFG",
+      "isJapanBound": true,
+      "lat": 39.7603,
+      "lon": 140.0515
+    },
+    {
+      "mmsi": 440101990,
+      "name": "DONG BANG 7HO",
+      "destination": "PUS",
+      "isJapanBound": false,
+      "lat": 35.1198,
+      "lon": 129.0505
+    },
+    {
+      "mmsi": 431501837,
+      "name": "KINTAI MARU",
+      "destination": "JP KWS DU 200-2",
+      "isJapanBound": true,
+      "lat": 35.5012,
+      "lon": 139.7426
+    },
+    {
+      "mmsi": 440147320,
+      "name": "TN LETO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0904,
+      "lon": 129.0828
+    },
+    {
+      "mmsi": 440400010,
+      "name": "PHOENIX",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1022,
+      "lon": 129.0721
+    },
+    {
+      "mmsi": 440155350,
+      "name": "NO.11 SONGWON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0367,
+      "lon": 129.0682
     },
     {
       "mmsi": 440105720,
       "name": "DAE JEONG",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1198,
-      "lon": 129.0508
+      "lat": 35.1062,
+      "lon": 129.0904
     },
     {
-      "mmsi": 440002070,
-      "name": "SUN YEONG",
-      "destination": "KR BSN",
+      "mmsi": 273273980,
+      "name": "AKVILON",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.122,
-      "lon": 129.0496
-    },
-    {
-      "mmsi": 373982000,
-      "name": "SULFUR BRAVE",
-      "destination": "BUSAN_KR",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431023475,
-      "name": "EISHIN MARU NO.28",
-      "destination": "JP TYO HANEDA OFF",
-      "isJapanBound": true,
-      "lat": 35.5166,
-      "lon": 139.8409
+      "lat": 35.0237,
+      "lon": 129.051
     },
     {
       "mmsi": 440103700,
@@ -76,15 +121,39 @@
       "destination": "YU",
       "isJapanBound": false,
       "lat": 35.121,
-      "lon": 129.0497
+      "lon": 129.0498
     },
     {
-      "mmsi": 440147320,
-      "name": "TN LETO",
+      "mmsi": 440208580,
+      "name": "BOMUN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1221,
+      "lon": 129.0517
+    },
+    {
+      "mmsi": 440130790,
+      "name": "7 MIREU",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1216,
+      "lon": 129.0515
+    },
+    {
+      "mmsi": 440410930,
+      "name": "CHARIS",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0911,
-      "lon": 129.0825
+      "lat": 35.1191,
+      "lon": 129.0526
+    },
+    {
+      "mmsi": 413378910,
+      "name": "DU JUAN",
+      "destination": "CAOJING/CN",
+      "isJapanBound": false,
+      "lat": 34.9349,
+      "lon": 129.1665
     }
   ],
   "boundingBox": "24-46N / 122-146E",
