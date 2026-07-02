@@ -1,111 +1,100 @@
 {
-  "fetchedAt": "2026-07-02T15:37:24+00:00",
+  "fetchedAt": "2026-07-02T18:08:44+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 1,
+  "totalTankersInRegion": 11,
+  "japanBoundTankers": 2,
   "japanBoundUnknownPort": 1,
-  "topDestinationPorts": [],
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 440016190,
-      "name": "TN RHEA",
+      "mmsi": 440147320,
+      "name": "TN LETO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.09,
+      "lon": 129.0825
+    },
+    {
+      "mmsi": 636025884,
+      "name": "ABUNDANT WARRIOR",
+      "destination": "SG SIN",
+      "isJapanBound": false,
+      "lat": 29.1479,
+      "lon": 123.2341
+    },
+    {
+      "mmsi": 440215590,
+      "name": "DONGNAM ACE",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.032,
+      "lon": 129.0465
     },
     {
       "mmsi": 440103700,
       "name": "GEUMILHO",
       "destination": "YU",
       "isJapanBound": false,
-      "lat": 35.121,
+      "lat": 35.1211,
       "lon": 129.0497
     },
     {
-      "mmsi": 440038740,
-      "name": "NO8WOOJINHO",
-      "destination": "BUSAN",
+      "mmsi": 440142830,
+      "name": "95KYEONG JIN",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.0632,
-      "lon": 129.1257
+      "lat": 35.1202,
+      "lon": 129.0496
     },
     {
-      "mmsi": 440978000,
-      "name": "KEOYOUNG STAR",
-      "destination": "KR PUS WM",
-      "isJapanBound": false,
-      "lat": 35.1036,
-      "lon": 129.0922
-    },
-    {
-      "mmsi": 440500300,
-      "name": "SONGRIM HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.0506
-    },
-    {
-      "mmsi": 440115430,
-      "name": "TAHITI",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1225,
-      "lon": 129.0514
-    },
-    {
-      "mmsi": 440324850,
-      "name": "NO3TAEYOUNG",
-      "destination": "POHANG",
-      "isJapanBound": false,
-      "lat": 35.1196,
-      "lon": 129.0506
-    },
-    {
-      "mmsi": 440002070,
-      "name": "SUN YEONG",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.0051,
-      "lon": 129.0663
-    },
-    {
-      "mmsi": 431010346,
-      "name": "KEIYO MARU NO.15",
-      "destination": "JP WAK",
+      "mmsi": 431001112,
+      "name": "NO.10 HASSHOMARU",
+      "destination": ">JP AFG",
       "isJapanBound": true,
-      "lat": 34.2145,
-      "lon": 135.1412
+      "lat": 39.7719,
+      "lon": 139.9727
     },
     {
-      "mmsi": 440155350,
-      "name": "NO.11 SONGWON",
-      "destination": "",
+      "mmsi": 355493000,
+      "name": "CRANE URANUS",
+      "destination": ">JP KWS OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440016190,
+      "name": "TN RHEA",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.122,
-      "lon": 129.0499
+      "lat": 35.0976,
+      "lon": 129.0656
     },
     {
-      "mmsi": 440199510,
-      "name": "SUNGSIMHO",
-      "destination": "",
+      "mmsi": 373982000,
+      "name": "SULFUR BRAVE",
+      "destination": "BUSAN_KR",
       "isJapanBound": false,
-      "lat": 35.0725,
-      "lon": 129.1421
+      "lat": 35.0499,
+      "lon": 129.0716
     },
     {
-      "mmsi": 440076890,
-      "name": "YEONG ROO",
-      "destination": "",
+      "mmsi": 440208060,
+      "name": "CHEONGHAE NO1",
+      "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": 35.122,
-      "lon": 129.0518
+      "lat": 35.0345,
+      "lon": 129.0592
     },
     {
-      "mmsi": 440048680,
-      "name": "FC GRACE",
-      "destination": "KRICN",
+      "mmsi": 352181000,
+      "name": "CRANE AVANCE",
+      "destination": "KR PUS",
       "isJapanBound": false,
       "lat": null,
       "lon": null
