@@ -1,58 +1,23 @@
 {
-  "fetchedAt": "2026-07-02T07:51:21+00:00",
+  "fetchedAt": "2026-07-02T10:58:19+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 14,
-  "japanBoundTankers": 0,
-  "japanBoundUnknownPort": 0,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 12,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 2,
+  "topDestinationPorts": [
+    {
+      "port": "YOKKAICHI",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 440178690,
-      "name": "DAIN3HO",
-      "destination": "",
+      "mmsi": 440316150,
+      "name": "HAE WON",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1226,
-      "lon": 129.0514
-    },
-    {
-      "mmsi": 440314810,
-      "name": "21 DONGBANG",
-      "destination": "BURAN",
-      "isJapanBound": false,
-      "lat": 35.1089,
-      "lon": 129.0933
-    },
-    {
-      "mmsi": 440022810,
-      "name": "SANGA HO",
-      "destination": "INCHEON",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0515
-    },
-    {
-      "mmsi": 440130790,
-      "name": "7 MIREU",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0539,
-      "lon": 129.0217
-    },
-    {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1233,
-      "lon": 129.0526
+      "lat": 35.0969,
+      "lon": 129.0946
     },
     {
       "mmsi": 440400010,
@@ -63,58 +28,82 @@
       "lon": 129.0513
     },
     {
-      "mmsi": 440305160,
-      "name": "YUHAN1",
-      "destination": "ULSAN",
+      "mmsi": 440152720,
+      "name": "SAM SUNG HO",
+      "destination": "KR BSN",
       "isJapanBound": false,
-      "lat": 35.1049,
-      "lon": 129.0938
+      "lat": 35.0874,
+      "lon": 129.0857
     },
     {
-      "mmsi": 440714100,
-      "name": "DAON",
-      "destination": "ULSAN",
+      "mmsi": 440062680,
+      "name": "JIN YANG 1HO",
+      "destination": "USN",
       "isJapanBound": false,
-      "lat": 35.1583,
-      "lon": 129.2291
+      "lat": 35.202,
+      "lon": 129.2821
     },
     {
-      "mmsi": 440102050,
-      "name": "MYUNGJIN",
-      "destination": "BUSAN 5 PIER",
-      "isJapanBound": false,
-      "lat": 35.0255,
-      "lon": 129.0696
+      "mmsi": 440892000,
+      "name": "GOLDEN SUNNY HANA",
+      "destination": "JP YKK",
+      "isJapanBound": true,
+      "lat": 34.9619,
+      "lon": 129.1431
     },
     {
-      "mmsi": 440132370,
-      "name": "KOMAR NO2",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0388,
-      "lon": 129.0429
-    },
-    {
-      "mmsi": 440316160,
-      "name": "INTRANS EDY",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 35.104,
-      "lon": 129.0904
-    },
-    {
-      "mmsi": 352906000,
-      "name": "K.JASMINE",
-      "destination": "KRJSP",
-      "isJapanBound": false,
-      "lat": 34.8742,
-      "lon": 128.7921
-    },
-    {
-      "mmsi": 440016190,
-      "name": "TN RHEA",
+      "mmsi": 440115430,
+      "name": "TAHITI",
       "destination": "BUSAN",
       "isJapanBound": false,
+      "lat": 35.1225,
+      "lon": 129.0514
+    },
+    {
+      "mmsi": 431010346,
+      "name": "KEIYO MARU NO.15",
+      "destination": "JP WAK",
+      "isJapanBound": true,
+      "lat": 34.2145,
+      "lon": 135.1412
+    },
+    {
+      "mmsi": 440155350,
+      "name": "NO.11 SONGWON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.122,
+      "lon": 129.0499
+    },
+    {
+      "mmsi": 440147320,
+      "name": "TN LETO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0911,
+      "lon": 129.081
+    },
+    {
+      "mmsi": 440084290,
+      "name": "YONG CHEON",
+      "destination": "INC",
+      "isJapanBound": false,
+      "lat": 37.4659,
+      "lon": 126.6019
+    },
+    {
+      "mmsi": 248050000,
+      "name": "ANFIELD DP",
+      "destination": "SEA TRIAL(SHI.2708)",
+      "isJapanBound": false,
+      "lat": 34.6979,
+      "lon": 129.2448
+    },
+    {
+      "mmsi": 431003155,
+      "name": "HOUEI NO.1",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
       "lat": null,
       "lon": null
     }
