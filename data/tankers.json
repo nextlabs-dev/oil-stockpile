@@ -1,58 +1,58 @@
 {
-  "fetchedAt": "2026-07-03T17:53:58+00:00",
+  "fetchedAt": "2026-07-03T19:55:31+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 9,
+  "totalTankersInRegion": 10,
   "japanBoundTankers": 0,
   "japanBoundUnknownPort": 0,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440400200,
-      "name": "HAE CHANG SUN",
-      "destination": "INCHEON",
+      "mmsi": 440103440,
+      "name": "A-ONE",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 37.5092,
-      "lon": 126.6018
+      "lat": 35.1209,
+      "lon": 129.0507
     },
     {
       "mmsi": 440191790,
       "name": "ARA1HO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.009,
-      "lon": 129.0662
+      "lat": 35.0094,
+      "lon": 129.0659
     },
     {
-      "mmsi": 440141630,
-      "name": "77YOUNGDEOK",
+      "mmsi": 440403100,
+      "name": "SH GRACE",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1213,
-      "lon": 129.0494
-    },
-    {
-      "mmsi": 440155010,
-      "name": "YU SUNG HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
       "lat": 35.1198,
-      "lon": 129.0506
+      "lon": 129.0509
     },
     {
-      "mmsi": 440305360,
-      "name": "5WOOYUNG",
+      "mmsi": 440049630,
+      "name": "SONG SOON HO",
+      "destination": "MOKPO",
+      "isJapanBound": false,
+      "lat": 35.1199,
+      "lon": 129.0505
+    },
+    {
+      "mmsi": 440232000,
+      "name": "DOOLA STAR",
+      "destination": "DSN/KR",
+      "isJapanBound": false,
+      "lat": 37.499,
+      "lon": 126.6025
+    },
+    {
+      "mmsi": 440115430,
+      "name": "TAHITI",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.084,
-      "lon": 129.0999
-    },
-    {
-      "mmsi": 441469000,
-      "name": "BUM YOUNG",
-      "destination": "MY SDK",
-      "isJapanBound": false,
-      "lat": 35.2332,
-      "lon": 129.4065
+      "lat": 35.1227,
+      "lon": 129.0513
     },
     {
       "mmsi": 440155380,
@@ -60,23 +60,31 @@
       "destination": "",
       "isJapanBound": false,
       "lat": 35.1233,
-      "lon": 129.0528
+      "lon": 129.0527
     },
     {
-      "mmsi": 440401790,
-      "name": "SONG DEOG",
-      "destination": "BUSAN",
+      "mmsi": 440135400,
+      "name": "TRITON",
+      "destination": "S/JEJU",
       "isJapanBound": false,
-      "lat": 35.1208,
-      "lon": 129.0508
+      "lat": 35.2295,
+      "lon": 129.3527
     },
     {
-      "mmsi": 273273980,
-      "name": "AKVILON",
-      "destination": "",
+      "mmsi": 370388000,
+      "name": "YC CLOVER",
+      "destination": "KR KCN",
       "isJapanBound": false,
-      "lat": 35.0219,
-      "lon": 129.0545
+      "lat": 35.0507,
+      "lon": 129.0005
+    },
+    {
+      "mmsi": 319100600,
+      "name": "MANCHAC SUN",
+      "destination": "KRUSN",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
