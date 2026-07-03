@@ -1,138 +1,79 @@
 {
-  "fetchedAt": "2026-07-03T13:16:02+00:00",
+  "fetchedAt": "2026-07-03T15:31:59+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 16,
-  "japanBoundTankers": 0,
+  "totalTankersInRegion": 8,
+  "japanBoundTankers": 1,
   "japanBoundUnknownPort": 0,
-  "topDestinationPorts": [],
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
+      "mmsi": 440103700,
+      "name": "GEUMILHO",
+      "destination": "YU",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.1211,
+      "lon": 129.0498
     },
     {
-      "mmsi": 440115430,
-      "name": "TAHITI",
-      "destination": "BUSAN",
+      "mmsi": 440409920,
+      "name": "HANNAM",
+      "destination": "BUSAN KC#3",
       "isJapanBound": false,
-      "lat": 35.1227,
-      "lon": 129.0513
-    },
-    {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1234,
-      "lon": 129.0528
-    },
-    {
-      "mmsi": 440002070,
-      "name": "SUN YEONG",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440714100,
-      "name": "DAON",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1196,
-      "lon": 129.0511
-    },
-    {
-      "mmsi": 440400200,
-      "name": "HAE CHANG SUN",
-      "destination": "INCHEON",
-      "isJapanBound": false,
-      "lat": 37.5092,
-      "lon": 126.6018
-    },
-    {
-      "mmsi": 440199510,
-      "name": "SUNGSIMHO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1229,
-      "lon": 129.0528
+      "lat": 35.0937,
+      "lon": 129.0313
     },
     {
       "mmsi": 440049630,
       "name": "SONG SOON HO",
       "destination": "MOKPO",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.1199,
+      "lon": 129.0505
     },
     {
-      "mmsi": 440400010,
-      "name": "PHOENIX",
+      "mmsi": 440000000,
+      "name": "",
+      "destination": "BUSAN KOREA",
+      "isJapanBound": false,
+      "lat": 35.0922,
+      "lon": 129.0331
+    },
+    {
+      "mmsi": 440409790,
+      "name": "ARAM",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0725,
-      "lon": 129.1184
+      "lat": 35.1195,
+      "lon": 129.0511
     },
     {
-      "mmsi": 440103440,
-      "name": "A-ONE",
+      "mmsi": 431001071,
+      "name": "FUKUJIN MARU NO.21",
+      "destination": "JP KWS OFF",
+      "isJapanBound": true,
+      "lat": 35.4861,
+      "lon": 139.8135
+    },
+    {
+      "mmsi": 440147320,
+      "name": "TN LETO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1209,
-      "lon": 129.0506
-    },
-    {
-      "mmsi": 352001353,
-      "name": "SH VENUS",
-      "destination": "CN NGB",
-      "isJapanBound": false,
-      "lat": 34.8107,
-      "lon": 129.0661
-    },
-    {
-      "mmsi": 440103970,
-      "name": "31 WOO JEONG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.0494
-    },
-    {
-      "mmsi": 440141630,
-      "name": "77YOUNGDEOK",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1213,
-      "lon": 129.0494
-    },
-    {
-      "mmsi": 440374000,
-      "name": "SUNNY QUEEN",
-      "destination": "KR YOS",
-      "isJapanBound": false,
-      "lat": 25.0653,
-      "lon": 122.8284
-    },
-    {
-      "mmsi": 373982000,
-      "name": "SULFUR BRAVE",
-      "destination": "BUSAN_KR",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.0902,
+      "lon": 129.0828
     },
     {
       "mmsi": 440038740,
       "name": "NO8WOOJINHO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1211,
-      "lon": 129.049
+      "lat": 35.0751,
+      "lon": 129.1148
     }
   ],
   "boundingBox": "24-46N / 122-146E",
