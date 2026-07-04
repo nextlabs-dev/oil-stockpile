@@ -1,34 +1,87 @@
 {
-  "fetchedAt": "2026-07-04T19:43:18+00:00",
+  "fetchedAt": "2026-07-04T21:20:55+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 9,
+  "totalTankersInRegion": 11,
   "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 2,
-  "topDestinationPorts": [],
+  "japanBoundUnknownPort": 1,
+  "topDestinationPorts": [
+    {
+      "port": "CHIBA",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 431004181,
-      "name": "SANKYO MARU NO.2",
-      "destination": "JP WAK 2-J",
-      "isJapanBound": true,
-      "lat": 34.1528,
-      "lon": 135.1274
+      "mmsi": 440326290,
+      "name": "EUN SUNG 1HO",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1216,
+      "lon": 129.0528
     },
     {
-      "mmsi": 440105720,
-      "name": "DAE JEONG",
-      "destination": "BUSAN",
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0522
+      "lat": 35.1225,
+      "lon": 129.0517
     },
     {
-      "mmsi": 352006568,
-      "name": "GINGA MARGAY",
-      "destination": "KRPUS>USSCK",
+      "mmsi": 440322380,
+      "name": "GWANGSAN",
+      "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": 35.0441,
-      "lon": 129.0669
+      "lat": 35.122,
+      "lon": 129.052
+    },
+    {
+      "mmsi": 440155350,
+      "name": "NO.11 SONGWON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1215,
+      "lon": 129.0507
+    },
+    {
+      "mmsi": 440101990,
+      "name": "DONG BANG 7HO",
+      "destination": "PUS",
+      "isJapanBound": false,
+      "lat": 35.0384,
+      "lon": 129.0727
+    },
+    {
+      "mmsi": 440068000,
+      "name": "WOO HWANG",
+      "destination": "KR INC",
+      "isJapanBound": false,
+      "lat": 34.9921,
+      "lon": 129.0403
+    },
+    {
+      "mmsi": 441598000,
+      "name": "GOLDEN WINGS",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
+      "isJapanBound": false,
+      "lat": 35.122,
+      "lon": 129.0496
+    },
+    {
+      "mmsi": 273273980,
+      "name": "AKVILON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
     },
     {
       "mmsi": 431001715,
@@ -39,44 +92,12 @@
       "lon": 140.0568
     },
     {
-      "mmsi": 440331750,
-      "name": "BO WON HO",
-      "destination": "BSN",
-      "isJapanBound": false,
-      "lat": 35.1195,
-      "lon": 129.0509
-    },
-    {
-      "mmsi": 440409920,
-      "name": "HANNAM",
-      "destination": "BUSAN KC#3",
-      "isJapanBound": false,
-      "lat": 35.0936,
-      "lon": 129.0313
-    },
-    {
-      "mmsi": 440714100,
-      "name": "DAON",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1208,
-      "lon": 129.0505
-    },
-    {
-      "mmsi": 440115430,
-      "name": "TAHITI",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1227,
-      "lon": 129.0513
-    },
-    {
-      "mmsi": 441598000,
-      "name": "GOLDEN WINGS",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 35.0641,
-      "lon": 129.0275
+      "mmsi": 431012675,
+      "name": "SEIWA",
+      "destination": "> JP CHB OIREC 12",
+      "isJapanBound": true,
+      "lat": 34.2145,
+      "lon": 135.1414
     }
   ],
   "boundingBox": "24-46N / 122-146E",
