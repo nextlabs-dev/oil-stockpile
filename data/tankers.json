@@ -1,18 +1,34 @@
 {
-  "fetchedAt": "2026-07-05T12:48:55+00:00",
+  "fetchedAt": "2026-07-05T15:00:13+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 9,
+  "totalTankersInRegion": 8,
   "japanBoundTankers": 1,
   "japanBoundUnknownPort": 1,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 431052000,
-      "name": "SUNNY MARS",
-      "destination": ">JP ANE OFF",
-      "isJapanBound": true,
-      "lat": 39.6937,
-      "lon": 139.5599
+      "mmsi": 440117010,
+      "name": "YOUNG JIN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1148,
+      "lon": 129.0611
+    },
+    {
+      "mmsi": 441601000,
+      "name": "SEONGHO ACE",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": 35.1022,
+      "lon": 129.0599
+    },
+    {
+      "mmsi": 440103970,
+      "name": "31 WOO JEONG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1219,
+      "lon": 129.0495
     },
     {
       "mmsi": 440400900,
@@ -20,39 +36,23 @@
       "destination": "YEOSU",
       "isJapanBound": false,
       "lat": 35.1199,
-      "lon": 129.0504
+      "lon": 129.0503
     },
     {
-      "mmsi": 440303500,
-      "name": "CHEONGDAM",
-      "destination": "BSN#5MRJ",
-      "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.0505
+      "mmsi": 431017908,
+      "name": "KIRISHIMA MARU",
+      "destination": ">JP NGO/NNX",
+      "isJapanBound": true,
+      "lat": 35.521,
+      "lon": 139.7664
     },
     {
-      "mmsi": 440409920,
-      "name": "HANNAM",
-      "destination": "BUSAN KC#3",
+      "mmsi": 440103440,
+      "name": "A-ONE",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0937,
-      "lon": 129.0313
-    },
-    {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1234,
-      "lon": 129.0528
-    },
-    {
-      "mmsi": 440316160,
-      "name": "INTRANS EDY",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 35.1039,
-      "lon": 129.0904
+      "lat": 35.1201,
+      "lon": 129.0501
     },
     {
       "mmsi": 440002070,
@@ -63,20 +63,12 @@
       "lon": 129.0496
     },
     {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
+      "mmsi": 440103700,
+      "name": "GEUMILHO",
+      "destination": "YU",
       "isJapanBound": false,
-      "lat": 35.1065,
-      "lon": 129.0936
-    },
-    {
-      "mmsi": 440305360,
-      "name": "5WOOYUNG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.0319,
+      "lon": 129.0799
     }
   ],
   "boundingBox": "24-46N / 122-146E",
