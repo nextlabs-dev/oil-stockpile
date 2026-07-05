@@ -1,74 +1,34 @@
 {
-  "fetchedAt": "2026-07-05T18:22:21+00:00",
+  "fetchedAt": "2026-07-05T19:49:34+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 8,
+  "japanBoundTankers": 1,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440714100,
-      "name": "DAON",
-      "destination": "ULSAN",
+      "mmsi": 416449000,
+      "name": "HUA YUN",
+      "destination": "KEL,TW",
       "isJapanBound": false,
-      "lat": 35.1209,
-      "lon": 129.0507
+      "lat": 25.1487,
+      "lon": 122.059
     },
     {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1233,
-      "lon": 129.0528
-    },
-    {
-      "mmsi": 440042130,
-      "name": "WOO SUNG HO",
-      "destination": "MASAN",
-      "isJapanBound": false,
-      "lat": 35.0062,
-      "lon": 129.1572
-    },
-    {
-      "mmsi": 440215590,
-      "name": "DONGNAM ACE",
-      "destination": "YEOSU",
-      "isJapanBound": false,
-      "lat": 35.1168,
-      "lon": 129.0554
-    },
-    {
-      "mmsi": 273616650,
-      "name": "PACIFICOS",
-      "destination": "CN LKU",
-      "isJapanBound": false,
-      "lat": 35.0779,
-      "lon": 129.3838
-    },
-    {
-      "mmsi": 440120270,
-      "name": "NO.15 DAESHIN",
+      "mmsi": 440059890,
+      "name": "DOOLA SKY",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0552,
-      "lon": 129.0223
+      "lat": 35.0556,
+      "lon": 129.1471
     },
     {
-      "mmsi": 636026074,
-      "name": "AL MAJHOULAH",
-      "destination": "HO-2573 GAS TRIAL",
+      "mmsi": 440331080,
+      "name": "DAEHEUNG",
+      "destination": "",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440152720,
-      "name": "SAM SUNG HO",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.0964,
-      "lon": 129.0781
+      "lat": 35.1199,
+      "lon": 129.0502
     },
     {
       "mmsi": 431001715,
@@ -79,12 +39,36 @@
       "lon": 140.0568
     },
     {
-      "mmsi": 431011753,
-      "name": "HOUSEIMARU NO21",
-      "destination": ">JP WAK OFF",
-      "isJapanBound": true,
+      "mmsi": 440316160,
+      "name": "INTRANS EDY",
+      "destination": "KR PUS             B",
+      "isJapanBound": false,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 440300120,
+      "name": "M/T BK25",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1208,
+      "lon": 129.0491
+    },
+    {
+      "mmsi": 440410930,
+      "name": "CHARIS",
+      "destination": "MASAN",
+      "isJapanBound": false,
+      "lat": 35.0113,
+      "lon": 128.8817
+    },
+    {
+      "mmsi": 440500300,
+      "name": "SONGRIM HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0461,
+      "lon": 129.1251
     }
   ],
   "boundingBox": "24-46N / 122-146E",
