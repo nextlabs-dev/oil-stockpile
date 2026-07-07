@@ -1,143 +1,103 @@
 {
-  "fetchedAt": "2026-07-07T00:27:06+00:00",
+  "fetchedAt": "2026-07-07T05:13:36+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 16,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 11,
+  "japanBoundTankers": 1,
+  "japanBoundUnknownPort": 0,
   "topDestinationPorts": [
     {
-      "port": "YOKOHAMA",
+      "port": "KAWASAKI",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 440154950,
-      "name": "DONGJIN ACE",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.121,
-      "lon": 129.0508
-    },
-    {
-      "mmsi": 440215590,
-      "name": "DONGNAM ACE",
+      "mmsi": 440020220,
+      "name": "68 SE HAN",
       "destination": "YEOSU",
       "isJapanBound": false,
-      "lat": 35.0096,
-      "lon": 129.0498
+      "lat": 35.106,
+      "lon": 129.1966
     },
     {
-      "mmsi": 440303500,
-      "name": "CHEONGDAM",
-      "destination": "BSN#5MRJ",
+      "mmsi": 440141630,
+      "name": "77YOUNGDEOK",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.1198,
-      "lon": 129.0507
+      "lat": 35.1213,
+      "lon": 129.0494
     },
     {
-      "mmsi": 431004235,
-      "name": "KAKUSEI MARU",
-      "destination": "JP AFG ENEOS",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440400200,
-      "name": "HAE CHANG SUN",
-      "destination": "INCHEON",
+      "mmsi": 440403100,
+      "name": "SH GRACE",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 37.4572,
-      "lon": 126.5751
+      "lat": 35.0371,
+      "lon": 129.0695
     },
     {
-      "mmsi": 440322380,
-      "name": "GWANGSAN",
-      "destination": "BUSAN",
+      "mmsi": 440001860,
+      "name": "DONGIL HO",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.1222,
-      "lon": 129.0518
-    },
-    {
-      "mmsi": 440714100,
-      "name": "DAON",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.121,
-      "lon": 129.0508
+      "lat": 35.124,
+      "lon": 129.0521
     },
     {
       "mmsi": 440500300,
       "name": "SONGRIM HO",
-      "destination": "BUSAN              B",
-      "isJapanBound": false,
-      "lat": 35.1056,
-      "lon": 129.0661
-    },
-    {
-      "mmsi": 431003276,
-      "name": "KIRISHIMA MARU NO.2",
-      "destination": ">JP WAK KAINAN-8",
-      "isJapanBound": true,
-      "lat": 34.1457,
-      "lon": 135.1739
-    },
-    {
-      "mmsi": 440092260,
-      "name": "7 SUN YEONG",
-      "destination": "KR BUS",
-      "isJapanBound": false,
-      "lat": 35.0685,
-      "lon": 129.1215
-    },
-    {
-      "mmsi": 431014522,
-      "name": "HOKENMARU NO.3",
-      "destination": ">JP YOK AZ",
-      "isJapanBound": true,
-      "lat": 35.4875,
-      "lon": 139.705
-    },
-    {
-      "mmsi": 440035420,
-      "name": "DAE IL",
-      "destination": "UL",
-      "isJapanBound": false,
-      "lat": 35.109,
-      "lon": 129.0933
-    },
-    {
-      "mmsi": 440135930,
-      "name": "JUNG WOO 1",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0705,
-      "lon": 129.0429
+      "lat": 35.1218,
+      "lon": 129.0506
     },
     {
-      "mmsi": 440125440,
-      "name": "96DONGBANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1244,
-      "lon": 129.0551
-    },
-    {
-      "mmsi": 440400900,
-      "name": "WOOWONHO",
-      "destination": "YEOSU",
+      "mmsi": 373982000,
+      "name": "SULFUR BRAVE",
+      "destination": "BUSAN_KR",
       "isJapanBound": false,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 613618200,
-      "name": "LUNA",
-      "destination": "YEOSU KOREA",
+      "mmsi": 440130790,
+      "name": "7 MIREU",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 34.6349,
-      "lon": 127.9684
+      "lat": 35.0955,
+      "lon": 129.0701
+    },
+    {
+      "mmsi": 440053280,
+      "name": "GO RYO 3 HO",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0972,
+      "lon": 129.044
+    },
+    {
+      "mmsi": 440155380,
+      "name": "KEUMHYANG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0741,
+      "lon": 129.1174
+    },
+    {
+      "mmsi": 354475000,
+      "name": "CRANE STELLA",
+      "destination": ">JP KWS OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 613003716,
+      "name": "ELOWE",
+      "destination": "F0R ORDER",
+      "isJapanBound": false,
+      "lat": 34.5415,
+      "lon": 128.0032
     }
   ],
   "boundingBox": "24-46N / 122-146E",
