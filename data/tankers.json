@@ -1,98 +1,63 @@
 {
-  "fetchedAt": "2026-07-07T12:16:32+00:00",
+  "fetchedAt": "2026-07-07T15:20:14+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 11,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 1,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 6,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 2,
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 431015686,
-      "name": "MASAWA MARU",
-      "destination": ">JP WAK",
+      "mmsi": 440215590,
+      "name": "DONGNAM ACE",
+      "destination": "YEOSU",
+      "isJapanBound": false,
+      "lat": 35.121,
+      "lon": 129.0506
+    },
+    {
+      "mmsi": 440108790,
+      "name": "3MYEONGGWANG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1219,
+      "lon": 129.0517
+    },
+    {
+      "mmsi": 431018777,
+      "name": "HOUSEIMARU NO.7",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1508,
+      "lon": 135.1623
+    },
+    {
+      "mmsi": 477664300,
+      "name": "GLORISEA",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": 34.8608,
+      "lon": 129.0435
+    },
+    {
+      "mmsi": 354475000,
+      "name": "CRANE STELLA",
+      "destination": ">JP KWS OFF",
+      "isJapanBound": true,
+      "lat": 35.4717,
+      "lon": 139.798
+    },
+    {
+      "mmsi": 431003276,
+      "name": "KIRISHIMA MARU NO.2",
+      "destination": ">JP WAK KAINAN-OFF",
       "isJapanBound": true,
       "lat": null,
       "lon": null
-    },
-    {
-      "mmsi": 440155010,
-      "name": "YU SUNG HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1197,
-      "lon": 129.0509
-    },
-    {
-      "mmsi": 440191310,
-      "name": "BU KWANG HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1199,
-      "lon": 129.0503
-    },
-    {
-      "mmsi": 440365000,
-      "name": "OCEAN ACE 11",
-      "destination": "KR PUS AS",
-      "isJapanBound": false,
-      "lat": 35.0044,
-      "lon": 129.2471
-    },
-    {
-      "mmsi": 440103790,
-      "name": "13DAESIN",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1053,
-      "lon": 129.069
-    },
-    {
-      "mmsi": 440145170,
-      "name": "23 SAMJIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.124,
-      "lon": 129.0519
-    },
-    {
-      "mmsi": 440197410,
-      "name": "HWA JEONG ACE",
-      "destination": "YEOSU",
-      "isJapanBound": false,
-      "lat": 35.0734,
-      "lon": 129.1095
-    },
-    {
-      "mmsi": 440036020,
-      "name": "GYEONG SEONG HO",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.0384,
-      "lon": 129.1222
-    },
-    {
-      "mmsi": 441083000,
-      "name": "KEOYOUNG STAR 5",
-      "destination": "CN CJK",
-      "isJapanBound": false,
-      "lat": 34.9759,
-      "lon": 129.1482
-    },
-    {
-      "mmsi": 440154950,
-      "name": "DONGJIN ACE",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1589,
-      "lon": 129.2331
-    },
-    {
-      "mmsi": 440892000,
-      "name": "GOLDEN SUNNY HANA",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 34.9876,
-      "lon": 129.1266
     }
   ],
   "boundingBox": "24-46N / 122-146E",
