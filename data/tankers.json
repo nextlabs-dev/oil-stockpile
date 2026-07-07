@@ -1,63 +1,66 @@
 {
-  "fetchedAt": "2026-07-07T15:20:14+00:00",
+  "fetchedAt": "2026-07-07T17:33:03+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 6,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 2,
-  "topDestinationPorts": [
-    {
-      "port": "KAWASAKI",
-      "count": 1
-    }
-  ],
+  "totalTankersInRegion": 7,
+  "japanBoundTankers": 0,
+  "japanBoundUnknownPort": 0,
+  "topDestinationPorts": [],
   "vessels": [
     {
       "mmsi": 440215590,
       "name": "DONGNAM ACE",
       "destination": "YEOSU",
       "isJapanBound": false,
-      "lat": 35.121,
+      "lat": 35.1211,
       "lon": 129.0506
     },
     {
-      "mmsi": 440108790,
-      "name": "3MYEONGGWANG",
+      "mmsi": 440500300,
+      "name": "SONGRIM HO",
       "destination": "BUSAN",
       "isJapanBound": false,
       "lat": 35.1219,
-      "lon": 129.0517
-    },
-    {
-      "mmsi": 431018777,
-      "name": "HOUSEIMARU NO.7",
-      "destination": ">JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.1508,
-      "lon": 135.1623
+      "lon": 129.0505
     },
     {
       "mmsi": 477664300,
       "name": "GLORISEA",
       "destination": "KR PUS",
       "isJapanBound": false,
-      "lat": 34.8608,
-      "lon": 129.0435
+      "lat": 34.8897,
+      "lon": 129.0842
     },
     {
-      "mmsi": 354475000,
-      "name": "CRANE STELLA",
-      "destination": ">JP KWS OFF",
-      "isJapanBound": true,
-      "lat": 35.4717,
-      "lon": 139.798
-    },
-    {
-      "mmsi": 431003276,
-      "name": "KIRISHIMA MARU NO.2",
-      "destination": ">JP WAK KAINAN-OFF",
-      "isJapanBound": true,
+      "mmsi": 441311000,
+      "name": "KS ADONIS",
+      "destination": "KR INC INBOUND NO1",
+      "isJapanBound": false,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 440145170,
+      "name": "23 SAMJIN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.124,
+      "lon": 129.0519
+    },
+    {
+      "mmsi": 440062680,
+      "name": "JIN YANG 1HO",
+      "destination": "MASAN",
+      "isJapanBound": false,
+      "lat": 35.087,
+      "lon": 129.2252
+    },
+    {
+      "mmsi": 440038740,
+      "name": "NO8WOOJINHO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1203,
+      "lon": 129.0498
     }
   ],
   "boundingBox": "24-46N / 122-146E",
