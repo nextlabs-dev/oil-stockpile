@@ -1,90 +1,82 @@
 {
-  "fetchedAt": "2026-07-08T12:04:29+00:00",
+  "fetchedAt": "2026-07-08T14:47:43+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 9,
+  "japanBoundTankers": 0,
+  "japanBoundUnknownPort": 0,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 431015453,
-      "name": "MARUOKA MARU",
-      "destination": "JP WAK OFF",
-      "isJapanBound": true,
-      "lat": 34.2082,
-      "lon": 135.1257
-    },
-    {
-      "mmsi": 440203830,
-      "name": "SKYMARS",
+      "mmsi": 440322380,
+      "name": "GWANGSAN",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1212,
-      "lon": 129.0508
+      "lat": 35.1218,
+      "lon": 129.0528
+    },
+    {
+      "mmsi": 440192560,
+      "name": "JINSUNG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1217,
+      "lon": 129.0516
+    },
+    {
+      "mmsi": 440172660,
+      "name": "KUM KANG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1224,
+      "lon": 129.0519
+    },
+    {
+      "mmsi": 440331980,
+      "name": "BU KWANG 9 HO",
+      "destination": "YEOSU",
+      "isJapanBound": false,
+      "lat": 35.121,
+      "lon": 129.0491
+    },
+    {
+      "mmsi": 440009260,
+      "name": "HONG JINHO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1249,
+      "lon": 129.0552
+    },
+    {
+      "mmsi": 440303500,
+      "name": "CHEONGDAM",
+      "destination": "BSN#5MRJ",
+      "isJapanBound": false,
+      "lat": 35.1199,
+      "lon": 129.0503
+    },
+    {
+      "mmsi": 563079900,
+      "name": "GOLDEN CYGNUS",
+      "destination": "CNZPU",
+      "isJapanBound": false,
+      "lat": 35.138,
+      "lon": 129.3808
+    },
+    {
+      "mmsi": 220635000,
+      "name": "TORM LOTTE",
+      "destination": "PENGERANG MY",
+      "isJapanBound": false,
+      "lat": 34.9695,
+      "lon": 129.3659
     },
     {
       "mmsi": 440215590,
       "name": "DONGNAM ACE",
       "destination": "YEOSU",
       "isJapanBound": false,
-      "lat": 35.1211,
-      "lon": 129.0506
-    },
-    {
-      "mmsi": 440206050,
-      "name": "BUKWANG NO 5",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1198,
-      "lon": 129.0507
-    },
-    {
-      "mmsi": 419001997,
-      "name": "MARIA GLORY",
-      "destination": "ONSAN",
-      "isJapanBound": false,
-      "lat": 35.0924,
-      "lon": 129.4869
-    },
-    {
-      "mmsi": 441355000,
-      "name": "OCEAN GAS",
-      "destination": "USN KR",
-      "isJapanBound": false,
       "lat": null,
       "lon": null
-    },
-    {
-      "mmsi": 440304320,
-      "name": "DOO LA NO.7",
-      "destination": "KR ICN",
-      "isJapanBound": false,
-      "lat": 37.4992,
-      "lon": 126.6303
-    },
-    {
-      "mmsi": 431005056,
-      "name": "KINYOU",
-      "destination": ">JP NGO OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440845000,
-      "name": "GRACE SAMBU",
-      "destination": "YOS KR",
-      "isJapanBound": false,
-      "lat": 34.8435,
-      "lon": 129.03
-    },
-    {
-      "mmsi": 440103700,
-      "name": "GEUMILHO",
-      "destination": "YU",
-      "isJapanBound": false,
-      "lat": 35.1466,
-      "lon": 129.2292
     }
   ],
   "boundingBox": "24-46N / 122-146E",
