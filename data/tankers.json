@@ -1,85 +1,133 @@
 {
-  "fetchedAt": "2026-07-08T00:18:34+00:00",
+  "fetchedAt": "2026-07-08T03:50:12+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 9,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 0,
+  "totalTankersInRegion": 15,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [
     {
-      "port": "KAWASAKI",
+      "port": "MIZUSHIMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 440215590,
-      "name": "DONGNAM ACE",
-      "destination": "YEOSU",
+      "mmsi": 440049630,
+      "name": "SONG SOON HO",
+      "destination": "MOKPO",
       "isJapanBound": false,
-      "lat": 35.1211,
-      "lon": 129.0506
+      "lat": 35.0651,
+      "lon": 129.1197
     },
     {
-      "mmsi": 440115430,
-      "name": "TAHITI",
+      "mmsi": 440172660,
+      "name": "KUM KANG",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1221,
-      "lon": 129.052
+      "lat": 35.1224,
+      "lon": 129.0519
     },
     {
-      "mmsi": 440155350,
-      "name": "NO.11 SONGWON",
+      "mmsi": 636020423,
+      "name": "ATLANTIC GOLD",
+      "destination": "MY PTP",
+      "isJapanBound": false,
+      "lat": 27.1247,
+      "lon": 122.0585
+    },
+    {
+      "mmsi": 440141630,
+      "name": "77YOUNGDEOK",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1198,
+      "lat": 35.1214,
+      "lon": 129.0494
+    },
+    {
+      "mmsi": 431003155,
+      "name": "HOUEI NO.1",
+      "destination": ">JP SBK OFF",
+      "isJapanBound": true,
+      "lat": 34.2006,
+      "lon": 135.1088
+    },
+    {
+      "mmsi": 440300120,
+      "name": "M/T BK25",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1035,
+      "lon": 129.091
+    },
+    {
+      "mmsi": 440155010,
+      "name": "YU SUNG HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1175,
+      "lon": 129.1865
+    },
+    {
+      "mmsi": 440500300,
+      "name": "SONGRIM HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1219,
       "lon": 129.0505
-    },
-    {
-      "mmsi": 440103700,
-      "name": "GEUMILHO",
-      "destination": "YU",
-      "isJapanBound": false,
-      "lat": 35.1198,
-      "lon": 129.0503
-    },
-    {
-      "mmsi": 440048210,
-      "name": "GREEN HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1089,
-      "lon": 129.0933
     },
     {
       "mmsi": 440203830,
       "name": "SKYMARS",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1211,
+      "lat": 35.1212,
       "lon": 129.0509
     },
     {
-      "mmsi": 354475000,
-      "name": "CRANE STELLA",
-      "destination": ">JP KWS OFF",
-      "isJapanBound": true,
-      "lat": 35.4717,
-      "lon": 139.7981
+      "mmsi": 440305160,
+      "name": "YUHAN1",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.0486,
+      "lon": 129.0937
     },
     {
-      "mmsi": 440108790,
-      "name": "3MYEONGGWANG",
-      "destination": "BUSAN",
+      "mmsi": 440130790,
+      "name": "7 MIREU",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0518
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 273436640,
+      "name": "CILICIA",
+      "destination": "QIN CHINA",
+      "isJapanBound": false,
+      "lat": 35.0671,
+      "lon": 129.6106
     },
     {
       "mmsi": 273273980,
       "name": "AKVILON",
       "destination": "",
       "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440503100,
+      "name": "ES LILY",
+      "destination": "KR BUS",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 432831000,
+      "name": "TAKAMATSU MARU",
+      "destination": ">JP MIZ A",
+      "isJapanBound": true,
       "lat": null,
       "lon": null
     }
