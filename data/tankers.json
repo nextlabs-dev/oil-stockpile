@@ -1,143 +1,82 @@
 {
-  "fetchedAt": "2026-07-08T16:56:21+00:00",
+  "fetchedAt": "2026-07-08T18:50:42+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 16,
-  "japanBoundTankers": 5,
+  "totalTankersInRegion": 9,
+  "japanBoundTankers": 3,
   "japanBoundUnknownPort": 3,
-  "topDestinationPorts": [
-    {
-      "port": "KAWASAKI",
-      "count": 2
-    }
-  ],
+  "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440112380,
-      "name": "KUKDONG3HO",
-      "destination": "",
+      "mmsi": 440092260,
+      "name": "7 SUN YEONG",
+      "destination": "KR BUS",
       "isJapanBound": false,
-      "lat": 35.0604,
-      "lon": 129.0452
-    },
-    {
-      "mmsi": 440208580,
-      "name": "BOMUN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1194,
-      "lon": 129.0525
-    },
-    {
-      "mmsi": 440035420,
-      "name": "DAE IL",
-      "destination": "UL",
-      "isJapanBound": false,
-      "lat": 35.0624,
-      "lon": 129.1145
-    },
-    {
-      "mmsi": 440322380,
-      "name": "GWANGSAN",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1222,
-      "lon": 129.0521
-    },
-    {
-      "mmsi": 538011670,
-      "name": "PASCO YUMIKO S/T",
-      "destination": "HHHI-3505 SEA TRIAL",
-      "isJapanBound": false,
-      "lat": 35.0643,
-      "lon": 129.4777
-    },
-    {
-      "mmsi": 533133476,
-      "name": "LE INFINITY",
-      "destination": "VN HPH",
-      "isJapanBound": false,
-      "lat": 35.1134,
-      "lon": 129.3845
+      "lat": null,
+      "lon": null
     },
     {
       "mmsi": 431015453,
       "name": "MARUOKA MARU",
       "destination": "JP WAK OFF",
       "isJapanBound": true,
-      "lat": 34.2081,
-      "lon": 135.1252
+      "lat": 34.2075,
+      "lon": 135.125
     },
     {
-      "mmsi": 563113800,
-      "name": "RYDAL",
-      "destination": "JP KWS JXEK-AB",
-      "isJapanBound": true,
-      "lat": 35.477,
-      "lon": 139.7658
-    },
-    {
-      "mmsi": 440314810,
-      "name": "21 DONGBANG",
-      "destination": "BURAN",
+      "mmsi": 440503100,
+      "name": "ES LILY",
+      "destination": "KR BUS",
       "isJapanBound": false,
-      "lat": 35.0203,
-      "lon": 129.0929
+      "lat": 35.1079,
+      "lon": 129.0917
     },
     {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
+      "mmsi": 440130790,
+      "name": "7 MIREU",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.108,
-      "lon": 129.0938
+      "lat": 35.122,
+      "lon": 129.0519
     },
     {
       "mmsi": 440215590,
       "name": "DONGNAM ACE",
       "destination": "YEOSU",
       "isJapanBound": false,
+      "lat": 35.1211,
+      "lon": 129.0506
+    },
+    {
+      "mmsi": 440016180,
+      "name": "ES ROSE",
+      "destination": "DAESAN",
+      "isJapanBound": false,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 431012332,
-      "name": "SHINKO MARU NO.38",
-      "destination": "JP KWS OFF",
-      "isJapanBound": true,
-      "lat": 35.4882,
-      "lon": 139.8086
-    },
-    {
-      "mmsi": 440132930,
-      "name": "SEYANG PRIME",
-      "destination": "MOKPO",
-      "isJapanBound": false,
-      "lat": 34.8943,
-      "lon": 129.1344
-    },
-    {
-      "mmsi": 431007252,
-      "name": "KINRYU MARU",
-      "destination": ">JP AFG OFF",
-      "isJapanBound": true,
-      "lat": 39.7749,
-      "lon": 139.9698
-    },
-    {
-      "mmsi": 440076890,
-      "name": "YEONG ROO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1221,
-      "lon": 129.052
-    },
-    {
-      "mmsi": 431027469,
-      "name": "TOUKA MARU",
+      "mmsi": 431002151,
+      "name": "NO.3TOKUYOMARU",
       "destination": ">JP WAK OFF",
       "isJapanBound": true,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 431402001,
+      "name": "HOSEI MARU NO.3",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.2044,
+      "lon": 135.1158
+    },
+    {
+      "mmsi": 440206050,
+      "name": "BUKWANG NO 5",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1199,
+      "lon": 129.0506
     }
   ],
   "boundingBox": "24-46N / 122-146E",
