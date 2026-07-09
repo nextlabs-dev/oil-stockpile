@@ -1,111 +1,87 @@
 {
-  "fetchedAt": "2026-07-09T04:19:39+00:00",
+  "fetchedAt": "2026-07-09T08:04:33+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 3,
+  "totalTankersInRegion": 10,
+  "japanBoundTankers": 4,
+  "japanBoundUnknownPort": 4,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440202770,
-      "name": "SKYCHEMI",
-      "destination": "YEOSU",
-      "isJapanBound": false,
-      "lat": 35.265,
-      "lon": 129.3777
+      "mmsi": 432480000,
+      "name": "KASHIMA MARU NO.7",
+      "destination": ">JP WAK KAINAN",
+      "isJapanBound": true,
+      "lat": 34.1585,
+      "lon": 135.1634
     },
     {
-      "mmsi": 440152720,
-      "name": "SAM SUNG HO",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.1046,
-      "lon": 129.0938
+      "mmsi": 431012877,
+      "name": "TSURUGI MARU",
+      "destination": ">JP ANE OFF",
+      "isJapanBound": true,
+      "lat": 39.7436,
+      "lon": 140.0661
     },
     {
       "mmsi": 431402001,
       "name": "HOSEI MARU NO.3",
       "destination": ">JP WAK KAINAN OFF",
       "isJapanBound": true,
-      "lat": 34.1531,
-      "lon": 135.1603
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 441277000,
-      "name": "101 HYODONG CHEMI",
-      "destination": "KR YOS",
+      "mmsi": 440194890,
+      "name": "KS HONOR",
+      "destination": "KR INC",
       "isJapanBound": false,
-      "lat": 34.8786,
-      "lon": 128.9826
-    },
-    {
-      "mmsi": 440133280,
-      "name": "MANSUNGHO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.105,
-      "lon": 129.0717
-    },
-    {
-      "mmsi": 273436640,
-      "name": "CILICIA",
-      "destination": "QIN CHINA",
-      "isJapanBound": false,
-      "lat": 35.0036,
-      "lon": 129.4886
-    },
-    {
-      "mmsi": 440306940,
-      "name": "PUNGYUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0999,
-      "lon": 129.0609
+      "lat": null,
+      "lon": null
     },
     {
       "mmsi": 440178690,
       "name": "DAIN3HO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.052
+      "lat": 35.0112,
+      "lon": 129.0681
     },
     {
-      "mmsi": 440505620,
-      "name": "KYUNGSUNGHO",
-      "destination": "BUSAM",
+      "mmsi": 432970000,
+      "name": "ZUIHO MARU",
+      "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 35.0713,
-      "lon": 129.138
+      "lat": 35.2454,
+      "lon": 129.5709
     },
     {
-      "mmsi": 432480000,
-      "name": "KASHIMA MARU NO.7",
-      "destination": ">JP WAK KAINAN",
-      "isJapanBound": true,
-      "lat": 34.1583,
-      "lon": 135.1634
-    },
-    {
-      "mmsi": 440208060,
-      "name": "CHEONGHAE NO1",
+      "mmsi": 440308690,
+      "name": "CHEONGHAE3HO",
       "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.1223,
+      "lon": 129.0516
     },
     {
-      "mmsi": 431013096,
-      "name": "MIKITOYO",
-      "destination": ">JP ANE OFF",
+      "mmsi": 636025446,
+      "name": "ARIDAIOS",
+      "destination": "HHI-8425 SEA TRIAL",
+      "isJapanBound": false,
+      "lat": 35.1,
+      "lon": 129.2823
+    },
+    {
+      "mmsi": 431000214,
+      "name": "NIKKOUMARU NO.5",
+      "destination": ">JP NGO OFF",
       "isJapanBound": true,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 440140000,
-      "name": "WOOLIM DRAGON",
-      "destination": ">KR INC",
+      "mmsi": 440115430,
+      "name": "TAHITI",
+      "destination": "BUSAN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
