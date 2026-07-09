@@ -1,71 +1,50 @@
 {
-  "fetchedAt": "2026-07-09T11:25:01+00:00",
+  "fetchedAt": "2026-07-09T14:07:01+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 2,
+  "totalTankersInRegion": 9,
+  "japanBoundTankers": 1,
   "japanBoundUnknownPort": 1,
-  "topDestinationPorts": [
-    {
-      "port": "KAWASAKI",
-      "count": 1
-    }
-  ],
+  "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440187910,
-      "name": "GRACE ALPHA",
-      "destination": "ULSAN.KOREA",
-      "isJapanBound": false,
-      "lat": 34.9642,
-      "lon": 129.4386
-    },
-    {
-      "mmsi": 441598000,
-      "name": "GOLDEN WINGS",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 35.0656,
-      "lon": 129.028
-    },
-    {
-      "mmsi": 440172660,
-      "name": "KUM KANG",
+      "mmsi": 440103440,
+      "name": "A-ONE",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1225,
-      "lon": 129.0519
+      "lat": 35.1199,
+      "lon": 129.0502
     },
     {
-      "mmsi": 441269000,
-      "name": "NO 1 HANMIREU",
+      "mmsi": 440005700,
+      "name": "ZIRCON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1034,
+      "lon": 129.0781
+    },
+    {
+      "mmsi": 440500300,
+      "name": "SONGRIM HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1854,
-      "lon": 129.2604
+      "lat": 35.0844,
+      "lon": 129.1001
     },
     {
-      "mmsi": 477664300,
-      "name": "GLORISEA",
-      "destination": "KR USN",
+      "mmsi": 440178690,
+      "name": "DAIN3HO",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.0989,
-      "lon": 129.2537
+      "lat": 35.1228,
+      "lon": 129.0525
     },
     {
-      "mmsi": 441918000,
-      "name": "KEOJE ESION",
-      "destination": "YEOSU",
+      "mmsi": 440115430,
+      "name": "TAHITI",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 34.9029,
-      "lon": 129.0589
-    },
-    {
-      "mmsi": 370758000,
-      "name": "C.GLORY",
-      "destination": "SG SIN             B",
-      "isJapanBound": false,
-      "lat": 34.9901,
-      "lon": 129.4105
+      "lat": 35.1223,
+      "lon": 129.052
     },
     {
       "mmsi": 440303500,
@@ -76,20 +55,28 @@
       "lon": 129.0502
     },
     {
-      "mmsi": 431018777,
-      "name": "HOUSEIMARU NO.7",
-      "destination": ">JP KWS OFF",
-      "isJapanBound": true,
-      "lat": 35.4882,
-      "lon": 139.8077
+      "mmsi": 440155380,
+      "name": "KEUMHYANG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1233,
+      "lon": 129.0528
     },
     {
-      "mmsi": 431402001,
-      "name": "HOSEI MARU NO.3",
-      "destination": ">JP WAK KAINAN OFF",
+      "mmsi": 431018886,
+      "name": "KUSHIDA MARU",
+      "destination": "> JP AFG ENEOS",
       "isJapanBound": true,
-      "lat": 34.1534,
-      "lon": 135.1596
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 441598000,
+      "name": "GOLDEN WINGS",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
