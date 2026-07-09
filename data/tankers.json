@@ -1,58 +1,26 @@
 {
-  "fetchedAt": "2026-07-09T14:07:01+00:00",
+  "fetchedAt": "2026-07-09T16:46:57+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 9,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 1,
+  "totalTankersInRegion": 7,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440103440,
-      "name": "A-ONE",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1199,
-      "lon": 129.0502
+      "mmsi": 432480000,
+      "name": "KASHIMA MARU NO.7",
+      "destination": ">JP WAK KAINAN",
+      "isJapanBound": true,
+      "lat": 34.1585,
+      "lon": 135.1624
     },
     {
-      "mmsi": 440005700,
-      "name": "ZIRCON",
-      "destination": "",
+      "mmsi": 440331980,
+      "name": "BU KWANG 9 HO",
+      "destination": "YEOSU",
       "isJapanBound": false,
-      "lat": 35.1034,
-      "lon": 129.0781
-    },
-    {
-      "mmsi": 440500300,
-      "name": "SONGRIM HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.0844,
-      "lon": 129.1001
-    },
-    {
-      "mmsi": 440178690,
-      "name": "DAIN3HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1228,
-      "lon": 129.0525
-    },
-    {
-      "mmsi": 440115430,
-      "name": "TAHITI",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1223,
-      "lon": 129.052
-    },
-    {
-      "mmsi": 440303500,
-      "name": "CHEONGDAM",
-      "destination": "BS.NP#WT02",
-      "isJapanBound": false,
-      "lat": 35.1199,
-      "lon": 129.0502
+      "lat": 35.1209,
+      "lon": 129.0491
     },
     {
       "mmsi": 440155380,
@@ -63,17 +31,33 @@
       "lon": 129.0528
     },
     {
-      "mmsi": 431018886,
-      "name": "KUSHIDA MARU",
-      "destination": "> JP AFG ENEOS",
+      "mmsi": 441598000,
+      "name": "GOLDEN WINGS",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": 35.0649,
+      "lon": 129.0287
+    },
+    {
+      "mmsi": 431005339,
+      "name": "KOUSYU MARU",
+      "destination": "JP WAK OFF",
       "isJapanBound": true,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 441598000,
-      "name": "GOLDEN WINGS",
-      "destination": "KR PUS",
+      "mmsi": 636026017,
+      "name": "ATLANTIC CORAL",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 34.9141,
+      "lon": 129.3565
+    },
+    {
+      "mmsi": 440130790,
+      "name": "7 MIREU",
+      "destination": "",
       "isJapanBound": false,
       "lat": null,
       "lon": null
