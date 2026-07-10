@@ -1,104 +1,101 @@
 {
-  "fetchedAt": "2026-07-10T00:25:35+00:00",
+  "fetchedAt": "2026-07-10T05:14:07+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 12,
-  "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 4,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 11,
+  "japanBoundTankers": 1,
+  "japanBoundUnknownPort": 0,
+  "topDestinationPorts": [
+    {
+      "port": "YOKOHAMA",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 440005700,
-      "name": "ZIRCON",
-      "destination": "",
+      "mmsi": 440564000,
+      "name": "SHINING ROAD",
+      "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 35.1191,
-      "lon": 129.0524
-    },
-    {
-      "mmsi": 440103970,
-      "name": "31 WOO JEONG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1218,
-      "lon": 129.0494
-    },
-    {
-      "mmsi": 431015647,
-      "name": "SHOWAMARU",
-      "destination": "JP TYO HANEDA OFF",
-      "isJapanBound": true,
-      "lat": 35.5056,
-      "lon": 139.8383
-    },
-    {
-      "mmsi": 432480000,
-      "name": "KASHIMA MARU NO.7",
-      "destination": ">JP WAK KAINAN",
-      "isJapanBound": true,
-      "lat": 34.1574,
-      "lon": 135.1629
-    },
-    {
-      "mmsi": 440305860,
-      "name": "BOSUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1245,
-      "lon": 129.0541
+      "lat": 34.9955,
+      "lon": 129.3193
     },
     {
       "mmsi": 440130480,
       "name": "STELLA HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.122,
-      "lon": 129.0519
+      "lat": 35.101,
+      "lon": 129.0565
     },
     {
-      "mmsi": 440312010,
-      "name": "NO2 HAEJIN",
+      "mmsi": 440058060,
+      "name": "KEOJE YUBIA",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1248,
-      "lon": 129.0552
+      "lat": 35.104,
+      "lon": 129.0904
     },
     {
-      "mmsi": 431005339,
-      "name": "KOUSYU MARU",
-      "destination": "JP WAK 8B",
+      "mmsi": 440308690,
+      "name": "CHEONGHAE3HO",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.1223,
+      "lon": 129.0515
+    },
+    {
+      "mmsi": 440049630,
+      "name": "SONG SOON HO",
+      "destination": "MOKPO",
+      "isJapanBound": false,
+      "lat": 35.1198,
+      "lon": 129.0503
+    },
+    {
+      "mmsi": 440053750,
+      "name": "17 YU SUNG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 441634000,
+      "name": "POLARIS",
+      "destination": "CN-JAX",
+      "isJapanBound": false,
+      "lat": 34.6644,
+      "lon": 129.1175
+    },
+    {
+      "mmsi": 440072080,
+      "name": "DL RUBY",
+      "destination": "PUS,KR",
+      "isJapanBound": false,
+      "lat": 35.0557,
+      "lon": 129.051
+    },
+    {
+      "mmsi": 440140000,
+      "name": "WOOLIM DRAGON",
+      "destination": ">KR INC",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440304320,
+      "name": "DOO LA NO.7",
+      "destination": "KR ICN",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 354850000,
+      "name": "DORAJI GAS",
+      "destination": "JP YOK OFF",
       "isJapanBound": true,
-      "lat": 34.1473,
-      "lon": 135.1961
-    },
-    {
-      "mmsi": 431018886,
-      "name": "KUSHIDA MARU",
-      "destination": "> JP AOM OFF",
-      "isJapanBound": true,
-      "lat": 39.7604,
-      "lon": 140.0518
-    },
-    {
-      "mmsi": 440351000,
-      "name": "109 HYODONGCHEMI",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 35.0535,
-      "lon": 129.022
-    },
-    {
-      "mmsi": 440103700,
-      "name": "GEUMILHO",
-      "destination": "YU",
-      "isJapanBound": false,
-      "lat": 35.0393,
-      "lon": 129.0786
-    },
-    {
-      "mmsi": 440105720,
-      "name": "DAE JEONG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
       "lat": null,
       "lon": null
     }
