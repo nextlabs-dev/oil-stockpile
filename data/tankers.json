@@ -1,31 +1,47 @@
 {
-  "fetchedAt": "2026-07-10T08:47:20+00:00",
+  "fetchedAt": "2026-07-10T12:15:42+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 12,
+  "totalTankersInRegion": 7,
   "japanBoundTankers": 1,
   "japanBoundUnknownPort": 0,
   "topDestinationPorts": [
     {
-      "port": "KAWASAKI",
+      "port": "YOKOHAMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 440132140,
-      "name": "HANYU ULSAN",
-      "destination": "ULSAN",
+      "mmsi": 413303910,
+      "name": "HONG YU",
+      "destination": "CJK",
       "isJapanBound": false,
-      "lat": 34.9586,
-      "lon": 129.1424
+      "lat": 34.9163,
+      "lon": 129.0787
     },
     {
-      "mmsi": 440215590,
-      "name": "DONGNAM ACE",
-      "destination": "YEOSU",
+      "mmsi": 440005700,
+      "name": "ZIRCON",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.0101,
-      "lon": 129.0497
+      "lat": 35.0343,
+      "lon": 129.0591
+    },
+    {
+      "mmsi": 440172660,
+      "name": "KUM KANG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1225,
+      "lon": 129.0519
+    },
+    {
+      "mmsi": 477227900,
+      "name": "SENDA",
+      "destination": "KOZMINO",
+      "isJapanBound": false,
+      "lat": 35.005,
+      "lon": 129.0515
     },
     {
       "mmsi": 440206050,
@@ -33,77 +49,21 @@
       "destination": "",
       "isJapanBound": false,
       "lat": 35.1198,
-      "lon": 129.0507
+      "lon": 129.0506
     },
     {
-      "mmsi": 440103970,
-      "name": "31 WOO JEONG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0495
-    },
-    {
-      "mmsi": 538012424,
-      "name": "ELANDRA K2",
-      "destination": "SEA TRIAL(HWO.5519)",
-      "isJapanBound": false,
-      "lat": 34.8257,
-      "lon": 129.1195
-    },
-    {
-      "mmsi": 440322380,
-      "name": "GWANGSAN",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.0503,
-      "lon": 129.0531
-    },
-    {
-      "mmsi": 440400900,
-      "name": "WOOWONHO",
+      "mmsi": 440197410,
+      "name": "HWA JEONG ACE",
       "destination": "YEOSU",
       "isJapanBound": false,
-      "lat": 35.0943,
-      "lon": 129.0855
+      "lat": 35.1082,
+      "lon": 129.0925
     },
     {
-      "mmsi": 440031780,
-      "name": "SINJEONG3HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1235,
-      "lon": 129.0512
-    },
-    {
-      "mmsi": 440774000,
-      "name": "KEOYOUNG DREAM 3",
-      "destination": "JP KWS",
+      "mmsi": 354850000,
+      "name": "DORAJI GAS",
+      "destination": "JP YOK OFF",
       "isJapanBound": true,
-      "lat": 34.1193,
-      "lon": 134.9757
-    },
-    {
-      "mmsi": 373982000,
-      "name": "SULFUR BRAVE",
-      "destination": "BUSAN_KR",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 477227900,
-      "name": "SENDA",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440304320,
-      "name": "DOO LA NO.7",
-      "destination": "KR ICN",
-      "isJapanBound": false,
       "lat": null,
       "lon": null
     }
