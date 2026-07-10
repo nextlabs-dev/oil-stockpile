@@ -1,42 +1,111 @@
 {
-  "fetchedAt": "2026-07-10T20:49:13+00:00",
+  "fetchedAt": "2026-07-10T22:22:26+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 4,
-  "japanBoundTankers": 0,
-  "japanBoundUnknownPort": 0,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 12,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 1,
+  "topDestinationPorts": [
+    {
+      "port": "MIZUSHIMA",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 440130300,
-      "name": "C.HORIZON",
-      "destination": "YEOSU",
+      "mmsi": 440049630,
+      "name": "SONG SOON HO",
+      "destination": "MOKPO",
       "isJapanBound": false,
-      "lat": 35.1041,
-      "lon": 129.0904
-    },
-    {
-      "mmsi": 441598000,
-      "name": "GOLDEN WINGS",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440044920,
-      "name": "NO21BUYOUNG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1209,
+      "lat": 35.1198,
       "lon": 129.0504
     },
     {
-      "mmsi": 403517001,
-      "name": "NCC SAFA",
-      "destination": "KRUSN",
+      "mmsi": 440103970,
+      "name": "31 WOO JEONG",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 34.967,
-      "lon": 129.4003
+      "lat": 35.1216,
+      "lon": 129.0496
+    },
+    {
+      "mmsi": 440208060,
+      "name": "CHEONGHAE NO1",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.0984,
+      "lon": 129.0751
+    },
+    {
+      "mmsi": 440130790,
+      "name": "7 MIREU",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0427,
+      "lon": 129.0348
+    },
+    {
+      "mmsi": 311019200,
+      "name": "LNG JUPITER",
+      "destination": "JPHIM",
+      "isJapanBound": true,
+      "lat": 34.0914,
+      "lon": 134.9909
+    },
+    {
+      "mmsi": 440036020,
+      "name": "GYEONG SEONG HO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1065,
+      "lon": 129.0549
+    },
+    {
+      "mmsi": 440312990,
+      "name": "MOKRIMBUSAN    DM",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.12,
+      "lon": 129.0499
+    },
+    {
+      "mmsi": 440033210,
+      "name": "HANDONG 27HO",
+      "destination": "ULSAN@@@@A9",
+      "isJapanBound": false,
+      "lat": 34.989,
+      "lon": 129.1402
+    },
+    {
+      "mmsi": 273273980,
+      "name": "AKVILON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0237,
+      "lon": 129.0544
+    },
+    {
+      "mmsi": 373982000,
+      "name": "SULFUR BRAVE",
+      "destination": "BUSAN_KR",
+      "isJapanBound": false,
+      "lat": 35.0583,
+      "lon": 129.037
+    },
+    {
+      "mmsi": 636019761,
+      "name": "EASTERN POSEIDON",
+      "destination": "JPMIZ",
+      "isJapanBound": true,
+      "lat": 34.1802,
+      "lon": 134.989
+    },
+    {
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1226,
+      "lon": 129.0518
     }
   ],
   "boundingBox": "24-46N / 122-146E",
