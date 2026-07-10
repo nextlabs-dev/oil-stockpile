@@ -1,71 +1,42 @@
 {
-  "fetchedAt": "2026-07-10T18:51:41+00:00",
+  "fetchedAt": "2026-07-10T20:49:13+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 7,
-  "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 1,
-  "topDestinationPorts": [
-    {
-      "port": "KAWASAKI",
-      "count": 1
-    }
-  ],
+  "totalTankersInRegion": 4,
+  "japanBoundTankers": 0,
+  "japanBoundUnknownPort": 0,
+  "topDestinationPorts": [],
   "vessels": [
+    {
+      "mmsi": 440130300,
+      "name": "C.HORIZON",
+      "destination": "YEOSU",
+      "isJapanBound": false,
+      "lat": 35.1041,
+      "lon": 129.0904
+    },
+    {
+      "mmsi": 441598000,
+      "name": "GOLDEN WINGS",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440044920,
+      "name": "NO21BUYOUNG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1209,
+      "lon": 129.0504
+    },
     {
       "mmsi": 403517001,
       "name": "NCC SAFA",
       "destination": "KRUSN",
       "isJapanBound": false,
-      "lat": 34.6768,
-      "lon": 129.1882
-    },
-    {
-      "mmsi": 440505620,
-      "name": "KYUNGSUNGHO",
-      "destination": "BUSAM",
-      "isJapanBound": false,
-      "lat": 35.1298,
-      "lon": 129.1925
-    },
-    {
-      "mmsi": 338164000,
-      "name": "SLNC PAX",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 35.1191,
-      "lon": 129.0701
-    },
-    {
-      "mmsi": 440322380,
-      "name": "GWANGSAN",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.1033,
-      "lon": 129.0891
-    },
-    {
-      "mmsi": 431015093,
-      "name": "SHINKO MARU NO2",
-      "destination": ">JP WAK",
-      "isJapanBound": true,
-      "lat": 34.2483,
-      "lon": 135.0896
-    },
-    {
-      "mmsi": 431025494,
-      "name": "KIRISHIMA MARU NO.12",
-      "destination": ">JP KWS HO 22",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440892000,
-      "name": "GOLDEN SUNNY HANA",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 35.0695,
-      "lon": 129.0287
+      "lat": 34.967,
+      "lon": 129.4003
     }
   ],
   "boundingBox": "24-46N / 122-146E",
