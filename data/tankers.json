@@ -1,50 +1,107 @@
 {
-  "fetchedAt": "2026-07-11T12:11:26+00:00",
+  "fetchedAt": "2026-07-11T13:59:26+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 5,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 1,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 11,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 0,
+  "topDestinationPorts": [
+    {
+      "port": "YOKKAICHI",
+      "count": 1
+    },
+    {
+      "port": "YOKOHAMA",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 431003181,
-      "name": "SHINKOMARU NO8",
-      "destination": ">JP WAK OFF",
+      "mmsi": 440504030,
+      "name": "DONGHAE SEASTAR",
+      "destination": "NEWBUSAN",
+      "isJapanBound": false,
+      "lat": 35.0932,
+      "lon": 129.2082
+    },
+    {
+      "mmsi": 431402007,
+      "name": "KYOWAMARU",
+      "destination": ">JP YKK/NNX OFF",
       "isJapanBound": true,
-      "lat": 34.2136,
-      "lon": 135.0459
+      "lat": 35.3977,
+      "lon": 139.7482
     },
     {
-      "mmsi": 440108790,
-      "name": "3MYEONGGWANG",
+      "mmsi": 440130480,
+      "name": "STELLA HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1227,
-      "lon": 129.0517
+      "lat": 35.1216,
+      "lon": 129.052
     },
     {
-      "mmsi": 440149350,
-      "name": "NO.11 SEYANG",
+      "mmsi": 440202770,
+      "name": "SKYCHEMI",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 34.8935,
+      "lon": 129.0151
+    },
+    {
+      "mmsi": 440105250,
+      "name": "JEONG SEONG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.0305,
+      "lon": 129.1047
+    },
+    {
+      "mmsi": 440130790,
+      "name": "7 MIREU",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1223,
+      "lon": 129.052
+    },
+    {
+      "mmsi": 374380000,
+      "name": "WINNING ROAD",
+      "destination": "CN ZAP",
+      "isJapanBound": false,
+      "lat": 35.3577,
+      "lon": 129.7212
+    },
+    {
+      "mmsi": 440331750,
+      "name": "BO WON HO",
+      "destination": "BSN",
+      "isJapanBound": false,
+      "lat": 35.1209,
+      "lon": 129.0506
+    },
+    {
+      "mmsi": 440107000,
+      "name": "GREEN OCEAN",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1076,
-      "lon": 129.0939
+      "lat": 35.0885,
+      "lon": 129.0968
     },
     {
-      "mmsi": 441598000,
-      "name": "GOLDEN WINGS",
-      "destination": "KR PUS",
-      "isJapanBound": false,
+      "mmsi": 354850000,
+      "name": "DORAJI GAS",
+      "destination": "JP YOK OFF",
+      "isJapanBound": true,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 352001707,
-      "name": "SUN ROYAL",
-      "destination": "CN DGG",
+      "mmsi": 440103440,
+      "name": "A-ONE",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0843,
-      "lon": 129.5264
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
