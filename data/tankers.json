@@ -1,27 +1,47 @@
 {
-  "fetchedAt": "2026-07-11T17:22:37+00:00",
+  "fetchedAt": "2026-07-11T18:14:35+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 12,
-  "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 1,
+  "totalTankersInRegion": 11,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [
     {
       "port": "YOKOHAMA",
-      "count": 2
-    },
-    {
-      "port": "YOKKAICHI",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 440201420,
-      "name": "BLUE OCEAN HO",
-      "destination": "ULSAN",
+      "mmsi": 431007738,
+      "name": "NO.11 SHIGEFUKUMARU",
+      "destination": "JP YOK D",
+      "isJapanBound": true,
+      "lat": 35.4761,
+      "lon": 139.6474
+    },
+    {
+      "mmsi": 440054060,
+      "name": "DOOLA SUN",
+      "destination": "GUNSAN",
       "isJapanBound": false,
-      "lat": 35.1195,
-      "lon": 129.0509
+      "lat": 34.9866,
+      "lon": 129.2329
+    },
+    {
+      "mmsi": 440105720,
+      "name": "DAE JEONG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1217,
+      "lon": 129.0517
+    },
+    {
+      "mmsi": 440316160,
+      "name": "INTRANS EDY",
+      "destination": "KR INC",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
     },
     {
       "mmsi": 440049630,
@@ -32,84 +52,52 @@
       "lon": 129.0503
     },
     {
-      "mmsi": 440155010,
-      "name": "YU SUNG HO",
+      "mmsi": 440107000,
+      "name": "GREEN OCEAN",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1211,
-      "lon": 129.0506
+      "lat": 35.1192,
+      "lon": 129.0509
     },
     {
-      "mmsi": 431402007,
-      "name": "KYOWAMARU",
-      "destination": ">JP YKK/NNX OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440331980,
-      "name": "BU KWANG 9 HO",
-      "destination": "YEOSU",
-      "isJapanBound": false,
-      "lat": 35.1199,
-      "lon": 129.0506
-    },
-    {
-      "mmsi": 440066770,
-      "name": "DOOLA NO.5",
+      "mmsi": 440203830,
+      "name": "SKYMARS",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 34.8824,
-      "lon": 129.0476
+      "lat": 35.0937,
+      "lon": 129.0313
     },
     {
-      "mmsi": 431007738,
-      "name": "NO.11 SHIGEFUKUMARU",
-      "destination": "JP YOK D",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 354850000,
-      "name": "DORAJI GAS",
-      "destination": "JP YOK OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 373982000,
-      "name": "SULFUR BRAVE",
-      "destination": "BUSAN_KR B,",
+      "mmsi": 440504030,
+      "name": "DONGHAE SEASTAR",
+      "destination": "NEWBUSAN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 431000214,
-      "name": "NIKKOUMARU NO.5",
-      "destination": ">JP NGO OFF",
+      "mmsi": 440044920,
+      "name": "NO21BUYOUNG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1196,
+      "lon": 129.0508
+    },
+    {
+      "mmsi": 431003181,
+      "name": "SHINKOMARU NO8",
+      "destination": ">JP WAK OFF",
       "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 34.1666,
+      "lon": 135.145
     },
     {
-      "mmsi": 440173000,
-      "name": "WOODONG",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 538012424,
-      "name": "ELANDRA K2",
-      "destination": "SEA TRIAL(HWO.5519)",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "mmsi": 431029628,
+      "name": "MEIRINMARU",
+      "destination": "JP WAK",
+      "isJapanBound": true,
+      "lat": 34.1604,
+      "lon": 135.1476
     }
   ],
   "boundingBox": "24-46N / 122-146E",
