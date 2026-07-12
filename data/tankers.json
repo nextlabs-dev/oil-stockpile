@@ -1,63 +1,91 @@
 {
-  "fetchedAt": "2026-07-12T12:15:04+00:00",
+  "fetchedAt": "2026-07-12T14:02:05+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 6,
-  "japanBoundTankers": 2,
-  "japanBoundUnknownPort": 1,
+  "totalTankersInRegion": 9,
+  "japanBoundTankers": 4,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [
     {
       "port": "YOKOHAMA",
+      "count": 1
+    },
+    {
+      "port": "KAWASAKI",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431025781,
-      "name": "DAIITI METAMARU",
-      "destination": ">JP WAK OFF",
+      "mmsi": 354850000,
+      "name": "DORAJI GAS",
+      "destination": "JP YOK OFF",
       "isJapanBound": true,
-      "lat": 34.2052,
-      "lon": 135.1241
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440002690,
-      "name": "HY BUSAN",
-      "destination": "ULSAN",
+      "mmsi": 441918000,
+      "name": "KEOJE ESION",
+      "destination": "INCHE0N",
       "isJapanBound": false,
-      "lat": 35.0482,
-      "lon": 129.1263
+      "lat": 37.4782,
+      "lon": 126.5943
     },
     {
-      "mmsi": 431401999,
-      "name": "SHOHOMARU",
-      "destination": ">JP YOK-NMXX",
+      "mmsi": 440351000,
+      "name": "109 HYODONGCHEMI",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": 35.0536,
+      "lon": 129.0402
+    },
+    {
+      "mmsi": 431100969,
+      "name": "NITTAN MARU NO.21",
+      "destination": "JP KWS DU 150 A-2",
       "isJapanBound": true,
-      "lat": 35.4001,
-      "lon": 139.7555
+      "lat": 35.5223,
+      "lon": 139.7651
     },
     {
-      "mmsi": 440208060,
-      "name": "CHEONGHAE NO1",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.1142,
-      "lon": 129.181
-    },
-    {
-      "mmsi": 440203830,
-      "name": "SKYMARS",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.0937,
-      "lon": 129.0313
-    },
-    {
-      "mmsi": 440016180,
-      "name": "ES ROSE",
-      "destination": "INCHEON",
+      "mmsi": 440207000,
+      "name": "NO 7 SJ GAS",
+      "destination": "KR INC",
       "isJapanBound": false,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 440191790,
+      "name": "ARA1HO",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1225,
+      "lon": 129.052
+    },
+    {
+      "mmsi": 563082600,
+      "name": "MENUETT",
+      "destination": "KR YOS",
+      "isJapanBound": false,
+      "lat": 35.1777,
+      "lon": 129.4919
+    },
+    {
+      "mmsi": 431001715,
+      "name": "CHOUKAI MARU",
+      "destination": ">JP AFG E",
+      "isJapanBound": true,
+      "lat": 39.7564,
+      "lon": 140.0568
+    },
+    {
+      "mmsi": 431002935,
+      "name": "TAMARIKI MARU NO.8",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1497,
+      "lon": 135.1476
     }
   ],
   "boundingBox": "24-46N / 122-146E",
