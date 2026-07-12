@@ -1,14 +1,10 @@
 {
-  "fetchedAt": "2026-07-11T23:16:54+00:00",
+  "fetchedAt": "2026-07-12T00:17:05+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 15,
-  "japanBoundTankers": 5,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 9,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [
-    {
-      "port": "YOKKAICHI",
-      "count": 2
-    },
     {
       "port": "YOKOHAMA",
       "count": 1
@@ -16,120 +12,72 @@
   ],
   "vessels": [
     {
-      "mmsi": 440112380,
-      "name": "KUKDONG3HO",
-      "destination": "",
+      "mmsi": 440304320,
+      "name": "DOO LA NO.7",
+      "destination": "KR ICN",
       "isJapanBound": false,
-      "lat": 35.0575,
-      "lon": 129.1068
+      "lat": 37.4734,
+      "lon": 126.5883
     },
     {
-      "mmsi": 440206050,
-      "name": "BUKWANG NO 5",
-      "destination": "",
+      "mmsi": 440035420,
+      "name": "DAE IL",
+      "destination": "UL",
       "isJapanBound": false,
-      "lat": 35.0722,
-      "lon": 129.2037
+      "lat": 35.1202,
+      "lon": 129.0498
     },
     {
-      "mmsi": 431402007,
-      "name": "KYOWAMARU",
-      "destination": ">JP YKK/NNX OFF",
-      "isJapanBound": true,
-      "lat": 35.3967,
-      "lon": 139.7475
-    },
-    {
-      "mmsi": 440505620,
-      "name": "KYUNGSUNGHO",
-      "destination": "BUSAM",
-      "isJapanBound": false,
-      "lat": 35.1228,
-      "lon": 129.0516
-    },
-    {
-      "mmsi": 441269000,
-      "name": "NO 1 HANMIREU",
+      "mmsi": 440500300,
+      "name": "SONGRIM HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1022,
-      "lon": 129.0551
-    },
-    {
-      "mmsi": 431004568,
-      "name": "KINYO MARU NO.5",
-      "destination": ">JP YOK XX/NNX",
-      "isJapanBound": true,
-      "lat": 35.3711,
-      "lon": 139.7256
-    },
-    {
-      "mmsi": 440130790,
-      "name": "7 MIREU",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1223,
-      "lon": 129.052
+      "lat": 35.122,
+      "lon": 129.0505
     },
     {
       "mmsi": 440051760,
       "name": "7DAEBOK",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0591,
-      "lon": 129.1485
+      "lat": 35.104,
+      "lon": 129.0904
     },
     {
-      "mmsi": 440331980,
-      "name": "BU KWANG 9 HO",
-      "destination": "YEOSU",
-      "isJapanBound": false,
-      "lat": 35.1198,
-      "lon": 129.0506
+      "mmsi": 431003181,
+      "name": "SHINKOMARU NO8",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1656,
+      "lon": 135.1449
     },
     {
-      "mmsi": 440714100,
-      "name": "DAON",
+      "mmsi": 354850000,
+      "name": "DORAJI GAS",
+      "destination": "JP YOK OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440191190,
+      "name": "YU WON HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1198,
-      "lon": 129.0505
+      "lat": 35.1238,
+      "lon": 129.0511
     },
     {
-      "mmsi": 431017908,
-      "name": "KIRISHIMA MARU",
-      "destination": ">JP SMZ",
-      "isJapanBound": true,
-      "lat": 35.3673,
-      "lon": 139.7022
-    },
-    {
-      "mmsi": 431018367,
-      "name": "KOYO MARU NO.21",
-      "destination": ">JP YKK OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431009445,
-      "name": "KYOWA MARU NO.1",
-      "destination": "JP ONA OFF",
-      "isJapanBound": true,
-      "lat": 35.4631,
-      "lon": 139.7069
-    },
-    {
-      "mmsi": 440304320,
-      "name": "DOO LA NO.7",
-      "destination": "KR ICN",
+      "mmsi": 440206050,
+      "name": "BUKWANG NO 5",
+      "destination": "",
       "isJapanBound": false,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 440500300,
-      "name": "SONGRIM HO",
+      "mmsi": 440154950,
+      "name": "DONGJIN ACE",
       "destination": "BUSAN",
       "isJapanBound": false,
       "lat": null,
