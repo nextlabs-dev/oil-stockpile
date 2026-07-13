@@ -1,123 +1,95 @@
 {
-  "fetchedAt": "2026-07-13T11:35:30+00:00",
+  "fetchedAt": "2026-07-13T15:17:22+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 6,
-  "japanBoundUnknownPort": 4,
+  "totalTankersInRegion": 10,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [
     {
       "port": "KAWASAKI",
-      "count": 1
-    },
-    {
-      "port": "CHIBA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431501664,
-      "name": "KYOKUZAN",
-      "destination": "JP AFG OFF",
-      "isJapanBound": true,
-      "lat": 39.78,
-      "lon": 139.9666
+      "mmsi": 440101990,
+      "name": "DONG BANG 7HO",
+      "destination": "PUS",
+      "isJapanBound": false,
+      "lat": 35.0869,
+      "lon": 129.1369
     },
     {
-      "mmsi": 538012092,
-      "name": "SEAWAYS SPIRIT",
-      "destination": "TWSHE",
+      "mmsi": 440173000,
+      "name": "WOODONG",
+      "destination": "KR INC",
       "isJapanBound": false,
-      "lat": 25.2587,
-      "lon": 122.0362
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440208060,
-      "name": "CHEONGHAE NO1",
-      "destination": "ULSAN",
+      "mmsi": 440409920,
+      "name": "HANNAM",
+      "destination": "BUSAN SK DOLPHIN",
       "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0517
+      "lat": 35.0839,
+      "lon": 129.0922
     },
     {
-      "mmsi": 440108790,
-      "name": "3MYEONGGWANG",
-      "destination": "BUSAN",
+      "mmsi": 440331750,
+      "name": "BO WON HO",
+      "destination": "PNC",
       "isJapanBound": false,
-      "lat": 35.1227,
+      "lat": 35.0292,
       "lon": 129.0518
-    },
-    {
-      "mmsi": 440206050,
-      "name": "BUKWANG NO 5",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1211,
-      "lon": 129.0506
     },
     {
       "mmsi": 431018712,
       "name": "ASAHI",
       "destination": ">JP KWS SG",
       "isJapanBound": true,
-      "lat": 35.5172,
-      "lon": 139.7434
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 354850000,
-      "name": "DORAJI GAS",
-      "destination": "JP CHB OFF T6",
-      "isJapanBound": true,
-      "lat": 35.4742,
-      "lon": 139.97
+      "mmsi": 440306940,
+      "name": "PUNGYUNG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1213,
+      "lon": 129.0493
     },
     {
-      "mmsi": 431005242,
-      "name": "KAKUSHO MARU",
-      "destination": ">JP NGI NNX",
+      "mmsi": 440049630,
+      "name": "SONG SOON HO",
+      "destination": "MOKPO",
+      "isJapanBound": false,
+      "lat": 35.1197,
+      "lon": 129.0508
+    },
+    {
+      "mmsi": 431001715,
+      "name": "CHOUKAI MARU",
+      "destination": ">JP AFG E",
       "isJapanBound": true,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 440092260,
-      "name": "7 SUN YEONG",
-      "destination": "KR BUS",
+      "mmsi": 440115430,
+      "name": "TAHITI",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1194,
-      "lon": 129.0509
+      "lat": 35.1224,
+      "lon": 129.0522
     },
     {
-      "mmsi": 338164000,
-      "name": "SLNC PAX",
-      "destination": "KR PUS",
+      "mmsi": 370408000,
+      "name": "KEOYOUNG BLUE 3",
+      "destination": ">KR PUS /WM",
       "isJapanBound": false,
-      "lat": 35.1191,
-      "lon": 129.0702
-    },
-    {
-      "mmsi": 440401790,
-      "name": "SONG DEOG",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.143,
-      "lon": 129.2226
-    },
-    {
-      "mmsi": 431004798,
-      "name": "EIHO MARU NO.31",
-      "destination": ">JP ANE OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431025781,
-      "name": "DAIITI METAMARU",
-      "destination": ">JP SMJ",
-      "isJapanBound": true,
-      "lat": 34.0888,
-      "lon": 133.016
+      "lat": 34.929,
+      "lon": 129.3912
     }
   ],
   "boundingBox": "24-46N / 122-146E",
