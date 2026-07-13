@@ -1,83 +1,27 @@
 {
-  "fetchedAt": "2026-07-13T04:05:34+00:00",
+  "fetchedAt": "2026-07-13T07:43:10+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 20,
-  "japanBoundTankers": 6,
-  "japanBoundUnknownPort": 4,
+  "totalTankersInRegion": 6,
+  "japanBoundTankers": 2,
+  "japanBoundUnknownPort": 0,
   "topDestinationPorts": [
     {
       "port": "CHIBA",
       "count": 1
     },
     {
-      "port": "KAWASAKI",
+      "port": "YOKOHAMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 431020091,
-      "name": "SHINKAWA MARU",
-      "destination": "JP KNM",
-      "isJapanBound": true,
-      "lat": 35.4208,
-      "lon": 139.7394
-    },
-    {
-      "mmsi": 431004586,
-      "name": "HASSYOMARU NO.5",
-      "destination": ">JP NNX OFF",
-      "isJapanBound": true,
-      "lat": 35.1867,
-      "lon": 139.7747
-    },
-    {
-      "mmsi": 440113630,
-      "name": "WOOJIN1HO",
-      "destination": "0",
-      "isJapanBound": false,
-      "lat": 35.1238,
-      "lon": 129.055
-    },
-    {
-      "mmsi": 440500300,
-      "name": "SONGRIM HO",
+      "mmsi": 440191310,
+      "name": "BU KWANG HO",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.1219,
+      "lat": 35.1218,
       "lon": 129.0505
-    },
-    {
-      "mmsi": 440300820,
-      "name": "GEUM YANG 3 HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1248,
-      "lon": 129.0553
-    },
-    {
-      "mmsi": 563319500,
-      "name": "FUJIN SAILOR",
-      "destination": "SEA TRIAL(HO-2558)",
-      "isJapanBound": false,
-      "lat": 34.8,
-      "lon": 128.8658
-    },
-    {
-      "mmsi": 412487000,
-      "name": "HE PING HAI",
-      "destination": "JP-CHB",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440331980,
-      "name": "BU KWANG 9 HO",
-      "destination": "YEOSU",
-      "isJapanBound": false,
-      "lat": 35.1199,
-      "lon": 129.0504
     },
     {
       "mmsi": 440306940,
@@ -88,92 +32,36 @@
       "lon": 129.0493
     },
     {
-      "mmsi": 440132930,
-      "name": "SEYANG PRIME",
-      "destination": "MOKPO",
-      "isJapanBound": false,
-      "lat": 34.9183,
-      "lon": 129.1511
-    },
-    {
-      "mmsi": 431016017,
-      "name": "YACHIYO MARU NO.3",
-      "destination": "JP NGO N3 27",
-      "isJapanBound": true,
-      "lat": 35.3092,
-      "lon": 139.724
-    },
-    {
-      "mmsi": 431001715,
-      "name": "CHOUKAI MARU",
-      "destination": ">JP AFG E",
-      "isJapanBound": true,
-      "lat": 39.7564,
-      "lon": 140.0568
-    },
-    {
-      "mmsi": 440190820,
-      "name": "DONGBANG ACE",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.12,
-      "lon": 129.0501
-    },
-    {
-      "mmsi": 440138770,
-      "name": "LUCKY OCEAN HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 34.9915,
-      "lon": 129.1018
-    },
-    {
-      "mmsi": 440053750,
-      "name": "17 YU SUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0496
-    },
-    {
-      "mmsi": 440308690,
-      "name": "CHEONGHAE3HO",
+      "mmsi": 440208060,
+      "name": "CHEONGHAE NO1",
       "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": 35.1222,
-      "lon": 129.0517
+      "lat": 35.1056,
+      "lon": 129.0713
     },
     {
-      "mmsi": 440300120,
-      "name": "M/T BK25",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1208,
-      "lon": 129.0492
-    },
-    {
-      "mmsi": 440134270,
-      "name": "WOO BIN HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1247,
-      "lon": 129.0551
-    },
-    {
-      "mmsi": 273273980,
-      "name": "AKVILON",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 374112000,
-      "name": "SUN QUEEN",
-      "destination": "JP KWS OFF",
+      "mmsi": 354850000,
+      "name": "DORAJI GAS",
+      "destination": "JP CHB OFF T6",
       "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 35.474,
+      "lon": 139.9696
+    },
+    {
+      "mmsi": 440027000,
+      "name": "KEOYOUNG BLUE 1",
+      "destination": "JP YOK OFF",
+      "isJapanBound": true,
+      "lat": 35.4382,
+      "lon": 139.7255
+    },
+    {
+      "mmsi": 373982000,
+      "name": "SULFUR BRAVE",
+      "destination": "BUSAN_KR",
+      "isJapanBound": false,
+      "lat": 35.0595,
+      "lon": 129.0387
     }
   ],
   "boundingBox": "24-46N / 122-146E",
