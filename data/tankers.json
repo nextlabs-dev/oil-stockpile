@@ -1,34 +1,115 @@
 {
-  "fetchedAt": "2026-07-13T19:54:33+00:00",
+  "fetchedAt": "2026-07-13T21:19:53+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 11,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 1,
-  "topDestinationPorts": [],
+  "totalTankersInRegion": 13,
+  "japanBoundTankers": 5,
+  "japanBoundUnknownPort": 3,
+  "topDestinationPorts": [
+    {
+      "port": "KAWASAKI",
+      "count": 1
+    },
+    {
+      "port": "YOKOHAMA",
+      "count": 1
+    }
+  ],
   "vessels": [
     {
-      "mmsi": 440155350,
-      "name": "NO.11 SONGWON",
+      "mmsi": 440103700,
+      "name": "GEUMILHO",
+      "destination": "YU",
+      "isJapanBound": false,
+      "lat": 35.0449,
+      "lon": 129.0908
+    },
+    {
+      "mmsi": 440014870,
+      "name": "MS CLEAN",
+      "destination": "INCHEON",
+      "isJapanBound": false,
+      "lat": 34.9323,
+      "lon": 129.1644
+    },
+    {
+      "mmsi": 431001630,
+      "name": "NAIKAI MARU NO,1",
+      "destination": ">JP KWS/NNX OFF",
+      "isJapanBound": true,
+      "lat": 35.3984,
+      "lon": 139.7407
+    },
+    {
+      "mmsi": 431019191,
+      "name": "KAKUYOU MARU",
+      "destination": ">JP FNB",
+      "isJapanBound": true,
+      "lat": 35.4416,
+      "lon": 139.6956
+    },
+    {
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.121,
-      "lon": 129.05
+      "lat": 35.1225,
+      "lon": 129.052
     },
     {
-      "mmsi": 525007413,
-      "name": "SILVER PHOENIX",
-      "destination": "CN GULEI",
-      "isJapanBound": false,
-      "lat": 34.7802,
-      "lon": 129.2573
+      "mmsi": 431001715,
+      "name": "CHOUKAI MARU",
+      "destination": ">JP AFG E",
+      "isJapanBound": true,
+      "lat": 39.7564,
+      "lon": 140.0568
     },
     {
-      "mmsi": 563335700,
-      "name": "TH'AILIB",
-      "destination": "SEA TRIAL(SHI-2693)",
+      "mmsi": 431014021,
+      "name": "TAIWA MARU",
+      "destination": "JP YOK D /NNX",
+      "isJapanBound": true,
+      "lat": 35.408,
+      "lon": 139.7568
+    },
+    {
+      "mmsi": 636025334,
+      "name": "PACIFIC PROSPERITY",
+      "destination": "BATAAN",
       "isJapanBound": false,
-      "lat": 34.8513,
-      "lon": 128.9125
+      "lat": 34.7905,
+      "lon": 129.2452
+    },
+    {
+      "mmsi": 440002690,
+      "name": "HY BUSAN",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.0481,
+      "lon": 129.1171
+    },
+    {
+      "mmsi": 431001343,
+      "name": "YOSHO MARU",
+      "destination": "JP WAK KAINAN",
+      "isJapanBound": true,
+      "lat": 34.155,
+      "lon": 135.1583
+    },
+    {
+      "mmsi": 440152720,
+      "name": "SAM SUNG HO",
+      "destination": "KR BSN",
+      "isJapanBound": false,
+      "lat": 35.1216,
+      "lon": 129.0515
+    },
+    {
+      "mmsi": 440208580,
+      "name": "BOMUN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1229,
+      "lon": 129.1922
     },
     {
       "mmsi": 440103970,
@@ -36,63 +117,7 @@
       "destination": "BUSAN",
       "isJapanBound": false,
       "lat": 35.1219,
-      "lon": 129.0496
-    },
-    {
-      "mmsi": 440152720,
-      "name": "SAM SUNG HO",
-      "destination": "KR BSN",
-      "isJapanBound": false,
-      "lat": 35.0902,
-      "lon": 129.0832
-    },
-    {
-      "mmsi": 440153850,
-      "name": "12CHUNGKYUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1142,
-      "lon": 129.0573
-    },
-    {
-      "mmsi": 440049630,
-      "name": "SONG SOON HO",
-      "destination": "MOKPO",
-      "isJapanBound": false,
-      "lat": 35.121,
-      "lon": 129.0506
-    },
-    {
-      "mmsi": 440410930,
-      "name": "CHARIS",
-      "destination": "KWANG YANG",
-      "isJapanBound": false,
-      "lat": 34.9254,
-      "lon": 129.0685
-    },
-    {
-      "mmsi": 431017908,
-      "name": "KIRISHIMA MARU",
-      "destination": ">JP NNX",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 441598000,
-      "name": "GOLDEN WINGS",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 35.0654,
-      "lon": 129.0285
-    },
-    {
-      "mmsi": 374216000,
-      "name": "BISHU MARU",
-      "destination": "AUBWB",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lon": 129.0495
     }
   ],
   "boundingBox": "24-46N / 122-146E",
