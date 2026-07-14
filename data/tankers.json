@@ -1,51 +1,23 @@
 {
-  "fetchedAt": "2026-07-14T15:10:00+00:00",
+  "fetchedAt": "2026-07-14T16:45:26+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 3,
+  "totalTankersInRegion": 6,
+  "japanBoundTankers": 2,
   "japanBoundUnknownPort": 0,
   "topDestinationPorts": [
     {
-      "port": "KAWASAKI",
-      "count": 2
-    },
-    {
       "port": "YOKOHAMA",
-      "count": 1
+      "count": 2
     }
   ],
   "vessels": [
     {
-      "mmsi": 440167480,
-      "name": "DL AMBER",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.2456,
-      "lon": 129.4101
-    },
-    {
-      "mmsi": 440215710,
-      "name": "SEUNG JIN",
-      "destination": "INCHEON KR",
-      "isJapanBound": false,
-      "lat": 37.4325,
-      "lon": 126.5682
-    },
-    {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1227,
-      "lon": 129.0522
-    },
-    {
-      "mmsi": 431001630,
-      "name": "NAIKAI MARU NO,1",
-      "destination": ">JP KWS/NNX OFF",
+      "mmsi": 431000745,
+      "name": "SUZUKAMARU N0,7",
+      "destination": "JP YOK D/NNX",
       "isJapanBound": true,
-      "lat": 35.3999,
-      "lon": 139.7427
+      "lat": 35.4039,
+      "lon": 139.7471
     },
     {
       "mmsi": 440103700,
@@ -56,41 +28,33 @@
       "lon": 129.0499
     },
     {
-      "mmsi": 373982000,
-      "name": "SULFUR BRAVE",
-      "destination": "BUSAN_KR",
+      "mmsi": 440103970,
+      "name": "31 WOO JEONG",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0597,
-      "lon": 129.0387
+      "lat": 35.1221,
+      "lon": 129.0496
     },
     {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
       "destination": "",
       "isJapanBound": false,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 431200655,
-      "name": "28 TOKUEIMARU",
-      "destination": "JP KWS DU/NNX",
+      "mmsi": 371350000,
+      "name": "ACE HANA",
+      "destination": "JP YOK OFF",
       "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 35.4453,
+      "lon": 139.7057
     },
     {
-      "mmsi": 431000745,
-      "name": "SUZUKAMARU N0,7",
-      "destination": "JP YOK D/NNX",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 338164000,
-      "name": "SLNC PAX",
-      "destination": "KR PUS",
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
