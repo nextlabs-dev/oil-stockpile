@@ -1,14 +1,10 @@
 {
-  "fetchedAt": "2026-07-14T19:51:10+00:00",
+  "fetchedAt": "2026-07-14T21:21:36+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 4,
-  "japanBoundUnknownPort": 1,
+  "totalTankersInRegion": 11,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [
-    {
-      "port": "KAWASAKI",
-      "count": 2
-    },
     {
       "port": "YOKOHAMA",
       "count": 1
@@ -16,82 +12,90 @@
   ],
   "vessels": [
     {
-      "mmsi": 440203830,
-      "name": "SKYMARS",
-      "destination": "BUSAN",
+      "mmsi": 440155380,
+      "name": "KEUMHYANG",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.0937,
-      "lon": 129.0313
+      "lat": 35.1235,
+      "lon": 129.0528
     },
     {
-      "mmsi": 563207800,
-      "name": "EAGLE VENTURA",
-      "destination": "ULSAN, S.KOREA",
+      "mmsi": 440002070,
+      "name": "SUN YEONG",
+      "destination": "KR BSN",
       "isJapanBound": false,
-      "lat": 34.6851,
-      "lon": 129.2075
+      "lat": 35.1199,
+      "lon": 129.0505
     },
     {
-      "mmsi": 440215710,
-      "name": "SEUNG JIN",
-      "destination": "INCHEON KR",
-      "isJapanBound": false,
-      "lat": 37.4324,
-      "lon": 126.5684
-    },
-    {
-      "mmsi": 440092260,
-      "name": "7 SUN YEONG",
-      "destination": "KR BUS",
+      "mmsi": 440300120,
+      "name": "M/T BK25",
+      "destination": "",
       "isJapanBound": false,
       "lat": null,
       "lon": null
     },
     {
-      "mmsi": 431024158,
-      "name": "MIYA MARU NO.18",
-      "destination": "JP WAK OFF",
+      "mmsi": 431000745,
+      "name": "SUZUKAMARU N0,7",
+      "destination": "JP YOK D/NNX",
       "isJapanBound": true,
-      "lat": 34.1523,
-      "lon": 135.1553
+      "lat": 35.4032,
+      "lon": 139.7461
     },
     {
-      "mmsi": 431101171,
-      "name": "EIKA MARU",
-      "destination": "JP YOK D",
-      "isJapanBound": true,
-      "lat": 35.4748,
-      "lon": 139.646
-    },
-    {
-      "mmsi": 440135400,
-      "name": "TRITON",
-      "destination": "N/JEJU",
+      "mmsi": 441918000,
+      "name": "KEOJE ESION",
+      "destination": "INCHE0N",
       "isJapanBound": false,
-      "lat": 34.9482,
-      "lon": 129.116
+      "lat": 37.4623,
+      "lon": 126.586
     },
     {
-      "mmsi": 431018712,
-      "name": "ASAHI",
-      "destination": ">JP KWS SG",
-      "isJapanBound": true,
-      "lat": 35.5172,
-      "lon": 139.7434
-    },
-    {
-      "mmsi": 431001630,
-      "name": "NAIKAI MARU NO,1",
-      "destination": ">JP KWS/NNX OFF",
-      "isJapanBound": true,
-      "lat": 35.3995,
-      "lon": 139.7427
-    },
-    {
-      "mmsi": 440304320,
-      "name": "DOO LA NO.7",
-      "destination": "KR ICN",
+      "mmsi": 440112380,
+      "name": "KUKDONG3HO",
+      "destination": "",
       "isJapanBound": false,
+      "lat": 35.1229,
+      "lon": 129.0518
+    },
+    {
+      "mmsi": 431005056,
+      "name": "KINYOU",
+      "destination": ">JP NNX OFF",
+      "isJapanBound": true,
+      "lat": 35.3934,
+      "lon": 139.7407
+    },
+    {
+      "mmsi": 241638000,
+      "name": "MARAN GAS HYDRA",
+      "destination": "YOK XX TG_O",
+      "isJapanBound": false,
+      "lat": 35.4611,
+      "lon": 139.7185
+    },
+    {
+      "mmsi": 440103700,
+      "name": "GEUMILHO",
+      "destination": "YU",
+      "isJapanBound": false,
+      "lat": 35.1211,
+      "lon": 129.0498
+    },
+    {
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1227,
+      "lon": 129.0521
+    },
+    {
+      "mmsi": 431005551,
+      "name": "YUHO MARU NO.6",
+      "destination": ">JP WAK",
+      "isJapanBound": true,
       "lat": null,
       "lon": null
     }
