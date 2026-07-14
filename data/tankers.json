@@ -1,113 +1,29 @@
 {
-  "fetchedAt": "2026-07-14T06:30:51+00:00",
+  "fetchedAt": "2026-07-14T09:23:45+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 13,
-  "japanBoundTankers": 6,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 11,
+  "japanBoundTankers": 1,
+  "japanBoundUnknownPort": 0,
   "topDestinationPorts": [
     {
       "port": "KAWASAKI",
-      "count": 3
-    },
-    {
-      "port": "YOKOHAMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 440005700,
-      "name": "ZIRCON",
-      "destination": "",
+      "mmsi": 440304320,
+      "name": "DOO LA NO.7",
+      "destination": "KR ICN",
       "isJapanBound": false,
-      "lat": 35.0995,
-      "lon": 129.0943
+      "lat": 37.4992,
+      "lon": 126.6303
     },
     {
-      "mmsi": 440152720,
-      "name": "SAM SUNG HO",
-      "destination": "KR BSN",
+      "mmsi": 241638000,
+      "name": "MARAN GAS HYDRA",
+      "destination": "YOK XX TG_O",
       "isJapanBound": false,
-      "lat": 35.1034,
-      "lon": 129.0878
-    },
-    {
-      "mmsi": 441039000,
-      "name": "MS THANKS",
-      "destination": "JP KWS US",
-      "isJapanBound": true,
-      "lat": 35.4302,
-      "lon": 139.7845
-    },
-    {
-      "mmsi": 431008234,
-      "name": "NEW STREAM 2",
-      "destination": ">JP UKB 3 OFF",
-      "isJapanBound": true,
-      "lat": 35.4509,
-      "lon": 139.6798
-    },
-    {
-      "mmsi": 431101171,
-      "name": "EIKA MARU",
-      "destination": "JP YOK D",
-      "isJapanBound": true,
-      "lat": 35.4748,
-      "lon": 139.646
-    },
-    {
-      "mmsi": 538005187,
-      "name": "SEAWAYS DWARKA",
-      "destination": "MUTSU PT ST",
-      "isJapanBound": false,
-      "lat": 35.5048,
-      "lon": 139.745
-    },
-    {
-      "mmsi": 431001715,
-      "name": "CHOUKAI MARU",
-      "destination": ">JP AFG E",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440665000,
-      "name": "WOO SEOK",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1023,
-      "lon": 129.0551
-    },
-    {
-      "mmsi": 441103000,
-      "name": "KOREA VISION",
-      "destination": "KR YOS",
-      "isJapanBound": false,
-      "lat": 35.1959,
-      "lon": 129.3823
-    },
-    {
-      "mmsi": 440322380,
-      "name": "GWANGSAN",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1112,
-      "lon": 129.062
-    },
-    {
-      "mmsi": 440103970,
-      "name": "31 WOO JEONG",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.122,
-      "lon": 129.0497
-    },
-    {
-      "mmsi": 431001630,
-      "name": "NAIKAI MARU NO,1",
-      "destination": ">JP KWS/NNX OFF",
-      "isJapanBound": true,
       "lat": null,
       "lon": null
     },
@@ -116,8 +32,72 @@
       "name": "ASAHI",
       "destination": ">JP KWS SG",
       "isJapanBound": true,
-      "lat": 35.509,
-      "lon": 139.7733
+      "lat": 35.5172,
+      "lon": 139.7434
+    },
+    {
+      "mmsi": 440009260,
+      "name": "HONG JINHO",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1249,
+      "lon": 129.055
+    },
+    {
+      "mmsi": 440306940,
+      "name": "PUNGYUNG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1212,
+      "lon": 129.0491
+    },
+    {
+      "mmsi": 441598000,
+      "name": "GOLDEN WINGS",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440014500,
+      "name": "WOO CHAN",
+      "destination": "KR INC",
+      "isJapanBound": false,
+      "lat": 37.4504,
+      "lon": 126.5908
+    },
+    {
+      "mmsi": 440044920,
+      "name": "NO21BUYOUNG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1198,
+      "lon": 129.0507
+    },
+    {
+      "mmsi": 440103700,
+      "name": "GEUMILHO",
+      "destination": "YU",
+      "isJapanBound": false,
+      "lat": 35.12,
+      "lon": 129.0519
+    },
+    {
+      "mmsi": 338164000,
+      "name": "SLNC PAX",
+      "destination": "KR PUS",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 538005187,
+      "name": "SEAWAYS DWARKA",
+      "destination": "MUTSU PT ST",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
