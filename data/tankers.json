@@ -1,27 +1,51 @@
 {
-  "fetchedAt": "2026-07-14T03:38:55+00:00",
+  "fetchedAt": "2026-07-14T06:30:51+00:00",
   "samplingDurationSec": 480,
   "totalTankersInRegion": 13,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 1,
+  "japanBoundTankers": 6,
+  "japanBoundUnknownPort": 2,
   "topDestinationPorts": [
     {
-      "port": "YOKOHAMA",
-      "count": 1
+      "port": "KAWASAKI",
+      "count": 3
     },
     {
-      "port": "KAWASAKI",
+      "port": "YOKOHAMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 440306940,
-      "name": "PUNGYUNG",
+      "mmsi": 440005700,
+      "name": "ZIRCON",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1212,
-      "lon": 129.0491
+      "lat": 35.0995,
+      "lon": 129.0943
+    },
+    {
+      "mmsi": 440152720,
+      "name": "SAM SUNG HO",
+      "destination": "KR BSN",
+      "isJapanBound": false,
+      "lat": 35.1034,
+      "lon": 129.0878
+    },
+    {
+      "mmsi": 441039000,
+      "name": "MS THANKS",
+      "destination": "JP KWS US",
+      "isJapanBound": true,
+      "lat": 35.4302,
+      "lon": 139.7845
+    },
+    {
+      "mmsi": 431008234,
+      "name": "NEW STREAM 2",
+      "destination": ">JP UKB 3 OFF",
+      "isJapanBound": true,
+      "lat": 35.4509,
+      "lon": 139.6798
     },
     {
       "mmsi": 431101171,
@@ -32,76 +56,12 @@
       "lon": 139.646
     },
     {
-      "mmsi": 440044920,
-      "name": "NO21BUYOUNG",
-      "destination": "BUSAN",
+      "mmsi": 538005187,
+      "name": "SEAWAYS DWARKA",
+      "destination": "MUTSU PT ST",
       "isJapanBound": false,
-      "lat": 35.1002,
-      "lon": 129.0757
-    },
-    {
-      "mmsi": 440204360,
-      "name": "NO.7 MINSUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1243,
-      "lon": 129.0552
-    },
-    {
-      "mmsi": 440117010,
-      "name": "YOUNG JIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1208,
-      "lon": 129.0504
-    },
-    {
-      "mmsi": 241638000,
-      "name": "MARAN GAS HYDRA",
-      "destination": "YOK XX TG_O",
-      "isJapanBound": false,
-      "lat": 35.4611,
-      "lon": 139.7185
-    },
-    {
-      "mmsi": 477963300,
-      "name": "FANG CHENG GANG",
-      "destination": "CJK",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440011120,
-      "name": "MINSUNG11",
-      "destination": "INCHEON",
-      "isJapanBound": false,
-      "lat": 37.4966,
-      "lon": 126.6245
-    },
-    {
-      "mmsi": 440048210,
-      "name": "GREEN HO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0422,
-      "lon": 129.0241
-    },
-    {
-      "mmsi": 440312010,
-      "name": "NO2 HAEJIN",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.1249,
-      "lon": 129.0551
-    },
-    {
-      "mmsi": 431001630,
-      "name": "NAIKAI MARU NO,1",
-      "destination": ">JP KWS/NNX OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 35.5048,
+      "lon": 139.745
     },
     {
       "mmsi": 431001715,
@@ -112,12 +72,52 @@
       "lon": null
     },
     {
-      "mmsi": 352906000,
-      "name": "K.JASMINE",
-      "destination": "KRJSP",
+      "mmsi": 440665000,
+      "name": "WOO SEOK",
+      "destination": "BUSAN",
       "isJapanBound": false,
+      "lat": 35.1023,
+      "lon": 129.0551
+    },
+    {
+      "mmsi": 441103000,
+      "name": "KOREA VISION",
+      "destination": "KR YOS",
+      "isJapanBound": false,
+      "lat": 35.1959,
+      "lon": 129.3823
+    },
+    {
+      "mmsi": 440322380,
+      "name": "GWANGSAN",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.1112,
+      "lon": 129.062
+    },
+    {
+      "mmsi": 440103970,
+      "name": "31 WOO JEONG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.122,
+      "lon": 129.0497
+    },
+    {
+      "mmsi": 431001630,
+      "name": "NAIKAI MARU NO,1",
+      "destination": ">JP KWS/NNX OFF",
+      "isJapanBound": true,
       "lat": null,
       "lon": null
+    },
+    {
+      "mmsi": 431018712,
+      "name": "ASAHI",
+      "destination": ">JP KWS SG",
+      "isJapanBound": true,
+      "lat": 35.509,
+      "lon": 139.7733
     }
   ],
   "boundingBox": "24-46N / 122-146E",
