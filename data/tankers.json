@@ -1,7 +1,7 @@
 {
-  "fetchedAt": "2026-07-14T11:04:22+00:00",
+  "fetchedAt": "2026-07-14T12:46:30+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 11,
+  "totalTankersInRegion": 10,
   "japanBoundTankers": 3,
   "japanBoundUnknownPort": 1,
   "topDestinationPorts": [
@@ -12,92 +12,84 @@
   ],
   "vessels": [
     {
-      "mmsi": 440409920,
-      "name": "HANNAM",
-      "destination": "BUSAN 5PIER",
+      "mmsi": 440149350,
+      "name": "NO.11 SEYANG",
+      "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0768,
-      "lon": 129.1183
+      "lat": 35.1233,
+      "lon": 129.0539
     },
     {
-      "mmsi": 431018712,
-      "name": "ASAHI",
-      "destination": ">JP KWS SG",
+      "mmsi": 319103800,
+      "name": "STOLT SINCERITY",
+      "destination": "JP KWS OFF",
       "isJapanBound": true,
-      "lat": 35.5172,
-      "lon": 139.7434
-    },
-    {
-      "mmsi": 440130790,
-      "name": "7 MIREU",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1221,
-      "lon": 129.0519
-    },
-    {
-      "mmsi": 431001630,
-      "name": "NAIKAI MARU NO,1",
-      "destination": ">JP KWS/NNX OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
+      "lat": 35.4318,
+      "lon": 139.7628
     },
     {
       "mmsi": 440155380,
       "name": "KEUMHYANG",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1235,
+      "lat": 35.1234,
       "lon": 129.0528
     },
     {
-      "mmsi": 440053750,
-      "name": "17 YU SUNG",
+      "mmsi": 440117010,
+      "name": "YOUNG JIN",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1219,
-      "lon": 129.0495
+      "lat": 35.0598,
+      "lon": 129.1069
     },
     {
-      "mmsi": 440400900,
-      "name": "WOOWONHO",
-      "destination": "YEOSU",
+      "mmsi": 440103700,
+      "name": "GEUMILHO",
+      "destination": "YU",
       "isJapanBound": false,
-      "lat": 35.0785,
-      "lon": 129.114
+      "lat": 35.1211,
+      "lon": 129.0499
+    },
+    {
+      "mmsi": 440021230,
+      "name": "GWANG SEONG",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
     },
     {
       "mmsi": 241638000,
       "name": "MARAN GAS HYDRA",
       "destination": "YOK XX TG_O",
       "isJapanBound": false,
-      "lat": 35.4611,
-      "lon": 139.7185
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 538012424,
-      "name": "ELANDRA K2",
-      "destination": "SEA TRIAL(HWO.5519)",
+      "mmsi": 440409920,
+      "name": "HANNAM",
+      "destination": "BUSAN 5PIER",
       "isJapanBound": false,
-      "lat": 34.6647,
-      "lon": 129.0231
+      "lat": 35.1197,
+      "lon": 129.0506
     },
     {
-      "mmsi": 431001715,
-      "name": "CHOUKAI MARU",
-      "destination": ">JP AFG E",
+      "mmsi": 431017504,
+      "name": "SENREI MARU",
+      "destination": ">JP KWS TU",
       "isJapanBound": true,
-      "lat": 39.7564,
-      "lon": 140.0567
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440505620,
-      "name": "KYUNGSUNGHO",
-      "destination": "BUSAM",
-      "isJapanBound": false,
-      "lat": 35.0987,
-      "lon": 129.1583
+      "mmsi": 431024158,
+      "name": "MIYA MARU NO.18",
+      "destination": "JP WAK OFF",
+      "isJapanBound": true,
+      "lat": 34.1526,
+      "lon": 135.1557
     }
   ],
   "boundingBox": "24-46N / 122-146E",
