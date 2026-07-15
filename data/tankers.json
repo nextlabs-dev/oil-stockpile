@@ -1,47 +1,83 @@
 {
-  "fetchedAt": "2026-07-15T15:55:55+00:00",
+  "fetchedAt": "2026-07-15T17:44:59+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 4,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 0,
+  "totalTankersInRegion": 8,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [
     {
-      "port": "MIZUSHIMA",
+      "port": "YOKKAICHI",
+      "count": 1
+    },
+    {
+      "port": "KAWASAKI",
       "count": 1
     }
   ],
   "vessels": [
+    {
+      "mmsi": 440053950,
+      "name": "WOO HYEON",
+      "destination": "KR USN",
+      "isJapanBound": false,
+      "lat": 34.8405,
+      "lon": 128.9648
+    },
+    {
+      "mmsi": 413474270,
+      "name": "BAO QING",
+      "destination": "ULSAN KR",
+      "isJapanBound": false,
+      "lat": 35.1784,
+      "lon": 129.4087
+    },
+    {
+      "mmsi": 431005666,
+      "name": "TOUYOUMARU 33",
+      "destination": "JP YKK OFF",
+      "isJapanBound": true,
+      "lat": 34.2352,
+      "lon": 134.9764
+    },
+    {
+      "mmsi": 431019648,
+      "name": "KIYO MARU NO1",
+      "destination": "JP KWS /NNX",
+      "isJapanBound": true,
+      "lat": 35.4096,
+      "lon": 139.7624
+    },
+    {
+      "mmsi": 440103700,
+      "name": "GEUMILHO",
+      "destination": "YU",
+      "isJapanBound": false,
+      "lat": 35.1211,
+      "lon": 129.0499
+    },
+    {
+      "mmsi": 440151030,
+      "name": "NEW DONGSIN",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1225,
+      "lon": 129.0521
+    },
+    {
+      "mmsi": 431007017,
+      "name": "RINDO MARU",
+      "destination": ">JP TYO HANEDA OFF",
+      "isJapanBound": true,
+      "lat": 35.5147,
+      "lon": 139.8454
+    },
     {
       "mmsi": 440113630,
       "name": "WOOJIN1HO",
       "destination": "0",
       "isJapanBound": false,
       "lat": 35.1003,
-      "lon": 129.0941
-    },
-    {
-      "mmsi": 440072080,
-      "name": "DL RUBY",
-      "destination": "PUS,KR",
-      "isJapanBound": false,
-      "lat": 35.0528,
-      "lon": 129.0643
-    },
-    {
-      "mmsi": 538007361,
-      "name": "PACIFIC SARAH",
-      "destination": "JP MIZ",
-      "isJapanBound": true,
-      "lat": 34.2165,
-      "lon": 134.9882
-    },
-    {
-      "mmsi": 440049630,
-      "name": "SONG SOON HO",
-      "destination": "MOKPO",
-      "isJapanBound": false,
-      "lat": 35.7726,
-      "lon": 129.0506
+      "lon": 129.0942
     }
   ],
   "boundingBox": "24-46N / 122-146E",
