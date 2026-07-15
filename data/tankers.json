@@ -1,10 +1,14 @@
 {
-  "fetchedAt": "2026-07-15T11:54:41+00:00",
+  "fetchedAt": "2026-07-15T14:15:05+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 7,
-  "japanBoundTankers": 1,
-  "japanBoundUnknownPort": 0,
+  "totalTankersInRegion": 6,
+  "japanBoundTankers": 3,
+  "japanBoundUnknownPort": 1,
   "topDestinationPorts": [
+    {
+      "port": "YOKOHAMA",
+      "count": 1
+    },
     {
       "port": "KAWASAKI",
       "count": 1
@@ -12,60 +16,52 @@
   ],
   "vessels": [
     {
-      "mmsi": 613414703,
-      "name": "LAYLA",
-      "destination": "KR USN",
+      "mmsi": 440201420,
+      "name": "BLUE O",
+      "destination": "ULSAN",
       "isJapanBound": false,
-      "lat": 35.1829,
-      "lon": 129.5456
+      "lat": 35.1198,
+      "lon": 129.0506
     },
     {
-      "mmsi": 431017908,
-      "name": "KIRISHIMA MARU",
-      "destination": ">JP KWS /NNX",
+      "mmsi": 431004474,
+      "name": "MEIWA MARU",
+      "destination": "JP YOK SUZUSIGE 4",
       "isJapanBound": true,
-      "lat": 35.3935,
-      "lon": 139.7312
+      "lat": 35.4748,
+      "lon": 139.6459
     },
     {
-      "mmsi": 440113630,
-      "name": "WOOJIN1HO",
-      "destination": "0",
+      "mmsi": 338164000,
+      "name": "SLNC PAX",
+      "destination": "KR PUS",
       "isJapanBound": false,
-      "lat": 35.1207,
-      "lon": 129.0493
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440076890,
-      "name": "YEONG ROO",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1192,
-      "lon": 129.0528
+      "mmsi": 431000781,
+      "name": "SENTAIMARU",
+      "destination": ">JP KWS DU ASAHI-3",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440331080,
-      "name": "DAEHEUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0664,
-      "lon": 129.0525
+      "mmsi": 431014522,
+      "name": "HOKENMARU NO.3",
+      "destination": ">JP WAK OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440002440,
-      "name": "KTS GREEN",
-      "destination": "KS-YOS",
+      "mmsi": 352906000,
+      "name": "K.JASMINE",
+      "destination": "KRJSP",
       "isJapanBound": false,
-      "lat": 34.8768,
-      "lon": 129.1283
-    },
-    {
-      "mmsi": 373982000,
-      "name": "SULFUR BRAVE",
-      "destination": "BUSAN_KR",
-      "isJapanBound": false,
-      "lat": 35.0594,
-      "lon": 129.0392
+      "lat": 34.878,
+      "lon": 128.802
     }
   ],
   "boundingBox": "24-46N / 122-146E",
