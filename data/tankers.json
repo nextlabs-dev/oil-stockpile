@@ -1,83 +1,42 @@
 {
-  "fetchedAt": "2026-07-15T17:44:59+00:00",
+  "fetchedAt": "2026-07-15T19:43:06+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 8,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 1,
-  "topDestinationPorts": [
-    {
-      "port": "YOKKAICHI",
-      "count": 1
-    },
-    {
-      "port": "KAWASAKI",
-      "count": 1
-    }
-  ],
+  "totalTankersInRegion": 4,
+  "japanBoundTankers": 0,
+  "japanBoundUnknownPort": 0,
+  "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440053950,
-      "name": "WOO HYEON",
+      "mmsi": 440208060,
+      "name": "CHEONGHAE NO1",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.122,
+      "lon": 129.0519
+    },
+    {
+      "mmsi": 636023752,
+      "name": "AL SADAF",
+      "destination": "KR TYG",
+      "isJapanBound": false,
+      "lat": 34.9402,
+      "lon": 129.4492
+    },
+    {
+      "mmsi": 413578350,
+      "name": "HUA HANG HE SHUN",
+      "destination": "NANJING CN",
+      "isJapanBound": false,
+      "lat": 35.013,
+      "lon": 129.2461
+    },
+    {
+      "mmsi": 440374000,
+      "name": "SUNNY QUEEN",
       "destination": "KR USN",
       "isJapanBound": false,
-      "lat": 34.8405,
-      "lon": 128.9648
-    },
-    {
-      "mmsi": 413474270,
-      "name": "BAO QING",
-      "destination": "ULSAN KR",
-      "isJapanBound": false,
-      "lat": 35.1784,
-      "lon": 129.4087
-    },
-    {
-      "mmsi": 431005666,
-      "name": "TOUYOUMARU 33",
-      "destination": "JP YKK OFF",
-      "isJapanBound": true,
-      "lat": 34.2352,
-      "lon": 134.9764
-    },
-    {
-      "mmsi": 431019648,
-      "name": "KIYO MARU NO1",
-      "destination": "JP KWS /NNX",
-      "isJapanBound": true,
-      "lat": 35.4096,
-      "lon": 139.7624
-    },
-    {
-      "mmsi": 440103700,
-      "name": "GEUMILHO",
-      "destination": "YU",
-      "isJapanBound": false,
-      "lat": 35.1211,
-      "lon": 129.0499
-    },
-    {
-      "mmsi": 440151030,
-      "name": "NEW DONGSIN",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1225,
-      "lon": 129.0521
-    },
-    {
-      "mmsi": 431007017,
-      "name": "RINDO MARU",
-      "destination": ">JP TYO HANEDA OFF",
-      "isJapanBound": true,
-      "lat": 35.5147,
-      "lon": 139.8454
-    },
-    {
-      "mmsi": 440113630,
-      "name": "WOOJIN1HO",
-      "destination": "0",
-      "isJapanBound": false,
-      "lat": 35.1003,
-      "lon": 129.0942
+      "lat": 35.129,
+      "lon": 129.3689
     }
   ],
   "boundingBox": "24-46N / 122-146E",
