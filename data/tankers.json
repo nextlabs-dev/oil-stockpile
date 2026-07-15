@@ -1,103 +1,96 @@
 {
-  "fetchedAt": "2026-07-15T06:34:56+00:00",
+  "fetchedAt": "2026-07-15T09:28:11+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 12,
-  "japanBoundTankers": 1,
+  "totalTankersInRegion": 10,
+  "japanBoundTankers": 3,
   "japanBoundUnknownPort": 1,
-  "topDestinationPorts": [],
-  "vessels": [
+  "topDestinationPorts": [
     {
-      "mmsi": 440154450,
-      "name": "DIA OCEAN HO",
-      "destination": "JINHAE",
-      "isJapanBound": false,
-      "lat": 35.0971,
-      "lon": 129.0667
+      "port": "KASHIMA",
+      "count": 1
     },
     {
-      "mmsi": 352003175,
-      "name": "HAVEN",
-      "destination": "BUSANN",
+      "port": "YOKOHAMA",
+      "count": 1
+    }
+  ],
+  "vessels": [
+    {
+      "mmsi": 440006970,
+      "name": "OCEAN BEST",
+      "destination": "",
       "isJapanBound": false,
-      "lat": 35.059,
-      "lon": 129.0527
+      "lat": 35.0988,
+      "lon": 129.1767
+    },
+    {
+      "mmsi": 431402028,
+      "name": "KOKUSEI MARU",
+      "destination": "JP KSM SE MCC B1",
+      "isJapanBound": true,
+      "lat": 35.454,
+      "lon": 139.7835
+    },
+    {
+      "mmsi": 440197410,
+      "name": "HWA JEONG ACE",
+      "destination": "YEOSU",
+      "isJapanBound": false,
+      "lat": 35.1075,
+      "lon": 129.0938
     },
     {
       "mmsi": 440105720,
       "name": "DAE JEONG",
       "destination": "BUSAN",
       "isJapanBound": false,
-      "lat": 35.0976,
-      "lon": 129.0944
-    },
-    {
-      "mmsi": 440191310,
-      "name": "BU KWANG HO",
-      "destination": "BUSAN",
-      "isJapanBound": false,
-      "lat": 35.121,
-      "lon": 129.0505
-    },
-    {
-      "mmsi": 431000826,
-      "name": "TENSHO MARU NO.2",
-      "destination": ">JP SBK7 OFF",
-      "isJapanBound": true,
-      "lat": 35.4203,
-      "lon": 139.7332
-    },
-    {
-      "mmsi": 440156960,
-      "name": "SUNGJIN ACE",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1086,
-      "lon": 129.0936
-    },
-    {
-      "mmsi": 241638000,
-      "name": "MARAN GAS HYDRA",
-      "destination": "FOR ORDERS",
-      "isJapanBound": false,
-      "lat": 35.343,
-      "lon": 139.7073
-    },
-    {
-      "mmsi": 440215590,
-      "name": "DONGNAM ACE",
-      "destination": "YEOSU",
-      "isJapanBound": false,
-      "lat": 35.1216,
-      "lon": 129.05
-    },
-    {
-      "mmsi": 440215710,
-      "name": "SEUNG JIN",
-      "destination": "INCHEON KR",
-      "isJapanBound": false,
-      "lat": 37.5092,
-      "lon": 126.6018
+      "lat": 35.1203,
+      "lon": 129.0511
     },
     {
       "mmsi": 338164000,
       "name": "SLNC PAX",
       "destination": "KR PUS",
       "isJapanBound": false,
-      "lat": 35.1191,
-      "lon": 129.0701
+      "lat": null,
+      "lon": null
     },
     {
-      "mmsi": 440312010,
-      "name": "NO2 HAEJIN",
-      "destination": "BUSAN",
+      "mmsi": 431004474,
+      "name": "MEIWA MARU",
+      "destination": "JP YOK SUZUSIGE 4",
+      "isJapanBound": true,
+      "lat": 35.4748,
+      "lon": 139.6459
+    },
+    {
+      "mmsi": 440049630,
+      "name": "SONG SOON HO",
+      "destination": "MOKPO",
       "isJapanBound": false,
-      "lat": 35.1009,
-      "lon": 129.0557
+      "lat": 35.1211,
+      "lon": 129.0506
     },
     {
-      "mmsi": 441918000,
-      "name": "KEOJE ESION",
-      "destination": "INCHE0N",
+      "mmsi": 440155350,
+      "name": "NO.11 SONGWON",
+      "destination": "",
+      "isJapanBound": false,
+      "lat": 35.1146,
+      "lon": 129.1833
+    },
+    {
+      "mmsi": 431005056,
+      "name": "KINYOU",
+      "destination": ">JP NNX OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 440016180,
+      "name": "ES ROSE",
+      "destination": "INCHEON",
       "isJapanBound": false,
       "lat": null,
       "lon": null
