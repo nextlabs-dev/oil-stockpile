@@ -1,67 +1,47 @@
 {
-  "fetchedAt": "2026-07-15T14:15:05+00:00",
+  "fetchedAt": "2026-07-15T15:55:55+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 6,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 1,
+  "totalTankersInRegion": 4,
+  "japanBoundTankers": 1,
+  "japanBoundUnknownPort": 0,
   "topDestinationPorts": [
     {
-      "port": "YOKOHAMA",
-      "count": 1
-    },
-    {
-      "port": "KAWASAKI",
+      "port": "MIZUSHIMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 440201420,
-      "name": "BLUE O",
-      "destination": "ULSAN",
+      "mmsi": 440113630,
+      "name": "WOOJIN1HO",
+      "destination": "0",
       "isJapanBound": false,
-      "lat": 35.1198,
+      "lat": 35.1003,
+      "lon": 129.0941
+    },
+    {
+      "mmsi": 440072080,
+      "name": "DL RUBY",
+      "destination": "PUS,KR",
+      "isJapanBound": false,
+      "lat": 35.0528,
+      "lon": 129.0643
+    },
+    {
+      "mmsi": 538007361,
+      "name": "PACIFIC SARAH",
+      "destination": "JP MIZ",
+      "isJapanBound": true,
+      "lat": 34.2165,
+      "lon": 134.9882
+    },
+    {
+      "mmsi": 440049630,
+      "name": "SONG SOON HO",
+      "destination": "MOKPO",
+      "isJapanBound": false,
+      "lat": 35.7726,
       "lon": 129.0506
-    },
-    {
-      "mmsi": 431004474,
-      "name": "MEIWA MARU",
-      "destination": "JP YOK SUZUSIGE 4",
-      "isJapanBound": true,
-      "lat": 35.4748,
-      "lon": 139.6459
-    },
-    {
-      "mmsi": 338164000,
-      "name": "SLNC PAX",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431000781,
-      "name": "SENTAIMARU",
-      "destination": ">JP KWS DU ASAHI-3",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431014522,
-      "name": "HOKENMARU NO.3",
-      "destination": ">JP WAK OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 352906000,
-      "name": "K.JASMINE",
-      "destination": "KRJSP",
-      "isJapanBound": false,
-      "lat": 34.878,
-      "lon": 128.802
     }
   ],
   "boundingBox": "24-46N / 122-146E",
