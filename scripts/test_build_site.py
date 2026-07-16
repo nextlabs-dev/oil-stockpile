@@ -192,7 +192,7 @@ class RenderPageTest(unittest.TestCase):
     """最小テンプレで render_page の組み立てを検証する。"""
 
     TEMPLATE = Template(
-        "T=$title|D=$description|C=$canonical|"
+        "T=$title|D=$description|C=$canonical|OG_URL=$og_url|"
         "OG_IMG=$og_image|FAVI=$favicon|CSS=$stylesheet|"
         "FONT=$font_href|EXTRA=[$extra_head]|BODY_CLASS=[$body_class]|HOME=$home_href|"
         "NAV=[$nav]|BOTTOM=[$bottom_nav]|BODY=$content|"
@@ -295,6 +295,35 @@ class RenderPageTest(unittest.TestCase):
         # 省略時 (デフォルト空) はクエリを付けない。
         out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY")
         self.assertIn("OG_IMG=https://example.com/og.png|", out)
+
+    def test_og_url_appends_version_query(self):
+        # X のカードキャッシュは共有URL単位。og:url に og:image と同じ ?v=<hash> を
+        # 付け、画像更新のたびに共有URLも変えて再クロールさせる (issue #90)。
+        out = render_page(
+            self.TEMPLATE,
+            self.SITE_CONFIG,
+            self._page(),
+            "BODY",
+            og_image_version="abc12345",
+        )
+        self.assertIn("OG_URL=https://example.com/scale/?v=abc12345|", out)
+        # og:image と同一ハッシュ (ビルド全体で version は 1 つ)
+        self.assertIn("OG_IMG=https://example.com/og.png?v=abc12345|", out)
+
+    def test_og_url_no_query_when_version_empty(self):
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY")
+        self.assertIn("OG_URL=https://example.com/scale/|", out)
+
+    def test_canonical_stays_clean_when_version_present(self):
+        # <link rel="canonical"> は SEO のためクエリ無しのまま維持する。
+        out = render_page(
+            self.TEMPLATE,
+            self.SITE_CONFIG,
+            self._page(),
+            "BODY",
+            og_image_version="abc12345",
+        )
+        self.assertIn("C=https://example.com/scale/|", out)
 
 
 class ComputeInlineScriptHashesTest(unittest.TestCase):
