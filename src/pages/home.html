@@ -3,7 +3,7 @@
   <section class="update-banner" aria-label="更新情報">
     <span class="update-banner-label">最新の更新情報</span>
     <span class="update-banner-divider" aria-hidden="true">｜</span>
-    <span class="update-banner-date" id="update-banner-date">—</span>
+    <span class="update-banner-date" id="update-banner-date">${latest_published_dot}</span>
     <span class="update-banner-divider" aria-hidden="true">｜</span>
     <span class="update-banner-text">石油備蓄の現況を更新</span>
   </section>
@@ -17,7 +17,7 @@
         <div class="hero-left">
           <span class="dash-card-eyebrow dash-card-eyebrow--brand">今、日本の石油備蓄は</span>
           <div class="counter-days-row" role="timer" aria-label="日本の石油備蓄 推計日数">
-            <span id="counter-days" class="counter-num">—</span>
+            <span id="counter-days" class="counter-num">${latest_total_days}</span>
             <span class="counter-unit-stack">
               <span class="counter-unit">日分</span>
               <span class="counter-sub-label">DAYS LEFT</span>

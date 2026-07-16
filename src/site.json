@@ -34,11 +34,11 @@
       "header_meta": [
         "    <div class=\"site-header-meta\">",
         "      <span class=\"site-header-meta-label\">最終更新</span>",
-        "      <span class=\"site-header-meta-value\" id=\"header-last-updated\">—</span>",
+        "      <span class=\"site-header-meta-value\" id=\"header-last-updated\">${latest_published_dot}</span>",
         "    </div>"
       ],
       "title": "あと何日？｜日本の石油備蓄",
-      "description": "日本の石油備蓄、いまこれだけ。経済産業省「石油備蓄の現況」速報値を分かりやすく可視化する非公式カウンター。",
+      "description": "日本の石油備蓄はいま約${latest_total_days}日分（${latest_asof_jp}集計時点）。経済産業省「石油備蓄の現況」速報値を毎日更新で可視化する非公式カウンター。",
       "canonical_path": "/",
       "og_title": "あと何日？｜日本の石油備蓄",
       "og_description": "経済産業省の速報値から、日本の石油備蓄日数を静かに可視化します。",
