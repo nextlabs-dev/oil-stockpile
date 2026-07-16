@@ -1,136 +1,39 @@
 {
-  "fetchedAt": "2026-07-16T12:00:50+00:00",
+  "fetchedAt": "2026-07-16T14:27:48+00:00",
   "samplingDurationSec": 480,
-  "totalTankersInRegion": 15,
-  "japanBoundTankers": 5,
-  "japanBoundUnknownPort": 1,
-  "topDestinationPorts": [
-    {
-      "port": "YOKOHAMA",
-      "count": 3
-    },
-    {
-      "port": "KAWASAKI",
-      "count": 1
-    }
-  ],
+  "totalTankersInRegion": 4,
+  "japanBoundTankers": 0,
+  "japanBoundUnknownPort": 0,
+  "topDestinationPorts": [],
   "vessels": [
     {
-      "mmsi": 440201420,
-      "name": "BLUE O",
-      "destination": "ULSAN",
-      "isJapanBound": false,
-      "lat": 35.01,
-      "lon": 129.0636
-    },
-    {
-      "mmsi": 440117010,
-      "name": "YOUNG JIN",
+      "mmsi": 440130790,
+      "name": "7 MIREU",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.0349,
-      "lon": 129.1003
-    },
-    {
-      "mmsi": 431015093,
-      "name": "SHINKO MARU NO2",
-      "destination": ">JP YOK D",
-      "isJapanBound": true,
-      "lat": 35.4748,
-      "lon": 139.646
-    },
-    {
-      "mmsi": 441598000,
-      "name": "GOLDEN WINGS",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440155380,
-      "name": "KEUMHYANG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1234,
-      "lon": 129.0528
-    },
-    {
-      "mmsi": 440316160,
-      "name": "INTRANS EDY",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 35.0377,
-      "lon": 129.145
+      "lat": 35.081,
+      "lon": 129.1137
     },
     {
       "mmsi": 440400900,
       "name": "WOOWONHO",
       "destination": "YEOSU",
       "isJapanBound": false,
-      "lat": 35.0089,
-      "lon": 129.0773
+      "lat": 35.0109,
+      "lon": 129.0802
     },
     {
-      "mmsi": 352005630,
-      "name": "EASUNHO",
-      "destination": "JP YOK OFF YL3",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 440155350,
-      "name": "NO.11 SONGWON",
-      "destination": "",
+      "mmsi": 440409920,
+      "name": "HANNAM",
+      "destination": "BUSAN 5PIER",
       "isJapanBound": false,
-      "lat": 35.0349,
-      "lon": 129.0648
+      "lat": 35.1149,
+      "lon": 129.0574
     },
     {
-      "mmsi": 477664300,
-      "name": "GLORISEA",
-      "destination": "KR PUS",
-      "isJapanBound": false,
-      "lat": 34.9199,
-      "lon": 129.1861
-    },
-    {
-      "mmsi": 431932000,
-      "name": "GOLDEN DENEB",
-      "destination": "JP KWS OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431004506,
-      "name": "YOSHITAKA MARU NO.93",
-      "destination": "JP WAK OFF",
-      "isJapanBound": true,
-      "lat": null,
-      "lon": null
-    },
-    {
-      "mmsi": 431010694,
-      "name": "KOSHO MARU",
-      "destination": ">JP YOK OF",
-      "isJapanBound": true,
-      "lat": 35.4422,
-      "lon": 139.7119
-    },
-    {
-      "mmsi": 273216560,
-      "name": "SAMSON",
-      "destination": "YAME",
-      "isJapanBound": false,
-      "lat": 35.4796,
-      "lon": 130.1912
-    },
-    {
-      "mmsi": 636020559,
-      "name": "DUBAI ENERGY",
-      "destination": "TWHSL",
+      "mmsi": 440400010,
+      "name": "PHOENIX",
+      "destination": "BUSAN",
       "isJapanBound": false,
       "lat": null,
       "lon": null
