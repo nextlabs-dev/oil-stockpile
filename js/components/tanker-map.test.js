@@ -21,9 +21,12 @@ const SAMPLE = [
   },
 ];
 
-test('buildVesselTableHtml: 視覚的に隠した table と caption を返す（chart の隠し表と同パターン）', () => {
+test('buildVesselTableHtml: 視覚的に隠した div でラップした table と caption を返す（chart の隠し表と同パターン）', () => {
   const html = buildVesselTableHtml(SAMPLE);
-  assert.match(html, /<table class="visually-hidden">/);
+  // 隠すのは div 側。table は CSS width:1px でも min-content 未満に縮まず、
+  // 画面外まで伸びて横スクロールを生むため、縮められる div に隠蔽を任せる
+  assert.match(html, /<div class="visually-hidden"><table>/);
+  assert.match(html, /<\/table><\/div>/);
   assert.match(html, /<caption>/);
   // 列見出しは scope="col"
   assert.match(html, /<th scope="col">/);

@@ -61,8 +61,10 @@ function buildHiddenTable(data) {
         `<td>${r.total}</td><td>${r.national}</td><td>${r.private}</td><td>${r.joint}</td></tr>`,
     )
     .join('');
+  // 隠すのは wrapper div 側。table 要素は CSS width:1px でも min-content 未満に
+  // 縮まらず（nowrap で数百 px に膨らみ）モバイル幅で横スクロールを生むため。
   return (
-    `<table class="visually-hidden">` +
+    `<div class="visually-hidden"><table>` +
     `<caption>備蓄日数の推移（直近${data.length}データ点・単位は日）</caption>` +
     `<thead><tr>` +
     `<th scope="col">データ時点</th>` +
@@ -72,7 +74,7 @@ function buildHiddenTable(data) {
     `<th scope="col">産油国共同</th>` +
     `</tr></thead>` +
     `<tbody>${rows}</tbody>` +
-    `</table>`
+    `</table></div>`
   );
 }
 
