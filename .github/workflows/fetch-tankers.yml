@@ -39,10 +39,13 @@ jobs:
         # 避けるため continue-on-error にする。失敗時は tankers.json を書かないため、次の
         # Commit if changed は no-op で抜ける。鍵失効や持続障害でグリーンのまま凍結する
         # ケースは、末尾の 'Guard against stale data' が fetchedAt 鮮度で検出して赤くする。
+        #
+        # --min-tankers 5: 実測分布（直近5日・60サンプル）では正常値は 5〜25 隻。それ未満は
+        # AIS 受信網の部分障害による劣化サンプルとみなし、書き込まず既存データを保持する (#74)。
         continue-on-error: true
         env:
           AISSTREAM_API_KEY: ${{ secrets.AISSTREAM_API_KEY }}
-        run: python scripts/fetch_tankers.py --duration 480
+        run: python scripts/fetch_tankers.py --duration 480 --min-tankers 5
 
       - name: Commit if changed
         env:
