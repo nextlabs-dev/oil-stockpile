@@ -165,6 +165,26 @@ class TestParseSnapshots(unittest.TestCase):
         result = parse_snapshots(text)
         self.assertEqual(result, [])
 
+    def test_reiwa_year_zero_raises(self):
+        text = make_block(0, 5, 1, 4, 28, total=211, national=128, priv=81, joint=2)
+        with self.assertRaises(RuntimeError):
+            parse_snapshots(text)
+
+    def test_reiwa_year_31_raises(self):
+        text = make_block(31, 5, 1, 4, 28, total=211, national=128, priv=81, joint=2)
+        with self.assertRaises(RuntimeError):
+            parse_snapshots(text)
+
+    def test_reiwa_year_at_lower_bound_ok(self):
+        text = make_block(1, 5, 7, 5, 4, total=211, national=128, priv=81, joint=2)
+        result = parse_snapshots(text)
+        self.assertEqual(result[0]["published"], "2019-05-07")
+
+    def test_reiwa_year_at_upper_bound_ok(self):
+        text = make_block(30, 5, 1, 4, 28, total=211, national=128, priv=81, joint=2)
+        result = parse_snapshots(text)
+        self.assertEqual(result[0]["published"], "2048-05-01")
+
 
 class TestValidate(unittest.TestCase):
     def _ok_snap(self, **overrides):
@@ -219,6 +239,42 @@ class TestValidate(unittest.TestCase):
         # abs(211 - 180) = 31 → fail
         with self.assertRaises(RuntimeError):
             validate(self._ok_snap(total=211), prev_total=180)
+
+    def test_invalid_asof_month_raises(self):
+        with self.assertRaises(RuntimeError):
+            validate(self._ok_snap(asOf="2026-13-05"))
+
+    def test_invalid_asof_day_raises(self):
+        with self.assertRaises(RuntimeError):
+            validate(self._ok_snap(asOf="2026-04-45"))
+
+    def test_invalid_published_raises(self):
+        with self.assertRaises(RuntimeError):
+            validate(self._ok_snap(published="2026-13-45"))
+
+    def test_feb_29_non_leap_year_raises(self):
+        with self.assertRaises(RuntimeError):
+            validate(self._ok_snap(asOf="2026-02-29"))
+
+    def test_feb_29_leap_year_ok(self):
+        validate(self._ok_snap(published="2028-03-02", asOf="2028-02-29"))
+
+    def test_asof_after_published_raises(self):
+        # データ時点が公表日より未来はあり得ない
+        with self.assertRaises(RuntimeError):
+            validate(self._ok_snap(published="2026-05-01", asOf="2026-05-02"))
+
+    def test_asof_equal_published_ok(self):
+        validate(self._ok_snap(published="2026-05-01", asOf="2026-05-01"))
+
+    def test_garbled_header_date_rejected_by_validate(self):
+        # Issue #60 回帰テスト: 「13月45日時点」がヘッダ regex に一致した場合、
+        # parse_snapshots 自体は通るが validate が遮断する
+        text = make_block(8, 5, 1, 13, 45, total=211, national=128, priv=81, joint=2)
+        result = parse_snapshots(text)
+        self.assertEqual(len(result), 1)
+        with self.assertRaises(RuntimeError):
+            validate(result[0])
 
 
 class TestMerge(unittest.TestCase):
