@@ -182,28 +182,32 @@ def render_nav(page: dict[str, Any], nav_labels: dict[str, str], nav_order: list
 
 # ボトムナビ用 線画アイコン（22px 表示・stroke 1.8）。ラベル併記のため装飾扱いで
 # aria-hidden。キーは site.json の nav_order と一致させる。
+# 4 つのグリフは光学的に揃うよう、描画範囲の中心を y≈12.5–12.75 に統一し、
+# viewBox 24×24 のうち幅 17–19 / 十分な高さを使う（小さすぎると欠けて見える）。
 NAV_ICONS = {
     "home": (
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-        '<path d="M4 17a8 8 0 1 1 16 0"/><line x1="12" y1="17" x2="16" y2="11"/></svg>'
+        '<path d="M5.6 20.4A9 9 0 1 1 18.4 20.4"/>'
+        '<line x1="12" y1="14" x2="16.2" y2="9.8"/></svg>'
     ),
     "tankers": (
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-        '<path d="M2 15h20l-3 4H5z"/><path d="M15 15v-4h4v4"/><path d="M6 15v-2h6v2"/></svg>'
+        '<path d="M2.5 13h19l-3 4.5h-13z"/><path d="M14.5 13v-5h4.5v5"/>'
+        '<path d="M5.5 13v-3h6v3"/></svg>'
     ),
     "scale": (
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-        '<rect x="3" y="9" width="18" height="6" rx="1"/>'
-        '<path d="M7.5 9v3M12 9v3M16.5 9v3"/></svg>'
+        '<rect x="2.5" y="9" width="19" height="7" rx="1"/>'
+        '<path d="M7.25 9v3.5M12 9v3.5M16.75 9v3.5"/></svg>'
     ),
     "about": (
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-        '<circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/>'
-        '<circle cx="12" cy="7.8" r="0.4" fill="currentColor"/></svg>'
+        '<circle cx="12" cy="12.5" r="8.5"/><line x1="12" y1="12.2" x2="12" y2="16.7"/>'
+        '<circle cx="12" cy="8.7" r="0.4" fill="currentColor"/></svg>'
     ),
 }
 
