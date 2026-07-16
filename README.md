@@ -156,7 +156,7 @@ python scripts/fetch_pdf.py --dry-run  # パースのみ、書き換えなし
 
 ```bash
 export AISSTREAM_API_KEY=xxx
-python scripts/fetch_tankers.py --duration 480           # 本番モード
+python scripts/fetch_tankers.py --duration 720           # 本番モード
 python scripts/fetch_tankers.py --duration 60 --dry-run  # 短時間、書き込まない
 ```
 
