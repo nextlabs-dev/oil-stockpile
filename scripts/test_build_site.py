@@ -412,10 +412,22 @@ class ComputeOgImageVersionTest(unittest.TestCase):
 class BuildLatestVarsTest(unittest.TestCase):
     # asOf 昇順で末尾が最新になることを確かめるため、意図的に順序を崩してある
     ROWS = [
-        {"published": "2026-03-18", "asOf": "2026-03-15", "total": 241,
-         "national": 146, "private": 89, "joint": 6},
-        {"published": "2026-03-17", "asOf": "2026-03-14", "total": 242,
-         "national": 146, "private": 90, "joint": 6},
+        {
+            "published": "2026-03-18",
+            "asOf": "2026-03-15",
+            "total": 241,
+            "national": 146,
+            "private": 89,
+            "joint": 6,
+        },
+        {
+            "published": "2026-03-17",
+            "asOf": "2026-03-14",
+            "total": 242,
+            "national": 146,
+            "private": 90,
+            "joint": 6,
+        },
     ]
 
     def test_picks_latest_by_asof_and_formats(self):
@@ -467,8 +479,11 @@ class RenderPageLatestVarsTest(unittest.TestCase):
 
     def test_substitutes_in_content(self):
         out = render_page(
-            self.TEMPLATE, self.SITE_CONFIG, self._page(),
-            "DAYS=${latest_total_days}", latest_vars=self.LATEST_VARS,
+            self.TEMPLATE,
+            self.SITE_CONFIG,
+            self._page(),
+            "DAYS=${latest_total_days}",
+            latest_vars=self.LATEST_VARS,
         )
         self.assertIn("BODY=DAYS=242|", out)
 
@@ -478,7 +493,11 @@ class RenderPageLatestVarsTest(unittest.TestCase):
             header_meta="U=${latest_published_dot}",
         )
         out = render_page(
-            self.TEMPLATE, self.SITE_CONFIG, page, "BODY", latest_vars=self.LATEST_VARS,
+            self.TEMPLATE,
+            self.SITE_CONFIG,
+            page,
+            "BODY",
+            latest_vars=self.LATEST_VARS,
         )
         self.assertIn("D=約242日分（2026年3月14日集計時点）|", out)
         self.assertIn("HM=[U=2026.03.17", out)
@@ -486,7 +505,11 @@ class RenderPageLatestVarsTest(unittest.TestCase):
     def test_does_not_touch_og_and_twitter_description(self):
         page = self._page(og_description="OD ${latest_total_days}")
         out = render_page(
-            self.TEMPLATE, self.SITE_CONFIG, page, "BODY", latest_vars=self.LATEST_VARS,
+            self.TEMPLATE,
+            self.SITE_CONFIG,
+            page,
+            "BODY",
+            latest_vars=self.LATEST_VARS,
         )
         # og_description は置換対象外 — プレースホルダが素通しで残る
         self.assertIn("OG_DESC=OD ${latest_total_days}|", out)
@@ -494,22 +517,30 @@ class RenderPageLatestVarsTest(unittest.TestCase):
     def test_unknown_placeholder_raises_key_error(self):
         with self.assertRaises(KeyError):
             render_page(
-                self.TEMPLATE, self.SITE_CONFIG, self._page(),
-                "BODY=${no_such_var}", latest_vars=self.LATEST_VARS,
+                self.TEMPLATE,
+                self.SITE_CONFIG,
+                self._page(),
+                "BODY=${no_such_var}",
+                latest_vars=self.LATEST_VARS,
             )
 
     def test_bare_dollar_raises_value_error(self):
         with self.assertRaises(ValueError):
             render_page(
-                self.TEMPLATE, self.SITE_CONFIG, self._page(),
-                "PRICE $ 100", latest_vars=self.LATEST_VARS,
+                self.TEMPLATE,
+                self.SITE_CONFIG,
+                self._page(),
+                "PRICE $ 100",
+                latest_vars=self.LATEST_VARS,
             )
 
     def test_placeholder_without_latest_vars_raises_key_error(self):
         # main() が latest_vars を渡し忘れても沈黙劣化しない（Fail Fast）
         with self.assertRaises(KeyError):
             render_page(
-                self.TEMPLATE, self.SITE_CONFIG, self._page(),
+                self.TEMPLATE,
+                self.SITE_CONFIG,
+                self._page(),
                 "DAYS=${latest_total_days}",
             )
 
