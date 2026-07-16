@@ -36,14 +36,26 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Fetch and parse PDF
+        # コアの日次データ取得。ここは fail-fast（continue-on-error なし）。
+        # snapshots.json の取得失敗はジョブを赤くして人間に戻す。
         run: python scripts/fetch_pdf.py
 
       - name: Generate OGP image
+        # OGP 画像は装飾出力。フォント欠損や Pillow エラーで失敗しても、後段の
+        # スナップショットコミットを止めないよう continue-on-error にする。失敗は
+        # 末尾の 'Surface decorative-rebuild failures' が拾ってジョブを赤くする。
+        id: ogp
+        continue-on-error: true
         run: python scripts/generate_ogp.py
 
       - name: Build site
         # og:image / twitter:image に og-image.png のハッシュ (?v=) を焼き直す。
         # generate_ogp の後に置き、HTML が常にその時点の画像と一致するようにする。
+        # verify_constants_in_sync()（JS/JSON ドリフト）や画像欠損で失敗し得るが、
+        # これは純粋なフロントエンド/SSOT 問題でデータ取得とは別ドメイン。日次
+        # スナップショットの commit を巻き込まないよう continue-on-error にする。
+        id: build
+        continue-on-error: true
         run: python scripts/build_site.py
 
       - name: Commit if changed
@@ -54,20 +66,29 @@ jobs:
           GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
         run: |
           changed_paths=()
+          # スナップショットはコアデータ。OGP/build の成否に関わらず常にコミットする。
           if [[ -n "$(git status --porcelain data/snapshots.json)" ]]; then
             changed_paths+=("data/snapshots.json")
           fi
-          if [[ -n "$(git status --porcelain assets/og-image.png)" ]]; then
-            changed_paths+=("assets/og-image.png")
-          fi
-          # build_site が ?v=<hash> を焼き直した HTML も拾う。
-          # 生成ページ一覧は src/site.json の pages[].output を SSOT とし、
-          # ここでハードコードしない（test.yml と重複させない）。
-          while IFS= read -r html; do
-            if [[ -n "$(git status --porcelain "$html")" ]]; then
-              changed_paths+=("$html")
+          # og-image.png と生成 HTML は装飾出力で、HTML の ?v=<hash> が画像内容に
+          # 結合している。両者を常に一緒に動かすため、generate_ogp と build_site が
+          # 「両方成功」した時だけまとめてコミットする。どちらか失敗時は画像/HTML を
+          # 前回値のまま据え置き（次の run で再生成）、stale カードや片側更新を防ぐ。
+          if [[ "${{ steps.ogp.outcome }}" == "success" && "${{ steps.build.outcome }}" == "success" ]]; then
+            if [[ -n "$(git status --porcelain assets/og-image.png)" ]]; then
+              changed_paths+=("assets/og-image.png")
             fi
-          done < <(python -c "import json;print('\n'.join(p['output'] for p in json.load(open('src/site.json', encoding='utf-8'))['pages']))")
+            # build_site が ?v=<hash> を焼き直した HTML も拾う。
+            # 生成ページ一覧は src/site.json の pages[].output を SSOT とし、
+            # ここでハードコードしない（test.yml と重複させない）。
+            while IFS= read -r html; do
+              if [[ -n "$(git status --porcelain "$html")" ]]; then
+                changed_paths+=("$html")
+              fi
+            done < <(python -c "import json;print('\n'.join(p['output'] for p in json.load(open('src/site.json', encoding='utf-8'))['pages']))")
+          else
+            echo "::warning::OGP/build step failed; committing snapshot only (og-image.png and HTML deferred to next run)"
+          fi
           if [[ ${#changed_paths[@]} -gt 0 ]]; then
             git add "${changed_paths[@]}"
             git commit -m "data: auto-update $(date -u +%Y-%m-%d)"
@@ -91,3 +112,14 @@ jobs:
           else
             echo "::notice::No changes; PDF and OGP were identical to existing"
           fi
+
+      - name: Surface decorative-rebuild failures
+        # 'Generate OGP image' / 'Build site' の continue-on-error がフロントエンドの
+        # 持続的失敗（JS/JSON 定数ドリフト、フォント欠損 等）を握りつぶしてジョブが
+        # グリーンのまま凍結するのを防ぐ。スナップショットを安全にコミットした「後」に
+        # 走らせるので、データは失われず、かつ装飾の劣化が沈黙しない
+        # （fetch-tankers.yml の 'Guard against stale data' と同じ思想）。
+        if: steps.ogp.outcome != 'success' || steps.build.outcome != 'success'
+        run: |
+          echo "::error::OGP generation or site build failed; the daily snapshot was committed but og-image.png / HTML are stale. See the 'Generate OGP image' / 'Build site' step logs above."
+          exit 1
