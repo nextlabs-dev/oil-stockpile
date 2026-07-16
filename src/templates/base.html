@@ -48,20 +48,17 @@ $extra_head<link rel="stylesheet" href="$stylesheet">
     <a class="site-brand" href="$home_href" aria-label="あと何日？日本の石油備蓄 ホーム">
 $site_brand
     </a>
-    <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="メニューを開く">
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-    </button>
-    <div class="site-nav" id="site-nav">
-      <nav class="tabs" aria-label="セクション">
+    <nav class="tabs" aria-label="セクション">
 $nav
-      </nav>
-$header_meta    </div>
-  </div>
+    </nav>
+$header_meta  </div>
 </header>
 
 $content
+
+<nav class="bottom-nav" aria-label="主要ページ">
+$bottom_nav
+</nav>
 
 <section class="footer-share-section" aria-labelledby="footer-share-heading">
   <h2 id="footer-share-heading" class="visually-hidden">運営</h2>
@@ -75,6 +72,5 @@ $content
   <div id="share-toast" class="share-toast" role="status" aria-live="polite"></div>
 </section>
 
-<script type="module" src="$nav_script"></script>
 $script_tags</body>
 </html>

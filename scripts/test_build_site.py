@@ -195,7 +195,7 @@ class RenderPageTest(unittest.TestCase):
         "T=$title|D=$description|C=$canonical|"
         "OG_IMG=$og_image|FAVI=$favicon|CSS=$stylesheet|"
         "FONT=$font_href|EXTRA=[$extra_head]|BODY_CLASS=[$body_class]|HOME=$home_href|"
-        "NAV=[$nav]|BODY=$content|"
+        "NAV=[$nav]|BOTTOM=[$bottom_nav]|BODY=$content|"
         "SCRIPTS=[$script_tags]|"
         "OG_TITLE=$og_title|OG_DESC=$og_description|"
         "TW_TITLE=$twitter_title|TW_DESC=$twitter_description|"
@@ -211,6 +211,7 @@ class RenderPageTest(unittest.TestCase):
         },
         "nav_order": ["home", "about"],
         "nav_labels": {"home": "ホーム", "about": "About"},
+        "nav_labels_short": {"home": "カウンター", "about": "About"},
     }
 
     def _page(self, **overrides) -> dict:
@@ -263,6 +264,11 @@ class RenderPageTest(unittest.TestCase):
         self.assertIn('aria-current="page"', out)
         self.assertIn("ホーム", out)
         self.assertIn("About", out)
+
+    def test_bottom_nav_renders_inside_template(self):
+        out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY")
+        self.assertIn('class="bottom-nav-item bottom-nav-item--active"', out)
+        self.assertIn("<span>カウンター</span>", out)
 
     def test_body_class_empty_when_missing(self):
         out = render_page(self.TEMPLATE, self.SITE_CONFIG, self._page(), "BODY")
