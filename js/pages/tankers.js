@@ -13,7 +13,7 @@ import { initShare } from '../components/share.js';
 import { initTankerMap } from '../components/tanker-map.js';
 import { consumptionDaysFromKl, loadHistory, loadJson, VLCC_CAPACITY_KL } from '../core/data.js';
 import { onReady, setText, showElement } from '../core/dom.js';
-import { formatDotDate, formatInt, formatJaDateTime } from '../core/format.js';
+import { formatDotDateTime, formatInt, formatJaDateTime } from '../core/format.js';
 
 const TANKERS_URL = '../data/tankers.json';
 const STALE_HOURS = 6;
@@ -146,7 +146,7 @@ async function main() {
   renderPorts(data.topDestinationPorts, data.japanBoundUnknownPort);
 
   setText('fetched-at', formatJaDateTime(data.fetchedAt));
-  setText('header-last-updated', formatDotDate((data.fetchedAt ?? '').slice(0, 10)));
+  setText('header-last-updated', formatDotDateTime(data.fetchedAt));
   setText('sampling-duration', `約 ${Math.round((data.samplingDurationSec || 0) / 60)} 分`);
   setText('bounding-box', data.boundingBox || '—');
 
