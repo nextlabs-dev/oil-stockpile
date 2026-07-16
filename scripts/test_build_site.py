@@ -21,6 +21,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_site import (  # noqa: E402
     _check_peak_reference_in_sync,
     build_csp,
+    build_latest_vars,
     compute_inline_script_hashes,
     compute_og_image_version,
     render_bottom_nav,
@@ -195,7 +196,7 @@ class RenderPageTest(unittest.TestCase):
         "T=$title|D=$description|C=$canonical|"
         "OG_IMG=$og_image|FAVI=$favicon|CSS=$stylesheet|"
         "FONT=$font_href|EXTRA=[$extra_head]|BODY_CLASS=[$body_class]|HOME=$home_href|"
-        "NAV=[$nav]|BOTTOM=[$bottom_nav]|BODY=$content|"
+        "NAV=[$nav]|BOTTOM=[$bottom_nav]|HM=[$header_meta]BODY=$content|"
         "SCRIPTS=[$script_tags]|"
         "OG_TITLE=$og_title|OG_DESC=$og_description|"
         "TW_TITLE=$twitter_title|TW_DESC=$twitter_description|"
@@ -406,6 +407,111 @@ class ComputeOgImageVersionTest(unittest.TestCase):
             missing = Path(tmp) / "og-image.png"
             with self.assertRaises(FileNotFoundError):
                 compute_og_image_version(missing)
+
+
+class BuildLatestVarsTest(unittest.TestCase):
+    # asOf 昇順で末尾が最新になることを確かめるため、意図的に順序を崩してある
+    ROWS = [
+        {"published": "2026-03-18", "asOf": "2026-03-15", "total": 241,
+         "national": 146, "private": 89, "joint": 6},
+        {"published": "2026-03-17", "asOf": "2026-03-14", "total": 242,
+         "national": 146, "private": 90, "joint": 6},
+    ]
+
+    def test_picks_latest_by_asof_and_formats(self):
+        self.assertEqual(
+            build_latest_vars(self.ROWS),
+            {
+                "latest_total_days": "241",
+                "latest_published_dot": "2026.03.18",
+                "latest_asof_jp": "2026年3月15日",
+            },
+        )
+
+    def test_empty_rows_raise_value_error(self):
+        with self.assertRaises(ValueError):
+            build_latest_vars([])
+
+
+class RenderPageLatestVarsTest(unittest.TestCase):
+    """render_page の latest_vars 置換（Issue #93）。
+
+    置換対象は content / description / header_meta の 3 フィールドのみ。
+    strict substitute なので未定義プレースホルダ・生の $ はビルドを落とす。
+    """
+
+    TEMPLATE = RenderPageTest.TEMPLATE
+    SITE_CONFIG = RenderPageTest.SITE_CONFIG
+    LATEST_VARS = {
+        "latest_total_days": "242",
+        "latest_published_dot": "2026.03.17",
+        "latest_asof_jp": "2026年3月14日",
+    }
+
+    def _page(self, **overrides) -> dict:
+        # RenderPageTest._page と同内容（TestCase インスタンス跨ぎの共有を避けて複製）
+        page = {
+            "title": "T",
+            "description": "D",
+            "canonical_path": "/scale/",
+            "og_title": "OT",
+            "og_description": "OD",
+            "twitter_title": "TT",
+            "twitter_description": "TD",
+            "active_nav": "home",
+            "root_path": "../",
+            "nav": {"home": "../", "about": "../about/"},
+        }
+        page.update(overrides)
+        return page
+
+    def test_substitutes_in_content(self):
+        out = render_page(
+            self.TEMPLATE, self.SITE_CONFIG, self._page(),
+            "DAYS=${latest_total_days}", latest_vars=self.LATEST_VARS,
+        )
+        self.assertIn("BODY=DAYS=242|", out)
+
+    def test_substitutes_in_description_and_header_meta(self):
+        page = self._page(
+            description="約${latest_total_days}日分（${latest_asof_jp}集計時点）",
+            header_meta="U=${latest_published_dot}",
+        )
+        out = render_page(
+            self.TEMPLATE, self.SITE_CONFIG, page, "BODY", latest_vars=self.LATEST_VARS,
+        )
+        self.assertIn("D=約242日分（2026年3月14日集計時点）|", out)
+        self.assertIn("HM=[U=2026.03.17", out)
+
+    def test_does_not_touch_og_and_twitter_description(self):
+        page = self._page(og_description="OD ${latest_total_days}")
+        out = render_page(
+            self.TEMPLATE, self.SITE_CONFIG, page, "BODY", latest_vars=self.LATEST_VARS,
+        )
+        # og_description は置換対象外 — プレースホルダが素通しで残る
+        self.assertIn("OG_DESC=OD ${latest_total_days}|", out)
+
+    def test_unknown_placeholder_raises_key_error(self):
+        with self.assertRaises(KeyError):
+            render_page(
+                self.TEMPLATE, self.SITE_CONFIG, self._page(),
+                "BODY=${no_such_var}", latest_vars=self.LATEST_VARS,
+            )
+
+    def test_bare_dollar_raises_value_error(self):
+        with self.assertRaises(ValueError):
+            render_page(
+                self.TEMPLATE, self.SITE_CONFIG, self._page(),
+                "PRICE $ 100", latest_vars=self.LATEST_VARS,
+            )
+
+    def test_placeholder_without_latest_vars_raises_key_error(self):
+        # main() が latest_vars を渡し忘れても沈黙劣化しない（Fail Fast）
+        with self.assertRaises(KeyError):
+            render_page(
+                self.TEMPLATE, self.SITE_CONFIG, self._page(),
+                "DAYS=${latest_total_days}",
+            )
 
 
 if __name__ == "__main__":
