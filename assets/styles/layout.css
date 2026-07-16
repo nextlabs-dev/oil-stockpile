@@ -89,6 +89,17 @@
   letter-spacing: 0.02em;
 }
 
+/* Temporary shims until the hamburger markup is removed from
+   src/templates/base.html (next task): keep the old toggle hidden and the
+   nav wrapper transparent so the current pages render unchanged. */
+.nav-toggle {
+  display: none;
+}
+
+.site-nav {
+  display: contents;
+}
+
 /* =============================================================
    Bottom nav — mobile only (≤640px), fixed to the viewport bottom.
    Desktop keeps the header pill tabs; this bar replaces the old
