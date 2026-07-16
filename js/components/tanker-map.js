@@ -70,8 +70,10 @@ export function buildVesselTableHtml(vessels) {
       );
     })
     .join('');
+  // 隠すのは wrapper div 側。table 要素は CSS width:1px でも min-content 未満に
+  // 縮まらず（nowrap で数百 px に膨らみ）モバイル幅で横スクロールを生むため。
   return (
-    `<table class="visually-hidden">` +
+    `<div class="visually-hidden"><table>` +
     `<caption>海域内のタンカー一覧（${list.length}隻・船名／destination／MMSI／座標）</caption>` +
     `<thead><tr>` +
     `<th scope="col">船名</th>` +
@@ -81,7 +83,7 @@ export function buildVesselTableHtml(vessels) {
     `<th scope="col">区分</th>` +
     `</tr></thead>` +
     `<tbody>${rows}</tbody>` +
-    `</table>`
+    `</table></div>`
   );
 }
 

@@ -89,52 +89,13 @@
   letter-spacing: 0.02em;
 }
 
-/* Nav wrapper: transparent on desktop so .tabs / meta flow in the header
-   flex row exactly as before; becomes a real dropdown panel on mobile. */
-.site-nav {
-  display: contents;
-}
-
-/* Hamburger toggle — hidden on desktop, shown ≤640px */
-.nav-toggle {
+/* =============================================================
+   Bottom nav — mobile only (≤640px), fixed to the viewport bottom.
+   Desktop keeps the header pill tabs; this bar replaces the old
+   hamburger dropdown.
+   ============================================================= */
+.bottom-nav {
   display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 10px;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.nav-toggle:hover {
-  background: var(--header-overlay);
-}
-
-.nav-toggle-bar {
-  display: block;
-  width: 18px;
-  height: 2px;
-  margin: 0 auto;
-  background: var(--header-fg);
-  border-radius: 2px;
-  transition:
-    transform 0.2s,
-    opacity 0.2s;
-}
-
-.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
-  opacity: 0;
-}
-.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
 }
 
 @media (max-width: 640px) {
@@ -142,37 +103,55 @@
     flex-wrap: nowrap;
     padding: var(--space-3);
     gap: var(--space-3);
-    position: relative;
   }
-  .nav-toggle {
-    display: flex;
-    margin-left: auto;
+
+  body {
+    /* Keep page bottom clear of the fixed bottom nav */
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
   }
-  /* Override display:contents → a positioned dropdown panel */
-  .site-nav {
-    display: none;
-    position: absolute;
-    top: calc(100% + 8px);
+
+  .bottom-nav {
+    position: fixed;
     right: 0;
+    bottom: 0;
     left: 0;
-    flex-direction: column;
-    gap: var(--space-3);
-    padding: var(--space-3);
-    background: var(--header-panel);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
     z-index: 60;
-  }
-  .site-nav.is-open {
     display: flex;
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    background: var(--header-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .site-header-meta {
-    text-align: left;
-    flex-direction: row;
-    gap: 6px;
-    padding-top: var(--space-2);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  .bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-height: 44px;
+    padding: 4px 0;
+    color: var(--header-fg-muted);
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .bottom-nav-item:hover {
+    text-decoration: none;
+  }
+
+  .bottom-nav-item svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .bottom-nav-item--active {
+    color: var(--header-fg-strong);
+    font-weight: 600;
+  }
+
+  .bottom-nav-item--active svg {
+    color: var(--brand);
   }
 }
 

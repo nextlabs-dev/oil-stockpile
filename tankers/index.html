@@ -55,22 +55,15 @@
         <span class="site-tagline">あと何日、日本は持つのか。</span>
       </span>
     </a>
-    <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="メニューを開く">
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-    </button>
-    <div class="site-nav" id="site-nav">
-      <nav class="tabs" aria-label="セクション">
+    <nav class="tabs" aria-label="セクション">
       <a class="tab" href="../">カウンター</a>
       <a class="tab tab--active" href="./" aria-current="page">タンカー</a>
       <a class="tab" href="../scale/">石油のものさし</a>
       <a class="tab" href="../about/">about</a>
-      </nav>
+    </nav>
     <div class="site-header-meta">
       <span class="site-header-meta-label">最終更新</span>
       <span class="site-header-meta-value" id="header-last-updated">—</span>
-    </div>
     </div>
   </div>
 </header>
@@ -255,6 +248,13 @@
   </div>
 </main>
 
+<nav class="bottom-nav" aria-label="主要ページ">
+  <a class="bottom-nav-item" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.6 20.4A9 9 0 1 1 18.4 20.4"/><line x1="12" y1="14" x2="16.2" y2="9.8"/></svg><span>カウンター</span></a>
+  <a class="bottom-nav-item bottom-nav-item--active" href="./" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 13h19l-3 4.5h-13z"/><path d="M14.5 13v-5h4.5v5"/><path d="M5.5 13v-3h6v3"/></svg><span>タンカー</span></a>
+  <a class="bottom-nav-item" href="../scale/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="9" width="19" height="7" rx="1"/><path d="M7.25 9v3.5M12 9v3.5M16.75 9v3.5"/></svg><span>ものさし</span></a>
+  <a class="bottom-nav-item" href="../about/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12.5" r="8.5"/><line x1="12" y1="12.2" x2="12" y2="16.7"/><circle cx="12" cy="8.7" r="0.4" fill="currentColor"/></svg><span>about</span></a>
+</nav>
+
 <section class="footer-share-section" aria-labelledby="footer-share-heading">
   <h2 id="footer-share-heading" class="visually-hidden">運営</h2>
   <div class="footer-share-row">
@@ -267,7 +267,6 @@
   <div id="share-toast" class="share-toast" role="status" aria-live="polite"></div>
 </section>
 
-<script type="module" src="../js/components/nav.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin="anonymous"></script>

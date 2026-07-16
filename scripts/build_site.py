@@ -180,6 +180,55 @@ def render_nav(page: dict[str, Any], nav_labels: dict[str, str], nav_order: list
     return "\n".join(links)
 
 
+# ボトムナビ用 線画アイコン（22px 表示・stroke 1.8）。ラベル併記のため装飾扱いで
+# aria-hidden。キーは site.json の nav_order と一致させる。
+# 4 つのグリフは光学的に揃うよう、描画範囲の中心を y≈12.5–12.75 に統一し、
+# viewBox 24×24 のうち幅 17–19 / 十分な高さを使う（小さすぎると欠けて見える）。
+NAV_ICONS = {
+    "home": (
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<path d="M5.6 20.4A9 9 0 1 1 18.4 20.4"/>'
+        '<line x1="12" y1="14" x2="16.2" y2="9.8"/></svg>'
+    ),
+    "tankers": (
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<path d="M2.5 13h19l-3 4.5h-13z"/><path d="M14.5 13v-5h4.5v5"/>'
+        '<path d="M5.5 13v-3h6v3"/></svg>'
+    ),
+    "scale": (
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<rect x="2.5" y="9" width="19" height="7" rx="1"/>'
+        '<path d="M7.25 9v3.5M12 9v3.5M16.75 9v3.5"/></svg>'
+    ),
+    "about": (
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<circle cx="12" cy="12.5" r="8.5"/><line x1="12" y1="12.2" x2="12" y2="16.7"/>'
+        '<circle cx="12" cy="8.7" r="0.4" fill="currentColor"/></svg>'
+    ),
+}
+
+
+def render_bottom_nav(
+    page: dict[str, Any],
+    nav_labels_short: dict[str, str],
+    nav_order: list[str],
+) -> str:
+    links = []
+    for key in nav_order:
+        active = key == page["active_nav"]
+        classes = "bottom-nav-item bottom-nav-item--active" if active else "bottom-nav-item"
+        current = ' aria-current="page"' if active else ""
+        links.append(
+            f'  <a class="{classes}" href="{page["nav"][key]}"{current}>'
+            f"{NAV_ICONS[key]}<span>{nav_labels_short[key]}</span></a>"
+        )
+    return "\n".join(links)
+
+
 def render_page(
     template: Template,
     site_config: dict[str, Any],
@@ -196,7 +245,6 @@ def render_page(
     asset_root = "" if page["root_path"] == "./" else page["root_path"]
     favicon = asset_root + "assets/favicon.svg"
     stylesheet = asset_root + "assets/styles.css"
-    nav_script = asset_root + "js/components/nav.js"
     extra_head_value = text_value(page.get("extra_head"))
     script_tags_value = text_value(page.get("script_tags"))
     extra_head = f"{extra_head_value}\n" if extra_head_value else ""
@@ -220,12 +268,14 @@ def render_page(
         font_href=site["font_href"],
         extra_head=extra_head,
         stylesheet=stylesheet,
-        nav_script=nav_script,
         body_class=page.get("body_class", ""),
         home_href=page["root_path"],
         site_brand=site_brand,
         header_meta=header_meta,
         nav=render_nav(page, site_config["nav_labels"], site_config["nav_order"]),
+        bottom_nav=render_bottom_nav(
+            page, site_config["nav_labels_short"], site_config["nav_order"]
+        ),
         content=content,
         script_tags=script_tags,
     )
