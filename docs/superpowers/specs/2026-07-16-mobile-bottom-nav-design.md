@@ -79,7 +79,7 @@
 
 ## エッジケース
 
-- iOS セーフエリア: `env(safe-area-inset-bottom)` で対応
+- iOS セーフエリア: viewport-fit=cover 非使用のため env(safe-area-inset-bottom) は 0 に評価されるが、auto モードではブラウザ自身が固定バーをインセットするため実害なし（防御的に残置）
 - CSP: インライン SVG は `style-src` / `script-src` に影響せず、CSP 変更不要
 - 開閉 JS が消えるため、Esc・外側クリック・フォーカス管理の考慮自体が不要になる
 - 641px 境界: 既存の `max-width: 640px` メディアクエリをそのまま使用

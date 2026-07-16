@@ -400,6 +400,7 @@
   border-radius: 10px;
   background: var(--bg-soft);
   overflow: hidden;
+  isolation: isolate;
 }
 
 .page-tankers .tanker-map .leaflet-control-attribution {
