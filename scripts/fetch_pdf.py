@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+import datetime
 import re
 import sys
 import time
@@ -115,6 +116,9 @@ def parse_snapshots(text: str) -> list[dict]:
 
     for i, m in enumerate(matches):
         ry, mp, dp, ma, da = (int(g) for g in m.groups())
+        # 令和年の乱れは PDF フォーマット変化か抽出破綻の兆候なので abort する
+        if not (1 <= ry <= 30):
+            raise RuntimeError(f"implausible Reiwa year {ry}: {m.group(0)!r}")
         year_pub = reiwa_to_gregorian(ry)
 
         # asOf の年は通常 published と同じ。ただし「公表1月、データ時点12月」のような
@@ -152,6 +156,15 @@ def parse_snapshots(text: str) -> list[dict]:
 
 
 def validate(snapshot: dict, prev_total: int | None = None) -> None:
+    # 「13月」「45日」等の抽出乱れはカレンダー実在性で遮断する (issue #60)
+    try:
+        published = datetime.date.fromisoformat(snapshot["published"])
+        as_of = datetime.date.fromisoformat(snapshot["asOf"])
+    except ValueError as e:
+        raise RuntimeError(f"invalid calendar date in snapshot: {e}") from e
+    if as_of > published:
+        raise RuntimeError(f"asOf {as_of} is after published {published}")
+
     t = snapshot["total"]
     parts = snapshot["national"] + snapshot["private"] + snapshot["joint"]
     if not (50 <= t <= 500):
