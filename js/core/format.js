@@ -55,3 +55,13 @@ export function formatDotDate(iso) {
   if (!iso) return '—';
   return iso.replaceAll('-', '.');
 }
+
+/** ISO 日時をローカル暦日のドット区切り (YYYY.MM.DD) に。空なら '—'、パース不能は入力のまま。 */
+export function formatDotDateTime(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${d.getFullYear()}.${m}.${day}`;
+}
