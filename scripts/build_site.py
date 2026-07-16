@@ -239,6 +239,11 @@ def render_page(
 ) -> str:
     site = site_config["site"]
     canonical = site["url"] + page["canonical_path"]
+    # og:url は canonical + ?v=<og画像ハッシュ> (issue #90)。X のカードキャッシュは
+    # 共有URL単位のため、クエリ無し og:url があると versioned 共有URLが canonical へ
+    # 正規化され古いカードが使い回されうる。<link rel="canonical"> は SEO のため
+    # クリーンなまま維持する。
+    og_url = f"{canonical}?v={og_image_version}" if og_image_version else canonical
     og_image = site["og_image"]
     if og_image_version:
         og_image += f"?v={og_image_version}"
@@ -258,6 +263,7 @@ def render_page(
         title=page["title"],
         description=page["description"],
         canonical=canonical,
+        og_url=og_url,
         og_title=page["og_title"],
         og_description=page["og_description"],
         og_image=og_image,

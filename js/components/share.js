@@ -9,10 +9,12 @@
  * バインドは `data-share="x|line|copy"` 属性で行い、ページ上の
  * 複数インスタンス（例: ヒーロー内 + フッター内）に同時に作用する。
  *
- * 共有URL（X/LINE がクロールする URL）には og:image に焼かれた ?v=<hash> を
- * 反映する。X 等のカードキャッシュは「共有URL単位」（X は約7日TTL）で、画像URL側を
- * ?v= でバストしても共有URLが不変だと再クロールされない。画像が変わるたびに共有URLも
- * 変えることで毎回再クロールさせ、最新カードを出させる。
+ * 共有URL（X/LINE がクロールする URL）には og:url に焼かれた ?v=<hash>
+ * （og:image と同一のビルドハッシュ）を反映する。X 等のカードキャッシュは
+ * 「共有URL単位」（X は約7日TTL）で、画像URL側を ?v= でバストしても共有URLが
+ * 不変だと再クロールされない。画像が変わるたびに共有URLも変えることで毎回
+ * 再クロールさせ、最新カードを出させる。共有URLと og:url が一致するため、
+ * クローラーが og:url でカードを正規化しても古いカードに統合されない (issue #90)。
  */
 
 import { SITE_CONFIG } from '../core/data.js';
@@ -21,17 +23,17 @@ import { computeCurrentDays } from './counter.js';
 const TOAST_MS = 2400;
 
 /**
- * og:image の content（例 '.../og-image.png?v=8b7353b1'）から ?v= の値を取り出し、
- * ページURL（siteUrl）に同じ ?v= を付けて返す純粋関数。
+ * og:url の content（例 'https://oilstock.nextlabs.jp/?v=8b7353b1'）から ?v= の値を
+ * 取り出し、ページURL（siteUrl）に同じ ?v= を付けて返す純粋関数。
  * ハッシュが取れない／不正な値なら siteUrl をそのまま返す（fail safe・共有は止めない）。
  */
-export function buildShareUrl(siteUrl, ogImage) {
+export function buildShareUrl(siteUrl, ogUrl) {
   let version = null;
-  if (ogImage) {
+  if (ogUrl) {
     try {
-      version = new URL(ogImage).searchParams.get('v');
+      version = new URL(ogUrl).searchParams.get('v');
     } catch {
-      // og:image が不正 URL なら cache-bust 無しで継続（version は null のまま）
+      // og:url が不正 URL なら cache-bust 無しで継続（version は null のまま）
     }
   }
   if (!version) return siteUrl;
@@ -41,8 +43,8 @@ export function buildShareUrl(siteUrl, ogImage) {
 }
 
 function currentShareUrl() {
-  const ogImage = document.querySelector('meta[property="og:image"]')?.content;
-  return buildShareUrl(SITE_CONFIG.url, ogImage);
+  const ogUrl = document.querySelector('meta[property="og:url"]')?.content;
+  return buildShareUrl(SITE_CONFIG.url, ogUrl);
 }
 
 function buildShareText() {
