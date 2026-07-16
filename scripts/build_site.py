@@ -180,6 +180,51 @@ def render_nav(page: dict[str, Any], nav_labels: dict[str, str], nav_order: list
     return "\n".join(links)
 
 
+# ボトムナビ用 線画アイコン（22px 表示・stroke 1.8）。ラベル併記のため装飾扱いで
+# aria-hidden。キーは site.json の nav_order と一致させる。
+NAV_ICONS = {
+    "home": (
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<path d="M4 17a8 8 0 1 1 16 0"/><line x1="12" y1="17" x2="16" y2="11"/></svg>'
+    ),
+    "tankers": (
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<path d="M2 15h20l-3 4H5z"/><path d="M15 15v-4h4v4"/><path d="M6 15v-2h6v2"/></svg>'
+    ),
+    "scale": (
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<rect x="3" y="9" width="18" height="6" rx="1"/>'
+        '<path d="M7.5 9v3M12 9v3M16.5 9v3"/></svg>'
+    ),
+    "about": (
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/>'
+        '<circle cx="12" cy="7.8" r="0.4" fill="currentColor"/></svg>'
+    ),
+}
+
+
+def render_bottom_nav(
+    page: dict[str, Any],
+    nav_labels_short: dict[str, str],
+    nav_order: list[str],
+) -> str:
+    links = []
+    for key in nav_order:
+        active = key == page["active_nav"]
+        classes = "bottom-nav-item bottom-nav-item--active" if active else "bottom-nav-item"
+        current = ' aria-current="page"' if active else ""
+        links.append(
+            f'  <a class="{classes}" href="{page["nav"][key]}"{current}>'
+            f"{NAV_ICONS[key]}<span>{nav_labels_short[key]}</span></a>"
+        )
+    return "\n".join(links)
+
+
 def render_page(
     template: Template,
     site_config: dict[str, Any],

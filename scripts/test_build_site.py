@@ -23,6 +23,7 @@ from build_site import (  # noqa: E402
     build_csp,
     compute_inline_script_hashes,
     compute_og_image_version,
+    render_bottom_nav,
     render_nav,
     render_page,
     text_value,
@@ -144,6 +145,47 @@ class RenderNavTest(unittest.TestCase):
     def test_links_emitted_in_nav_order(self):
         out = render_nav(self._page("home"), self.NAV_LABELS, self.NAV_ORDER)
         self.assertLess(out.index("ホーム"), out.index("About"))
+
+
+class RenderBottomNavTest(unittest.TestCase):
+    NAV_LABELS_SHORT = {"home": "カウンター", "about": "about"}
+    NAV_ORDER = ["home", "about"]
+
+    def _page(self, active: str) -> dict:
+        return {
+            "active_nav": active,
+            "nav": {"home": "./", "about": "./about/"},
+        }
+
+    def test_active_item_has_active_class_and_aria_current(self):
+        out = render_bottom_nav(self._page("home"), self.NAV_LABELS_SHORT, self.NAV_ORDER)
+        home_line = next(line for line in out.splitlines() if "カウンター" in line)
+        self.assertIn('class="bottom-nav-item bottom-nav-item--active"', home_line)
+        self.assertIn('aria-current="page"', home_line)
+        self.assertIn('href="./"', home_line)
+
+    def test_inactive_item_has_no_aria_current(self):
+        out = render_bottom_nav(self._page("home"), self.NAV_LABELS_SHORT, self.NAV_ORDER)
+        about_line = next(line for line in out.splitlines() if "about" in line)
+        self.assertIn('class="bottom-nav-item"', about_line)
+        self.assertNotIn("aria-current", about_line)
+        self.assertIn('href="./about/"', about_line)
+
+    def test_labels_come_from_nav_labels_short(self):
+        # ボトムバー専用の短縮ラベル辞書を使うこと（nav_labels ではない）
+        short = {"home": "短い", "about": "about"}
+        out = render_bottom_nav(self._page("home"), short, self.NAV_ORDER)
+        self.assertIn("<span>短い</span>", out)
+
+    def test_links_emitted_in_nav_order(self):
+        out = render_bottom_nav(self._page("home"), self.NAV_LABELS_SHORT, self.NAV_ORDER)
+        self.assertLess(out.index("カウンター"), out.index("about"))
+
+    def test_each_item_has_aria_hidden_icon_svg(self):
+        out = render_bottom_nav(self._page("home"), self.NAV_LABELS_SHORT, self.NAV_ORDER)
+        for line in out.splitlines():
+            self.assertIn('<svg', line)
+            self.assertIn('aria-hidden="true"', line)
 
 
 class RenderPageTest(unittest.TestCase):
