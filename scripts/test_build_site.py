@@ -184,7 +184,7 @@ class RenderBottomNavTest(unittest.TestCase):
     def test_each_item_has_aria_hidden_icon_svg(self):
         out = render_bottom_nav(self._page("home"), self.NAV_LABELS_SHORT, self.NAV_ORDER)
         for line in out.splitlines():
-            self.assertIn('<svg', line)
+            self.assertIn("<svg", line)
             self.assertIn('aria-hidden="true"', line)
 
 
