@@ -19,7 +19,8 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # 12分サンプル + setup + push リトライ（最大3回）に余裕を持たせる
+    timeout-minutes: 20
     permissions:
       contents: write
     steps:
@@ -40,12 +41,16 @@ jobs:
         # Commit if changed は no-op で抜ける。鍵失効や持続障害でグリーンのまま凍結する
         # ケースは、末尾の 'Guard against stale data' が fetchedAt 鮮度で検出して赤くする。
         #
-        # --min-tankers 5: 実測分布（直近5日・60サンプル）では正常値は 5〜25 隻。それ未満は
-        # AIS 受信網の部分障害による劣化サンプルとみなし、書き込まず既存データを保持する (#74)。
+        # --duration 720: 12分サンプル。既定の8分（Type 5 の約6分間隔を一巡カバー）から延長し、
+        # 電波衝突等での取りこぼしを減らす試み。
+        #
+        # --min-tankers 5: 実測分布（8分サンプル・直近5日・60サンプル）では正常値は 5〜25 隻。
+        # それ未満は AIS 受信網の部分障害による劣化サンプルとみなし、書き込まず既存データを
+        # 保持する (#74)。12分サンプルでは観測数は同等以上になるため、下限としてそのまま有効。
         continue-on-error: true
         env:
           AISSTREAM_API_KEY: ${{ secrets.AISSTREAM_API_KEY }}
-        run: python scripts/fetch_tankers.py --duration 480 --min-tankers 5
+        run: python scripts/fetch_tankers.py --duration 720 --min-tankers 5
 
       - name: Commit if changed
         env:
