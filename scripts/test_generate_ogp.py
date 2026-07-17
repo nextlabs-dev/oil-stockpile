@@ -33,16 +33,14 @@ import generate_ogp  # noqa: E402
 from generate_ogp import (  # noqa: E402
     ILLUSTRATION_PATH,
     PEAK_DAYS,
-    Snapshot,
     compute_current_days,
     compute_fill_ratio,
-    format_jst_date,
-    pick_latest_snapshot,
     render_image,
     resolve_inter,
 )
 from lib.io import read_json  # noqa: E402
 from lib.paths import CURRENT_DAYS_FIXTURE_PATH  # noqa: E402
+from lib.snapshots import Snapshot, format_jst_date, pick_latest_snapshot  # noqa: E402
 
 
 class PickLatestTest(unittest.TestCase):

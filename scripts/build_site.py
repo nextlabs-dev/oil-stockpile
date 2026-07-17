@@ -21,7 +21,8 @@ from typing import Any
 
 from lib.constants import PEAK_DAYS, PEAK_SOURCE
 from lib.io import read_json
-from lib.paths import OG_IMAGE_PATH, REPO_ROOT, SITE_CONFIG_PATH, SRC_DIR
+from lib.paths import OG_IMAGE_PATH, REPO_ROOT, SITE_CONFIG_PATH, SNAPSHOTS_PATH, SRC_DIR
+from lib.snapshots import format_jst_date, load_snapshots, pick_latest_snapshot
 
 PAGES_DIR = SRC_DIR / "pages"
 TEMPLATES_DIR = SRC_DIR / "templates"
@@ -38,6 +39,21 @@ def text_value(value: str | list[str] | None) -> str:
 
 def load_site_config() -> dict[str, Any]:
     return read_json(SITE_CONFIG_PATH)
+
+
+def build_latest_vars(rows: list[dict]) -> dict[str, str]:
+    """最新スナップショットから HTML 焼き込み用テンプレート変数を組み立てる（#93）。
+
+    値は snapshots.json の公表値そのまま。実行時刻依存の値（compute_current_days）は
+    使わない — test.yml の drift チェックがビルドの決定論性を前提にしているため。
+    JS (counter.js) がロード後にリアルタイム推計値で上書きする。
+    """
+    latest = pick_latest_snapshot(rows)
+    return {
+        "latest_total_days": str(latest.total),
+        "latest_published_dot": latest.published.replace("-", "."),
+        "latest_asof_jp": format_jst_date(latest.as_of),
+    }
 
 
 def compute_og_image_version(path: Path) -> str:
@@ -236,8 +252,17 @@ def render_page(
     content: str,
     og_image_version: str = "",
     csp: str = "",
+    latest_vars: dict[str, str] | None = None,
 ) -> str:
     site = site_config["site"]
+    # 最新値の焼き込みは content / description / header_meta の 3 フィールド限定
+    # （og/twitter description は X カードキャッシュ churn を避けるため静的維持）。
+    # strict substitute: 未定義プレースホルダ・生の $ はビルドを即失敗させる。
+    # latest_vars 未指定でも空 dict で置換を走らせ、置き忘れを KeyError で検知する。
+    subs = latest_vars or {}
+    content = Template(content).substitute(subs)
+    description = Template(page["description"]).substitute(subs)
+    header_meta_value = Template(text_value(page.get("header_meta"))).substitute(subs)
     canonical = site["url"] + page["canonical_path"]
     # og:url は canonical + ?v=<og画像ハッシュ> (issue #90)。X のカードキャッシュは
     # 共有URL単位のため、クエリ無し og:url があると versioned 共有URLが canonical へ
@@ -256,12 +281,11 @@ def render_page(
     script_tags = f"{script_tags_value}\n" if script_tags_value else ""
     default_site_brand = '      <h1 class="site-title">あと何日？日本の石油備蓄</h1>'
     site_brand = text_value(page.get("site_brand")) or default_site_brand
-    header_meta_value = text_value(page.get("header_meta"))
     header_meta = f"{header_meta_value}\n" if header_meta_value else ""
     return template.substitute(
         csp=csp,
         title=page["title"],
-        description=page["description"],
+        description=description,
         canonical=canonical,
         og_url=og_url,
         og_title=page["og_title"],
@@ -294,11 +318,14 @@ def main() -> int:
     template = Template(base_text)
     csp = build_csp(base_text)
     og_image_version = compute_og_image_version(OG_IMAGE_PATH)
+    latest_vars = build_latest_vars(load_snapshots(SNAPSHOTS_PATH))
     for page in site_config["pages"]:
         output = REPO_ROOT / page["output"]
         content = (PAGES_DIR / page["source"]).read_text(encoding="utf-8").strip()
         output.parent.mkdir(parents=True, exist_ok=True)
-        rendered = render_page(template, site_config, page, content, og_image_version, csp)
+        rendered = render_page(
+            template, site_config, page, content, og_image_version, csp, latest_vars
+        )
         output.write_text(rendered, encoding="utf-8", newline="\n")
         print(f"built {page['output']}")
     return 0
