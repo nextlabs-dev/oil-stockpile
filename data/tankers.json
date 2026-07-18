@@ -1,55 +1,35 @@
 {
-  "fetchedAt": "2026-07-18T13:58:13+00:00",
+  "fetchedAt": "2026-07-18T15:24:55+00:00",
   "samplingDurationSec": 720,
-  "totalTankersInRegion": 10,
-  "japanBoundTankers": 3,
-  "japanBoundUnknownPort": 2,
+  "totalTankersInRegion": 16,
+  "japanBoundTankers": 9,
+  "japanBoundUnknownPort": 5,
   "topDestinationPorts": [
     {
       "port": "KAWASAKI",
+      "count": 3
+    },
+    {
+      "port": "YOKOHAMA",
       "count": 1
     }
   ],
   "vessels": [
     {
-      "mmsi": 440155350,
-      "name": "NO.11 SONGWON",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.0689,
-      "lon": 129.1325
-    },
-    {
-      "mmsi": 431007738,
-      "name": "NO.11 SHIGEFUKUMARU",
-      "destination": "JP WAK OFF",
+      "mmsi": 431009313,
+      "name": "AWAJISHIMA",
+      "destination": "JP KWS OFF",
       "isJapanBound": true,
-      "lat": 34.1584,
-      "lon": 135.1597
+      "lat": 35.3988,
+      "lon": 139.7519
     },
     {
-      "mmsi": 431018712,
-      "name": "ASAHI",
-      "destination": ">JP KWS SG",
+      "mmsi": 431010331,
+      "name": "NIKKO MARU NO22",
+      "destination": "JP WAK",
       "isJapanBound": true,
-      "lat": 35.5172,
-      "lon": 139.7434
-    },
-    {
-      "mmsi": 440303500,
-      "name": "CHEONGDAM",
-      "destination": "BSN#5MRJ",
-      "isJapanBound": false,
-      "lat": 35.1215,
-      "lon": 129.0499
-    },
-    {
-      "mmsi": 440306940,
-      "name": "PUNGYUNG",
-      "destination": "",
-      "isJapanBound": false,
-      "lat": 35.1212,
-      "lon": 129.0491
+      "lat": 34.212,
+      "lon": 135.1414
     },
     {
       "mmsi": 440002690,
@@ -60,12 +40,36 @@
       "lon": 129.0489
     },
     {
-      "mmsi": 441555000,
-      "name": "KTS WHITE",
-      "destination": "KR ICN PALMIDO",
+      "mmsi": 440401790,
+      "name": "SONG DEOG",
+      "destination": "YEOSU",
       "isJapanBound": false,
-      "lat": null,
-      "lon": null
+      "lat": 35.1219,
+      "lon": 129.0505
+    },
+    {
+      "mmsi": 431005551,
+      "name": "YUHO MARU NO.6",
+      "destination": ">JP WAK",
+      "isJapanBound": true,
+      "lat": 34.204,
+      "lon": 135.143
+    },
+    {
+      "mmsi": 431018712,
+      "name": "ASAHI",
+      "destination": ">JP KWS SG",
+      "isJapanBound": true,
+      "lat": 35.5172,
+      "lon": 139.7434
+    },
+    {
+      "mmsi": 538011551,
+      "name": "FRONTIER LNG",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": 35.0107,
+      "lon": 129.0798
     },
     {
       "mmsi": 440400900,
@@ -80,16 +84,64 @@
       "name": "SUN VENUS",
       "destination": "JPKAI",
       "isJapanBound": true,
-      "lat": 34.1391,
-      "lon": 135.1168
+      "lat": 34.1392,
+      "lon": 135.1165
     },
     {
-      "mmsi": 440053750,
-      "name": "17 YU SUNG",
+      "mmsi": 431000781,
+      "name": "SENTAIMARU",
+      "destination": ">JP YOK D-DETATI-C",
+      "isJapanBound": true,
+      "lat": 35.4762,
+      "lon": 139.6496
+    },
+    {
+      "mmsi": 440400570,
+      "name": "DONGHAE GLORY",
+      "destination": "ULSAN",
+      "isJapanBound": false,
+      "lat": 35.0052,
+      "lon": 129.0677
+    },
+    {
+      "mmsi": 440134270,
+      "name": "WOO BIN HO",
       "destination": "",
       "isJapanBound": false,
-      "lat": 35.1211,
-      "lon": 129.049
+      "lat": 35.0354,
+      "lon": 129.0692
+    },
+    {
+      "mmsi": 431000592,
+      "name": "NITTAN MARU NO.10",
+      "destination": ">JP KWS DU/NNX",
+      "isJapanBound": true,
+      "lat": 35.4041,
+      "lon": 139.7474
+    },
+    {
+      "mmsi": 273270560,
+      "name": "PHOENIX",
+      "destination": "BUSAN",
+      "isJapanBound": false,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431005321,
+      "name": "TOKUEIMARU NO27",
+      "destination": "JP WAK OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
+    },
+    {
+      "mmsi": 431007738,
+      "name": "NO.11 SHIGEFUKUMARU",
+      "destination": "JP WAK OFF",
+      "isJapanBound": true,
+      "lat": null,
+      "lon": null
     }
   ],
   "boundingBox": "24-46N / 122-146E",
