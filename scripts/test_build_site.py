@@ -9,7 +9,9 @@ render_page / _check_peak_reference_in_sync) をカバーする。
 
 import base64
 import hashlib
+import json
 import os
+import re
 import sys
 import tempfile
 import unittest
@@ -19,9 +21,11 @@ from string import Template
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from build_site import (  # noqa: E402
+    BASE_TEMPLATE,
     _check_peak_reference_in_sync,
     build_csp,
     build_latest_vars,
+    build_structured_data,
     compute_inline_script_hashes,
     compute_og_image_version,
     render_bottom_nav,
@@ -29,6 +33,7 @@ from build_site import (  # noqa: E402
     render_page,
     text_value,
 )
+from lib.snapshots import Snapshot  # noqa: E402
 
 
 def _sha256_token(body: str) -> str:
@@ -572,6 +577,63 @@ class RenderPageLatestVarsTest(unittest.TestCase):
                 self._page(),
                 "DAYS=${latest_total_days}",
             )
+
+
+class StructuredDataTest(unittest.TestCase):
+    """AEO 用 JSON-LD（build_structured_data）。
+
+    2026-07-10 に生成物 index.html へ直接書いた JSON-LD が翌日の自動ビルドで
+    消えた事故の再発防止。スキーマがビルド経路に乗っていることを固定する。
+    """
+
+    SITE = {"url": "https://oilstock.nextlabs.jp"}
+    LATEST = Snapshot(
+        published="2026-07-17",
+        as_of="2026-07-14",
+        total=203,
+        national=103,
+        private_=97,
+        joint=4,
+    )
+
+    def _graph(self):
+        raw = build_structured_data({"key": "home"}, self.SITE, self.LATEST)
+        body = re.search(
+            r'<script type="application/ld\+json">(.*?)</script>', raw, re.DOTALL
+        ).group(1)
+        return json.loads(body)["@graph"]
+
+    def test_home_emits_expected_types(self):
+        types = [n["@type"] for n in self._graph()]
+        self.assertEqual(types, ["WebApplication", "Dataset", "FAQPage"])
+
+    def test_non_home_pages_emit_nothing(self):
+        for key in ("tankers", "scale", "about"):
+            self.assertEqual(build_structured_data({"key": key}, self.SITE, self.LATEST), "")
+
+    def test_dataset_values_come_from_snapshot(self):
+        ds = next(n for n in self._graph() if n["@type"] == "Dataset")
+        self.assertEqual(
+            [v["value"] for v in ds["variableMeasured"]],
+            [self.LATEST.total, self.LATEST.national, self.LATEST.private_, self.LATEST.joint],
+        )
+        self.assertEqual(ds["dateModified"], self.LATEST.published)
+        self.assertEqual(ds["temporalCoverage"], self.LATEST.as_of)
+
+    def test_publisher_points_at_nextlabs_entity(self):
+        # 本体サイトのエンティティグラフと接続していることが権威ハブ施策の要
+        for t in ("WebApplication", "Dataset"):
+            node = next(n for n in self._graph() if n["@type"] == t)
+            self.assertEqual(node["publisher"]["@id"], "https://nextlabs.jp/#organization")
+
+    def test_faq_answer_states_current_total(self):
+        faq = next(n for n in self._graph() if n["@type"] == "FAQPage")
+        answer = faq["mainEntity"][0]["acceptedAnswer"]["text"]
+        self.assertIn("203", answer)
+
+    def test_base_template_has_structured_data_placeholder(self):
+        # base.html から placeholder が消えるとスキーマが静かに出力されなくなる
+        self.assertIn("$structured_data", BASE_TEMPLATE.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

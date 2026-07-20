@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import json
 import re
 from pathlib import Path
 from string import Template
@@ -22,7 +23,7 @@ from typing import Any
 from lib.constants import PEAK_DAYS, PEAK_SOURCE
 from lib.io import read_json
 from lib.paths import OG_IMAGE_PATH, REPO_ROOT, SITE_CONFIG_PATH, SNAPSHOTS_PATH, SRC_DIR
-from lib.snapshots import format_jst_date, load_snapshots, pick_latest_snapshot
+from lib.snapshots import Snapshot, format_jst_date, load_snapshots, pick_latest_snapshot
 
 PAGES_DIR = SRC_DIR / "pages"
 TEMPLATES_DIR = SRC_DIR / "templates"
@@ -185,6 +186,165 @@ def build_csp(template_text: str) -> str:
     return "; ".join(directives)
 
 
+def build_structured_data(
+    page: dict[str, Any],
+    site: dict[str, Any],
+    latest: Snapshot,
+) -> str:
+    """AEO 用の JSON-LD を組み立てる（トップページのみ）。
+
+    「石油 あと何日」のような事実系クエリで AI/検索に引用されるための施策。
+    値は snapshots.json（SSOT）から取るため、日次の自動ビルドで自動的に新しくなる。
+
+    ⚠ 生成物である index.html を直接編集しないこと。
+       2026-07-10 に index.html へ直接書いた JSON-LD は、翌日の
+       `data: auto-update` ビルドで丸ごと上書きされ、約10日間 AEO が無効化された。
+       スキーマはこの関数（テンプレート側）が唯一の出所。
+    """
+    if page["key"] != "home":
+        return ""
+
+    org_id = "https://nextlabs.jp/#organization"
+    app_id = f"{site['url']}/#app"
+    asof_jp = format_jst_date(latest.as_of)
+
+    graph = [
+        {
+            "@type": "WebApplication",
+            "@id": app_id,
+            "name": "あと何日？日本の石油備蓄",
+            "url": site["url"] + "/",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "All",
+            "browserRequirements": "JavaScript を有効にしてください",
+            "inLanguage": "ja",
+            "isAccessibleForFree": True,
+            "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+            "publisher": {"@id": org_id},
+        },
+        {
+            "@type": "Dataset",
+            "@id": f"{site['url']}/#dataset",
+            "name": "日本の石油備蓄 推計日数",
+            "description": (
+                "経済産業省「石油備蓄の現況」速報値をもとに、日本の石油備蓄が"
+                "あと何日分あるかを推計したデータセット。国家備蓄・民間備蓄・"
+                "産油国共同備蓄の内訳を含む。"
+            ),
+            "url": site["url"] + "/",
+            "inLanguage": "ja",
+            "license": "https://creativecommons.org/licenses/by/4.0/",
+            "isAccessibleForFree": True,
+            "creator": {"@id": org_id},
+            "publisher": {"@id": org_id},
+            "spatialCoverage": {"@type": "Place", "name": "日本"},
+            "sourceOrganization": {"@type": "GovernmentOrganization", "name": "経済産業省"},
+            "citation": "経済産業省「石油備蓄の現況」",
+            "measurementTechnique": "備蓄量 ÷ 1日あたり推定消費量",
+            "temporalCoverage": latest.as_of,
+            "dateModified": latest.published,
+            "variableMeasured": [
+                {
+                    "@type": "PropertyValue",
+                    "name": "合計備蓄日数",
+                    "value": latest.total,
+                    "unitText": "日分",
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "国家備蓄",
+                    "value": latest.national,
+                    "unitText": "日分",
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "民間備蓄",
+                    "value": latest.private_,
+                    "unitText": "日分",
+                },
+                {
+                    "@type": "PropertyValue",
+                    "name": "産油国共同備蓄",
+                    "value": latest.joint,
+                    "unitText": "日分",
+                },
+            ],
+        },
+        {
+            "@type": "FAQPage",
+            "@id": f"{site['url']}/#faq",
+            "inLanguage": "ja",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "日本の石油備蓄はあと何日分ありますか？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": (
+                            f"経済産業省の最新公表値（{asof_jp}集計時点）で、"
+                            f"合計約{latest.total}日分です。内訳は国家備蓄"
+                            f"{latest.national}日分、民間備蓄{latest.private_}日分、"
+                            f"産油国共同備蓄{latest.joint}日分です。"
+                        ),
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "備蓄日数はどのように計算していますか？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": (
+                            "備蓄量を1日あたりの推定消費量で割って算出しています。"
+                            "経済産業省が公表した最新データの集計日を起点に、"
+                            "1日経過するごとに1日分減る計算で表示しており、"
+                            "備蓄量を実測しているわけではありません。"
+                        ),
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "データの出典はどこですか？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": (
+                            "経済産業省が日次で公表する「石油備蓄の現況」速報値です。"
+                            "本サイトはその速報値を可視化した非公式サイトで、"
+                            "正確性・完全性を保証するものではありません。"
+                        ),
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "日本の石油備蓄の義務量はどれくらいですか？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": (
+                            "日本はIEA（国際エネルギー機関）の基準により、"
+                            "90日分の石油備蓄義務を負っています。"
+                            "日本は石油の約97%を輸入に依存しています。"
+                        ),
+                    },
+                },
+                {
+                    "@type": "Question",
+                    "name": "このサイトは公式サイトですか？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": (
+                            "いいえ。株式会社ネクストラボが運営する非公式の情報サイトです。"
+                            "経済産業省をはじめとする公的機関とは関係ありません。"
+                        ),
+                    },
+                },
+            ],
+        },
+    ]
+
+    payload = {"@context": "https://schema.org", "@graph": graph}
+    body = json.dumps(payload, ensure_ascii=False, indent=2)
+    return f'<script type="application/ld+json">\n{body}\n</script>\n'
+
+
 def render_nav(page: dict[str, Any], nav_labels: dict[str, str], nav_order: list[str]) -> str:
     links = []
     for key in nav_order:
@@ -253,6 +413,7 @@ def render_page(
     og_image_version: str = "",
     csp: str = "",
     latest_vars: dict[str, str] | None = None,
+    latest: Snapshot | None = None,
 ) -> str:
     site = site_config["site"]
     # 最新値の焼き込みは content / description / header_meta の 3 フィールド限定
@@ -308,6 +469,7 @@ def render_page(
         ),
         content=content,
         script_tags=script_tags,
+        structured_data=(build_structured_data(page, site, latest) if latest else ""),
     )
 
 
@@ -318,13 +480,15 @@ def main() -> int:
     template = Template(base_text)
     csp = build_csp(base_text)
     og_image_version = compute_og_image_version(OG_IMAGE_PATH)
-    latest_vars = build_latest_vars(load_snapshots(SNAPSHOTS_PATH))
+    snapshot_rows = load_snapshots(SNAPSHOTS_PATH)
+    latest_vars = build_latest_vars(snapshot_rows)
+    latest = pick_latest_snapshot(snapshot_rows)
     for page in site_config["pages"]:
         output = REPO_ROOT / page["output"]
         content = (PAGES_DIR / page["source"]).read_text(encoding="utf-8").strip()
         output.parent.mkdir(parents=True, exist_ok=True)
         rendered = render_page(
-            template, site_config, page, content, og_image_version, csp, latest_vars
+            template, site_config, page, content, og_image_version, csp, latest_vars, latest
         )
         output.write_text(rendered, encoding="utf-8", newline="\n")
         print(f"built {page['output']}")
