@@ -4,6 +4,17 @@
    トークン（--bg-card / --rule / --radius-lg 等）に揃える。
    ========================================================= */
 
+/* TOP(カウンター)と同じ青紫グラデ地・エアリーな余白でトンマナを揃える。 */
+.page-opinions {
+  background: var(--bg-gradient);
+  color: var(--fg);
+  min-height: 100dvh;
+}
+
+.page-opinions a {
+  color: var(--link);
+}
+
 .opinions-layout {
   padding-block: var(--space-5) var(--space-6);
 }
@@ -29,11 +40,10 @@
 
 .op-eyebrow {
   display: inline-block;
-  font-size: var(--text-xs);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--brand-strong);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--brand);
   margin-bottom: var(--space-2);
 }
 
