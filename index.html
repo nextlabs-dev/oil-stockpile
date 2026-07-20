@@ -38,6 +38,133 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://oilstock.nextlabs.jp/#app",
+      "name": "あと何日？日本の石油備蓄",
+      "url": "https://oilstock.nextlabs.jp/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "JavaScript を有効にしてください",
+      "inLanguage": "ja",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "JPY"
+      },
+      "publisher": {
+        "@id": "https://nextlabs.jp/#organization"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://oilstock.nextlabs.jp/#dataset",
+      "name": "日本の石油備蓄 推計日数",
+      "description": "経済産業省「石油備蓄の現況」速報値をもとに、日本の石油備蓄があと何日分あるかを推計したデータセット。国家備蓄・民間備蓄・産油国共同備蓄の内訳を含む。",
+      "url": "https://oilstock.nextlabs.jp/",
+      "inLanguage": "ja",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "isAccessibleForFree": true,
+      "creator": {
+        "@id": "https://nextlabs.jp/#organization"
+      },
+      "publisher": {
+        "@id": "https://nextlabs.jp/#organization"
+      },
+      "spatialCoverage": {
+        "@type": "Place",
+        "name": "日本"
+      },
+      "sourceOrganization": {
+        "@type": "GovernmentOrganization",
+        "name": "経済産業省"
+      },
+      "citation": "経済産業省「石油備蓄の現況」",
+      "measurementTechnique": "備蓄量 ÷ 1日あたり推定消費量",
+      "temporalCoverage": "2026-07-14",
+      "dateModified": "2026-07-17",
+      "variableMeasured": [
+        {
+          "@type": "PropertyValue",
+          "name": "合計備蓄日数",
+          "value": 203,
+          "unitText": "日分"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "国家備蓄",
+          "value": 103,
+          "unitText": "日分"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "民間備蓄",
+          "value": 97,
+          "unitText": "日分"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "産油国共同備蓄",
+          "value": 4,
+          "unitText": "日分"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://oilstock.nextlabs.jp/#faq",
+      "inLanguage": "ja",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "日本の石油備蓄はあと何日分ありますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "経済産業省の最新公表値（2026年7月14日集計時点）で、合計約203日分です。内訳は国家備蓄103日分、民間備蓄97日分、産油国共同備蓄4日分です。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "備蓄日数はどのように計算していますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "備蓄量を1日あたりの推定消費量で割って算出しています。経済産業省が公表した最新データの集計日を起点に、1日経過するごとに1日分減る計算で表示しており、備蓄量を実測しているわけではありません。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "データの出典はどこですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "経済産業省が日次で公表する「石油備蓄の現況」速報値です。本サイトはその速報値を可視化した非公式サイトで、正確性・完全性を保証するものではありません。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "日本の石油備蓄の義務量はどれくらいですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "日本はIEA（国際エネルギー機関）の基準により、90日分の石油備蓄義務を負っています。日本は石油の約97%を輸入に依存しています。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "このサイトは公式サイトですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "いいえ。株式会社ネクストラボが運営する非公式の情報サイトです。経済産業省をはじめとする公的機関とは関係ありません。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body class="page-home">
 
