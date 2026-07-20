@@ -177,6 +177,8 @@ def build_csp(template_text: str) -> str:
         "style-src 'self' https://fonts.googleapis.com https://unpkg.com",
         "font-src 'self' https://fonts.gstatic.com",
         "img-src 'self' data: https://tile.openstreetmap.org https://www.google-analytics.com",
+        # /opinions/ の国会論戦 YouTube 埋め込み用（Cookie を落とさない nocookie ドメイン）。
+        "frame-src https://www.youtube-nocookie.com",
         (
             "connect-src 'self' https://www.googletagmanager.com "
             "https://www.google-analytics.com https://*.google-analytics.com"
@@ -418,6 +420,12 @@ NAV_ICONS = {
         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
         '<rect x="2.5" y="9" width="19" height="7" rx="1"/>'
         '<path d="M7.25 9v3.5M12 9v3.5M16.75 9v3.5"/></svg>'
+    ),
+    "opinions": (
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<path d="M4 5.5h16v10H12l-4 3.5v-3.5H4z"/>'
+        '<path d="M8 9h8M8 12h5"/></svg>'
     ),
     "about": (
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '

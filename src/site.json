@@ -5,17 +5,19 @@
     "og_image_alt": "日本の石油備蓄カウンター（推計日数）",
     "font_href": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
   },
-  "nav_order": ["home", "tankers", "scale", "about"],
+  "nav_order": ["home", "tankers", "scale", "opinions", "about"],
   "nav_labels": {
     "home": "カウンター",
     "tankers": "タンカー",
     "scale": "石油のものさし",
+    "opinions": "提言",
     "about": "about"
   },
   "nav_labels_short": {
     "home": "カウンター",
     "tankers": "タンカー",
     "scale": "ものさし",
+    "opinions": "提言",
     "about": "about"
   },
   "pages": [
@@ -51,6 +53,7 @@
         "home": "./",
         "tankers": "./tankers/",
         "scale": "./scale/",
+        "opinions": "./opinions/",
         "about": "./about/"
       }
     },
@@ -96,6 +99,7 @@
         "home": "../",
         "tankers": "./",
         "scale": "../scale/",
+        "opinions": "../opinions/",
         "about": "../about/"
       }
     },
@@ -131,6 +135,7 @@
         "home": "../",
         "tankers": "../tankers/",
         "scale": "./",
+        "opinions": "../opinions/",
         "about": "../about/"
       }
     },
@@ -166,7 +171,44 @@
         "home": "../",
         "tankers": "../tankers/",
         "scale": "../scale/",
+        "opinions": "../opinions/",
         "about": "./"
+      }
+    },
+    {
+      "key": "opinions",
+      "source": "opinions.html",
+      "output": "opinions/index.html",
+      "body_class": "page-opinions",
+      "site_brand": [
+        "      <span class=\"site-logo\" aria-hidden=\"true\"></span>",
+        "      <span class=\"site-brand-text\">",
+        "        <span class=\"site-title\">JAPAN OIL STOCKPILE</span>",
+        "        <span class=\"site-tagline\">あと何日、日本は持つのか。</span>",
+        "      </span>"
+      ],
+      "header_meta": [
+        "    <div class=\"site-header-meta\">",
+        "      <span class=\"site-header-meta-label\">最終更新</span>",
+        "      <span class=\"site-header-meta-value\" id=\"header-last-updated\">—</span>",
+        "    </div>"
+      ],
+      "title": "提言｜国会論客カードと税・エネルギー論戦アーカイブ｜日本の石油備蓄",
+      "description": "ガソリン暫定税率・二重課税・インボイスなど、日本の税とエネルギー負担をめぐる国会論戦を、論客カードとマスコット「ピックン先生」の解説で整理する非公式アーカイブ。",
+      "canonical_path": "/opinions/",
+      "og_title": "提言｜国会論客カード｜日本の石油備蓄",
+      "og_description": "税・エネルギー負担をめぐる国会論戦を、論客カードとピックン先生の解説で整理。",
+      "twitter_title": "提言｜国会論客カード｜日本の石油備蓄",
+      "twitter_description": "税・エネルギー負担をめぐる国会論戦を、論客カードとピックン先生の解説で整理。",
+      "active_nav": "opinions",
+      "script_tags": "",
+      "root_path": "../",
+      "nav": {
+        "home": "../",
+        "tankers": "../tankers/",
+        "scale": "../scale/",
+        "opinions": "./",
+        "about": "../about/"
       }
     }
   ]
