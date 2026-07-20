@@ -191,7 +191,10 @@ def build_structured_data(
     site: dict[str, Any],
     latest: Snapshot,
 ) -> str:
-    """AEO 用の JSON-LD を組み立てる（トップページのみ）。
+    """AEO 用の JSON-LD を組み立てる。
+
+    トップは WebApplication + Dataset + FAQPage、それ以外のタブは本体グラフに
+    接続した WebPage / AboutPage を出す。
 
     「石油 あと何日」のような事実系クエリで AI/検索に引用されるための施策。
     値は snapshots.json（SSOT）から取るため、日次の自動ビルドで自動的に新しくなる。
@@ -201,12 +204,49 @@ def build_structured_data(
        `data: auto-update` ビルドで丸ごと上書きされ、約10日間 AEO が無効化された。
        スキーマはこの関数（テンプレート側）が唯一の出所。
     """
-    if page["key"] != "home":
-        return ""
-
     org_id = "https://nextlabs.jp/#organization"
     app_id = f"{site['url']}/#app"
     asof_jp = format_jst_date(latest.as_of)
+
+    # home 以外のタブ（tankers / scale / about）も、本体エンティティグラフに
+    # 接続した WebPage ノードを持たせて「権威の循環」を各ページに広げる（#柱3 AEO）。
+    # about は運営会社を主題にする AboutPage として扱う。
+    if page["key"] != "home":
+        current_url = f"{site['url']}{page['canonical_path']}"
+        page_id = f"{current_url}#webpage"
+        is_about = page["key"] == "about"
+        webpage: dict[str, Any] = {
+            "@type": "AboutPage" if is_about else "WebPage",
+            "@id": page_id,
+            "url": current_url,
+            "name": text_value(page["title"]),
+            "description": text_value(page["description"]),
+            "inLanguage": "ja",
+            "isPartOf": {"@id": app_id},
+            "publisher": {"@id": org_id},
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "あと何日？日本の石油備蓄",
+                        "item": site["url"] + "/",
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": text_value(page["title"]),
+                        "item": current_url,
+                    },
+                ],
+            },
+        }
+        if is_about:
+            webpage["mainEntity"] = {"@id": org_id}
+        payload = {"@context": "https://schema.org", "@graph": [webpage]}
+        body = json.dumps(payload, ensure_ascii=False, indent=2)
+        return f'<script type="application/ld+json">\n{body}\n</script>\n'
 
     graph = [
         {
