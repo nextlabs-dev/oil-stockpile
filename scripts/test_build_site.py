@@ -625,9 +625,7 @@ class StructuredDataTest(unittest.TestCase):
             graph = self._graph_for(self._page(key))
             webpage = next(n for n in graph if n["@type"] == "WebPage")
             self.assertEqual(webpage["isPartOf"]["@id"], f"{self.SITE['url']}/#app")
-            self.assertEqual(
-                webpage["publisher"]["@id"], "https://nextlabs.jp/#organization"
-            )
+            self.assertEqual(webpage["publisher"]["@id"], "https://nextlabs.jp/#organization")
             self.assertEqual(webpage["breadcrumb"]["@type"], "BreadcrumbList")
 
     def test_about_is_aboutpage_about_the_organization(self):
