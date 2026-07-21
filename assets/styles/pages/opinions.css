@@ -1,0 +1,291 @@
+/* =========================================================
+   提言 (/opinions/) — 国会論客カード
+   本文は読みやすさ優先の単一カラム。カードは site の
+   トークン（--bg-card / --rule / --radius-lg 等）に揃える。
+   ========================================================= */
+
+/* TOP(カウンター)と同じ青紫グラデ地・エアリーな余白でトンマナを揃える。 */
+.page-opinions {
+  background: var(--bg-gradient);
+  color: var(--fg);
+  min-height: 100dvh;
+}
+
+.page-opinions a {
+  color: var(--link);
+}
+
+.opinions-layout {
+  padding-block: var(--space-5) var(--space-6);
+}
+
+.opinions-wrap {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* --- 汎用カード --- */
+.op-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+}
+
+.op-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--brand);
+  margin-bottom: var(--space-2);
+}
+
+.op-title {
+  font-size: clamp(1.25rem, 1rem + 1.2vw, 1.6rem);
+  font-weight: 800;
+  color: var(--fg-strong);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.op-title--lg {
+  font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.2rem);
+}
+
+.op-lead {
+  color: var(--fg-sub);
+  line-height: 1.85;
+  margin-top: var(--space-3);
+}
+
+/* --- ピックン先生 イントロ --- */
+.op-mascot {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule-soft);
+}
+
+.op-mascot-avatar {
+  flex: 0 0 auto;
+}
+
+.pikkun-avatar {
+  width: 72px;
+  height: 72px;
+  filter: drop-shadow(0 2px 4px rgba(44, 64, 120, 0.12));
+}
+
+.op-mascot-note {
+  font-size: var(--text-sm);
+  color: var(--fg-sub);
+  line-height: 1.75;
+  margin: 0;
+}
+
+.op-mascot-label {
+  display: block;
+  font-weight: 700;
+  color: #c22525;
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+/* --- 論客カード群 --- */
+.op-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.op-politician {
+  --accent: var(--brand);
+  --accent-soft: var(--brand-soft);
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+}
+
+.op-politician--amber {
+  --accent: #f59e0b;
+  --accent-soft: #fffbeb;
+}
+
+.op-politician--sky {
+  --accent: #0284c7;
+  --accent-soft: #f0f9ff;
+}
+
+.op-pol-head {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.pol-avatar {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 auto;
+}
+
+.op-pol-course {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 999px;
+  padding: 2px 10px;
+  margin-bottom: 6px;
+}
+
+.op-pol-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--fg-strong);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.op-pol-role {
+  font-size: var(--text-sm);
+  color: var(--fg-sub);
+  margin: 4px 0 0;
+}
+
+.op-pol-prev {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+
+.op-pol-catch {
+  font-weight: 700;
+  color: var(--fg-strong);
+  line-height: 1.7;
+  margin: var(--space-3) 0 0;
+}
+
+.op-pol-comment {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.op-comment-label {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #c22525;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.op-pol-comment p {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.8;
+  color: var(--fg);
+}
+
+/* --- YouTube 埋め込み --- */
+.op-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-top: var(--space-3);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #0f1535;
+}
+
+.op-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.op-video-link {
+  display: inline-block;
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--link);
+  line-height: 1.6;
+}
+
+/* --- 税用語辞典 --- */
+.op-glossary-lead {
+  color: var(--fg-sub);
+  margin: var(--space-2) 0 var(--space-4);
+}
+
+.op-glossary-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.op-term {
+  border-top: 1px solid var(--rule-soft);
+  padding-top: var(--space-3);
+}
+
+.op-term dt {
+  font-weight: 800;
+  color: var(--fg-strong);
+  margin-bottom: 4px;
+}
+
+.op-term-en {
+  font-weight: 600;
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+  letter-spacing: 0.04em;
+}
+
+.op-term dd {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.85;
+  color: var(--fg-sub);
+}
+
+.op-footnote {
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+  line-height: 1.75;
+  margin: var(--space-2) 0 0;
+}
+
+@media (max-width: 520px) {
+  .op-card,
+  .op-politician {
+    padding: var(--space-4);
+  }
+  .op-pol-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+}

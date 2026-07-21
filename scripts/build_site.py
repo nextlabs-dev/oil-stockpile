@@ -177,6 +177,8 @@ def build_csp(template_text: str) -> str:
         "style-src 'self' https://fonts.googleapis.com https://unpkg.com",
         "font-src 'self' https://fonts.gstatic.com",
         "img-src 'self' data: https://tile.openstreetmap.org https://www.google-analytics.com",
+        # /opinions/ の国会論戦 YouTube 埋め込み用（Cookie を落とさない nocookie ドメイン）。
+        "frame-src https://www.youtube-nocookie.com",
         (
             "connect-src 'self' https://www.googletagmanager.com "
             "https://www.google-analytics.com https://*.google-analytics.com"
@@ -186,12 +188,108 @@ def build_csp(template_text: str) -> str:
     return "; ".join(directives)
 
 
+# 提言(/opinions/)に埋め込む国会論戦動画。VideoObject(AEO)の出所。
+# uploadDate は公開月までしか判明しないものは月精度(ISO8601)で正直に記載する。
+OPINIONS_VIDEOS = [
+    {
+        "id": "SmgENrlR8XA",
+        "name": "たまきチャンネル「ガソリン暫定税率 年内廃止へ・最後の攻防」",
+        "description": (
+            "国民民主党代表・玉木雄一郎が、ガソリン暫定税率の年内廃止に向けた"
+            "国会での攻防を解説する動画。"
+        ),
+        "uploadDate": "2025-11",
+    },
+    {
+        "id": "1xZVIlnYnpU",
+        "name": "重徳和彦「ガソリン暫定税率年内廃止・財源 徹底解説」",
+        "description": (
+            "立憲民主党 税制調査会長・重徳和彦が、ガソリン暫定税率の廃止とその財源を解説する動画。"
+        ),
+        "uploadDate": "2025-11",
+    },
+    {
+        "id": "hMKL-g4yNqk",
+        "name": "伊佐進一 衆院財務金融委員会「インボイスの現場負担」",
+        "description": (
+            "伊佐進一が衆議院財務金融委員会でインボイス制度の現場負担を追及する国会質疑。"
+        ),
+        "uploadDate": "2026-03-04",
+    },
+]
+
+# 提言の税用語辞典。DefinedTermSet(AEO)の出所。本文(opinions.html)と対応。
+OPINIONS_GLOSSARY = [
+    (
+        "トリガー条項",
+        "ガソリン小売価格が3ヶ月連続で160円/Lを超えた場合に、揮発油税の特例税率分"
+        "（25.1円）を一時的に停止（減税）する仕組み。現在まで凍結が続いている。",
+    ),
+    (
+        "暫定税率・特例税率",
+        "道路整備予算の確保等のため「暫定」として上乗せ開始された揮発油税の割増分"
+        "（リッター25.1円など）。一般財源化された現在も事実上の特例として課税が続く。",
+    ),
+    (
+        "二重課税（タックスオンプライス）",
+        "ガソリン本体価格に揮発油税や石油石炭税を上乗せした総和に、さらに10%の消費税"
+        "を課す仕組み。減税派が是正を訴える論点。",
+    ),
+    (
+        "インボイス制度",
+        "消費税の適格請求書等保存方式。免税事業者からの仕入れが実質的な追加負担になり、"
+        "フリーランスや零細事業者の負担が委員会等で追究されている。",
+    ),
+]
+
+
+def build_opinions_nodes(current_url: str, org_id: str) -> list[dict[str, Any]]:
+    """提言ページ固有の VideoObject×3 と DefinedTermSet を組み立てる（AEO）。"""
+    nodes: list[dict[str, Any]] = []
+    for v in OPINIONS_VIDEOS:
+        nodes.append(
+            {
+                "@type": "VideoObject",
+                "name": v["name"],
+                "description": v["description"],
+                "thumbnailUrl": f"https://i.ytimg.com/vi/{v['id']}/hqdefault.jpg",
+                "uploadDate": v["uploadDate"],
+                "embedUrl": f"https://www.youtube-nocookie.com/embed/{v['id']}",
+                "contentUrl": f"https://www.youtube.com/watch?v={v['id']}",
+                "inLanguage": "ja",
+                "isPartOf": {"@id": f"{current_url}#webpage"},
+            }
+        )
+    glossary_id = f"{current_url}#glossary"
+    nodes.append(
+        {
+            "@type": "DefinedTermSet",
+            "@id": glossary_id,
+            "name": "税用語辞典",
+            "inLanguage": "ja",
+            "hasDefinedTerm": [
+                {
+                    "@type": "DefinedTerm",
+                    "name": term,
+                    "description": desc,
+                    "inDefinedTermSet": {"@id": glossary_id},
+                }
+                for term, desc in OPINIONS_GLOSSARY
+            ],
+        }
+    )
+    return nodes
+
+
 def build_structured_data(
     page: dict[str, Any],
     site: dict[str, Any],
     latest: Snapshot,
 ) -> str:
-    """AEO 用の JSON-LD を組み立てる（トップページのみ）。
+    """AEO 用の JSON-LD を組み立てる。
+
+    トップは WebApplication + Dataset + FAQPage、それ以外のタブは本体グラフに
+    接続した WebPage / AboutPage を出す。
 
     「石油 あと何日」のような事実系クエリで AI/検索に引用されるための施策。
     値は snapshots.json（SSOT）から取るため、日次の自動ビルドで自動的に新しくなる。
@@ -201,12 +299,53 @@ def build_structured_data(
        `data: auto-update` ビルドで丸ごと上書きされ、約10日間 AEO が無効化された。
        スキーマはこの関数（テンプレート側）が唯一の出所。
     """
-    if page["key"] != "home":
-        return ""
-
     org_id = "https://nextlabs.jp/#organization"
     app_id = f"{site['url']}/#app"
     asof_jp = format_jst_date(latest.as_of)
+
+    # home 以外のタブ（tankers / scale / about）も、本体エンティティグラフに
+    # 接続した WebPage ノードを持たせて「権威の循環」を各ページに広げる（#柱3 AEO）。
+    # about は運営会社を主題にする AboutPage として扱う。
+    if page["key"] != "home":
+        current_url = f"{site['url']}{page['canonical_path']}"
+        page_id = f"{current_url}#webpage"
+        is_about = page["key"] == "about"
+        webpage: dict[str, Any] = {
+            "@type": "AboutPage" if is_about else "WebPage",
+            "@id": page_id,
+            "url": current_url,
+            "name": text_value(page["title"]),
+            "description": text_value(page["description"]),
+            "inLanguage": "ja",
+            "isPartOf": {"@id": app_id},
+            "publisher": {"@id": org_id},
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "あと何日？日本の石油備蓄",
+                        "item": site["url"] + "/",
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": text_value(page["title"]),
+                        "item": current_url,
+                    },
+                ],
+            },
+        }
+        if is_about:
+            webpage["mainEntity"] = {"@id": org_id}
+        nodes: list[dict[str, Any]] = [webpage]
+        # 提言は国会動画(VideoObject)と税用語辞典(DefinedTermSet)を追加してAEOを厚くする。
+        if page["key"] == "opinions":
+            nodes.extend(build_opinions_nodes(current_url, org_id))
+        payload = {"@context": "https://schema.org", "@graph": nodes}
+        body = json.dumps(payload, ensure_ascii=False, indent=2)
+        return f'<script type="application/ld+json">\n{body}\n</script>\n'
 
     graph = [
         {
@@ -379,6 +518,12 @@ NAV_ICONS = {
         '<rect x="2.5" y="9" width="19" height="7" rx="1"/>'
         '<path d="M7.25 9v3.5M12 9v3.5M16.75 9v3.5"/></svg>'
     ),
+    "opinions": (
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<path d="M4 5.5h16v10H12l-4 3.5v-3.5H4z"/>'
+        '<path d="M8 9h8M8 12h5"/></svg>'
+    ),
     "about": (
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
@@ -430,9 +575,17 @@ def render_page(
     # 正規化され古いカードが使い回されうる。<link rel="canonical"> は SEO のため
     # クリーンなまま維持する。
     og_url = f"{canonical}?v={og_image_version}" if og_image_version else canonical
-    og_image = site["og_image"]
-    if og_image_version:
-        og_image += f"?v={og_image_version}"
+    # ページ固有 OG 画像があれば使う（提言など）。無ければサイト共通のカウンター画像。
+    # 固有画像はライブ数値に依存しない静的アセットなので ?v= バージョンは付けない。
+    page_og_image = page.get("og_image")
+    if page_og_image:
+        og_image = page_og_image
+        og_image_alt = page.get("og_image_alt", site["og_image_alt"])
+    else:
+        og_image = site["og_image"]
+        og_image_alt = site["og_image_alt"]
+        if og_image_version:
+            og_image += f"?v={og_image_version}"
     asset_root = "" if page["root_path"] == "./" else page["root_path"]
     favicon = asset_root + "assets/favicon.svg"
     stylesheet = asset_root + "assets/styles.css"
@@ -452,7 +605,7 @@ def render_page(
         og_title=page["og_title"],
         og_description=page["og_description"],
         og_image=og_image,
-        og_image_alt=site["og_image_alt"],
+        og_image_alt=og_image_alt,
         twitter_title=page["twitter_title"],
         twitter_description=page["twitter_description"],
         favicon=favicon,
