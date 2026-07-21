@@ -188,6 +188,101 @@ def build_csp(template_text: str) -> str:
     return "; ".join(directives)
 
 
+# 提言(/opinions/)に埋め込む国会論戦動画。VideoObject(AEO)の出所。
+# uploadDate は公開月までしか判明しないものは月精度(ISO8601)で正直に記載する。
+OPINIONS_VIDEOS = [
+    {
+        "id": "SmgENrlR8XA",
+        "name": "たまきチャンネル「ガソリン暫定税率 年内廃止へ・最後の攻防」",
+        "description": (
+            "国民民主党代表・玉木雄一郎が、ガソリン暫定税率の年内廃止に向けた"
+            "国会での攻防を解説する動画。"
+        ),
+        "uploadDate": "2025-11",
+    },
+    {
+        "id": "1xZVIlnYnpU",
+        "name": "重徳和彦「ガソリン暫定税率年内廃止・財源 徹底解説」",
+        "description": (
+            "立憲民主党 税制調査会長・重徳和彦が、ガソリン暫定税率の廃止と"
+            "その財源を解説する動画。"
+        ),
+        "uploadDate": "2025-11",
+    },
+    {
+        "id": "hMKL-g4yNqk",
+        "name": "伊佐進一 衆院財務金融委員会「インボイスの現場負担」",
+        "description": (
+            "伊佐進一が衆議院財務金融委員会でインボイス制度の現場負担を"
+            "追及する国会質疑。"
+        ),
+        "uploadDate": "2026-03-04",
+    },
+]
+
+# 提言の税用語辞典。DefinedTermSet(AEO)の出所。本文(opinions.html)と対応。
+OPINIONS_GLOSSARY = [
+    (
+        "トリガー条項",
+        "ガソリン小売価格が3ヶ月連続で160円/Lを超えた場合に、揮発油税の特例税率分"
+        "（25.1円）を一時的に停止（減税）する仕組み。現在まで凍結が続いている。",
+    ),
+    (
+        "暫定税率・特例税率",
+        "道路整備予算の確保等のため「暫定」として上乗せ開始された揮発油税の割増分"
+        "（リッター25.1円など）。一般財源化された現在も事実上の特例として課税が続く。",
+    ),
+    (
+        "二重課税（タックスオンプライス）",
+        "ガソリン本体価格に揮発油税や石油石炭税を上乗せした総和に、さらに10%の消費税"
+        "を課す仕組み。減税派が是正を訴える論点。",
+    ),
+    (
+        "インボイス制度",
+        "消費税の適格請求書等保存方式。免税事業者からの仕入れが実質的な追加負担になり、"
+        "フリーランスや零細事業者の負担が委員会等で追究されている。",
+    ),
+]
+
+
+def build_opinions_nodes(current_url: str, org_id: str) -> list[dict[str, Any]]:
+    """提言ページ固有の VideoObject×3 と DefinedTermSet を組み立てる（AEO）。"""
+    nodes: list[dict[str, Any]] = []
+    for v in OPINIONS_VIDEOS:
+        nodes.append(
+            {
+                "@type": "VideoObject",
+                "name": v["name"],
+                "description": v["description"],
+                "thumbnailUrl": f"https://i.ytimg.com/vi/{v['id']}/hqdefault.jpg",
+                "uploadDate": v["uploadDate"],
+                "embedUrl": f"https://www.youtube-nocookie.com/embed/{v['id']}",
+                "contentUrl": f"https://www.youtube.com/watch?v={v['id']}",
+                "inLanguage": "ja",
+                "isPartOf": {"@id": f"{current_url}#webpage"},
+            }
+        )
+    glossary_id = f"{current_url}#glossary"
+    nodes.append(
+        {
+            "@type": "DefinedTermSet",
+            "@id": glossary_id,
+            "name": "税用語辞典",
+            "inLanguage": "ja",
+            "hasDefinedTerm": [
+                {
+                    "@type": "DefinedTerm",
+                    "name": term,
+                    "description": desc,
+                    "inDefinedTermSet": {"@id": glossary_id},
+                }
+                for term, desc in OPINIONS_GLOSSARY
+            ],
+        }
+    )
+    return nodes
+
+
 def build_structured_data(
     page: dict[str, Any],
     site: dict[str, Any],
@@ -246,7 +341,11 @@ def build_structured_data(
         }
         if is_about:
             webpage["mainEntity"] = {"@id": org_id}
-        payload = {"@context": "https://schema.org", "@graph": [webpage]}
+        nodes: list[dict[str, Any]] = [webpage]
+        # 提言は国会動画(VideoObject)と税用語辞典(DefinedTermSet)を追加してAEOを厚くする。
+        if page["key"] == "opinions":
+            nodes.extend(build_opinions_nodes(current_url, org_id))
+        payload = {"@context": "https://schema.org", "@graph": nodes}
         body = json.dumps(payload, ensure_ascii=False, indent=2)
         return f'<script type="application/ld+json">\n{body}\n</script>\n'
 
