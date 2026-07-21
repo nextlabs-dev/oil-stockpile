@@ -596,20 +596,52 @@ class StructuredDataTest(unittest.TestCase):
         joint=4,
     )
 
-    def _graph(self):
-        raw = build_structured_data({"key": "home"}, self.SITE, self.LATEST)
+    @staticmethod
+    def _page(key: str) -> dict:
+        return {
+            "key": key,
+            "title": f"{key} タイトル",
+            "description": f"{key} の説明",
+            "canonical_path": "/" if key == "home" else f"/{key}/",
+        }
+
+    def _graph_for(self, page: dict):
+        raw = build_structured_data(page, self.SITE, self.LATEST)
         body = re.search(
             r'<script type="application/ld\+json">(.*?)</script>', raw, re.DOTALL
         ).group(1)
         return json.loads(body)["@graph"]
 
+    def _graph(self):
+        return self._graph_for(self._page("home"))
+
     def test_home_emits_expected_types(self):
         types = [n["@type"] for n in self._graph()]
         self.assertEqual(types, ["WebApplication", "Dataset", "FAQPage"])
 
-    def test_non_home_pages_emit_nothing(self):
-        for key in ("tankers", "scale", "about"):
-            self.assertEqual(build_structured_data({"key": key}, self.SITE, self.LATEST), "")
+    def test_non_home_pages_emit_webpage_connected_to_entity_graph(self):
+        # tankers / scale は WebPage を出し、本体グラフ(#app / nextlabs.jp)へ接続する
+        for key in ("tankers", "scale"):
+            graph = self._graph_for(self._page(key))
+            webpage = next(n for n in graph if n["@type"] == "WebPage")
+            self.assertEqual(webpage["isPartOf"]["@id"], f"{self.SITE['url']}/#app")
+            self.assertEqual(
+                webpage["publisher"]["@id"], "https://nextlabs.jp/#organization"
+            )
+            self.assertEqual(webpage["breadcrumb"]["@type"], "BreadcrumbList")
+
+    def test_about_is_aboutpage_about_the_organization(self):
+        graph = self._graph_for(self._page("about"))
+        about = next(n for n in graph if n["@type"] == "AboutPage")
+        self.assertEqual(about["mainEntity"]["@id"], "https://nextlabs.jp/#organization")
+
+    def test_opinions_adds_videos_and_glossary(self):
+        graph = self._graph_for(self._page("opinions"))
+        types = [n["@type"] for n in graph]
+        self.assertEqual(types.count("VideoObject"), 3)
+        self.assertEqual(types.count("DefinedTermSet"), 1)
+        terms = next(n for n in graph if n["@type"] == "DefinedTermSet")["hasDefinedTerm"]
+        self.assertEqual(len(terms), 4)
 
     def test_dataset_values_come_from_snapshot(self):
         ds = next(n for n in self._graph() if n["@type"] == "Dataset")

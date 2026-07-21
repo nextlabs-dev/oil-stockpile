@@ -14,7 +14,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 WIDTH, HEIGHT = 1200, 630
 
@@ -98,8 +98,10 @@ def main() -> int:
     cw, ch = card.size
     # soft shadow
     shadow = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    ImageDraw.Draw(shadow).rounded_rectangle([cx0, cy0 + 10, cx1, cy1 + 10], 28, fill=(44, 64, 120, 46))
-    shadow = shadow.filter(__import__("PIL.ImageFilter", fromlist=["GaussianBlur"]).GaussianBlur(18))
+    ImageDraw.Draw(shadow).rounded_rectangle(
+        [cx0, cy0 + 10, cx1, cy1 + 10], 28, fill=(44, 64, 120, 46)
+    )
+    shadow = shadow.filter(ImageFilter.GaussianBlur(18))
     img.alpha_composite(shadow)
     cd.rounded_rectangle([0, 0, cw - 1, ch - 1], 28, fill=CARD_BG, outline=CARD_BORDER, width=2)
 
