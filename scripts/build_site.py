@@ -577,9 +577,17 @@ def render_page(
     # 正規化され古いカードが使い回されうる。<link rel="canonical"> は SEO のため
     # クリーンなまま維持する。
     og_url = f"{canonical}?v={og_image_version}" if og_image_version else canonical
-    og_image = site["og_image"]
-    if og_image_version:
-        og_image += f"?v={og_image_version}"
+    # ページ固有 OG 画像があれば使う（提言など）。無ければサイト共通のカウンター画像。
+    # 固有画像はライブ数値に依存しない静的アセットなので ?v= バージョンは付けない。
+    page_og_image = page.get("og_image")
+    if page_og_image:
+        og_image = page_og_image
+        og_image_alt = page.get("og_image_alt", site["og_image_alt"])
+    else:
+        og_image = site["og_image"]
+        og_image_alt = site["og_image_alt"]
+        if og_image_version:
+            og_image += f"?v={og_image_version}"
     asset_root = "" if page["root_path"] == "./" else page["root_path"]
     favicon = asset_root + "assets/favicon.svg"
     stylesheet = asset_root + "assets/styles.css"
@@ -599,7 +607,7 @@ def render_page(
         og_title=page["og_title"],
         og_description=page["og_description"],
         og_image=og_image,
-        og_image_alt=site["og_image_alt"],
+        og_image_alt=og_image_alt,
         twitter_title=page["twitter_title"],
         twitter_description=page["twitter_description"],
         favicon=favicon,
