@@ -268,7 +268,7 @@ python -m http.server 8080
 
 ### 初回セットアップ
 
-1. リポジトリ `CountieeReturns/oil-stockpile` の **Settings → Pages**
+1. リポジトリ `nextlabs-dev/oil-stockpile` の **Settings → Pages**
    - Source: **Deploy from a branch**
    - Branch: **main** / **/ (root)**
 2. **Settings → Actions → General → Workflow permissions** を **Read and write permissions** に変更（Bot が `data/*.json` と `assets/og-image.png` を自動 push できるように）
@@ -284,7 +284,7 @@ python -m http.server 8080
 
 ### カスタムドメインに切り替える場合
 
-1. **Settings → Pages → Custom domain** で独自ドメインを設定 + DNS で CNAME を `countieereturns.github.io` に向ける
+1. **Settings → Pages → Custom domain** で独自ドメインを設定 + DNS で CNAME を `nextlabs-dev.github.io` に向ける
 2. 絶対 URL を新ドメインに置換:
    - `src/site.json` の `site.url` / `site.og_image`
    - `js/core/data.js` の `SITE_CONFIG.url`
