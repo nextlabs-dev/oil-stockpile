@@ -133,14 +133,27 @@ CREATE UNIQUE INDEX idx_votes_dedup ON votes(question_id, voter_hash);
 - レスポンスに個人識別情報を含めない。**得票率は API では返さず実数のみ**を返す（下限ルールは §4 の表示側で判定）。
 - エラー時はフロントで「現在集計を取得できません」を表示し、**推測値やモックにフォールバックしない**。
 
-### API ドメイン（未決）
+### API ドメイン（未決・切替方針は確定）
 
-`api.oilstock.nextlabs.jp` を第一候補とするが**未確定**。フェーズ1は `*.workers.dev` で疎通確認済み。
+`api.oilstock.nextlabs.jp` を第一候補とするが**URL 確定は未**。フェーズ1は `*.workers.dev` で疎通確認済み。
 
-- Cloudflare アカウントは保有を確認済み（2026-07-24）。
-- カスタムドメインに切り替える場合は `nextlabs.jp` の DNS を Cloudflare 管理に置き、
-  `wrangler.toml` の `routes`（コメントアウト済み）を有効化する。DNS の現管理先の確認が先。
-- 遅くとも**フェーズ2の公開までにドメインを確定**する。それまでは workers.dev で進める。
+判明事項（2026-07-24）:
+
+- **Cloudflare アカウント = `NextLab`**（保有確認済み）。
+- **`nextlabs.jp` の DNS は AWS Route 53 管理**。本体サイト `oilstock.nextlabs.jp`（GitHub Pages）も
+  Route 53 のままで問題なく、今回 Cloudflare が関わるのは投票 API のサブドメインのみ。
+
+切替方針（DNS が AWS のため、3案から選定）:
+
+| 案 | 内容 | 評価 |
+|---|---|---|
+| A. workers.dev のまま | 独自ドメインを付けない | **当面これ。** CORS は `oilstock.nextlabs.jp` 限定済みで機能・安全性は同じ |
+| **B. サブドメイン委任** | Route 53 に `api.oilstock.nextlabs.jp` の NS を追加し、その**サブドメインだけ** Cloudflare に委任 | **本命。** `nextlabs.jp` 全体を移さず、既存サイトに無影響 |
+| C. ゾーン全体移管 | `nextlabs.jp` を丸ごと Cloudflare へ | **非推奨。** メール等の全レコード移行リスクが釣り合わない |
+
+- **フェーズ2の実装・公開まではA（workers.dev）** で進める。ドメイン確定を待たずフロント連携まで作れる。
+- 公開時に**B**へ切替：Route 53 に NS 追加 → Cloudflare で `api.oilstock.nextlabs.jp` 追加 →
+  `wrangler.toml` の `routes`（コメントアウト済み）を有効化。いずれも既存サイトに触れない。
 
 ---
 
@@ -192,6 +205,6 @@ CREATE UNIQUE INDEX idx_votes_dedup ON votes(question_id, voter_hash);
 
 ### 残る未決
 
-- [ ] **API ドメイン** → `api.oilstock.nextlabs.jp` が第一候補だが未確定。Cloudflare アカウントは保有確認済み（2026-07-24）。`nextlabs.jp` の DNS 現管理先を確認し、フェーズ2公開までに確定する（§6）。
+- [ ] **API ドメイン（URL のみ未確定、切替方針は確定）** → 第一候補 `api.oilstock.nextlabs.jp`。Cloudflareアカウント=`NextLab`、DNSはAWS Route 53 と判明（2026-07-24）。当面 workers.dev、公開時にサブドメイン委任（案B）で切替（§6）。
 - [ ] 「終息」定義を METI/報道の表現と突き合わせ、必要なら文言を微調整（意味は変えない）。
 - [ ] KV による集計キャッシュを入れるトラフィック閾値の見極め（当面は都度 `COUNT`）。
