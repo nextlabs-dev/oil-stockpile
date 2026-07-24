@@ -1,0 +1,99 @@
+<main id="main" class="site-main forecast-layout">
+  <div class="fc-wrap">
+
+    <section class="fc-card fc-hero" aria-labelledby="forecast-heading">
+      <span class="fc-eyebrow">有事終息予想 / forecast</span>
+      <h1 id="forecast-heading" class="fc-title">この有事は、いつ終わると思いますか。</h1>
+      <p class="fc-lead">
+        ホルムズ海峡の通航支障は、日本の石油備蓄があと何日もつかという本題に直結します。
+        このページは<strong>来訪者の予想を集計して可視化する世論パート</strong>です。
+        運営者が地政学的な予測を示すものではなく、外部の予測市場やオッズも使いません。
+        表示される数値は、このサイトで投じられた実際の票だけです。
+      </p>
+    </section>
+
+    <section class="fc-card fc-vote" aria-labelledby="forecast-question">
+      <h2 id="forecast-question" class="fc-question">
+        ホルムズ海峡の通航支障による有事は、いつ終息すると思いますか？
+      </h2>
+
+      <div class="fc-definition">
+        <span class="fc-definition-label">この設問での「終息」の定義</span>
+        <p class="fc-definition-body">
+          米国・イランの当事国間で<strong>停戦または核合意等の公式な合意が発表され</strong>、
+          ホルムズ海峡の通航支障の原因が解消した状態を「終息」とします。
+          価格や輸送量といった経済指標ではなく、当事国間の公式合意という
+          観測可能なできごとで線を引いています。
+        </p>
+      </div>
+
+      <ul id="forecast-choices" class="fc-choices">
+        <li>
+          <button type="button" class="fc-choice" data-choice="m3" aria-pressed="false">
+            <span class="fc-choice-label">〜3ヶ月</span>
+            <span class="fc-choice-hint">年内の早期収束</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="fc-choice" data-choice="m6" aria-pressed="false">
+            <span class="fc-choice-label">〜6ヶ月</span>
+            <span class="fc-choice-hint">半年以内に決着</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="fc-choice" data-choice="y1" aria-pressed="false">
+            <span class="fc-choice-label">〜1年</span>
+            <span class="fc-choice-hint">越年するが1年内</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="fc-choice" data-choice="long" aria-pressed="false">
+            <span class="fc-choice-label">1年以上</span>
+            <span class="fc-choice-hint">長期化する</span>
+          </button>
+        </li>
+      </ul>
+
+      <div id="forecast-turnstile" class="fc-turnstile" hidden></div>
+
+      <p id="forecast-status" class="fc-status" role="status" aria-live="polite" hidden></p>
+
+      <p id="forecast-revote" class="fc-revote" hidden>
+        予測は<strong>いつでも変更できます</strong>。情勢が動いたら投票し直してください。
+        集計に反映されるのは、あなたの最新の1票だけです。
+      </p>
+    </section>
+
+    <section id="forecast-results" class="fc-card fc-results" aria-labelledby="forecast-results-heading" hidden>
+      <h2 id="forecast-results-heading" class="fc-results-heading">みんなの予測</h2>
+      <p id="forecast-total" class="fc-total">—</p>
+      <p id="forecast-threshold-note" class="fc-threshold-note" hidden></p>
+      <ul id="forecast-results-list" class="fc-results-list"></ul>
+    </section>
+
+    <section class="fc-card fc-note" aria-labelledby="forecast-note-heading">
+      <h2 id="forecast-note-heading" class="fc-note-heading">この集計の読み方</h2>
+      <ul class="fc-note-list">
+        <li>
+          <strong>参考値・非公式です。</strong>
+          本サイト来訪者の回答であり、統計的な世論調査ではありません。
+          回答者は無作為抽出ではないため、世論全体を代表しません。
+        </li>
+        <li>
+          <strong>割合は総投票数が100票に達してから表示します。</strong>
+          それまでは実数のみを出します。数票の段階で割合だけが独り歩きするのを避けるためです。
+        </li>
+        <li>
+          <strong>投票前は全体の結果を伏せています。</strong>
+          先に多数派を見てしまうと回答が引きずられるためです。
+        </li>
+        <li>
+          <strong>個人を特定する情報は保存しません。</strong>
+          重複投票の判定にはIPアドレスをそのまま使わず、ソルトを混ぜて復元できない形にした
+          識別子だけを保持します。Cookieによる追跡も行いません。
+        </li>
+      </ul>
+    </section>
+
+  </div>
+</main>

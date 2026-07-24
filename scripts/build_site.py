@@ -4,6 +4,8 @@ The deployed URLs stay as plain GitHub Pages files:
   - index.html
   - tankers/index.html
   - scale/index.html
+  - opinions/index.html
+  - forecast/index.html
   - about/index.html
 
 Source HTML lives under src/pages and only contains the page-specific main
@@ -20,7 +22,14 @@ from pathlib import Path
 from string import Template
 from typing import Any
 
-from lib.constants import PEAK_DAYS, PEAK_SOURCE
+from lib.constants import (
+    FORECAST_API_ORIGIN,
+    FORECAST_MIN_VOTES_FOR_PERCENT,
+    FORECAST_QUESTION_ID,
+    FORECAST_TURNSTILE_SITE_KEY,
+    PEAK_DAYS,
+    PEAK_SOURCE,
+)
 from lib.io import read_json
 from lib.paths import OG_IMAGE_PATH, REPO_ROOT, SITE_CONFIG_PATH, SNAPSHOTS_PATH, SRC_DIR
 from lib.snapshots import Snapshot, format_jst_date, load_snapshots, pick_latest_snapshot
@@ -118,17 +127,74 @@ def _check_peak_reference_in_sync(
         )
 
 
+_FORECAST_JS_PATH = REPO_ROOT / "js" / "core" / "forecast.js"
+_FORECAST_CONFIG_BLOCK_RE = re.compile(
+    r"FORECAST_CONFIG\s*=\s*\{(?P<body>[^}]*)\}",
+    re.DOTALL,
+)
+# JS 側は camelCase なので、JSON のキーと対応づけて突き合わせる。
+_FORECAST_FIELD_MAP = {
+    "apiOrigin": "api_origin",
+    "turnstileSiteKey": "turnstile_site_key",
+    "questionId": "question_id",
+    "minVotesForPercent": "min_votes_for_percent",
+}
+
+
+def _check_forecast_config_in_sync(
+    forecast_js_text: str,
+    expected: dict[str, Any],
+) -> None:
+    """Raise if js/core/forecast.js drifts from src/constants.json's forecast block.
+
+    JS cannot import the JSON SSOT (no build step), so the config is
+    hand-mirrored. Text-pure like _check_peak_reference_in_sync so tests can
+    exercise it without filesystem fixtures.
+    """
+    block = _FORECAST_CONFIG_BLOCK_RE.search(forecast_js_text)
+    if not block:
+        raise RuntimeError("FORECAST_CONFIG block not found in js/core/forecast.js")
+    body = block.group("body")
+
+    for js_key, json_key in _FORECAST_FIELD_MAP.items():
+        want = expected[json_key]
+        if isinstance(want, int):
+            match = re.search(rf"\b{js_key}\s*:\s*(\d+)", body)
+            got: Any = int(match.group(1)) if match else None
+        else:
+            match = re.search(rf"\b{js_key}\s*:\s*(['\"])(.*?)\1", body, re.DOTALL)
+            got = match.group(2) if match else None
+        if match is None:
+            raise RuntimeError(f"FORECAST_CONFIG.{js_key} not found in js/core/forecast.js")
+        if got != want:
+            raise RuntimeError(
+                f"FORECAST_CONFIG.{js_key} drift: "
+                f"src/constants.json[{json_key}]={want!r}, "
+                f"js/core/forecast.js={got!r}. "
+                "Update both files to keep them in sync."
+            )
+
+
 def verify_constants_in_sync() -> None:
-    """Fail the build when js/core/data.js drifts from src/constants.json.
+    """Fail the build when JS mirrors drift from src/constants.json.
 
     The JS side cannot import the JSON SSOT directly (no build step), so it
-    keeps a hand-mirrored copy of PEAK_REFERENCE. This check catches drift
-    of both `days` and `source` before it ships.
+    keeps hand-mirrored copies: PEAK_REFERENCE in js/core/data.js and
+    FORECAST_CONFIG in js/core/forecast.js. This catches drift before it ships.
     """
     _check_peak_reference_in_sync(
         _DATA_JS_PATH.read_text(encoding="utf-8"),
         PEAK_DAYS,
         PEAK_SOURCE,
+    )
+    _check_forecast_config_in_sync(
+        _FORECAST_JS_PATH.read_text(encoding="utf-8"),
+        {
+            "api_origin": FORECAST_API_ORIGIN,
+            "turnstile_site_key": FORECAST_TURNSTILE_SITE_KEY,
+            "question_id": FORECAST_QUESTION_ID,
+            "min_votes_for_percent": FORECAST_MIN_VOTES_FOR_PERCENT,
+        },
     )
 
 
@@ -168,7 +234,18 @@ def build_csp(template_text: str) -> str:
     script_src = "'self'"
     if inline:
         script_src += f" {inline}"
-    script_src += " https://www.googletagmanager.com https://unpkg.com"
+    # /forecast/ の投票 bot 対策 Turnstile。スクリプトと challenge iframe の両方を許す。
+    script_src += (
+        " https://www.googletagmanager.com https://unpkg.com https://challenges.cloudflare.com"
+    )
+    # 投票 API (Workers)。未デプロイの間は api_origin が空なので何も足さない
+    # （ワイルドカードで先に穴を開けない）。
+    connect_src = (
+        "connect-src 'self' https://www.googletagmanager.com "
+        "https://www.google-analytics.com https://*.google-analytics.com"
+    )
+    if FORECAST_API_ORIGIN:
+        connect_src += f" {FORECAST_API_ORIGIN}"
     directives = [
         "default-src 'self'",
         "base-uri 'self'",
@@ -177,12 +254,9 @@ def build_csp(template_text: str) -> str:
         "style-src 'self' https://fonts.googleapis.com https://unpkg.com",
         "font-src 'self' https://fonts.gstatic.com",
         "img-src 'self' data: https://tile.openstreetmap.org https://www.google-analytics.com",
-        # /opinions/ の国会論戦 YouTube 埋め込み用（Cookie を落とさない nocookie ドメイン）。
-        "frame-src https://www.youtube-nocookie.com",
-        (
-            "connect-src 'self' https://www.googletagmanager.com "
-            "https://www.google-analytics.com https://*.google-analytics.com"
-        ),
+        # /opinions/ の国会論戦 YouTube 埋め込み（nocookie）と /forecast/ の Turnstile。
+        "frame-src https://www.youtube-nocookie.com https://challenges.cloudflare.com",
+        connect_src,
         "form-action 'self'",
     ]
     return "; ".join(directives)
@@ -281,6 +355,51 @@ def build_opinions_nodes(current_url: str, org_id: str) -> list[dict[str, Any]]:
     return nodes
 
 
+# 有事終息予想(/forecast/)の設問と「終息」の定義。FAQPage(AEO)の出所。
+# 投票率は変動値なので JSON-LD には**入れない**（陳腐化・誤引用リスク／仕様 §8）。
+# 定義は変動しないため安全に構造化できる。本文(forecast.html)と対応させること。
+FORECAST_FAQ = [
+    (
+        "ホルムズ海峡の通航支障による有事は、いつ終息すると思いますか？",
+        "本サイトでは来訪者の予想を「〜3ヶ月」「〜6ヶ月」「〜1年」「1年以上（長期化）」の"
+        "4択で集計しています。表示される数値は本サイトで投じられた実際の票のみで、"
+        "外部の予測市場やオッズは使用していません。",
+    ),
+    (
+        "この設問における「終息」の定義は？",
+        "米国・イランの当事国間で停戦または核合意等の公式な合意が発表され、"
+        "ホルムズ海峡の通航支障の原因が解消した状態を「終息」とします。"
+        "価格や輸送量といった経済指標ではなく、当事国間の公式合意という"
+        "観測可能なできごとで線を引いています。",
+    ),
+    (
+        "この集計は世論調査ですか？",
+        "いいえ。参考値・非公式の集計です。本サイト来訪者の回答であり、"
+        "無作為抽出ではないため世論全体を代表するものではありません。",
+    ),
+]
+
+
+def build_forecast_nodes(current_url: str) -> list[dict[str, Any]]:
+    """有事終息予想ページ固有の FAQPage を組み立てる（AEO）。"""
+    return [
+        {
+            "@type": "FAQPage",
+            "@id": f"{current_url}#faq",
+            "inLanguage": "ja",
+            "isPartOf": {"@id": f"{current_url}#webpage"},
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": question,
+                    "acceptedAnswer": {"@type": "Answer", "text": answer},
+                }
+                for question, answer in FORECAST_FAQ
+            ],
+        }
+    ]
+
+
 def build_structured_data(
     page: dict[str, Any],
     site: dict[str, Any],
@@ -343,6 +462,9 @@ def build_structured_data(
         # 提言は国会動画(VideoObject)と税用語辞典(DefinedTermSet)を追加してAEOを厚くする。
         if page["key"] == "opinions":
             nodes.extend(build_opinions_nodes(current_url, org_id))
+        # 有事終息予想は設問と「終息」の定義を FAQPage 化する（投票率は入れない）。
+        if page["key"] == "forecast":
+            nodes.extend(build_forecast_nodes(current_url))
         payload = {"@context": "https://schema.org", "@graph": nodes}
         body = json.dumps(payload, ensure_ascii=False, indent=2)
         return f'<script type="application/ld+json">\n{body}\n</script>\n'
@@ -523,6 +645,13 @@ NAV_ICONS = {
         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
         '<path d="M4 5.5h16v10H12l-4 3.5v-3.5H4z"/>'
         '<path d="M8 9h8M8 12h5"/></svg>'
+    ),
+    # 予想 = 分岐する未来。1点から複数の行き先へ伸びる線で「予測」を表す。
+    "forecast": (
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<path d="M3.5 12.5h5"/><path d="M8.5 12.5 15 6.5"/><path d="M8.5 12.5 15 18.5"/>'
+        '<circle cx="17" cy="5.5" r="2.2"/><circle cx="17" cy="19.5" r="2.2"/></svg>'
     ),
     "about": (
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
