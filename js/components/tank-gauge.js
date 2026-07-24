@@ -105,15 +105,21 @@ export function initTankGauge(history) {
   wrap.innerHTML = renderDonutSvg(segs);
   if (legend) legend.innerHTML = renderLegend(segs);
 
-  const peakEl = document.getElementById('tank-peak-days');
-  if (peakEl) peakEl.textContent = String(PEAK_REFERENCE.days);
+  for (const id of ['tank-peak-days', 'hero-peak-days', 'hero-meter-peak']) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = String(PEAK_REFERENCE.days);
+  }
 
-  // 充填率 KPI（#tank-percent）を秒按分で更新する
+  // 充填率を秒按分で更新する（KPI カード + ヒーローのリード文 / メーター）
   const peakDays = PEAK_REFERENCE.days;
   const percentEl = document.getElementById('tank-percent');
+  const heroPercentEl = document.getElementById('hero-fill-percent');
+  const heroFillEl = document.getElementById('hero-meter-fill');
   subscribe((days) => {
-    if (!percentEl) return;
     const ratio = Math.max(0, Math.min(1, days / peakDays));
-    percentEl.textContent = (ratio * 100).toFixed(1);
+    const percent = (ratio * 100).toFixed(1);
+    if (percentEl) percentEl.textContent = percent;
+    if (heroPercentEl) heroPercentEl.textContent = percent;
+    if (heroFillEl) heroFillEl.style.width = `${percent}%`;
   });
 }

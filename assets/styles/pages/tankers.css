@@ -665,8 +665,38 @@
     flex-direction: row;
     justify-content: space-around;
   }
+  /* 隻数はカウンターの日数（home.css .counter-num）と同じスケールに揃える */
   .page-tankers .ais-num {
-    font-size: clamp(56px, 18vw, 80px);
+    font-size: clamp(64px, 30vw, 120px);
+  }
+  /* 数字＋単位のかたまりをカード中央に置く */
+  .page-tankers .ais-num-row {
+    justify-content: center;
+  }
+  .page-tankers .ais-num-unit {
+    font-size: 22px;
+  }
+  .page-tankers .ais-num-sub-label {
+    font-size: 10px;
+  }
+  .page-tankers .ais-num-row {
+    gap: 12px;
+  }
+  .page-tankers .ais-num-unit-stack {
+    padding-bottom: 10px;
+  }
+  /* 内訳（日本向け / その他）も指で読める大きさに */
+  .page-tankers .ais-breakdown-box {
+    padding: 14px 16px;
+  }
+  .page-tankers .ais-breakdown-value strong {
+    font-size: 30px;
+  }
+  .page-tankers .ais-breakdown-label {
+    font-size: 13px;
+  }
+  .page-tankers .ais-breakdown-unit {
+    font-size: 13px;
   }
   .page-tankers .ship-viz-footer {
     grid-template-columns: 1fr;
