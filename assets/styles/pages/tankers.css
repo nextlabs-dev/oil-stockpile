@@ -64,6 +64,22 @@
   grid-column: 6 / span 7;
 }
 
+/* ヒーロー左上：LIVE バッジ＋何の隻数かのラベルを縦に積む */
+.page-tankers .ais-hero-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.page-tankers .ais-hero-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--jp-bound);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
 .page-tankers .dash-card-eyebrow--live {
   display: inline-flex;
   align-items: center;
@@ -121,13 +137,6 @@
   font-weight: 700;
   color: var(--fg-strong);
   line-height: 1;
-}
-
-.page-tankers .ais-num-sub-label {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--fg-muted);
-  font-weight: 600;
 }
 
 .page-tankers .ais-live-note {
@@ -665,9 +674,6 @@
   }
   .page-tankers .ais-num-unit {
     font-size: 22px;
-  }
-  .page-tankers .ais-num-sub-label {
-    font-size: 10px;
   }
   .page-tankers .ais-num-row {
     gap: 12px;
