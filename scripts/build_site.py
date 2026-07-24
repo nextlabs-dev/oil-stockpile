@@ -189,7 +189,9 @@ def build_csp(template_text: str) -> str:
 
 
 # 提言(/opinions/)に埋め込む国会論戦動画。VideoObject(AEO)の出所。
-# uploadDate は公開月までしか判明しないものは月精度(ISO8601)で正直に記載する。
+# uploadDate は yt-dlp の timestamp/release_timestamp から取得した実公開時刻を
+# ISO8601(JST, タイムゾーン付き)で記載する。Google の VideoObject は
+# タイムゾーン付きの完全な日時を要求するため、月精度・日付のみは不可。
 OPINIONS_VIDEOS = [
     {
         "id": "SmgENrlR8XA",
@@ -198,7 +200,7 @@ OPINIONS_VIDEOS = [
             "国民民主党代表・玉木雄一郎が、ガソリン暫定税率の年内廃止に向けた"
             "国会での攻防を解説する動画。"
         ),
-        "uploadDate": "2025-11",
+        "uploadDate": "2025-11-05T20:51:27+09:00",
     },
     {
         "id": "1xZVIlnYnpU",
@@ -206,7 +208,7 @@ OPINIONS_VIDEOS = [
         "description": (
             "立憲民主党 税制調査会長・重徳和彦が、ガソリン暫定税率の廃止とその財源を解説する動画。"
         ),
-        "uploadDate": "2025-11",
+        "uploadDate": "2025-11-13T19:00:04+09:00",
     },
     {
         "id": "QwybyP2RS8A",
@@ -215,7 +217,7 @@ OPINIONS_VIDEOS = [
             "伊佐進一が、ガソリン補助金の規模（リッター約40円・月約4000億円）と"
             "予備費1兆円の残余を示し、6月中旬の予算切れと節約への政策転換を論じる生配信。"
         ),
-        "uploadDate": "2026-05-20",
+        "uploadDate": "2026-05-20T08:31:47+09:00",
     },
 ]
 
