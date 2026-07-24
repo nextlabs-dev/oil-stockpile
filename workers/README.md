@@ -61,6 +61,19 @@ cd workers && npx wrangler secret put TURNSTILE_SECRET_KEY
 cd workers && npx wrangler d1 execute oilstock-forecast --local --file=./schema.sql && npx wrangler dev
 ```
 
+ローカルのシークレットと変数は `workers/.dev.vars`（gitignore 済み・コミット禁止）に置く。
+**フロントをローカルの静的サーバから叩くときは `ALLOWED_ORIGINS` にそのオリジンを足す**
+（既定は本番オリジンのみのため、足さないと CORS で `Failed to fetch` になる）。
+Turnstile は Cloudflare 公式のテストキー（常に成功）を使うとローカルで投票まで通せる。
+
+```
+VOTER_SALT_SECRET=local-dev-only-not-a-real-secret
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+ALLOWED_ORIGINS=https://oilstock.nextlabs.jp,http://localhost:4173
+```
+
+`.dev.vars` を書き換えたら `wrangler dev` を**再起動**する（起動中は再読み込みされない）。
+
 ## デプロイと疎通確認
 
 ```bash
@@ -72,7 +85,11 @@ curl -s "https://oilstock-forecast-api.<subdomain>.workers.dev/v1/forecast/resul
 ```
 
 投票は Turnstile トークンが必須のため、`curl` 単体では `turnstile_required` が返るのが正常。
-実投票の確認はフェーズ2のフロント実装後に行う。
+
+デプロイ後は **`src/constants.json` の `forecast.api_origin` に実オリジンを、
+`turnstile_site_key` に Turnstile のサイトキーを入れて再ビルド**する
+（`js/core/forecast.js` のミラーも同時に更新すること。ズレるとビルドが失敗する）。
+空のままだと `/forecast/` は投票 UI を無効化して「準備中」を表示する。
 
 ## テスト
 
