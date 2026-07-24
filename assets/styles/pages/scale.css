@@ -124,19 +124,22 @@
   padding: 22px 28px;
   display: flex;
   align-items: center;
+  /* ラベル・見出しは左、数値ブロックは右端に寄せる（.scale-card-value と対で指定）。 */
+  justify-content: flex-end;
   min-height: 90px;
 }
 
 .page-scale .scale-card-value {
-  display: inline-flex;
+  display: flex;
   align-items: baseline;
+  justify-content: flex-end;
   gap: 0;
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
 .page-scale .scale-card-prefix {
-  font-size: clamp(18px, 1.7vw, 22px);
+  font-size: clamp(20px, 1.9vw, 26px);
   font-weight: 800;
   letter-spacing: -0.01em;
   background: var(--num-gradient);
@@ -148,7 +151,7 @@
 
 .page-scale .scale-card-num {
   font-family: "Inter", var(--font-sans);
-  font-size: clamp(28px, 2.8vw, 36px);
+  font-size: clamp(34px, 3.4vw, 44px);
   font-weight: 800;
   letter-spacing: -0.02em;
   background: var(--num-gradient);
@@ -211,6 +214,43 @@
     gap: 14px;
   }
   .page-scale .scale-inner {
-    padding: 18px 20px;
+    padding: 22px 20px;
+    min-height: 104px;
+  }
+  /* 数値をモバイルで主役にする（カウンターの日数に次ぐ階層）。
+     バレル / リットル / VLCC / お風呂 で 1 サイズに統一する。上限は
+     最長のリットル（例: 552億3,845万 L）が 320px 幅でも折り返さない値。 */
+  .page-scale .scale-card-num {
+    font-size: clamp(34px, 10.5vw, 46px);
+  }
+  /* VLCC は 3 桁で収まるため、上記の約 2 倍で主役にする。
+     お風呂（1億8,402万杯）は桁数が多く同じ倍率では溢れるので対象外。 */
+  .page-scale .scale-card--vlcc .scale-card-num {
+    font-size: clamp(68px, 21vw, 92px);
+  }
+  .page-scale .scale-card--vlcc .scale-card-prefix {
+    font-size: clamp(24px, 7vw, 34px);
+  }
+  .page-scale .scale-card--vlcc .scale-card-suffix {
+    font-size: 22px;
+  }
+  .page-scale .scale-card--vlcc .scale-inner {
+    min-height: 132px;
+  }
+  .page-scale .scale-card-prefix {
+    font-size: clamp(20px, 5.5vw, 28px);
+  }
+  .page-scale .scale-card-suffix {
+    font-size: 17px;
+  }
+  .page-scale .scale-card-label,
+  .page-scale .scale-card-title {
+    font-size: 14px;
+  }
+  .page-scale .scale-hero-lead {
+    font-size: 14px;
+  }
+  .page-scale .scale-card-meta {
+    font-size: 12.5px;
   }
 }

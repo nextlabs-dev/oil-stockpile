@@ -198,6 +198,15 @@
 
 <main id="main" class="site-main dashboard">
 
+  <aside class="status-ticker" aria-labelledby="status-ticker-label">
+    <span id="status-ticker-label" class="status-ticker-label">現況</span>
+    <div class="status-ticker-viewport">
+      <p class="status-ticker-track" id="status-ticker-track">
+        <span class="status-ticker-item" id="status-ticker-text">現在の備蓄水準を判定しています。</span>
+      </p>
+    </div>
+  </aside>
+
   <section class="update-banner" aria-label="更新情報">
     <span class="update-banner-label">最新の更新情報</span>
     <span class="update-banner-divider" aria-hidden="true">｜</span>
@@ -221,6 +230,19 @@
               <span class="counter-sub-label">DAYS LEFT</span>
             </span>
           </div>
+          <p class="hero-lede">
+            日本国内にある石油備蓄を、いまの消費ペースで使い続けたら<strong>あと何日もつか</strong>。満タンの目安 <span id="hero-peak-days">247</span> 日分に対して <strong id="hero-fill-percent">—</strong> %です。
+          </p>
+          <div class="hero-meter">
+            <div class="hero-meter-bar" role="img" aria-labelledby="hero-fill-percent">
+              <span class="hero-meter-fill" id="hero-meter-fill"></span>
+            </div>
+            <div class="hero-meter-scale">
+              <span>0日</span>
+              <span>満タンの目安 <span id="hero-meter-peak">247</span>日分</span>
+            </div>
+          </div>
+
           <div class="hero-clock">
             <span class="dash-card-eyebrow">現在時刻</span>
             <div class="counter-time-row" aria-hidden="true">
@@ -323,6 +345,28 @@
       <p class="chart-hint" id="chart-hint">
         各データ点の数値（合計と内訳）は、図内のデータ表にまとめています。点にカーソルを当てると内訳が表示されます。
       </p>
+    </section>
+
+    <!-- はじめての人向け: サイトの簡単な解説 -->
+    <section class="dash-card intro-card" aria-labelledby="intro-heading">
+      <h2 id="intro-heading" class="intro-title">このサイトを簡単に解説</h2>
+      <ol class="intro-steps">
+        <li class="intro-step">
+          <span class="intro-step-num" aria-hidden="true">01</span>
+          <b class="intro-step-q">何の数字？</b>
+          <span class="intro-step-a">経済産業省が公表する石油備蓄量を、日本の 1 日あたり消費量で割った「残り日数」です。輸入が完全に止まった場合の持ちこたえ日数にあたります。</span>
+        </li>
+        <li class="intro-step">
+          <span class="intro-step-num" aria-hidden="true">02</span>
+          <b class="intro-step-q">なぜ秒で動く？</b>
+          <span class="intro-step-a">公表時点からいまこの瞬間までに消費した分を差し引いているためです。数字は推計値で、公表の原数値は下の「内訳」に出しています。</span>
+        </li>
+        <li class="intro-step">
+          <span class="intro-step-num" aria-hidden="true">03</span>
+          <b class="intro-step-q">どこを見ればいい？</b>
+          <span class="intro-step-a">まず残り日数と満タン比。次に「タンカー」タブで、これから日本に届く分の目安（AIS 航行データ）を見るのがおすすめです。</span>
+        </li>
+      </ol>
     </section>
 
   </div>

@@ -64,6 +64,22 @@
   grid-column: 6 / span 7;
 }
 
+/* ヒーロー左上：LIVE バッジ＋何の隻数かのラベルを縦に積む */
+.page-tankers .ais-hero-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.page-tankers .ais-hero-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--jp-bound);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
 .page-tankers .dash-card-eyebrow--live {
   display: inline-flex;
   align-items: center;
@@ -123,13 +139,6 @@
   line-height: 1;
 }
 
-.page-tankers .ais-num-sub-label {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--fg-muted);
-  font-weight: 600;
-}
-
 .page-tankers .ais-live-note {
   font-size: 12px;
   color: var(--fg-sub);
@@ -175,11 +184,6 @@
   letter-spacing: 0.02em;
 }
 
-.page-tankers .ais-breakdown-row--jp .ais-breakdown-label {
-  color: var(--jp-bound);
-  font-weight: 600;
-}
-
 .page-tankers .ais-breakdown-value {
   font-size: 12px;
   color: var(--fg-strong);
@@ -196,10 +200,6 @@
   color: var(--fg-strong);
   letter-spacing: -0.01em;
   line-height: 1;
-}
-
-.page-tankers .ais-breakdown-row--jp .ais-breakdown-value strong {
-  color: var(--jp-bound);
 }
 
 .page-tankers .ais-breakdown-unit {
@@ -224,10 +224,9 @@
   gap: 4px;
 }
 
+/* アイコンのみの共有ボタン：横長を抑え正方形寄りに（テキストは .visually-hidden で保持） */
 .page-tankers .ais-share .share-btn {
-  padding: 8px 10px;
-  font-size: 12px;
-  gap: 6px;
+  padding: 9px;
 }
 
 /* =============================================================
@@ -665,8 +664,35 @@
     flex-direction: row;
     justify-content: space-around;
   }
+  /* 隻数はカウンターの日数（home.css .counter-num）と同じスケールに揃える */
   .page-tankers .ais-num {
-    font-size: clamp(56px, 18vw, 80px);
+    font-size: clamp(64px, 30vw, 120px);
+  }
+  /* 数字＋単位のかたまりをカード中央に置く */
+  .page-tankers .ais-num-row {
+    justify-content: center;
+  }
+  .page-tankers .ais-num-unit {
+    font-size: 22px;
+  }
+  .page-tankers .ais-num-row {
+    gap: 12px;
+  }
+  .page-tankers .ais-num-unit-stack {
+    padding-bottom: 10px;
+  }
+  /* 内訳（日本向け / その他）も指で読める大きさに */
+  .page-tankers .ais-breakdown-box {
+    padding: 14px 16px;
+  }
+  .page-tankers .ais-breakdown-value strong {
+    font-size: 30px;
+  }
+  .page-tankers .ais-breakdown-label {
+    font-size: 13px;
+  }
+  .page-tankers .ais-breakdown-unit {
+    font-size: 13px;
   }
   .page-tankers .ship-viz-footer {
     grid-template-columns: 1fr;

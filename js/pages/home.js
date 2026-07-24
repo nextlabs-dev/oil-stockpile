@@ -9,6 +9,7 @@ import { initChart } from '../components/chart.js';
 import { initCounter } from '../components/counter.js';
 import { initKpi } from '../components/kpi.js';
 import { initShare } from '../components/share.js';
+import { initStatusTicker } from '../components/status-ticker.js';
 import { initTankGauge } from '../components/tank-gauge.js';
 import { loadHistory } from '../core/data.js';
 import { onReady, safeInit, setText } from '../core/dom.js';
@@ -49,6 +50,7 @@ async function main() {
   safeInit('chart', () => initChart(history));
   safeInit('tank-gauge', () => initTankGauge(history));
   safeInit('share', () => initShare());
+  safeInit('status-ticker', () => initStatusTicker(history));
 
   populateHeaderAndBanner(history);
 }
