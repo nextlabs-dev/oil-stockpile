@@ -49,3 +49,7 @@ data/.oil_daily.pdf
 # Superpowers brainstorming sessions (mockups, local state)
 .superpowers/
 
+# Cloudflare Workers のローカル実行成果物とローカル秘密情報
+# (.dev.vars はシークレットを含むため絶対にコミットしない)
+workers/.wrangler/
+workers/.dev.vars

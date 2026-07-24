@@ -1,0 +1,27 @@
+#:schema node_modules/wrangler/config-schema.json
+# 有事終息予想 API。フェーズ1では workers.dev で疎通確認し、
+# api.oilstock.nextlabs.jp への切り替え (routes) は DNS 決裁後に行う。
+
+name = "oilstock-forecast-api"
+main = "src/index.js"
+compatibility_date = "2026-07-24"
+workers_dev = true
+
+[vars]
+# CORS 許可オリジン (カンマ区切り)。未設定なら全拒否。
+ALLOWED_ORIGINS = "https://oilstock.nextlabs.jp"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "oilstock-forecast"
+# `wrangler d1 create oilstock-forecast` の出力 ID をここに入れる。
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+# シークレットは wrangler secret put で登録する (このファイルに書かない):
+#   VOTER_SALT_SECRET     投票者ハッシュのソルト元
+#   TURNSTILE_SECRET_KEY  Turnstile のシークレットキー
+
+# --- カスタムドメインへ切り替えるときに有効化する ---
+# [[routes]]
+# pattern = "api.oilstock.nextlabs.jp"
+# custom_domain = true
