@@ -198,6 +198,15 @@
 
 <main id="main" class="site-main dashboard">
 
+  <aside class="status-ticker" aria-labelledby="status-ticker-label">
+    <span id="status-ticker-label" class="status-ticker-label">現況</span>
+    <div class="status-ticker-viewport">
+      <p class="status-ticker-track" id="status-ticker-track">
+        <span class="status-ticker-item" id="status-ticker-text">現在の備蓄水準を判定しています。</span>
+      </p>
+    </div>
+  </aside>
+
   <section class="update-banner" aria-label="更新情報">
     <span class="update-banner-label">最新の更新情報</span>
     <span class="update-banner-divider" aria-hidden="true">｜</span>
@@ -277,28 +286,6 @@
       </div>
     </section>
 
-    <!-- はじめての人向け: 30秒で分かる要約 -->
-    <section class="dash-card intro-card" aria-labelledby="intro-heading">
-      <h2 id="intro-heading" class="intro-title">このサイトは、30秒でわかります。</h2>
-      <ol class="intro-steps">
-        <li class="intro-step">
-          <span class="intro-step-num" aria-hidden="true">01</span>
-          <b class="intro-step-q">何の数字？</b>
-          <span class="intro-step-a">経済産業省が公表する石油備蓄量を、日本の 1 日あたり消費量で割った「残り日数」です。輸入が完全に止まった場合の持ちこたえ日数にあたります。</span>
-        </li>
-        <li class="intro-step">
-          <span class="intro-step-num" aria-hidden="true">02</span>
-          <b class="intro-step-q">なぜ秒で動く？</b>
-          <span class="intro-step-a">公表時点からいまこの瞬間までに消費した分を差し引いているためです。数字は推計値で、公表の原数値は下の「内訳」に出しています。</span>
-        </li>
-        <li class="intro-step">
-          <span class="intro-step-num" aria-hidden="true">03</span>
-          <b class="intro-step-q">どこを見ればいい？</b>
-          <span class="intro-step-a">まず残り日数と満タン比。次に「タンカー」タブで、これから日本に届く分の目安（AIS 航行データ）を見るのがおすすめです。</span>
-        </li>
-      </ol>
-    </section>
-
     <!-- KPI 1: 備蓄残量（全体） -->
     <section class="dash-card dash-kpi" aria-labelledby="kpi-fill-label">
       <span id="kpi-fill-label" class="dash-card-eyebrow">備蓄残量（全体）</span>
@@ -358,6 +345,28 @@
       <p class="chart-hint" id="chart-hint">
         各データ点の数値（合計と内訳）は、図内のデータ表にまとめています。点にカーソルを当てると内訳が表示されます。
       </p>
+    </section>
+
+    <!-- はじめての人向け: サイトの簡単な解説 -->
+    <section class="dash-card intro-card" aria-labelledby="intro-heading">
+      <h2 id="intro-heading" class="intro-title">このサイトを簡単に解説</h2>
+      <ol class="intro-steps">
+        <li class="intro-step">
+          <span class="intro-step-num" aria-hidden="true">01</span>
+          <b class="intro-step-q">何の数字？</b>
+          <span class="intro-step-a">経済産業省が公表する石油備蓄量を、日本の 1 日あたり消費量で割った「残り日数」です。輸入が完全に止まった場合の持ちこたえ日数にあたります。</span>
+        </li>
+        <li class="intro-step">
+          <span class="intro-step-num" aria-hidden="true">02</span>
+          <b class="intro-step-q">なぜ秒で動く？</b>
+          <span class="intro-step-a">公表時点からいまこの瞬間までに消費した分を差し引いているためです。数字は推計値で、公表の原数値は下の「内訳」に出しています。</span>
+        </li>
+        <li class="intro-step">
+          <span class="intro-step-num" aria-hidden="true">03</span>
+          <b class="intro-step-q">どこを見ればいい？</b>
+          <span class="intro-step-a">まず残り日数と満タン比。次に「タンカー」タブで、これから日本に届く分の目安（AIS 航行データ）を見るのがおすすめです。</span>
+        </li>
+      </ol>
     </section>
 
   </div>
