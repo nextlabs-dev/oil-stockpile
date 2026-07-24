@@ -175,11 +175,6 @@
   letter-spacing: 0.02em;
 }
 
-.page-tankers .ais-breakdown-row--jp .ais-breakdown-label {
-  color: var(--jp-bound);
-  font-weight: 600;
-}
-
 .page-tankers .ais-breakdown-value {
   font-size: 12px;
   color: var(--fg-strong);
@@ -196,10 +191,6 @@
   color: var(--fg-strong);
   letter-spacing: -0.01em;
   line-height: 1;
-}
-
-.page-tankers .ais-breakdown-row--jp .ais-breakdown-value strong {
-  color: var(--jp-bound);
 }
 
 .page-tankers .ais-breakdown-unit {
@@ -224,10 +215,9 @@
   gap: 4px;
 }
 
+/* アイコンのみの共有ボタン：横長を抑え正方形寄りに（テキストは .visually-hidden で保持） */
 .page-tankers .ais-share .share-btn {
-  padding: 8px 10px;
-  font-size: 12px;
-  gap: 6px;
+  padding: 9px;
 }
 
 /* =============================================================
