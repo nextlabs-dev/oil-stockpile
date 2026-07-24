@@ -1,8 +1,11 @@
 # 有事終息予想タブ（/forecast/）要件・仕様
 
-**ステータス**: 仕様確定（2026-07-21）／未実装
+**ステータス**: 仕様確定（2026-07-21）／フェーズ1実装済み（2026-07-24, #112）
 **決裁**: 亀井（NextLab 代表）
-**関連**: 提言タブ `/opinions/`（#109 で実装済み）
+**関連**: 提言タブ `/opinions/`（#109 で実装済み）／API 実装 `workers/`（#112）
+
+> **2026-07-24 更新**: フェーズ1（Workers + D1 の API）実装にあたり、§10 の未決事項の一部を
+> 亀井決裁で確定した。本文を最新の決定に合わせて更新済み。差分は §10 の履歴を参照。
 
 ---
 
@@ -54,8 +57,11 @@
 | `y1` | 〜1年 |
 | `long` | 1年以上（長期化） |
 
-- 「終息」の定義を設問脇に明記する（例: ホルムズ海峡の通航が平常化し、国家備蓄の追加放出が不要になる状態）。
-  定義を書かない設問は解釈がぶれるため必須。
+- **「終息」の定義（確定・政治／軍事イベント基準）**:
+  「米国・イランの当事国間で停戦または核合意等の公式な合意が発表され、
+  ホルムズ海峡の通航支障の原因が解消した状態」を「終息」とする。
+  価格・輸送量などの経済指標ではなく、**当事国間の公式合意という観測可能なイベント**で線を引く。
+  定義文言の SSOT は実装側 `workers/src/forecast.js` の `QUESTIONS[].definition`。設問脇に必ず表示する。
 - 設問は当面この 1 問のみ。将来増やす場合も `question_id` で分離する。
 
 ---
@@ -68,10 +74,16 @@
 
 ### 投票後
 - **あなたの予測**: 選んだ肢をハイライト表示。
-- **みんなの予測**: 選択肢ごとの得票率バー＋実数＋総投票数。
+- **みんなの予測**: 選択肢ごとの実数＋総投票数を表示。
+  得票率バーは **総投票数が 100 票以上のときのみ表示する**（下限ルール、確定）。
+  100 票未満の間は実数のみを出し、率は「集計中」表示に留める。
+  数票で「75% が長期化と予想」のような誤引用が独り歩きするのを防ぐため。
 - **サイト本題との接続**: 現在の備蓄残日数（`snapshots.json` の SSOT）と突き合わせ、
   「①〜④のケースで備蓄が足りるか」を併記する。ここが他の予測サイトにない本サイト固有の価値。
-- 再投票は不可（変更したい場合の扱いは §8 の未決事項）。
+- **再投票は可（上書き方式、確定）**。同一来訪者の最後の 1 票のみを集計に反映する。
+  情勢の変化を受けて予測を変えられるようにするため。UNIQUE 制約
+  `(question_id, voter_hash)` により重複計上は起きない。短時間の連投は
+  Workers 側のクールダウン（既定 10 秒）で弾く。
 
 ### 表記
 - 「参考値・非公式」「本サイト来訪者の回答であり、統計的な世論調査ではない」旨を明記。
@@ -80,20 +92,27 @@
 
 ## 5. データモデル（D1）
 
+実装は `workers/schema.sql`。上書き投票のため `updated_at` を追加している。
+
 ```sql
 CREATE TABLE votes (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
   question_id   TEXT NOT NULL,           -- 例: 'hormuz_end_2026'
   choice        TEXT NOT NULL,           -- 'm3' | 'm6' | 'y1' | 'long'
-  voter_hash    TEXT NOT NULL,           -- IP+UA+日次ソルトの SHA-256（生IPは保存しない）
-  created_at    TEXT NOT NULL            -- ISO8601 (UTC)
+  voter_hash    TEXT NOT NULL,           -- secret+question+epoch を混ぜたソルト付き SHA-256（生IPは保存しない）
+  created_at    TEXT NOT NULL,           -- ISO8601 (UTC) 初回投票時刻
+  updated_at    TEXT NOT NULL            -- ISO8601 (UTC) 最終更新時刻（上書き投票と連投制限に使う）
 );
 CREATE INDEX idx_votes_q ON votes(question_id);
 CREATE UNIQUE INDEX idx_votes_dedup ON votes(question_id, voter_hash);
 ```
 
 - **生 IP は保存しない**。`voter_hash` にソルト付きハッシュのみ保持（プライバシー方針）。
-- ソルトは日次ローテーション（長期の名寄せを不可能にする）。
+- **ソルトは設問（`question_id`）ごとに固定**する（`saltEpoch`）。当初案は「日次ローテーション」
+  だったが、**再投票=上書き方式と両立しない**——ソルトが日次で変わると同一来訪者のハッシュが
+  日をまたぐたびに変化し、`ON CONFLICT` の上書きが効かず二重計上になる。長期の名寄せ防止は
+  「ソルトに `question_id` を混ぜて設問をまたいだ突合を不可能にする」ことと、`secret` の非公開で担保する。
+  情勢が変わって問い直す際は新しい `question_id`＋`saltEpoch` を切る（§10 参照）。
 - 個人情報・Cookie による追跡は行わない。
 
 ### 集計
@@ -103,23 +122,33 @@ CREATE UNIQUE INDEX idx_votes_dedup ON votes(question_id, voter_hash);
 
 ## 6. API 設計（Cloudflare Workers）
 
-別ホスト（例: `api.oilstock.nextlabs.jp`）で提供。GitHub Pages 本体は静的のまま維持する。
+別ホストで提供。GitHub Pages 本体は静的のまま維持する。実装は `workers/`（#112）。
 
 | メソッド | パス | 内容 |
 |---|---|---|
 | `GET` | `/v1/forecast/results?q=<question_id>` | 選択肢ごとの得票数・総数を返す |
 | `POST` | `/v1/forecast/vote` | `{question_id, choice, turnstile_token}` を受けて 1 票記録し、最新結果を返す |
 
-- CORS: `Access-Control-Allow-Origin: https://oilstock.nextlabs.jp` に限定。
-- レスポンスに個人識別情報を含めない。
+- CORS: `Access-Control-Allow-Origin: https://oilstock.nextlabs.jp` に限定（許可オリジンの完全一致のみ。未許可には CORS ヘッダを一切返さない）。
+- レスポンスに個人識別情報を含めない。**得票率は API では返さず実数のみ**を返す（下限ルールは §4 の表示側で判定）。
 - エラー時はフロントで「現在集計を取得できません」を表示し、**推測値やモックにフォールバックしない**。
+
+### API ドメイン（未決）
+
+`api.oilstock.nextlabs.jp` を第一候補とするが**未確定**。フェーズ1は `*.workers.dev` で疎通確認済み。
+
+- Cloudflare アカウントは保有を確認済み（2026-07-24）。
+- カスタムドメインに切り替える場合は `nextlabs.jp` の DNS を Cloudflare 管理に置き、
+  `wrangler.toml` の `routes`（コメントアウト済み）を有効化する。DNS の現管理先の確認が先。
+- 遅くとも**フェーズ2の公開までにドメインを確定**する。それまでは workers.dev で進める。
 
 ---
 
 ## 7. 不正対策・セキュリティ
 
 1. **Cloudflare Turnstile**: 投票時にトークン検証。bot を弾く。
-2. **IP レート制限**: 同一 `voter_hash` は 1 票（UNIQUE 制約）。加えて Workers 側で短時間の連投を制限。
+2. **IP レート制限**: 同一 `voter_hash` は 1 レコード（UNIQUE 制約、上書き方式）。
+   加えて Workers 側で `updated_at` を見て短時間の連投（既定 10 秒）を弾く。
 3. **`localStorage`** は UX 補助（投票済み表示）のみ。**信頼の根拠にはしない**。
 4. **CSP 追加が必要**（`build_csp()` を更新）:
    - `connect-src` に Workers の API オリジンを追加
@@ -142,7 +171,7 @@ CREATE UNIQUE INDEX idx_votes_dedup ON votes(question_id, voter_hash);
 
 | フェーズ | 内容 |
 |---|---|
-| 1 | Workers + D1 構築、API 単体で疎通確認（本体サイト未変更） |
+| 1 | **✅ 完了（#112, 2026-07-24）** Workers + D1 構築、API 単体で疎通確認（本体サイト未変更）。デプロイは `wrangler login` 後 |
 | 2 | `/forecast/` ページを `build_site.py` 経路で追加（設問＋結果表示、投票は API 連携） |
 | 3 | 備蓄残日数との突き合わせ表示を追加 |
 | 4 | シェア（X / LINE 等）を追加。元アプリのシェア導線は流用可 |
@@ -151,10 +180,18 @@ CREATE UNIQUE INDEX idx_votes_dedup ON votes(question_id, voter_hash);
 
 ---
 
-## 10. 未決事項
+## 10. 決定事項と残る未決事項
 
-- [ ] 「終息」の正式な定義文言（法令・METI 発表と整合させる）
-- [ ] 再投票・投票変更を許すか
-- [ ] 集計のリセット/期間区切り（情勢が変わった際に問い直すか）
-- [ ] API ドメイン（`api.oilstock.nextlabs.jp` で確定するか）
-- [ ] 投票数が極端に少ない期間の表示（例: 100 票未満は率を出さない等の下限ルール）
+### 確定（2026-07-24 亀井決裁、フェーズ1実装 #112 に反映）
+
+- [x] **「終息」の定義** → 政治・軍事イベント基準（当事国間の公式合意で線を引く）。§3・実装 `QUESTIONS[].definition` が SSOT。
+- [x] **再投票・投票変更** → 可（上書き方式）。§4・§5・§7 を更新。
+- [x] **ソルトの扱い** → 日次ローテーションは撤回し、設問ごとに固定（上書き方式との両立のため）。§5。
+- [x] **集計のリセット/期間区切り** → 定期リセットはしない。**情勢が動いたら新しい `question_id`＋`saltEpoch` を切って手動で問い直す**。旧結果は消さず「その時点の予測」として残す。
+- [x] **票数下限ルール** → **総投票数 100 票未満は得票率を出さず実数のみ**表示（§4）。API は常に実数のみ返す。
+
+### 残る未決
+
+- [ ] **API ドメイン** → `api.oilstock.nextlabs.jp` が第一候補だが未確定。Cloudflare アカウントは保有確認済み（2026-07-24）。`nextlabs.jp` の DNS 現管理先を確認し、フェーズ2公開までに確定する（§6）。
+- [ ] 「終息」定義を METI/報道の表現と突き合わせ、必要なら文言を微調整（意味は変えない）。
+- [ ] KV による集計キャッシュを入れるトラフィック閾値の見極め（当面は都度 `COUNT`）。
