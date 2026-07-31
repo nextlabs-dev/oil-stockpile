@@ -65,16 +65,21 @@ async function main() {
 
       populateHeaderAndBanner(history);
 
-      // トグル状態を更新（active クラス）
+      // トグル状態を更新（active クラス・aria-selected）
       document.querySelectorAll('[data-fuel]').forEach((b) => {
-        b.classList.toggle('active', b.dataset.fuel === fuel);
+        const isActive = b.dataset.fuel === fuel;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-selected', isActive ? 'true' : 'false');
       });
     });
   });
 
   // 初期時点で石油ボタンをアクティブ化
   const oilBtn = document.querySelector('[data-fuel="oil"]');
-  if (oilBtn) oilBtn.classList.add('active');
+  if (oilBtn) {
+    oilBtn.classList.add('active');
+    oilBtn.setAttribute('aria-selected', 'true');
+  }
 }
 
 onReady(main);

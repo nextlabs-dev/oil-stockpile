@@ -100,6 +100,33 @@ async function main() {
     return;
   }
 
+  function setOilCardVisibility(visible) {
+    const oilCardIds = [
+      'card-barrels-label',
+      'card-liters-label',
+      'card-vlcc-label',
+      'card-bath-label',
+    ];
+    const lpgCardIds = [
+      'card-volume-label',
+      'card-spherical-tanks-label',
+      'card-cassettes-label',
+      'card-propane-cylinders-label',
+      'card-vlgc-label',
+      'card-disaster-label',
+    ];
+
+    oilCardIds.forEach((id) => {
+      const section = document.querySelector(`[aria-labelledby="${id}"]`);
+      if (section) section.hidden = !visible;
+    });
+
+    lpgCardIds.forEach((id) => {
+      const section = document.querySelector(`[aria-labelledby="${id}"]`);
+      if (section) section.hidden = visible;
+    });
+  }
+
   function renderOil() {
     const snapshot = oilHistory[oilHistory.length - 1];
     const days = computeCurrentDays(snapshot);
@@ -114,6 +141,8 @@ async function main() {
     if (elapsedDaysSince(snapshot.asOf) > STALE_THRESHOLD_DAYS) {
       showElement('scale-stale-warning');
     }
+    setText('scale-heading', '石油ものさし');
+    setOilCardVisibility(true);
     renderCards(days);
   }
 
@@ -122,9 +151,10 @@ async function main() {
     setText('scale-days', String(Math.round(snapshot.totalDays * 10) / 10));
     setText('scale-as-of', formatYearMonth(snapshot.asOf));
     setText('header-last-updated', formatDotDate(snapshot.published));
-    // LPG は月次なので古さ警告は常に非表示
     const warning = document.getElementById('scale-stale-warning');
     if (warning) warning.style.display = 'none';
+    setText('scale-heading', 'LPGものさし');
+    setOilCardVisibility(false);
     renderLpgCards(snapshot);
   }
 
@@ -140,13 +170,18 @@ async function main() {
         renderLpg();
       }
       document.querySelectorAll('[data-fuel]').forEach((b) => {
-        b.classList.toggle('active', b.dataset.fuel === fuel);
+        const isActive = b.dataset.fuel === fuel;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-selected', isActive ? 'true' : 'false');
       });
     });
   });
 
   const oilBtn = document.querySelector('[data-fuel="oil"]');
-  if (oilBtn) oilBtn.classList.add('active');
+  if (oilBtn) {
+    oilBtn.classList.add('active');
+    oilBtn.setAttribute('aria-selected', 'true');
+  }
 }
 
 onReady(main);
