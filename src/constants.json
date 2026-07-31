@@ -2,5 +2,51 @@
   "peak_reference": {
     "days": 247,
     "source": "経産省「石油備蓄の現況」過去公表値の高水準（2025年3月末ごろ）"
+  },
+  "lpg": {
+    "reference": {
+      "days": 115.1,
+      "volume_tons": 2912000,
+      "source": "経産省「LPガス備蓄の現況」令和8年5月時点（民間1,520千トン＋国家1,392千トン）"
+    },
+    "display": {
+      "peak_reference_days": 115.1,
+      "display_mode": "static",
+      "display_mode_reason": "月次データで約2ヶ月遅れのため秒読みせず公表値を静的表示"
+    },
+    "conversions": {
+      "spherical_tank_tons": {
+        "value": 1000,
+        "unit": "トン/基",
+        "note": "郊外で見かける銀色の球形タンク1基を1,000t相当として概算。実際の球形貯槽は150kg～2.9tまで幅広いため代表値。"
+      },
+      "cassette_cartridge_kg": {
+        "value": 0.25,
+        "unit": "kg/本",
+        "name": "カセットボンベ（CB缶）",
+        "note": "キャンプ用・カセットコンロの250g缶"
+      },
+      "propane_cylinder_kg": {
+        "value": 50,
+        "unit": "kg/本",
+        "name": "プロパンボンベ",
+        "note": "家庭用50kg容器。軒下に2本セットで設置される"
+      },
+      "vlgc_tons": {
+        "value": 44000,
+        "unit": "トン/隻",
+        "name": "VLGC（大型LPG運搬船）",
+        "note": "大型LPG液化ガス運搬船。石油のVLCCに相当"
+      },
+      "disaster_capacity": {
+        "model": {
+          "people": 70,
+          "days": 12,
+          "unit": "人日"
+        },
+        "source": "経産省「LPガス備蓄の現況」資料：1tで発電機1台＋ストーブ5台＋70人分朝昼晩＋コンロ2台＋シャワー3時間/日を12日間",
+        "note": "全国民を対象に換算した場合の備蓄期間を示す"
+      }
+    }
   }
 }
