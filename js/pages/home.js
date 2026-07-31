@@ -6,11 +6,11 @@
  */
 
 import { initChart } from '../components/chart.js';
-import { initCounter } from '../components/counter.js';
+import { initCounter, setFuelMode } from '../components/counter.js';
 import { initKpi } from '../components/kpi.js';
 import { initShare } from '../components/share.js';
 import { initTankGauge } from '../components/tank-gauge.js';
-import { loadHistory } from '../core/data.js';
+import { loadHistory, loadLpgHistory } from '../core/data.js';
 import { onReady, safeInit, setText } from '../core/dom.js';
 import { formatDotDate } from '../core/format.js';
 
@@ -33,24 +33,48 @@ function showLoadError(err) {
 }
 
 async function main() {
-  let history;
+  let oilHistory, lpgHistory;
   try {
-    history = await loadHistory();
+    oilHistory = await loadHistory();
+    lpgHistory = await loadLpgHistory();
   } catch (e) {
     showLoadError(e);
     return;
   }
 
-  // counter を先に初期化することで、続く tank-gauge の subscribe() が
-  // 即座に正しい値で同期される（latestSnapshot 未設定で NaN が DOM に
-  // 書き込まれる隙間を作らない）。順序を保つため逐次に呼ぶ。
-  safeInit('counter', () => initCounter(history));
-  safeInit('kpi', () => initKpi(history));
-  safeInit('chart', () => initChart(history));
-  safeInit('tank-gauge', () => initTankGauge(history));
+  setFuelMode('oil');
+  safeInit('counter', () => initCounter(oilHistory));
+  safeInit('kpi', () => initKpi(oilHistory));
+  safeInit('chart', () => initChart(oilHistory));
+  safeInit('tank-gauge', () => initTankGauge(oilHistory));
   safeInit('share', () => initShare());
 
-  populateHeaderAndBanner(history);
+  populateHeaderAndBanner(oilHistory);
+
+  // [石油][LPG] トグル
+  document.querySelectorAll('[data-fuel]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const fuel = btn.dataset.fuel;
+      const history = fuel === 'oil' ? oilHistory : lpgHistory;
+
+      setFuelMode(fuel);
+      initCounter(history);
+      initKpi(history);
+      initChart(history);
+      initTankGauge(history);
+
+      populateHeaderAndBanner(history);
+
+      // トグル状態を更新（active クラス）
+      document.querySelectorAll('[data-fuel]').forEach((b) => {
+        b.classList.toggle('active', b.dataset.fuel === fuel);
+      });
+    });
+  });
+
+  // 初期時点で石油ボタンをアクティブ化
+  const oilBtn = document.querySelector('[data-fuel="oil"]');
+  if (oilBtn) oilBtn.classList.add('active');
 }
 
 onReady(main);

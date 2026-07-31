@@ -15,6 +15,7 @@
  */
 
 const DEFAULT_SNAPSHOTS_URL = './data/snapshots.json';
+const DEFAULT_LPG_SNAPSHOTS_URL = './data/lpg_snapshots.json';
 
 export async function loadJson(url, validate = null) {
   const r = await fetch(url, { cache: 'no-cache' });
@@ -38,6 +39,19 @@ export async function loadHistory(url = DEFAULT_SNAPSHOTS_URL) {
 }
 
 /**
+ * lpg_snapshots.json を取得する（月次・静的表示用）。
+ * 国家日数が入った完全行のみを返す。
+ */
+export async function loadLpgHistory(url = DEFAULT_LPG_SNAPSHOTS_URL) {
+  const data = await loadJson(url);
+  if (!Array.isArray(data) || data.length === 0) {
+    throw new Error('lpg_snapshots.json is empty or invalid');
+  }
+  const completeRows = data.filter((r) => r.nationalDays !== null);
+  return completeRows.slice().sort((a, b) => a.asOf.localeCompare(b.asOf));
+}
+
+/**
  * タンクゲージの基準（最大値）。
  *
  * SSOT: src/constants.json (peak_reference)
@@ -47,6 +61,17 @@ export async function loadHistory(url = DEFAULT_SNAPSHOTS_URL) {
 export const PEAK_REFERENCE = {
   days: 247,
   source: '経産省「石油備蓄の現況」過去公表値の高水準（2025年3月末ごろ）',
+};
+
+/**
+ * LPG備蓄の基準（最大値）。月次公表・約2ヶ月遅れのため固定値。
+ *
+ * SSOT: src/constants.json (lpg.reference)
+ * 令和8年5月時点（民間62.1日+国家53.0日）
+ */
+export const LPG_PEAK_REFERENCE = {
+  days: 115.1,
+  source: '経産省「LPガス備蓄の現況」令和8年5月時点',
 };
 
 /**

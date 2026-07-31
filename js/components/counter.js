@@ -20,8 +20,16 @@ import { setText, showElement } from '../core/dom.js';
 
 const MS_PER_DAY = 86_400_000;
 
+let fuelMode = 'oil'; // 'oil' | 'lpg'
 let latestSnapshot = null;
 let asOfTimestamp = null;
+
+export function setFuelMode(mode) {
+  if (mode !== 'oil' && mode !== 'lpg') {
+    throw new Error(`Invalid fuel mode: ${mode}`);
+  }
+  fuelMode = mode;
+}
 
 /**
  * 値ソース（最新スナップショット）だけを仕込む。tick 表示ループ・listener・
@@ -93,6 +101,16 @@ export function subscribe(fn) {
 let timer = null;
 
 function tick() {
+  if (fuelMode === 'lpg') {
+    // LPG：月次・静的表示（秒読みしない）
+    const totalDays = latestSnapshot.totalDays || latestSnapshot.total;
+    setText('counter-days', Math.round(totalDays * 10) / 10);
+    const timeEl = document.getElementById('counter-hours')?.parentElement;
+    if (timeEl) timeEl.style.display = 'none';
+    return;
+  }
+
+  // 石油：秒読み
   const days = computeCurrentDays();
   const { d, h, m, s } = splitBreakdown(days);
 
@@ -117,19 +135,28 @@ export function initCounter(history) {
   setLatest(history);
 
   // 古さ警告（asOf から閾値日数以上経過しているとき）。
-  // カウンター固有の id を使う。home が所有する #counter-stale-warning を指し、
-  // tankers の #stale-warning（6時間タンカーバナー）を誤って点けない。
-  const elapsedDays = getElapsedDays();
-  if (elapsedDays > STALE_THRESHOLD_DAYS) {
-    showElement('counter-stale-warning');
+  // LPG は月次なため古さ警告は常に非表示。
+  if (fuelMode === 'oil') {
+    const elapsedDays = getElapsedDays();
+    if (elapsedDays > STALE_THRESHOLD_DAYS) {
+      showElement('counter-stale-warning');
+    }
   }
 
   tick();
-  if (timer) clearInterval(timer);
-  timer = setInterval(tick, 1000);
 
-  // タブ非アクティブで setInterval が間引かれた後の即時補正
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') tick();
-  });
+  if (fuelMode === 'oil') {
+    // 石油：秒ごとに更新
+    if (timer) clearInterval(timer);
+    timer = setInterval(tick, 1000);
+
+    // タブ非アクティブで setInterval が間引かれた後の即時補正
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') tick();
+    });
+  } else if (timer) {
+    // LPG：タイマーを停止
+    clearInterval(timer);
+    timer = null;
+  }
 }

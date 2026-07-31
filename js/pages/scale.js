@@ -14,6 +14,7 @@ import {
   DAILY_CONSUMPTION_KL,
   elapsedDaysSince,
   loadHistory,
+  loadLpgHistory,
   STALE_THRESHOLD_DAYS,
   VLCC_CAPACITY_KL,
 } from '../core/data.js';
@@ -21,12 +22,17 @@ import { onReady, setText, showElement } from '../core/dom.js';
 import { formatDotDate, formatInt, formatJaNumber } from '../core/format.js';
 
 const CONSTANTS = {
-  /** 1 バレル = 158.987 L (USA Petroleum barrel)。 */
+  // 石油
   LITERS_PER_BARREL: 158.987,
-  /** 家庭用お風呂 1 杯。一般的に 200–300 L とされ、本実装では 300 L を採用。 */
   BATH_VOLUME_L: 300,
-  /** 日本の総人口（概算）。 */
   POPULATION: 125_000_000,
+
+  // LPG
+  LPG_SPHERICAL_TANK_TONS: 1000,
+  LPG_CASSETTE_CARTRIDGE_KG: 0.25,
+  LPG_PROPANE_CYLINDER_KG: 50,
+  LPG_VLGC_TONS: 44000,
+  LPG_VOLUME_TONS: 2_912_000,
 };
 
 function formatYearMonth(iso) {
@@ -65,36 +71,82 @@ function renderCards(days) {
   setText('compare-bath-years', formatInt(bathDays));
 }
 
+function renderLpgCards(snapshot) {
+  const volumeTons = CONSTANTS.LPG_VOLUME_TONS;
+  const volumeKg = volumeTons * 1_000;
+
+  // 6 ものさしカード
+  const sphericalTanks = volumeTons / CONSTANTS.LPG_SPHERICAL_TANK_TONS;
+  const cartridges = volumeKg / CONSTANTS.LPG_CASSETTE_CARTRIDGE_KG;
+  const propaneCylinders = volumeKg / CONSTANTS.LPG_PROPANE_CYLINDER_KG;
+  const vlgcShips = volumeTons / CONSTANTS.LPG_VLGC_TONS;
+
+  setText('unit-volume', formatJaNumber(volumeTons / 1_000_000)); // 万トン単位（例：291万）
+  setText('unit-spherical-tanks', formatInt(sphericalTanks));
+  setText('unit-cassettes', formatJaNumber(cartridges));
+  setText('unit-propane-cylinders', formatJaNumber(propaneCylinders));
+  setText('compare-vlgc', formatInt(vlgcShips));
+  setText('compare-disaster-days', Math.round(snapshot.totalDays * 10) / 10);
+}
+
 async function main() {
-  let history;
+  let oilHistory, lpgHistory;
   try {
-    history = await loadHistory('../data/snapshots.json');
+    oilHistory = await loadHistory('../data/snapshots.json');
+    lpgHistory = await loadLpgHistory('../data/lpg_snapshots.json');
   } catch (e) {
-    console.error('snapshots load failed:', e);
-    showLoadError();
-    return;
-  }
-  const snapshot = history[history.length - 1];
-
-  const days = computeCurrentDays(snapshot);
-  // 構造的に有効だが内容無効（total 非数値 / asOf 欠落・不正）なスナップショットを
-  // fetch 失敗と同じエラー状態に倒す。"NaN日分" を描かないためのガード。
-  if (!Number.isFinite(days)) {
-    console.error('invalid snapshot (computeCurrentDays returned NaN):', snapshot);
+    console.error('history load failed:', e);
     showLoadError();
     return;
   }
 
-  setText('scale-days', String(Math.floor(days)));
-  setText('scale-as-of', formatYearMonth(snapshot.asOf));
-  setText('header-last-updated', formatDotDate(snapshot.published));
-
-  // データ取得が止まっている可能性の警告（counter と同じ 14 日しきい値）。
-  if (elapsedDaysSince(snapshot.asOf) > STALE_THRESHOLD_DAYS) {
-    showElement('scale-stale-warning');
+  function renderOil() {
+    const snapshot = oilHistory[oilHistory.length - 1];
+    const days = computeCurrentDays(snapshot);
+    if (!Number.isFinite(days)) {
+      console.error('invalid snapshot:', snapshot);
+      showLoadError();
+      return;
+    }
+    setText('scale-days', String(Math.floor(days)));
+    setText('scale-as-of', formatYearMonth(snapshot.asOf));
+    setText('header-last-updated', formatDotDate(snapshot.published));
+    if (elapsedDaysSince(snapshot.asOf) > STALE_THRESHOLD_DAYS) {
+      showElement('scale-stale-warning');
+    }
+    renderCards(days);
   }
 
-  renderCards(days);
+  function renderLpg() {
+    const snapshot = lpgHistory[lpgHistory.length - 1];
+    setText('scale-days', String(Math.round(snapshot.totalDays * 10) / 10));
+    setText('scale-as-of', formatYearMonth(snapshot.asOf));
+    setText('header-last-updated', formatDotDate(snapshot.published));
+    // LPG は月次なので古さ警告は常に非表示
+    const warning = document.getElementById('scale-stale-warning');
+    if (warning) warning.style.display = 'none';
+    renderLpgCards(snapshot);
+  }
+
+  renderOil();
+
+  // [石油][LPG] トグル
+  document.querySelectorAll('[data-fuel]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const fuel = btn.dataset.fuel;
+      if (fuel === 'oil') {
+        renderOil();
+      } else if (fuel === 'lpg') {
+        renderLpg();
+      }
+      document.querySelectorAll('[data-fuel]').forEach((b) => {
+        b.classList.toggle('active', b.dataset.fuel === fuel);
+      });
+    });
+  });
+
+  const oilBtn = document.querySelector('[data-fuel="oil"]');
+  if (oilBtn) oilBtn.classList.add('active');
 }
 
 onReady(main);
