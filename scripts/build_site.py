@@ -643,7 +643,7 @@ def main() -> int:
         rendered = render_page(
             template, site_config, page, content, og_image_version, csp, latest_vars, latest
         )
-        output.write_text(rendered, encoding="utf-8", newline="\n")
+        output.write_text(rendered, encoding="utf-8")
         print(f"built {page['output']}")
     return 0
 

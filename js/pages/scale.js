@@ -118,12 +118,16 @@ async function main() {
 
     oilCardIds.forEach((id) => {
       const section = document.querySelector(`[aria-labelledby="${id}"]`);
-      if (section) section.hidden = !visible;
+      if (section) {
+        section.style.display = visible ? '' : 'none';
+      }
     });
 
     lpgCardIds.forEach((id) => {
       const section = document.querySelector(`[aria-labelledby="${id}"]`);
-      if (section) section.hidden = visible;
+      if (section) {
+        section.style.display = visible ? 'none' : '';
+      }
     });
   }
 
