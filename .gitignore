@@ -43,6 +43,11 @@ data/.oil_daily.pdf
 .env.local
 .env.*.local
 
+# Cloudflare Workers local artifacts / secrets (never commit)
+workers/.dev.vars
+workers/.wrangler/
+.wrangler/
+
 # Local design references
 .reference/
 

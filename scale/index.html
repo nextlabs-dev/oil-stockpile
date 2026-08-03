@@ -90,7 +90,7 @@
       <span class="site-logo" aria-hidden="true"></span>
       <span class="site-brand-text">
         <span class="site-title">JAPAN OIL STOCKPILE</span>
-        <span class="site-tagline">あと何日、日本は持つのか。</span>
+        <span class="site-tagline">あと何日、日本のエネルギー備蓄は持つのか。</span>
       </span>
     </a>
     <nav class="tabs" aria-label="セクション">
@@ -111,8 +111,12 @@
 
   <!-- Hero card -->
   <section class="scale-hero-card" aria-labelledby="scale-heading">
+    <div class="fuel-toggle" role="tablist" aria-label="燃料の種類を選択">
+      <button class="fuel-toggle-btn" data-fuel="oil" role="tab" aria-selected="true" title="石油のものさしを表示">石油</button>
+      <button class="fuel-toggle-btn" data-fuel="lpg" role="tab" aria-selected="false" title="LPGのものさしを表示">LPG</button>
+    </div>
     <span class="scale-eyebrow">経産省 最新速報値・<span id="scale-as-of">—</span>時点</span>
-    <h1 id="scale-heading" class="scale-hero-title">石油ものさし</h1>
+    <h1 id="scale-heading" class="scale-hero-title" id="scale-fuel-title">石油ものさし</h1>
     <p class="scale-hero-lead">
       <strong><span id="scale-days">—</span>日分</strong>を、容量・スケール・豆知識の3つの視点から体感できる形に変換します。
     </p>
@@ -169,6 +173,71 @@
       </div>
       <p class="scale-card-meta">
         家庭用お風呂 1 杯を約 300 L として換算。全国民が毎日入り続けて 約 <span id="compare-bath-years">—</span> 日分に相当。
+      </p>
+    </section>
+
+    <!-- LPG: 総量 -->
+    <section class="scale-card" aria-labelledby="card-volume-label" hidden>
+      <span id="card-volume-label" class="scale-card-label">総量</span>
+      <div class="scale-card-value">
+        <span id="unit-volume" class="scale-card-num">—</span>
+        <span class="scale-card-suffix">万トン</span>
+      </div>
+    </section>
+
+    <!-- LPG: 球形タンク -->
+    <section class="scale-card" aria-labelledby="card-spherical-tanks-label" hidden>
+      <span id="card-spherical-tanks-label" class="scale-card-label">球形タンク</span>
+      <div class="scale-card-value">
+        <span id="unit-spherical-tanks" class="scale-card-num">—</span>
+        <span class="scale-card-suffix">基</span>
+      </div>
+    </section>
+
+    <!-- LPG: カセットボンベ -->
+    <section class="scale-card" aria-labelledby="card-cassettes-label" hidden>
+      <span id="card-cassettes-label" class="scale-card-label">カセットボンベ</span>
+      <div class="scale-card-value">
+        <span id="unit-cassettes" class="scale-card-num">—</span>
+        <span class="scale-card-suffix">本</span>
+      </div>
+    </section>
+
+    <!-- LPG: プロパンボンベ -->
+    <section class="scale-card" aria-labelledby="card-propane-cylinders-label" hidden>
+      <span id="card-propane-cylinders-label" class="scale-card-label">プロパンボンベ</span>
+      <div class="scale-card-value">
+        <span id="unit-propane-cylinders" class="scale-card-num">—</span>
+        <span class="scale-card-suffix">本</span>
+      </div>
+    </section>
+
+    <!-- LPG: VLGC -->
+    <section class="scale-card scale-card--with-inner" aria-labelledby="card-vlgc-label" hidden>
+      <span id="card-vlgc-label" class="scale-card-title">LPG運搬船何隻分？</span>
+      <div class="scale-inner">
+        <div class="scale-card-value">
+          <span class="scale-card-prefix">約</span>
+          <span id="compare-vlgc" class="scale-card-num">—</span>
+          <span class="scale-card-suffix">隻</span>
+        </div>
+      </div>
+      <p class="scale-card-meta">
+        大型LPG液化ガス運搬船（VLGC）1隻を約4.4万トンとして換算。
+      </p>
+    </section>
+
+    <!-- LPG: 全国民日数 -->
+    <section class="scale-card scale-card--with-inner" aria-labelledby="card-disaster-label" hidden>
+      <span id="card-disaster-label" class="scale-card-title">全国民で何日分？</span>
+      <div class="scale-inner">
+        <div class="scale-card-value">
+          <span id="compare-disaster-days" class="scale-card-num">—</span>
+          <span class="scale-card-suffix">日</span>
+        </div>
+      </div>
+      <p class="scale-card-meta">
+        1トンで70人分が12日間（発電機・ストーブ・食事・シャワー）を賄えると仮定した場合。
       </p>
     </section>
 

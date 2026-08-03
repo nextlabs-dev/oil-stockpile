@@ -179,7 +179,7 @@
       <span class="site-logo" aria-hidden="true"></span>
       <span class="site-brand-text">
         <span class="site-title">JAPAN OIL STOCKPILE</span>
-        <span class="site-tagline">あと何日、日本は持つのか。</span>
+        <span class="site-tagline">あと何日、日本のエネルギー備蓄は持つのか。</span>
       </span>
     </a>
     <nav class="tabs" aria-label="セクション">
@@ -210,10 +210,14 @@
 
     <!-- Hero card -->
     <section class="dash-card dash-card--hero counter-section" aria-labelledby="counter-heading">
-      <h1 id="counter-heading" class="visually-hidden">石油備蓄カウンター</h1>
+      <h1 id="counter-heading" class="visually-hidden">エネルギー備蓄カウンター</h1>
       <div class="hero-top">
         <div class="hero-left">
-          <span class="dash-card-eyebrow dash-card-eyebrow--brand">今、日本の石油備蓄は</span>
+          <div class="fuel-toggle" role="tablist" aria-label="燃料の種類を選択">
+            <button class="fuel-toggle-btn" data-fuel="oil" role="tab" aria-selected="true" title="石油備蓄を表示">石油</button>
+            <button class="fuel-toggle-btn" data-fuel="lpg" role="tab" aria-selected="false" title="LPG備蓄を表示">LPG</button>
+          </div>
+          <span class="dash-card-eyebrow dash-card-eyebrow--brand" id="fuel-label">今、日本の石油備蓄は</span>
           <div class="counter-days-row" role="timer" aria-label="日本の石油備蓄 推計日数">
             <span id="counter-days" class="counter-num">202</span>
             <span class="counter-unit-stack">
