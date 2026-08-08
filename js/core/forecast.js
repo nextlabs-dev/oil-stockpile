@@ -10,8 +10,8 @@
  * 空のままだと投票 UI は無効化され、「準備中」を表示する（モックは出さない）。
  */
 export const FORECAST_CONFIG = {
-  apiOrigin: '',
-  turnstileSiteKey: '',
+  apiOrigin: 'https://oilstock-forecast-api.nextlab.workers.dev',
+  turnstileSiteKey: '0x4AAAAAAEKYSPqAdFEUUi-a',
   questionId: 'hormuz_end_2026',
   minVotesForPercent: 100,
 };
