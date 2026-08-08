@@ -5,12 +5,13 @@
     "og_image_alt": "日本の石油備蓄カウンター（推計日数）",
     "font_href": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
   },
-  "nav_order": ["home", "tankers", "scale", "opinions", "about"],
+  "nav_order": ["home", "tankers", "scale", "opinions", "forecast", "about"],
   "nav_labels": {
     "home": "カウンター",
     "tankers": "タンカー",
     "scale": "石油のものさし",
     "opinions": "提言",
+    "forecast": "有事終息予想",
     "about": "about"
   },
   "nav_labels_short": {
@@ -18,6 +19,7 @@
     "tankers": "タンカー",
     "scale": "ものさし",
     "opinions": "提言",
+    "forecast": "予想",
     "about": "about"
   },
   "pages": [
@@ -54,6 +56,7 @@
         "tankers": "./tankers/",
         "scale": "./scale/",
         "opinions": "./opinions/",
+        "forecast": "./forecast/",
         "about": "./about/"
       }
     },
@@ -100,6 +103,7 @@
         "tankers": "./",
         "scale": "../scale/",
         "opinions": "../opinions/",
+        "forecast": "../forecast/",
         "about": "../about/"
       }
     },
@@ -136,6 +140,7 @@
         "tankers": "../tankers/",
         "scale": "./",
         "opinions": "../opinions/",
+        "forecast": "../forecast/",
         "about": "../about/"
       }
     },
@@ -172,6 +177,7 @@
         "tankers": "../tankers/",
         "scale": "../scale/",
         "opinions": "../opinions/",
+        "forecast": "../forecast/",
         "about": "./"
       }
     },
@@ -210,6 +216,44 @@
         "tankers": "../tankers/",
         "scale": "../scale/",
         "opinions": "./",
+        "forecast": "../forecast/",
+        "about": "../about/"
+      }
+    },
+    {
+      "key": "forecast",
+      "source": "forecast.html",
+      "output": "forecast/index.html",
+      "body_class": "page-forecast",
+      "site_brand": [
+        "      <span class=\"site-logo\" aria-hidden=\"true\"></span>",
+        "      <span class=\"site-brand-text\">",
+        "        <span class=\"site-title\">JAPAN OIL STOCKPILE</span>",
+        "        <span class=\"site-tagline\">あと何日、日本は持つのか。</span>",
+        "      </span>"
+      ],
+      "header_meta": [
+        "    <div class=\"site-header-meta\">",
+        "      <span class=\"site-header-meta-label\">最終更新</span>",
+        "      <span class=\"site-header-meta-value\" id=\"header-last-updated\">—</span>",
+        "    </div>"
+      ],
+      "title": "有事終息予想｜ホルムズ海峡の有事はいつ終わるか｜日本の石油備蓄",
+      "description": "ホルムズ海峡の通航支障による有事がいつ終息するか、来訪者の予想を集計して可視化する非公式アンケート。外部の予測市場やオッズは使わず、本サイトで投じられた実票のみを表示します。",
+      "canonical_path": "/forecast/",
+      "og_title": "有事終息予想｜この有事はいつ終わるか｜日本の石油備蓄",
+      "og_description": "ホルムズ海峡の有事がいつ終息するか、来訪者の予想を実票で集計。",
+      "twitter_title": "有事終息予想｜この有事はいつ終わるか｜日本の石油備蓄",
+      "twitter_description": "ホルムズ海峡の有事がいつ終息するか、来訪者の予想を実票で集計。",
+      "active_nav": "forecast",
+      "script_tags": "<script src=\"https://challenges.cloudflare.com/turnstile/v0/api.js\" defer></script>\n    <script type=\"module\" src=\"../js/pages/forecast.js\"></script>",
+      "root_path": "../",
+      "nav": {
+        "home": "../",
+        "tankers": "../tankers/",
+        "scale": "../scale/",
+        "opinions": "../opinions/",
+        "forecast": "./",
         "about": "../about/"
       }
     }
