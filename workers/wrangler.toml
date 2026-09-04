@@ -15,7 +15,7 @@ ALLOWED_ORIGINS = "https://oilstock.nextlabs.jp"
 binding = "DB"
 database_name = "oilstock-forecast"
 # `wrangler d1 create oilstock-forecast` の出力 ID をここに入れる。
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "1ca58881-4b2b-4392-84d1-d35bbade766e"
 
 # シークレットは wrangler secret put で登録する (このファイルに書かない):
 #   VOTER_SALT_SECRET     投票者ハッシュのソルト元
