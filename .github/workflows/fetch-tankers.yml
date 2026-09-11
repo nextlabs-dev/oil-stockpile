@@ -67,8 +67,9 @@ jobs:
               git fetch origin main
               git reset --hard origin/main
               cp "$sampled" data/tankers.json
+              python scripts/update_sitemap.py
 
-              git add data/tankers.json
+              git add data/tankers.json sitemap.xml
               git commit -m "data: tankers snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
 
               if git push; then

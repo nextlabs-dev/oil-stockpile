@@ -19,6 +19,16 @@ function populateHeaderAndBanner(history) {
   if (!latest) return;
   setText('update-banner-date', formatDotDate(latest.published));
   setText('header-last-updated', formatDotDate(latest.published));
+  for (const [id, isoDate] of [
+    ['counter-data-asof', latest.asOf],
+    ['counter-published', latest.published],
+  ]) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.textContent = formatDotDate(isoDate);
+      el.dateTime = isoDate;
+    }
+  }
 }
 
 function showLoadError(err) {

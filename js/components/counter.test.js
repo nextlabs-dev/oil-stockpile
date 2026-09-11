@@ -5,6 +5,13 @@ import { computeCurrentDays, setLatest, splitBreakdown } from './counter.js';
 
 const SEC_PER_DAY = 86_400;
 
+test('setLatest: 不正な最新スナップショットを拒否する', () => {
+  assert.throws(
+    () => setLatest([{ asOf: '2026-01-01', total: '200' }]),
+    /latest snapshot cannot be used/,
+  );
+});
+
 test('setLatest: tick ループ/DOM 無しで共有テキスト用に computeCurrentDays が使える', () => {
   // 共有ボタンだけ必要な tankers ページは、1Hz タイマーや counter DOM を起動する
   // initCounter を呼ばずに値ソースだけ仕込めること（過結合の解消）を検証する。

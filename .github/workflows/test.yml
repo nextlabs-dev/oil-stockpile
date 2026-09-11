@@ -30,7 +30,7 @@ permissions:
 jobs:
   unit:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -46,7 +46,9 @@ jobs:
       # generate_ogp の RenderSmokeTest が CJK フォントを必須とするため、
       # fetch-daily.yml と同様に CI にも導入する。
       - name: Install CJK fonts (for OGP render test)
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+        run: |
+          sudo apt-get -o Acquire::Retries=3 update -y
+          sudo apt-get -o Acquire::Retries=3 install -y --no-install-recommends fonts-noto-cjk
 
       - name: Run unit tests
         run: python -m unittest discover -s scripts -p 'test_*.py' -v

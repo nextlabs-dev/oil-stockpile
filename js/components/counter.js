@@ -35,6 +35,12 @@ export function setLatest(history) {
     throw new Error('history is empty');
   }
   latestSnapshot = history[history.length - 1];
+  const initialDays = computeFromSnapshot(latestSnapshot);
+  if (!Number.isFinite(initialDays)) {
+    latestSnapshot = null;
+    asOfTimestamp = null;
+    throw new Error('latest snapshot cannot be used for counter');
+  }
   asOfTimestamp = asOfToMs(latestSnapshot.asOf);
 }
 
@@ -94,6 +100,25 @@ let timer = null;
 
 function tick() {
   const days = computeCurrentDays();
+  if (!Number.isFinite(days)) {
+    setText('counter-days', '—');
+    setText('counter-hours', '—');
+    setText('counter-minutes', '—');
+    setText('counter-seconds', '—');
+    const note = document.querySelector('.counter-note');
+    if (note) {
+      note.textContent = 'データを確認できないため、推計値を表示していません。';
+      note.classList.add('is-error');
+    }
+    subscribers.forEach((fn) => {
+      try {
+        fn(Number.NaN);
+      } catch (e) {
+        console.error(e);
+      }
+    });
+    return;
+  }
   const { d, h, m, s } = splitBreakdown(days);
 
   setText('counter-days', String(d));
