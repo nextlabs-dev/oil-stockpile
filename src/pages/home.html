@@ -44,10 +44,18 @@
             <p class="counter-note">
               端末時刻に基づく秒単位の推計値。データは経済産業省「石油備蓄の現況」速報です。
             </p>
+            <p class="counter-data-context">
+              <span>データ時点 <time id="counter-data-asof">—</time></span>
+              <span aria-hidden="true">｜</span>
+              <span>公表日 <time id="counter-published">—</time></span>
+            </p>
           </div>
         </div>
         <div class="hero-illustration" aria-hidden="true">
-          <img src="assets/counter_top.png" alt="" width="320" height="400" loading="eager" decoding="async" />
+          <picture>
+            <source srcset="assets/counter_top.webp" type="image/webp" />
+            <img src="assets/counter_top.png" alt="" width="320" height="400" loading="eager" fetchpriority="high" decoding="async" />
+          </picture>
         </div>
       </div>
 

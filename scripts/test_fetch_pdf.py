@@ -24,10 +24,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from fetch_pdf import (  # noqa: E402
     HEADER_RE,
     ZEN_TO_HAN,
+    main,
     merge,
     parse_snapshots,
     reiwa_to_gregorian,
     validate,
+    validate_existing_overlap,
 )
 
 
@@ -332,6 +334,43 @@ class TestMerge(unittest.TestCase):
         new = [self._row("2026-04-27", total=205)]
         merged, _, _ = merge(existing, new)
         self.assertEqual(merged[0]["total"], 205)
+
+
+class TestRealPdfFixture(unittest.TestCase):
+    def test_offline_pdf_fixture_completes_dry_run(self):
+        fixture = os.path.join(os.path.dirname(__file__), "fixtures", "oil_daily.pdf")
+        self.assertEqual(main(["--dry-run", "--pdf-path", fixture]), 0)
+
+
+class TestExistingOverlap(unittest.TestCase):
+    def _row(self, asof, total=200, national=100, private=80, joint=20):
+        return {
+            "published": asof,
+            "asOf": asof,
+            "total": total,
+            "national": national,
+            "private": private,
+            "joint": joint,
+        }
+
+    def test_small_overlap_change_is_allowed(self):
+        existing = [self._row("2026-04-27", total=200)]
+        new = [self._row("2026-04-27", total=201, private=81, joint=19)]
+        validate_existing_overlap(existing, new)
+
+    def test_large_overlap_change_is_rejected(self):
+        existing = [self._row("2026-04-27", total=200)]
+        new = [self._row("2026-04-27", total=205)]
+        with self.assertRaisesRegex(RuntimeError, "differs from PDF"):
+            validate_existing_overlap(existing, new)
+
+    def test_many_changed_overlap_rows_are_rejected(self):
+        existing = [self._row(f"2026-04-{day:02d}") for day in range(1, 11)]
+        new = [
+            self._row(f"2026-04-{day:02d}", total=201, private=81, joint=19) for day in range(1, 11)
+        ]
+        with self.assertRaisesRegex(RuntimeError, "too many"):
+            validate_existing_overlap(existing, new)
 
 
 if __name__ == "__main__":

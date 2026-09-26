@@ -8,6 +8,7 @@ oil_daily.pdf をダウンロード・パースし、data/snapshots.json を更�
     - PDF は毎日同一URLで上書き更新される。直近 ~38日分の履歴を含む
     - 失敗時は既存データを維持し、abort（exit non-zero）して人間に通知
     - 重複: 既存と同じ asOf があれば PDF 値で上書き（PDFが正典）
+    - 安全策: 重複期間の急激な値変更・大量変更は自動更新を停止して人間に戻す
     - 抽出: pdfplumber でテキスト化、全角数字を半角化、regex で6フィールドを取る
 
 出口コード:
@@ -35,6 +36,9 @@ PDF_URL = (
 )
 
 TMP_PDF_PATH = DATA_DIR / ".oil_daily.pdf"
+
+OVERLAP_MAX_DELTA_DAYS = 2
+OVERLAP_MAX_CHANGED_ROWS = 5
 
 # 全角→半角
 ZEN_TO_HAN = str.maketrans("０１２３４５６７８９", "0123456789")
@@ -188,6 +192,27 @@ def save(snapshots: list[dict]) -> None:
     write_json(SNAPSHOTS_PATH, snapshots)
 
 
+def validate_existing_overlap(existing: list[dict], new: list[dict]) -> None:
+    """PDFと既存履歴の重複期間を突合し、静かな履歴改変を止める。"""
+    existing_by_as_of = {row["asOf"]: row for row in existing}
+    overlap = [
+        (existing_by_as_of[row["asOf"]], row) for row in new if row["asOf"] in existing_by_as_of
+    ]
+    changed = []
+    for old, fresh in overlap:
+        fields = ("total", "national", "private", "joint")
+        if any(abs(old[field] - fresh[field]) > OVERLAP_MAX_DELTA_DAYS for field in fields):
+            raise RuntimeError(
+                "existing history differs from PDF by more than "
+                f"{OVERLAP_MAX_DELTA_DAYS} days at {fresh['asOf']}"
+            )
+        if any(old[field] != fresh[field] for field in fields):
+            changed.append(fresh["asOf"])
+
+    if len(changed) > max(OVERLAP_MAX_CHANGED_ROWS, len(overlap) // 2):
+        raise RuntimeError(f"too many overlapping snapshots changed: {len(changed)}/{len(overlap)}")
+
+
 def merge(existing: list[dict], new: list[dict]) -> tuple[list[dict], int, int]:
     """
     既存と新規を asOf キーで統合。新規があれば値を上書き。
@@ -274,6 +299,12 @@ def main(argv: list[str]) -> int:
         prev_total = s["total"]
 
     existing = load_existing()
+    try:
+        validate_existing_overlap(existing, new_sorted)
+    except RuntimeError as e:
+        print(f"[fetch] overlap validation failed: {e}", file=sys.stderr)
+        return 1
+
     merged, added, updated = merge(existing, new_sorted)
 
     print(f"[fetch] existing rows: {len(existing)}, added: {added}, updated: {updated}")

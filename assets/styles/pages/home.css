@@ -279,6 +279,11 @@
   align-items: center;
 }
 
+.page-home .hero-illustration picture {
+  display: block;
+  width: 100%;
+}
+
 .page-home .hero-illustration img {
   display: block;
   width: 100%;
@@ -327,6 +332,22 @@
 /* 読み込みエラー時に JS が付与する状態クラス */
 .page-home .counter-note.is-error {
   color: var(--tank-fill-warn);
+}
+
+.page-home .counter-data-context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: -2px 0 0;
+  color: var(--fg-sub);
+  font-size: 11px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+.page-home .counter-data-context time {
+  color: var(--fg-strong);
+  font-weight: 600;
 }
 
 .page-home .hero-share {

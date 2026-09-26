@@ -15,6 +15,48 @@
  */
 
 const DEFAULT_SNAPSHOTS_URL = './data/snapshots.json';
+const SNAPSHOT_NUMERIC_FIELDS = ['total', 'national', 'private', 'joint'];
+
+function isIsoDate(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const [year, month, day] = value.split('-').map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return (
+    date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day
+  );
+}
+
+/**
+ * 公開データの1行が、画面表示に使える最小契約を満たすか確認する。
+ * 異常値は推測補正せず、呼び出し側で読み込み失敗として扱う。
+ */
+export function isValidSnapshot(snapshot) {
+  if (!snapshot || !isIsoDate(snapshot.published) || !isIsoDate(snapshot.asOf)) {
+    return false;
+  }
+  if (snapshot.asOf > snapshot.published) return false;
+  if (
+    SNAPSHOT_NUMERIC_FIELDS.some(
+      (field) => !Number.isFinite(snapshot[field]) || snapshot[field] < 0,
+    )
+  ) {
+    return false;
+  }
+  if (snapshot.total > 500) return false;
+  const parts = snapshot.national + snapshot.private + snapshot.joint;
+  return Math.abs(parts - snapshot.total) <= 2;
+}
+
+export function validateHistory(data) {
+  if (!Array.isArray(data) || data.length === 0) {
+    throw new Error('snapshots.json is empty or invalid');
+  }
+  const invalidIndex = data.findIndex((snapshot) => !isValidSnapshot(snapshot));
+  if (invalidIndex !== -1) {
+    throw new Error(`snapshots.json contains invalid snapshot at index ${invalidIndex}`);
+  }
+  return data;
+}
 
 export async function loadJson(url, validate = null) {
   const r = await fetch(url, { cache: 'no-cache' });
@@ -29,10 +71,7 @@ export async function loadJson(url, validate = null) {
  * fetch失敗時は例外を投げる（呼び出し側で握り潰さないこと）。
  */
 export async function loadHistory(url = DEFAULT_SNAPSHOTS_URL) {
-  const data = await loadJson(url);
-  if (!Array.isArray(data) || data.length === 0) {
-    throw new Error('snapshots.json is empty or invalid');
-  }
+  const data = validateHistory(await loadJson(url));
   // asOf 昇順に並べる（json側で並んでいる前提だが、念のため）
   return data.slice().sort((a, b) => a.asOf.localeCompare(b.asOf));
 }

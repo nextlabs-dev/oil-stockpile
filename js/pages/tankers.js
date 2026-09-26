@@ -12,11 +12,11 @@ import { setLatest } from '../components/counter.js';
 import { initShare } from '../components/share.js';
 import { initTankerMap } from '../components/tanker-map.js';
 import { consumptionDaysFromKl, loadHistory, loadJson, VLCC_CAPACITY_KL } from '../core/data.js';
-import { onReady, setText, showElement } from '../core/dom.js';
+import { onReady, setText } from '../core/dom.js';
 import { formatDotDateTime, formatInt, formatJaDateTime } from '../core/format.js';
+import { evaluateAisHealth } from '../core/tankers-health.js';
 
 const TANKERS_URL = '../data/tankers.json';
-const STALE_HOURS = 6;
 // VLCC 1 隻あたりの概算容量 [万 kL]。SSOT は js/core/data.js の VLCC_CAPACITY_KL [kL]。
 const VLCC_MAN_KL_PER_SHIP = VLCC_CAPACITY_KL / 10_000;
 const SHIP_ICON_JP_SRC = '../assets/tanker_japan.png';
@@ -30,15 +30,30 @@ async function loadTankers() {
   });
 }
 
+function setAisHealthState(health) {
+  const note = document.querySelector('.ais-live-note');
+  if (note) {
+    note.dataset.aisState = health.state;
+    if (health.message) {
+      note.textContent = health.message;
+    }
+  }
+
+  const warning = document.getElementById('stale-warning');
+  if (warning) {
+    warning.hidden = health.state !== 'stale';
+    if (health.state === 'stale') warning.textContent = health.message;
+  }
+}
+
 function showLoadError() {
   setText('total-tankers', '—');
   setText('japan-bound', '—');
   setText('tankers-other', '—');
-  const note = document.querySelector('.ais-live-note');
-  if (note) {
-    note.textContent = 'データの読み込みに失敗しました。時間をおいて再読み込みしてください。';
-    note.classList.add('is-error');
-  }
+  setAisHealthState({
+    state: 'error',
+    message: 'AISデータの読み込みに失敗しました。時間をおいて再読み込みしてください。',
+  });
 }
 
 function renderShipViz(japanBound, other) {
@@ -107,15 +122,6 @@ function renderPorts(ports, unknownCount) {
   }
 }
 
-function checkStaleness(fetchedAtIso) {
-  const fetched = new Date(fetchedAtIso).getTime();
-  if (Number.isNaN(fetched)) return;
-  const ageHours = (Date.now() - fetched) / 3_600_000;
-  if (ageHours > STALE_HOURS) {
-    showElement('stale-warning');
-  }
-}
-
 async function main() {
   let data;
   try {
@@ -126,8 +132,15 @@ async function main() {
     return;
   }
 
-  const total = Number(data.totalTankersInRegion) || 0;
-  const jp = Number(data.japanBoundTankers) || 0;
+  const health = evaluateAisHealth(data);
+  if (health.state === 'error') {
+    showLoadError();
+    return;
+  }
+  setAisHealthState(health);
+
+  const total = data.totalTankersInRegion;
+  const jp = data.japanBoundTankers;
   const other = Math.max(0, total - jp);
   const jpKl = jp * VLCC_MAN_KL_PER_SHIP;
   // 「N 日分の原油消費量」欄: 隻数ではなく jpKl を日消費量で割った日数を入れる。
@@ -151,8 +164,6 @@ async function main() {
   setText('bounding-box', data.boundingBox || '—');
 
   initTankerMap(data.vessels);
-
-  checkStaleness(data.fetchedAt);
 
   // Load snapshot history just to enable the share button to show "いま N 日分".
   // setLatest() だけ呼ぶ: tankers にはカウンター DOM が無いので、initCounter の

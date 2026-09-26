@@ -14,7 +14,7 @@
   --fg: #14182c;
   --fg-strong: #0f1430;
   --fg-sub: #51587a;
-  --fg-muted: #828aa6;
+  --fg-muted: #65708c;
 
   --rule: #dde3ef;
   --rule-soft: #e8ecf5;
@@ -42,8 +42,8 @@
   --header-tab-fg: #a5b0c8; /* 非アクティブタブ文字 */
   --header-overlay: rgba(255, 255, 255, 0.06); /* ロゴ内側 / ホバー地 */
 
-  --link: var(--brand);
-  --focus: var(--brand);
+  --link: #2f5bb8;
+  --focus: #2f5bb8;
 
   /* スペーシング */
   --space-1: 0.25rem; /* 4px */

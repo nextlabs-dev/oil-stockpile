@@ -6,7 +6,9 @@ import {
   computeCurrentDays,
   consumptionDaysFromKl,
   elapsedDaysSince,
+  isValidSnapshot,
   STALE_THRESHOLD_DAYS,
+  validateHistory,
 } from './data.js';
 
 const DAY_MS = 86_400_000;
@@ -44,6 +46,35 @@ test('computeCurrentDays: 不正な入力は NaN を返す', () => {
   assert.ok(Number.isNaN(computeCurrentDays({ total: 200 }))); // asOf 欠落
   assert.ok(Number.isNaN(computeCurrentDays({ asOf: '2026-01-01' }))); // total 欠落
   assert.ok(Number.isNaN(computeCurrentDays({ asOf: '2026-01-01', total: 'x' }))); // total 非数値
+});
+
+test('snapshot contract: 正常な行を受け入れる', () => {
+  const snapshot = {
+    published: '2026-05-01',
+    asOf: '2026-04-28',
+    total: 211,
+    national: 128,
+    private: 81,
+    joint: 2,
+  };
+  assert.equal(isValidSnapshot(snapshot), true);
+  assert.deepEqual(validateHistory([snapshot]), [snapshot]);
+});
+
+test('snapshot contract: 欠損・型違い・内訳不一致・不正日付を拒否する', () => {
+  const base = {
+    published: '2026-05-01',
+    asOf: '2026-04-28',
+    total: 211,
+    national: 128,
+    private: 81,
+    joint: 2,
+  };
+  assert.equal(isValidSnapshot({ ...base, total: '211' }), false);
+  assert.equal(isValidSnapshot({ ...base, joint: 20 }), false);
+  assert.equal(isValidSnapshot({ ...base, asOf: '2026-02-30' }), false);
+  assert.equal(isValidSnapshot({ ...base, asOf: '2026-05-02' }), false);
+  assert.throws(() => validateHistory([{ ...base, total: null }]), /invalid snapshot/);
 });
 
 test('elapsedDaysSince: asOf 当日0時(JST)では 0', () => {
