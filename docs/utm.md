@@ -47,3 +47,20 @@ HubSpot キャンペーン「ネクストラボ公式SNS立ち上げ」（2026-1
 - **投稿は JST 11:00 以降にする**。画像は `fetch-daily.yml`（cron は 07:00 JST 指定）が更新するが、GitHub の cron 遅延で実際は JST 09:10〜10:40 頃（2026-09〜10 の実績。最大 10:39）。11:00 ならその日の画像・当日の日数でカードが出る。7 時投稿だと前日の画像になるため避ける。
 - 遅延が 11:00 を超えた日は前日の画像になる。気づいたら Actions の実行時刻を確認し、必要なら手動実行（workflow_dispatch）してから投稿する。
 - 画像右下の「提供：ネクストラボ」は `scripts/generate_ogp.py` の `SPONSORS`。週 1 回「提供：バクアゲ配送」にするには、`src/constants.json` の `ogp.bakuage_haiso_weekday` に曜日（JST、0=月 … 6=日）を入れる。`null` の間は毎日ネクストラボ。手動確認は `python scripts/generate_ogp.py --sponsor bakuage_haiso --output /tmp/og.png`。
+
+## バクアゲ関連の投稿（リンク先は bakuage.co、問い合わせに流す）
+
+石油ネタの投稿（`daily_oil`）は oilstock.nextlabs.jp へ、**バクアゲ関連の投稿は bakuage.co へ**リンクし、バクアゲへの問い合わせに流す。石油サイトの読者は EC 事業者から遠いので、バクアゲのフォームへの導線は石油サイトには置かない。
+
+| 投稿の種類 | `utm_content` | リンク先 |
+|---|---|---|
+| サービス紹介（一般） | `bakuage_service` | `https://bakuage.co/service/` |
+| 返品くん | `bakuage_return` | `https://bakuage.co/service/return/` |
+| 住所チェック | `bakuage_address_check` | `https://bakuage.co/service/address-check/` |
+| バクアゲ送金 | `bakuage_pay` | `https://bakuage.co/service/pay/` |
+| 問い合わせ誘導（CTA） | `bakuage_contact` | `https://bakuage.co/contact/?inq_service_contact=inq_introducing` |
+
+- 例: `https://bakuage.co/service/return/?utm_source=x&utm_medium=social&utm_campaign=official_sns&utm_content=bakuage_return`
+- source / medium / campaign は石油ネタと同じ固定値。**キャンペーンは 1 つで、`utm_content` の接頭辞（`daily_oil` / `bakuage_*`）で石油とバクアゲを分けて見る**。
+- バクアゲ配送の提供表示の日（OGP の `ogp.bakuage_haiso_weekday`）の投稿は、原則この表のリンクにする。配送サービス専用ページの URL が確定したら表に足す（2026-10 時点の bakuage.co には `/service/` 配下に配送のページが見当たらない）。
+- **計測の前提（要対応）**: 2026-10-06 時点で bakuage.co（トップ・問い合わせページ）に HubSpot のトラッキングコードは入っておらず、問い合わせフォームが HubSpot に繋がっているかも未確認。ここが繋がっていないと、X → bakuage.co の訪問と問い合わせがキャンペーンに帰属しない。
