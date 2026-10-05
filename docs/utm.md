@@ -39,3 +39,10 @@ HubSpot キャンペーン「ネクストラボ公式SNS立ち上げ」（2026-1
 | `js/core/data.js` | `SOCIAL_CONFIG.officialHandle` | 共有文のメンション（ミラー） |
 
 更新後は `python scripts/build_site.py` で全ページを再生成する。
+
+## 日付パラメータ `?d=` と OGP 画像
+
+- `?d=YYYYMMDD` は X のカードキャッシュ対策（X はカードを共有URL単位でキャッシュする）。日付ごとに別URLにすると、その日に新しくクロールされる。サイト側は `d` を無視する（GitHub Pages の静的配信）。
+- カードに出る画像は、クロール時点の `assets/og-image.png`（ページの `og:image` は `?v=<画像ハッシュ>` 付き）。**備蓄日数は画像の生成時刻で決まる**。
+- 毎朝 7 時の投稿に間に合わせるため、`.github/workflows/refresh-ogp.yml` が JST 03:23 狙いで画像だけを再生成する（`fetch-daily.yml` は GitHub の cron 遅延で実際は 09:10〜10:40 頃に走るため）。
+- 画像右下の「提供：ネクストラボ」は `scripts/generate_ogp.py` の `SPONSORS`。週 1 回「提供：バクアゲ配送」にするには、`src/constants.json` の `ogp.bakuage_haiso_weekday` に曜日（JST、0=月 … 6=日）を入れる。`null` の間は毎日ネクストラボ。手動確認は `python scripts/generate_ogp.py --sponsor bakuage_haiso --output /tmp/og.png`。

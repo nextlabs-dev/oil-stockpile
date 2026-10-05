@@ -25,11 +25,11 @@ from __future__ import annotations
 
 import argparse
 import sys
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Literal
 
-from lib.constants import PEAK_DAYS  # SSOT: src/constants.json
+from lib.constants import OGP_BAKUAGE_HAISO_WEEKDAY, PEAK_DAYS  # SSOT: src/constants.json
 from lib.paths import ASSETS_DIR, OG_IMAGE_PATH, REPO_ROOT, SNAPSHOTS_PATH
 from lib.snapshots import Snapshot, format_jst_date, load_snapshots, pick_latest_snapshot
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -74,6 +74,19 @@ SHADOW_OFFSET = (0, 4)
 # 画像内アセット
 ILLUSTRATION_PATH = ASSETS_DIR / "counter_top.png"
 INTER_FONT_DIR = ASSETS_DIR / "fonts" / "inter"
+
+# 「提供：」表示。key は --sponsor の値。logo は assets/brand/ の同梱ファイル。
+# 差し替えは SPONSORS に足すか、曜日(src/constants.json ogp.bakuage_haiso_weekday)を変える。
+SPONSORS = {
+    "nextlabs": {"label": "提供：ネクストラボ", "logo": ASSETS_DIR / "brand" / "nextlab-logo.png"},
+    "bakuage_haiso": {
+        "label": "提供：バクアゲ配送",
+        "logo": ASSETS_DIR / "brand" / "bakuage-haiso-logo.png",
+    },
+}
+DEFAULT_SPONSOR = "nextlabs"
+SPONSOR_LOGO_HEIGHT = 30
+JST = timezone(timedelta(hours=9))
 
 # Inter フォント候補（必ずリポジトリ同梱の TTF を最優先）。
 FONT_CANDIDATES_INTER_SEMIBOLD = [str(INTER_FONT_DIR / "Inter-SemiBold.ttf")]
@@ -592,6 +605,37 @@ def draw_footer_line(base: Image.Image, *, as_of_iso: str) -> None:
     )
 
 
+def pick_sponsor(
+    now: datetime | None = None,
+    weekday: int | None = OGP_BAKUAGE_HAISO_WEEKDAY,
+) -> str:
+    """その日の「提供：」表示キーを返す。JST の曜日が weekday と一致する日だけバクアゲ配送。
+
+    weekday が None（未決）なら常にネクストラボ。画像は毎朝 07:00 JST に再生成されるため、
+    曜日は「画像を作った日の JST 曜日」で決まる。
+    """
+    if weekday is None:
+        return DEFAULT_SPONSOR
+    if now is None:
+        now = datetime.now(UTC)
+    return "bakuage_haiso" if now.astimezone(JST).weekday() == weekday else DEFAULT_SPONSOR
+
+
+def draw_sponsor_line(base: Image.Image, *, sponsor: str) -> None:
+    """カード下の右寄せ「提供：○○ + ロゴ」。データ表示（カード内）には触れない小さな表記。"""
+    spec = SPONSORS[sponsor]
+    draw = ImageDraw.Draw(base)
+    font = resolve_cjk("regular", 16)
+    logo = Image.open(spec["logo"]).convert("RGBA")
+    h = SPONSOR_LOGO_HEIGHT
+    logo = logo.resize((round(logo.width * h / logo.height), h), Image.LANCZOS)
+    right = WIDTH - PAD_X
+    cy = 536  # カード下端(約490)とフッター(HEIGHT-32)の間
+    logo_x = right - logo.width
+    base.alpha_composite(logo, (logo_x, cy - h // 2))
+    draw.text((logo_x - 14, cy), spec["label"], font=font, fill=FG_MUTED, anchor="rm")
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # オーケストレータ
 # ─────────────────────────────────────────────────────────────────────────────
@@ -602,6 +646,7 @@ def render_image(
     *,
     current_days: float,
     peak: int = PEAK_DAYS,
+    sponsor: str = DEFAULT_SPONSOR,
 ) -> Image.Image:
     """OGP 画像本体。1200×630 RGB を返す。"""
     # レイヤ合成は全体を RGBA で保持し、最後に一度だけ RGB へ戻す（composite_layer 参照）。
@@ -619,6 +664,7 @@ def render_image(
     )
 
     draw_footer_line(base, as_of_iso=snapshot.as_of)
+    draw_sponsor_line(base, sponsor=sponsor)
 
     return base.convert("RGB")
 
@@ -635,6 +681,12 @@ def main() -> int:
         type=Path,
         default=DEFAULT_OUTPUT,
         help=f"出力先パス（既定: {DEFAULT_OUTPUT.relative_to(REPO_ROOT)})",
+    )
+    parser.add_argument(
+        "--sponsor",
+        choices=sorted(SPONSORS),
+        default=None,
+        help="「提供：」表示を固定（既定: 曜日設定に従って自動選択）",
     )
     args = parser.parse_args()
 
@@ -653,7 +705,8 @@ def main() -> int:
     days_int = int(current_days)
 
     try:
-        img = render_image(snapshot, current_days=current_days)
+        sponsor = args.sponsor or pick_sponsor()
+        img = render_image(snapshot, current_days=current_days, sponsor=sponsor)
     except Exception as e:
         print(f"::error::Failed to render OGP image: {e}", file=sys.stderr)
         return 1

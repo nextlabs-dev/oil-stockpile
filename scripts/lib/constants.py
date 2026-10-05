@@ -40,3 +40,9 @@ _hubspot = _constants["hubspot"]
 HUBSPOT_PORTAL_ID: str = str(_hubspot["portal_id"])
 HUBSPOT_REGION: str = str(_hubspot["region"])
 HUBSPOT_SCRIPT_SRC: str = f"https://js-{HUBSPOT_REGION}.hs-scripts.com/{HUBSPOT_PORTAL_ID}.js"
+
+# OGP 画像の「提供：」表示。週1回だけ「バクアゲ配送」に切り替える曜日（JST。0=月 … 6=日）。
+# null = 未決（毎日「ネクストラボ」）。曜日が決まったら constants.json の値だけ変えればよい。
+_ogp = _constants["ogp"]
+_weekday = _ogp["bakuage_haiso_weekday"]
+OGP_BAKUAGE_HAISO_WEEKDAY: int | None = None if _weekday is None else int(_weekday)

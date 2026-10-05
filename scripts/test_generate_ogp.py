@@ -277,5 +277,34 @@ class SharedFixtureConsistencyTest(unittest.TestCase):
                 self.assertAlmostEqual(result, case["expected"], places=6)
 
 
+class SponsorTests(unittest.TestCase):
+    # 2026-10-05 は月曜(JST)。UTC 日曜 15:00 = JST 月曜 0:00 の境界も押さえる。
+    CRON_JST_TUE = datetime(2026, 10, 5, 22, 0, tzinfo=UTC)  # UTC 月曜 22:00 = JST 火曜 07:00
+
+    def test_weekday_unset_is_always_nextlabs(self):
+        for d in range(7):
+            now = datetime(2026, 10, 5 + d, 0, 0, tzinfo=UTC)
+            self.assertEqual(generate_ogp.pick_sponsor(now, weekday=None), "nextlabs")
+
+    def test_matching_jst_weekday_switches_to_bakuage_haiso(self):
+        # JST 火曜 07:00（= cron 実行時刻）。火曜=1
+        self.assertEqual(generate_ogp.pick_sponsor(self.CRON_JST_TUE, weekday=1), "bakuage_haiso")
+        self.assertEqual(generate_ogp.pick_sponsor(self.CRON_JST_TUE, weekday=2), "nextlabs")
+
+    def test_weekday_uses_jst_not_utc(self):
+        # UTC では月曜 22:00 だが JST では火曜。UTC 基準だと weekday=0 で誤って切り替わる。
+        self.assertEqual(generate_ogp.pick_sponsor(self.CRON_JST_TUE, weekday=0), "nextlabs")
+
+    def test_all_sponsor_logos_exist_and_render(self):
+        for key, spec in generate_ogp.SPONSORS.items():
+            self.assertTrue(spec["logo"].exists(), key)
+        snap = generate_ogp.pick_latest_snapshot(
+            generate_ogp.load_snapshots(generate_ogp.SNAPSHOTS_PATH)
+        )
+        for key in generate_ogp.SPONSORS:
+            img = generate_ogp.render_image(snap, current_days=150.0, sponsor=key)
+            self.assertEqual(img.size, (1200, 630))
+
+
 if __name__ == "__main__":
     unittest.main()
