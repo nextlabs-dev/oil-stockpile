@@ -29,6 +29,11 @@ from lib.constants import (
     FORECAST_TURNSTILE_SITE_KEY,
     PEAK_DAYS,
     PEAK_SOURCE,
+    SOCIAL_OFFICIAL_HANDLE,
+    SOCIAL_TWITTER_SITE,
+    SOCIAL_UTM_CAMPAIGN,
+    SOCIAL_UTM_MEDIUM,
+    SOCIAL_UTM_SOURCE,
 )
 from lib.io import read_json
 from lib.paths import OG_IMAGE_PATH, REPO_ROOT, SITE_CONFIG_PATH, SNAPSHOTS_PATH, SRC_DIR
@@ -175,6 +180,34 @@ def _check_forecast_config_in_sync(
             )
 
 
+_SOCIAL_FIELD_MAP = {
+    "officialHandle": "official_handle",
+    "utmSource": "utm_source",
+    "utmMedium": "utm_medium",
+    "utmCampaign": "utm_campaign",
+}
+_SOCIAL_CONFIG_BLOCK_RE = re.compile(r"SOCIAL_CONFIG\s*=\s*\{(?P<body>[^}]*)\}", re.DOTALL)
+
+
+def _check_social_config_in_sync(data_js_text: str, expected: dict[str, str]) -> None:
+    """Raise if js/core/data.js SOCIAL_CONFIG drifts from src/constants.json's social block."""
+    block = _SOCIAL_CONFIG_BLOCK_RE.search(data_js_text)
+    if not block:
+        raise RuntimeError("SOCIAL_CONFIG block not found in js/core/data.js")
+    body = block.group("body")
+    for js_key, json_key in _SOCIAL_FIELD_MAP.items():
+        match = re.search(rf"\b{js_key}\s*:\s*(['\"])(.*?)\1", body, re.DOTALL)
+        if match is None:
+            raise RuntimeError(f"SOCIAL_CONFIG.{js_key} not found in js/core/data.js")
+        if match.group(2) != expected[json_key]:
+            raise RuntimeError(
+                f"SOCIAL_CONFIG.{js_key} drift: "
+                f"src/constants.json[{json_key}]={expected[json_key]!r}, "
+                f"js/core/data.js={match.group(2)!r}. "
+                "Update both files to keep them in sync."
+            )
+
+
 def verify_constants_in_sync() -> None:
     """Fail the build when JS mirrors drift from src/constants.json.
 
@@ -194,6 +227,15 @@ def verify_constants_in_sync() -> None:
             "turnstile_site_key": FORECAST_TURNSTILE_SITE_KEY,
             "question_id": FORECAST_QUESTION_ID,
             "min_votes_for_percent": FORECAST_MIN_VOTES_FOR_PERCENT,
+        },
+    )
+    _check_social_config_in_sync(
+        _DATA_JS_PATH.read_text(encoding="utf-8"),
+        {
+            "official_handle": SOCIAL_OFFICIAL_HANDLE,
+            "utm_source": SOCIAL_UTM_SOURCE,
+            "utm_medium": SOCIAL_UTM_MEDIUM,
+            "utm_campaign": SOCIAL_UTM_CAMPAIGN,
         },
     )
 
@@ -739,6 +781,7 @@ def render_page(
         og_description=page["og_description"],
         og_image=og_image,
         og_image_alt=og_image_alt,
+        twitter_site=SOCIAL_TWITTER_SITE,
         twitter_title=page["twitter_title"],
         twitter_description=page["twitter_description"],
         favicon=favicon,

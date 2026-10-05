@@ -17,7 +17,7 @@
  * クローラーが og:url でカードを正規化しても古いカードに統合されない (issue #90)。
  */
 
-import { SITE_CONFIG } from '../core/data.js';
+import { SITE_CONFIG, SOCIAL_CONFIG } from '../core/data.js';
 import { computeCurrentDays } from './counter.js';
 
 const TOAST_MS = 2400;
@@ -42,6 +42,31 @@ export function buildShareUrl(siteUrl, ogUrl) {
   return url.toString();
 }
 
+/**
+ * X 向けリンクに UTM を付ける純粋関数（規約は docs/utm.md）。
+ * source / medium / campaign は SOCIAL_CONFIG 固定、content は投稿・導線の種類。
+ * 既に付いている utm_* は上書きする。URL として解釈できなければそのまま返す（fail safe）。
+ */
+export function addUtm(rawUrl, content, config = SOCIAL_CONFIG) {
+  let url;
+  try {
+    url = new URL(rawUrl);
+  } catch {
+    return rawUrl;
+  }
+  url.searchParams.set('utm_source', config.utmSource);
+  url.searchParams.set('utm_medium', config.utmMedium);
+  url.searchParams.set('utm_campaign', config.utmCampaign);
+  url.searchParams.set('utm_content', content);
+  return url.toString();
+}
+
+/** 共有文末尾の公式アカウントのメンション。ハンドル未確定（空）なら付けない。 */
+export function officialMention(config = SOCIAL_CONFIG) {
+  const handle = (config.officialHandle || '').trim();
+  return handle ? ` ${handle}` : '';
+}
+
 function currentShareUrl() {
   const ogUrl = document.querySelector('meta[property="og:url"]')?.content;
   return buildShareUrl(SITE_CONFIG.url, ogUrl);
@@ -50,7 +75,7 @@ function currentShareUrl() {
 function buildShareText() {
   const days = computeCurrentDays();
   if (!Number.isFinite(days)) return null;
-  return `日本の石油備蓄、いま${Math.floor(days)}日分。`;
+  return `日本の石油備蓄、いま${Math.floor(days)}日分。${officialMention()}`;
 }
 
 let toastTimer = null;
@@ -71,7 +96,7 @@ function openShareX() {
     showToast('データを取得できていません');
     return;
   }
-  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(currentShareUrl())}`;
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(addUtm(currentShareUrl(), 'share_button'))}`;
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 

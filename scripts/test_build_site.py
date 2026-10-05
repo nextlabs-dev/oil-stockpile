@@ -23,6 +23,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_site import (  # noqa: E402
     BASE_TEMPLATE,
     _check_peak_reference_in_sync,
+    _check_social_config_in_sync,
     build_csp,
     build_latest_vars,
     build_structured_data,
@@ -664,6 +665,27 @@ class StructuredDataTest(unittest.TestCase):
     def test_base_template_has_structured_data_placeholder(self):
         # base.html から placeholder が消えるとスキーマが静かに出力されなくなる
         self.assertIn("$structured_data", BASE_TEMPLATE.read_text(encoding="utf-8"))
+
+
+class SocialConfigSyncTests(unittest.TestCase):
+    JS = "export const SOCIAL_CONFIG = {\n  officialHandle: '',\n  utmSource: 'x',\n  utmMedium: 'social',\n  utmCampaign: 'official_sns',\n};\n"
+    EXPECTED = {
+        "official_handle": "",
+        "utm_source": "x",
+        "utm_medium": "social",
+        "utm_campaign": "official_sns",
+    }
+
+    def test_in_sync_passes(self):
+        self.assertIsNone(_check_social_config_in_sync(self.JS, self.EXPECTED))
+
+    def test_handle_drift_raises(self):
+        with self.assertRaisesRegex(RuntimeError, "officialHandle drift"):
+            _check_social_config_in_sync(self.JS, {**self.EXPECTED, "official_handle": "@x"})
+
+    def test_missing_block_raises(self):
+        with self.assertRaisesRegex(RuntimeError, "SOCIAL_CONFIG block not found"):
+            _check_social_config_in_sync("", self.EXPECTED)
 
 
 if __name__ == "__main__":

@@ -59,6 +59,22 @@ export const SITE_CONFIG = {
 };
 
 /**
+ * 公式 SNS（X）の設定と UTM 規約。
+ *
+ * ⚠ src/constants.json の social ブロックを手で写したもの（PEAK_REFERENCE と同方式）。
+ *    build_site.py の drift チェックでズレを検出する。**片方だけ直さないこと。**
+ * officialHandle は公式アカウント確定までの間は空（= 共有文にメンションを入れない）。
+ * TODO: 公式アカウントのハンドル確定後、両ファイルに '@xxx' を入れる。
+ * UTM ルールの詳細は docs/utm.md。
+ */
+export const SOCIAL_CONFIG = {
+  officialHandle: '',
+  utmSource: 'x',
+  utmMedium: 'social',
+  utmCampaign: 'official_sns',
+};
+
+/**
  * 古さ警告のしきい値（asOf からの経過日数）。
  */
 export const STALE_THRESHOLD_DAYS = 14;
