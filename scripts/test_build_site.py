@@ -395,7 +395,7 @@ class BuildCspTest(unittest.TestCase):
         self.assertIn("https://unpkg.com", script_src)
 
     def test_hubspot_tracking_origins_allowed(self):
-        # ローダ→計測本体→ページビューのビーコン(画像)の3段が通る。どれか欠けると訪問が計測されない。
+        # ローダ→計測本体→ビーコン(画像)の3段が通る。どれか欠けると訪問が計測されない。
         script_src = self.directives["script-src"]
         self.assertIn("https://js-na2.hs-scripts.com", script_src)
         self.assertIn("https://js-na2.hs-analytics.net", script_src)
