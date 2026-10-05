@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-h9e+XXqoxl0csVGgkQbeCcJjRUygnFI64PBtNliUdc4=' https://www.googletagmanager.com https://unpkg.com https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://www.google-analytics.com; frame-src https://www.youtube-nocookie.com https://challenges.cloudflare.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-h9e+XXqoxl0csVGgkQbeCcJjRUygnFI64PBtNliUdc4=' https://www.googletagmanager.com https://unpkg.com https://challenges.cloudflare.com https://js-na2.hs-scripts.com https://js-na2.hs-analytics.net https://js-na2.hs-banner.com; style-src 'self' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://www.google-analytics.com https://track-na2.hubspot.com; frame-src https://www.youtube-nocookie.com https://challenges.cloudflare.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; form-action 'self'">
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XY6TX6ZXKM"></script>
@@ -13,6 +13,9 @@
   gtag('js', new Date());
   gtag('config', 'G-XY6TX6ZXKM');
 </script>
+
+<!-- HubSpot tracking code. 計測のみ。表示をブロックしないよう async defer -->
+<script type="text/javascript" id="hs-script-loader" async defer src="https://js-na2.hs-scripts.com/23725067.js"></script>
 
 <title>このサイトについて｜日本の石油備蓄</title>
 <meta name="description" content="「あと何日？日本の石油備蓄」サイトの目的・データ出典・計算方法・運営会社の情報を 1 ページに集約しています。">
@@ -201,7 +204,7 @@
         <h2 id="disclaimer-heading" class="about-card-title">免責事項</h2>
         <div class="about-prose">
           <p>
-            本サイトは経済産業省公表の速報（推計値）および AIS データに基づく<strong>非公式の情報サイト</strong>です。正確性・完全性・最新性について保証するものではありません。氏名・連絡先などの個人情報を直接収集することはありませんが、アクセス解析のため Google アナリティクス（GA4）を利用し、Cookie によってサイトの利用状況を匿名で集計します（IP アドレスは GA4 の仕様上、匿名化して扱われます）。Cookie はブラウザの設定で無効化できます。
+            本サイトは経済産業省公表の速報（推計値）および AIS データに基づく<strong>非公式の情報サイト</strong>です。正確性・完全性・最新性について保証するものではありません。氏名・連絡先などの個人情報を直接収集することはありませんが、アクセス解析のため Google アナリティクス（GA4）および HubSpot のトラッキングを利用し、Cookie によってサイトの利用状況を集計します（GA4 では IP アドレスは仕様上、匿名化して扱われます）。HubSpot では、運営会社（株式会社ネクストラボ）への問い合わせ導線と閲覧状況を結びつけて分析することがあります。Cookie はブラウザの設定で無効化できます。
           </p>
         </div>
       </section>
