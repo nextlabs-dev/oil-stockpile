@@ -680,7 +680,14 @@ class StructuredDataTest(unittest.TestCase):
 
 
 class SocialConfigSyncTests(unittest.TestCase):
-    JS = "export const SOCIAL_CONFIG = {\n  officialHandle: '',\n  utmSource: 'x',\n  utmMedium: 'social',\n  utmCampaign: 'official_sns',\n};\n"
+    JS = (
+        "export const SOCIAL_CONFIG = {\n"
+        "  officialHandle: '',\n"
+        "  utmSource: 'x',\n"
+        "  utmMedium: 'social',\n"
+        "  utmCampaign: 'official_sns',\n"
+        "};\n"
+    )
     EXPECTED = {
         "official_handle": "",
         "utm_source": "x",
