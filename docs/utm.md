@@ -55,12 +55,12 @@ HubSpot キャンペーン「ネクストラボ公式SNS立ち上げ」（2026-1
 | 投稿の種類 | `utm_content` | リンク先 |
 |---|---|---|
 | サービス紹介（一般） | `bakuage_service` | `https://bakuage.co/service/` |
-| 返品くん | `bakuage_return` | `https://bakuage.co/service/return/` |
+| バクアゲ配送（旧返品くん） | `bakuage_haiso` | `https://bakuage.co/service/return/`（URL は旧名のまま） |
 | 住所チェック | `bakuage_address_check` | `https://bakuage.co/service/address-check/` |
 | バクアゲ送金 | `bakuage_pay` | `https://bakuage.co/service/pay/` |
 | 問い合わせ誘導（CTA） | `bakuage_contact` | `https://bakuage.co/contact/?inq_service_contact=inq_introducing` |
 
-- 例: `https://bakuage.co/service/return/?utm_source=x&utm_medium=social&utm_campaign=official_sns&utm_content=bakuage_return`
+- 例: `https://bakuage.co/service/return/?utm_source=x&utm_medium=social&utm_campaign=official_sns&utm_content=bakuage_haiso`
 - source / medium / campaign は石油ネタと同じ固定値。**キャンペーンは 1 つで、`utm_content` の接頭辞（`daily_oil` / `bakuage_*`）で石油とバクアゲを分けて見る**。
-- バクアゲ配送の提供表示の日（OGP の `ogp.bakuage_haiso_weekday`）の投稿は、原則この表のリンクにする。配送サービス専用ページの URL が確定したら表に足す（2026-10 時点の bakuage.co には `/service/` 配下に配送のページが見当たらない）。
+- バクアゲ配送の提供表示の日（OGP の `ogp.bakuage_haiso_weekday`）の投稿は、原則 `bakuage_haiso`（`/service/return/`）にする。
 - **計測の前提（要対応）**: 2026-10-06 時点で bakuage.co（トップ・問い合わせページ）に HubSpot のトラッキングコードは入っておらず、問い合わせフォームが HubSpot に繋がっているかも未確認。ここが繋がっていないと、X → bakuage.co の訪問と問い合わせがキャンペーンに帰属しない。
