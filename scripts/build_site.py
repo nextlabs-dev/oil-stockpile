@@ -282,8 +282,6 @@ def build_csp(template_text: str) -> str:
     script_src += (
         " https://www.googletagmanager.com https://unpkg.com https://challenges.cloudflare.com"
     )
-    # 投票 API (Workers)。未デプロイの間は api_origin が空なので何も足さない
-    # （ワイルドカードで先に穴を開けない）。
     # HubSpot トラッキング: ローダ(hs-scripts)→ 計測本体(hs-analytics)と同意バナー(hs-banner)。
     # ページビューのビーコンは track-<region>.hubspot.com への画像リクエストなので img-src に要る。
     # 広告ピクセル(hsadspixel)とフォーム自動収集(hscollectedforms)は、この静的サイトに
@@ -293,6 +291,8 @@ def build_csp(template_text: str) -> str:
         f" https://js-{HUBSPOT_REGION}.hs-analytics.net"
         f" https://js-{HUBSPOT_REGION}.hs-banner.com"
     )
+    # 投票 API (Workers)。未デプロイの間は api_origin が空なので何も足さない
+    # （ワイルドカードで先に穴を開けない）。
     connect_src = (
         "connect-src 'self' https://www.googletagmanager.com "
         "https://www.google-analytics.com https://*.google-analytics.com"
