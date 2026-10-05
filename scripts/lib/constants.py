@@ -33,3 +33,10 @@ SOCIAL_OFFICIAL_HANDLE: str = str(_social["official_handle"])
 SOCIAL_UTM_SOURCE: str = str(_social["utm_source"])
 SOCIAL_UTM_MEDIUM: str = str(_social["utm_medium"])
 SOCIAL_UTM_CAMPAIGN: str = str(_social["utm_campaign"])
+
+# HubSpot トラッキングコード。ポータルID・リージョンは公開される値（トークンではない）。
+# スクリプト URL は base.html に、配信元の許可は CSP に、同じ値から展開する（SSOT）。
+_hubspot = _constants["hubspot"]
+HUBSPOT_PORTAL_ID: str = str(_hubspot["portal_id"])
+HUBSPOT_REGION: str = str(_hubspot["region"])
+HUBSPOT_SCRIPT_SRC: str = f"https://js-{HUBSPOT_REGION}.hs-scripts.com/{HUBSPOT_PORTAL_ID}.js"

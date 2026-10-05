@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-h9e+XXqoxl0csVGgkQbeCcJjRUygnFI64PBtNliUdc4=' https://www.googletagmanager.com https://unpkg.com https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://www.google-analytics.com; frame-src https://www.youtube-nocookie.com https://challenges.cloudflare.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-h9e+XXqoxl0csVGgkQbeCcJjRUygnFI64PBtNliUdc4=' https://www.googletagmanager.com https://unpkg.com https://challenges.cloudflare.com https://js-na2.hs-scripts.com https://js-na2.hs-analytics.net https://js-na2.hs-banner.com; style-src 'self' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://www.google-analytics.com https://track-na2.hubspot.com; frame-src https://www.youtube-nocookie.com https://challenges.cloudflare.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; form-action 'self'">
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XY6TX6ZXKM"></script>
@@ -13,6 +13,9 @@
   gtag('js', new Date());
   gtag('config', 'G-XY6TX6ZXKM');
 </script>
+
+<!-- HubSpot tracking code. 計測のみ。表示をブロックしないよう async defer -->
+<script type="text/javascript" id="hs-script-loader" async defer src="https://js-na2.hs-scripts.com/23725067.js"></script>
 
 <title>あと何日？｜日本の石油備蓄</title>
 <meta name="description" content="日本の石油備蓄はいま約197日分（2026年9月29日集計時点）。経済産業省「石油備蓄の現況」速報値を毎日更新で可視化する非公式カウンター。">

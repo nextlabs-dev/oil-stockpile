@@ -27,6 +27,8 @@ from lib.constants import (
     FORECAST_MIN_VOTES_FOR_PERCENT,
     FORECAST_QUESTION_ID,
     FORECAST_TURNSTILE_SITE_KEY,
+    HUBSPOT_REGION,
+    HUBSPOT_SCRIPT_SRC,
     PEAK_DAYS,
     PEAK_SOURCE,
     SOCIAL_OFFICIAL_HANDLE,
@@ -282,6 +284,15 @@ def build_csp(template_text: str) -> str:
     )
     # 投票 API (Workers)。未デプロイの間は api_origin が空なので何も足さない
     # （ワイルドカードで先に穴を開けない）。
+    # HubSpot トラッキング: ローダ(hs-scripts)→ 計測本体(hs-analytics)と同意バナー(hs-banner)。
+    # ページビューのビーコンは track-<region>.hubspot.com への画像リクエストなので img-src に要る。
+    # 広告ピクセル(hsadspixel)とフォーム自動収集(hscollectedforms)は、この静的サイトに
+    # フォームも広告も無いため許可しない（コンソールに CSP 違反が出るが意図したもの）。
+    script_src += (
+        f" https://js-{HUBSPOT_REGION}.hs-scripts.com"
+        f" https://js-{HUBSPOT_REGION}.hs-analytics.net"
+        f" https://js-{HUBSPOT_REGION}.hs-banner.com"
+    )
     connect_src = (
         "connect-src 'self' https://www.googletagmanager.com "
         "https://www.google-analytics.com https://*.google-analytics.com"
@@ -295,7 +306,8 @@ def build_csp(template_text: str) -> str:
         f"script-src {script_src}",
         "style-src 'self' https://fonts.googleapis.com https://unpkg.com",
         "font-src 'self' https://fonts.gstatic.com",
-        "img-src 'self' data: https://tile.openstreetmap.org https://www.google-analytics.com",
+        "img-src 'self' data: https://tile.openstreetmap.org https://www.google-analytics.com "
+        f"https://track-{HUBSPOT_REGION}.hubspot.com",
         # /opinions/ の国会論戦 YouTube 埋め込み（nocookie）と /forecast/ の Turnstile。
         "frame-src https://www.youtube-nocookie.com https://challenges.cloudflare.com",
         connect_src,
@@ -782,6 +794,7 @@ def render_page(
         og_image=og_image,
         og_image_alt=og_image_alt,
         twitter_site=SOCIAL_TWITTER_SITE,
+        hubspot_script_src=HUBSPOT_SCRIPT_SRC,
         twitter_title=page["twitter_title"],
         twitter_description=page["twitter_description"],
         favicon=favicon,

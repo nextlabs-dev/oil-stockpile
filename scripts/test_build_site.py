@@ -394,6 +394,18 @@ class BuildCspTest(unittest.TestCase):
         self.assertIn("https://www.googletagmanager.com", script_src)
         self.assertIn("https://unpkg.com", script_src)
 
+    def test_hubspot_tracking_origins_allowed(self):
+        # ローダ→計測本体→ページビューのビーコン(画像)の3段が通る。どれか欠けると訪問が計測されない。
+        script_src = self.directives["script-src"]
+        self.assertIn("https://js-na2.hs-scripts.com", script_src)
+        self.assertIn("https://js-na2.hs-analytics.net", script_src)
+        self.assertIn("https://track-na2.hubspot.com", self.directives["img-src"])
+
+    def test_hubspot_ads_and_form_collection_not_allowed(self):
+        # フォームも広告も無い静的サイトなので許可しない（最小権限）。
+        self.assertNotIn("hsadspixel", self.csp)
+        self.assertNotIn("hscollectedforms", self.csp)
+
     def test_default_src_is_self(self):
         self.assertEqual(self.directives["default-src"], "'self'")
 
