@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { buildShareUrl } from './share.js';
+import { addUtm, buildShareUrl, officialMention } from './share.js';
 
 const SITE_URL = 'https://oilstock.nextlabs.jp/';
 
@@ -39,4 +39,34 @@ test('buildShareUrl: og:url が空/未取得ならクリーンな siteUrl を返
 
 test('buildShareUrl: 不正な og:url でも例外を投げず siteUrl を返す（fail safe）', () => {
   assert.equal(buildShareUrl(SITE_URL, 'not a url'), SITE_URL);
+});
+
+const UTM = { utmSource: 'x', utmMedium: 'social', utmCampaign: 'official_sns' };
+
+test('addUtm: 規約どおり4つの utm_* を付け、既存の ?v= は保つ', () => {
+  const u = new URL(addUtm(`${SITE_URL}?v=8b7353b1`, 'share_button', UTM));
+  assert.equal(u.searchParams.get('v'), '8b7353b1');
+  assert.equal(u.searchParams.get('utm_source'), 'x');
+  assert.equal(u.searchParams.get('utm_medium'), 'social');
+  assert.equal(u.searchParams.get('utm_campaign'), 'official_sns');
+  assert.equal(u.searchParams.get('utm_content'), 'share_button');
+});
+
+test('addUtm: 既存の utm_* は上書きし重複させない', () => {
+  const u = new URL(addUtm(`${SITE_URL}?utm_source=foo&utm_content=bar`, 'daily_oil', UTM));
+  assert.deepEqual(u.searchParams.getAll('utm_source'), ['x']);
+  assert.deepEqual(u.searchParams.getAll('utm_content'), ['daily_oil']);
+});
+
+test('addUtm: URL として不正なら例外を投げずそのまま返す', () => {
+  assert.equal(addUtm('not a url', 'share_button', UTM), 'not a url');
+});
+
+test('officialMention: ハンドル未確定（空・空白）ならメンションなし', () => {
+  assert.equal(officialMention({ officialHandle: '' }), '');
+  assert.equal(officialMention({ officialHandle: '  ' }), '');
+});
+
+test('officialMention: ハンドルがあれば先頭に空白を付けて返す', () => {
+  assert.equal(officialMention({ officialHandle: '@example' }), ' @example');
 });
