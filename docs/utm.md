@@ -1,7 +1,7 @@
 # UTM ルール（公式 SNS 立ち上げ）
 
 X（公式アカウント）の投稿と、サイトから SNS へ出る導線の流入を HubSpot / GA で比較できるよう、UTM を次のとおり統一する。
-HubSpot キャンペーン「ネクストラボ公式SNS立ち上げ」（2026-10-01〜2026-12-31）と対応する。
+HubSpot キャンペーン「ネクストラボ公式SNS立ち上げ」（2026-10-06〜2026-12-31。HubSpot 側のキャンペーンUTM は `official_sns` に設定済み）と対応する。
 
 ## パラメータ
 
@@ -63,4 +63,4 @@ HubSpot キャンペーン「ネクストラボ公式SNS立ち上げ」（2026-1
 - 例: `https://bakuage.co/service/return/?utm_source=x&utm_medium=social&utm_campaign=official_sns&utm_content=bakuage_haiso`
 - source / medium / campaign は石油ネタと同じ固定値。**キャンペーンは 1 つで、`utm_content` の接頭辞（`daily_oil` / `bakuage_*`）で石油とバクアゲを分けて見る**。
 - バクアゲ配送の提供表示の日（OGP の `ogp.bakuage_haiso_weekday`）の投稿は、原則 `bakuage_haiso`（`/service/return/`）にする。
-- **計測の前提（要対応）**: 2026-10-06 時点で bakuage.co（トップ・問い合わせページ）に HubSpot のトラッキングコードは入っておらず、問い合わせフォームが HubSpot に繋がっているかも未確認。ここが繋がっていないと、X → bakuage.co の訪問と問い合わせがキャンペーンに帰属しない。
+- **計測の前提（要対応）**: bakuage.co の問い合わせページには HubSpot フォーム（バクアゲ窓口）が既に埋め込み済みだが、**HubSpot のトラッキングコードが未設置**（2026-10-06 時点、全ページ）。設置するまで、X → bakuage.co の訪問と問い合わせはキャンペーンに帰属しない。手順と検査は nextlabs-site リポジトリの `BAKUAGE_HUBSPOT.md` / `scripts/verify-bakuage-hubspot.mjs`。
