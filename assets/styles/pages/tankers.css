@@ -154,9 +154,22 @@
   margin: 0 1px;
 }
 
-/* 読み込みエラー時に JS が付与する状態クラス */
-.page-tankers .ais-live-note.is-error {
-  color: var(--tank-fill-warn);
+/* JS が付与する AIS ヘルス状態。色だけに依存せず、状態文言と併用する。 */
+.page-tankers .ais-live-note[data-ais-state="degraded"],
+.page-tankers .ais-live-note[data-ais-state="stale"],
+.page-tankers .ais-live-note[data-ais-state="error"] {
+  border-left: 3px solid var(--tank-fill-warn);
+  padding-left: 10px;
+  color: var(--fg-strong);
+}
+
+.page-tankers .ais-live-note[data-ais-state="error"] {
+  border-left-color: var(--tank-fill-warn);
+}
+
+.page-tankers .stale-warning {
+  border-left: 3px solid var(--tank-fill-warn);
+  padding-left: 10px;
 }
 
 .page-tankers .ais-breakdown-box {

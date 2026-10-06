@@ -43,13 +43,13 @@
 }
 
 .site-header .tab--active {
-  background: var(--brand);
+  background: var(--link);
   color: var(--header-fg-strong);
   font-weight: 600;
 }
 
 .site-header .tab--active:hover {
-  background: var(--brand-strong);
+  background: #234a99;
   color: var(--header-fg-strong);
 }
 

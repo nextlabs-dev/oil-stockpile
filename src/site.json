@@ -43,6 +43,7 @@
         "      <span class=\"site-header-meta-value\" id=\"header-last-updated\">${latest_published_dot}</span>",
         "    </div>"
       ],
+      "extra_head": "<link rel=\"preload\" as=\"image\" href=\"assets/counter_top.webp\" type=\"image/webp\" fetchpriority=\"high\">",
       "title": "あと何日？｜日本の石油備蓄",
       "description": "日本の石油備蓄はいま約${latest_total_days}日分（${latest_asof_jp}集計時点）。経済産業省「石油備蓄の現況」速報値を毎日更新で可視化する非公式カウンター。",
       "canonical_path": "/",

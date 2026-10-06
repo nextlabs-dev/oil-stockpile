@@ -32,15 +32,18 @@ function renderTankerCount(tankers) {
   setText('kpi-tankers', Number.isFinite(count) ? String(count) : '—');
 }
 
-function renderDelta(history) {
-  if (!Array.isArray(history) || history.length < 2) {
-    setText('kpi-delta', '—');
-    return;
-  }
+export function deltaBetweenSnapshots(history) {
+  if (!Array.isArray(history) || history.length < 2) return Number.NaN;
   const latest = history[history.length - 1];
   const prev = history[history.length - 2];
-  const delta = (latest.total ?? 0) - (prev.total ?? 0);
-  setText('kpi-delta', formatSigned(delta));
+  if (!Number.isFinite(latest?.total) || !Number.isFinite(prev?.total)) {
+    return Number.NaN;
+  }
+  return latest.total - prev.total;
+}
+
+function renderDelta(history) {
+  setText('kpi-delta', formatSigned(deltaBetweenSnapshots(history)));
 }
 
 export function initKpi(history) {

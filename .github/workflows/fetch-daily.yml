@@ -58,6 +58,11 @@ jobs:
         continue-on-error: true
         run: python scripts/build_site.py
 
+      - name: Update sitemap metadata
+        # sitemap は補助データ。失敗しても取得済みスナップショットのコミットを止めない。
+        continue-on-error: true
+        run: python scripts/update_sitemap.py
+
       - name: Commit if changed
         env:
           GIT_AUTHOR_NAME: github-actions[bot]
@@ -69,6 +74,10 @@ jobs:
           # スナップショットはコアデータ。OGP/build の成否に関わらず常にコミットする。
           if [[ -n "$(git status --porcelain data/snapshots.json)" ]]; then
             changed_paths+=("data/snapshots.json")
+          fi
+          # sitemap は最新の公表日・AIS取得日を検索エンジンへ伝える補助データ。
+          if [[ -n "$(git status --porcelain sitemap.xml)" ]]; then
+            changed_paths+=("sitemap.xml")
           fi
           # og-image.png と生成 HTML は装飾出力で、HTML の ?v=<hash> が画像内容に
           # 結合している。両者を常に一緒に動かすため、generate_ogp と build_site が
